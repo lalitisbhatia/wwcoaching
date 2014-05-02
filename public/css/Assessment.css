@@ -1,0 +1,414 @@
+﻿
+.empx9b12  {font-size: 0.750em;}
+.empx10b12 {font-size: 0.833em;}
+.empx11b12 {font-size: 0.917em;}
+.empx12b12 {font-size: 1em;}
+.empx13b12 {font-size: 1.083em;}
+.empx14b12 {font-size: 1.167em;}
+.empx15b12 {font-size: 1.250em;}
+.empx16b12 {font-size: 1.333em;}
+.empx17b12 {font-size: 1.417em;}
+.empx18b12 {font-size: 1.500em;}
+.empx19b12 {font-size: 1.583em;}
+.empx20b12 {font-size: 1.667em;}
+.empx21b12 {font-size: 1.750em;}
+.empx22b12 {font-size: 1.833em;}
+.empx23b12 {font-size: 1.917em;}
+.empx24b12 {font-size: 2em;}
+.empx25b12 {font-size: 2.083em;}
+.empx26b12 {font-size: 2.167em;}
+.empx27b12 {font-size: 2.250em;}
+.empx28b12 {font-size: 2.333em;}
+.empx29b12 {font-size: 2.417em;}
+.empx30b12 {font-size: 2.500em;}
+.empx31b12 {font-size: 2.583em;}
+.empx32b12 {font-size: 2.667em;}
+.empx33b12 {font-size: 2.750em;}
+.empx34b12 {font-size: 2.833em;}
+.empx35b12 {font-size: 2.917em;}
+.empx36b12 {font-size: 3.000em;}
+.empx37b12 {font-size: 3.083em;}
+.empx38b12 {font-size: 3.167em;}
+.empx39b12 {font-size: 3.250em;}
+.empx40b12 {font-size: 3.333em;}
+
+.background
+{
+    background:#FBF4D4;
+    
+}
+/* FT Buttons */
+.ftTrackBtn, .ftGoBtn, .ftLaunchBtn, .errorPU button {
+  background: linear-gradient(to bottom,  #B5E140 0%,#A0C933 99%); /* W3C */
+  background: -moz-linear-gradient(top,  #B5E140 0%, #A0C933 99%); /* FF3.6+ */
+  background: -ms-linear-gradient(top,  #B5E140 0%,#A0C933 99%); /* IE10+ */
+  background: -o-linear-gradient(top,  #B5E140 0%,#A0C933 99%); /* Opera 11.10+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#B5E140), color-stop(99%,#A0C933)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #B5E140 0%,#A0C933 99%); /* Chrome10+,Safari5.1+ */
+  border: 1px solid #b8d177;
+  border-radius: 5px;
+  box-shadow: 0px 1px 2px -1px #000000, inset 0 1px 0 #e1ff90;
+  -moz-box-shadow: 0px 1px 2px -1px #000000, inset 0 1px 0 #e1ff90;
+  -webkit-box-shadow: 0px 1px 2px -1px #000000, inset 0 1px 0 #e1ff90;
+  cursor: pointer;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Gradient(startColorstr=#B5E140, endColorstr=#A0C933)";
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#B5E140, endColorstr=#A0C933);
+  display: inline-table;
+  
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Main Launch Link */
+.ftLaunch {
+  bottom: 14px;
+  position: absolute;
+  text-align: center;
+  width: 50px;
+}
+
+.home-module-header
+{
+    font-family: 'Bodoni MT';
+    font-size: 1.3em;
+    color: #fff;
+    margin: 0 !important;
+    padding: 10px 0 10px 10px;
+    background: #005889;
+    border-radius: 10px 10px 0px 0px;
+    border: 1px solid #005889;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width:800px;
+
+}
+.fontHdr
+{
+    font-family:Bodoni MT;
+    color: #fff;
+    font-size: 1.1em;        
+    elevation:higher;
+}
+
+.tblHeader 
+{
+    font-weight:bold;
+    font-family:Bodoni MT;
+    font-family:Arial;
+    color: #fff;
+    background-color:Teal;
+    padding-left:15px;
+    
+}
+
+.ftTblData
+{
+    font-family:Bodoni MT;
+    color: Navy;
+    
+    elevation:higher;
+}
+    
+.tbl-no-outside-border
+{
+    border-top-width:0px;
+    border-bottom-width:0px;
+    border-left-width:0px;
+    border-right-width:0px;
+            
+}
+.LightHighlight { background-color:#ccc;}
+ .aq-btn-view 
+  {
+  background: #56B9AF;
+  border-radius: 4px;
+  color: #fff;
+  border: 0;
+  display: block;
+  padding: 4px 1px;
+  text-align: center;
+  -webkit-transition: background .25s ease-out;
+  -moz-transition: background .25s ease-out;
+  -ms-transition: background .25s ease-out;
+  -o-transition: background .25s ease-out;
+  transition: background .25s ease-out;
+  font-size: 1em;
+  font-weight: 500;
+  width: 220px;
+  cursor: pointer;
+ 
+  
+}
+ .aq-btn-edit 
+  {
+  background: #56B9AF;
+  border-radius: 4px;
+  color: #fff;
+  border: 0;
+  display: block;
+  padding: 2px 6px;
+  text-align: center;  
+  -webkit-transition: background .25s ease-out;
+  -moz-transition: background .25s ease-out;
+  -ms-transition: background .25s ease-out;
+  -o-transition: background .25s ease-out;
+  transition: background .25s ease-out;
+  font-size: 1em;
+  font-weight: 300;
+  width:auto;
+  cursor: pointer;
+ 
+}
+
+.aq-btn-disp 
+  {
+  background: #56B9AF;
+  border-radius: 4px;
+  color: #fff;
+  border: 0;
+  display: block;
+  padding: 2px 6px;
+  text-align: center;  
+  -webkit-transition: background .25s ease-out;
+  -moz-transition: background .25s ease-out;
+  -ms-transition: background .25s ease-out;
+  -o-transition: background .25s ease-out;
+  transition: background .25s ease-out;
+  font-size: 1em;
+  font-weight: 300;
+  width:160px;
+}
+
+
+ .aq-btn-left 
+  {
+  background: #56B9AF;  
+  border-top-left-radius:5px;
+  border-bottom-left-radius:5px;
+  color: #fff;
+  border: 0;
+  display: inline;
+  padding: 1px 1px;
+  text-align: center;  
+  font-size: 1em;
+  height:10px;
+  width:10px;
+  cursor:pointer;
+}
+
+ .aq-btn-right 
+  {
+  background: #56B9AF;  
+  border-top-right-radius:5px;
+  border-bottom-right-radius:5px;
+  color: #fff;
+  border: 0;
+  display: inline;
+  padding: 1px 1px;
+  text-align: center;  
+  font-size: 1em;
+  height:10px;
+  width:10px;
+  cursor:pointer;
+ 
+}
+.header {
+  font-size: 28px;
+  line-height: 1.4em;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.tab-row {
+  font-size: 16px;
+  line-height: 1.4em;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-family:Arial;
+  padding-left:5px;
+}
+.initCap
+   {
+       text-transform: capitalize;
+   }  
+   .TextInput
+   {
+       width:200px;
+       text-transform:capitalize;       
+   }
+.sub-header-menu {
+  font-size: 18px;
+  color:Navy;
+  line-height: 1.1em;
+  font-weight: 400;
+  padding-left:15px;
+  padding-right:15px;
+  background-color:Silver;
+  border-radius:3px;
+   box-shadow:
+    1px 1px 0 0 #011D01,
+    1px 1px 0 0 #011D01,
+    2px 2px 0 0 #011D01,
+    2px 2px 0 0 #011D01,
+    2px 2px 2px 0 #000000;
+  
+}
+a, u {
+    text-decoration: none;
+}
+.inputLabel  
+    {
+        font-size:14px;
+    }
+
+#tdUserDetails{
+    vertical-align:top;
+
+}
+
+#trackTimeHeader{
+    background-color:#C3BFCA;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    width:500px;    
+}
+#trackTimeHeader span{
+    margin-left:10px;
+}
+
+ #trackTimeHeader span{
+     font-family:'Bodoni MT Poster';
+     font-weight:700;
+     color:#240606;
+     text-decoration-style:solid;
+     float:none;
+ }
+ .trackerItemDetail {
+     font-size:17px;
+ }
+ .trackerItemDetail span{
+     margin-left:20px;
+     width:auto;
+     float:left;
+     text-align:left;    
+ }
+ .navDays{
+      padding-left:300px;
+ }
+ #divTrackerHeader{
+     border-bottom:groove;
+     border-top:ridge;
+     border-right:ridge;
+     margin-left:20px;
+     margin-top:10px;
+     width:500px;
+
+ }
+ #spanTrackerHeader{
+     padding-left:15px;
+ }
+ #divTrackerDetails{
+    font-family:Aparajita;
+    width:auto;
+    vertical-align:auto;
+    overflow:auto;
+    margin-top:10px;
+    margin-left:20px;
+}
+ .trkHeader  {
+       height:40px;
+ }
+ #currDateSpan{
+     margin-bottom:0px;
+ }
+ #spanTrkHeader{
+    display:inline-table;
+     height:40px;
+     vertical-align:top;
+     font-family:Arial;
+     border-bottom:groove;
+     
+ }
+ #spanTrkHeader span,#spanTrkHeader img{
+    display:inline-table;
+     height:32px;
+     vertical-align:top;
+     font-family:Arial;
+ }
+ #imgPPV{
+
+ }
+ #f{
+     display:inline-table;
+     height:38px;
+     vertical-align:top;
+     font-size:14px;
+ } 
+
+ #spanDaily{
+     display:inline-table;
+ }
+ #spanDaily table tr{
+     border:none;
+ }
+ #spanDaily td {
+       padding-left:5px;
+       padding-right:5px;
+       text-align:center;
+       vertical-align:middle;
+       border-right:groove;
+       color:#555;
+       font-weight:300;
+   }
+
+.pointsHeaderLabel {
+       font-size:13px;
+       color:#555;
+       font-weight:300;
+   }
+ .pointsHeader{
+       font-size:19px;
+       color:#f15506;
+       font-weight:500;
+   }
+ loadingImg{
+     height:15px;
+     width:15px;
+     zoom:50%;
+ }
+ 
+ #divUserDetails{
+     margin-top:20px;
+ }
+ #divUserDetails div{
+     margin-left:20px;
+ }
+
+ #divUserDetails span{
+     color:orangered;
+ }
+ #profile{
+     margin-top:20px;
+ }
+ #profile span{
+     color:orangered;
+ }
+ #profile div{
+     font-weight:600;
+ }
+
+
+
+ .tab-intro{
+     margin-top:20px;
+     width:800px;
+     text-wrap:normal;
+     padding-bottom:20px;
+ }
+
+ .userDetailRow{
+     padding-left:10px;
+ }

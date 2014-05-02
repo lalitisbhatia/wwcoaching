@@ -34,6 +34,19 @@ exports.getUserById = function(req, res) {helper.getConnection(function(err,db){
      
 });
 };
+
+exports.getUserByCoachId = function(req, res) {helper.getConnection(function(err,db){
+  var id = req.params.cid.toString();
+    //console.log('Retrieving user: ' + id);
+    db.collection(usersCollName, function(err, collection) {
+        collection.findOne({'CoachId':id}, function(err, item) {
+            //res.send(item);
+            res.render('user',item);
+        });
+    });
+     
+});
+};
      
 exports.addUser = function(req, res) {helper.getConnection(function(err,db){
     var user = req.body;

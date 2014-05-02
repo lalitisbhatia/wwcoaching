@@ -1,0 +1,1136 @@
+/* Custom Propriotary Typeface */
+@font-face {
+  font-family:'wwdisplay_bold';
+  src: url('../fonts/wwdisplay-bold.eot');
+  src: url('../fonts/wwdisplay-bold.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/wwdisplay-bold.woff') format('woff'),
+       url('../fonts/wwdisplay-bold.ttf') format('truetype'),
+       url('../fonts/wwdisplay-bold.svg#wwdisplay_bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 100%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #fff;
+  font-weight: 300;
+  line-height: 0.8em;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  color: #403292;
+  font-size: 4.5em;
+  font-weight: 600;
+  line-height: 1em;
+  margin: 0 0 10px 0;
+}
+
+h3 {
+  color: #403292;
+  font-size: 2.3em;
+  font-weight: 300;
+  margin: 0 0 40px 0;
+  padding-top: 20px;
+}
+
+.offscreen {
+  border: 0px;
+  clip: rect(1px 1px 1px 1px);
+  height: 1px;
+  overflow: hidden;
+  padding: 0px;
+  position: absolute;
+  width: 1px;
+  z-index: -1000;
+}
+
+.p-top-30 {padding-top: 30px;}
+.m-rgt-30 {margin-right: 30px;}
+.m-lft-neg-25 {margin-left: -25px;}
+.p-lft-25 {padding-left: 25px;}
+
+/* Form display */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+label {
+  color: #555;
+  display: block;
+  font-weight: 300;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.single-line label,
+.single-line input[type="text"] {
+  display: inline;
+}
+
+.true-false ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.true-false li {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.true-false legend {
+  position: relative;
+  top: -8px;
+  width: 700px;
+}
+
+.true-false label {
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+
+.single-input label span {
+  float: left;
+  clear: both;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.single-line.name ul label span {margin-right: 10px;}
+
+.single-line ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.single-line.name ul {margin: 0 0 0 35px;}
+
+.single-line.name ul li {display: inline-block;}
+
+.single-line.name ul li legend {margin-right: 30px;}
+
+.check-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.check-group ul li {
+  display: inline-block;
+  margin-right: 20px;
+  text-align: center;
+  vertical-align: top;
+  width: 130px;
+}
+
+.check-group ul li label {height: 140px;}
+
+.check-group fieldset ul li label .aq-radio-sq,
+.check-group fieldset ul li label .aq-radio-crcl {
+  display: block;
+  float: none;
+  margin: 0 auto 10px auto !important;
+}
+
+label span {
+  display: inline;
+  line-height: 1.4em;
+  margin-bottom: 10px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  left: -9999px;
+  position: absolute;
+}
+
+input[type="checkbox"] + .aq-checkbox:before,
+input[type="radio"] + .aq-radio:before {
+  background: url('../img/sprite1.png') no-repeat -754px -99px;
+}
+
+input[type="checkbox"] + .aq-checkbox {
+  border-radius: 5px;
+  float: left;
+  height: 24px;
+  margin-right: 8px;
+  width: 24px;
+}
+
+input[type="checkbox"] + .aq-checkbox:before {
+  content: '';
+  display: block;
+  height: 11px;
+  left: 50%;
+  margin: -6px 0 0 -6px;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+  width: 0;
+}
+
+input[type="checkbox"]:checked + .aq-checkbox:before {width: 12px;}
+
+input[type="radio"] + .aq-radio {
+  border-radius: 50px;
+  float: left;
+  height: 24px;
+  margin-right: 8px;
+  width: 24px;
+}
+
+input[type="radio"] + .aq-radio:before {
+  content: '';
+  display: block;
+  height: 11px;
+  left: 50%;
+  margin: -6px 0 0 -6px;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+  width: 0;
+}
+
+input[type="radio"]:focus + .aq-radio:before,
+input[type="radio"]:checked + .aq-radio:before {width: 12px;}
+
+input[type="radio"] + .aq-radio-rec {
+  display: table;
+  float: left;
+  text-align: center;
+}
+
+input[type="radio"] + .aq-radio-rec.sm {
+  height: 30px;
+  width: 80px;
+}
+
+input[type="radio"] + .aq-radio-rec.sm span {
+  font-size: 1em;
+}
+
+input[type="radio"] + .aq-radio-rec.med {
+  height: 80px;
+  margin-right: 10px;
+  padding: 5px;
+  width: 200px;
+}
+
+input[type="radio"] + .aq-radio-rec.lrg {
+  height: 80px;
+  margin-right: 10px;
+  padding: 10px 15px;
+  max-width: 270px;
+  min-width: 200px;
+  width: auto;
+}
+
+input[type="radio"] + .aq-radio-rec span {
+  color: #666;
+  display: table-cell;
+  font-size: 1.125em;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+input[type="radio"] + .aq-radio-sq,
+input[type="radio"] + .aq-radio-crcl {
+  display: table;
+  float: left;
+  text-align: center;
+}
+
+input[type="radio"] + .aq-radio-sq.sm,
+input[type="radio"] + .aq-radio-crcl.sm {
+  font-size: 1.2em;
+  height: 40px;
+  margin-right: 1.5%;
+  width: 40px;
+}
+
+input[type="radio"] + .aq-radio-sq span,
+input[type="radio"] + .aq-radio-crcl span {
+  color: #666;
+  display: table-cell;
+  font-size: 1em;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+input[type="radio"] + .aq-radio-sq.med,
+input[type="radio"] + .aq-radio-crcl.med {
+  height: 53px;
+  margin-right: 1.5%;
+  width: 53px;
+}
+
+input[type="radio"] + .aq-radio-crcl.med {
+  border-radius: 50px;
+}
+
+input[type="radio"] + .aq-radio-sq.med.check:before,
+input[type="radio"] + .aq-radio-crcl.med.check:before {
+  background: url('../img/sprite1.png') no-repeat -739px -63px;
+  content: '';
+  display: block;
+  height: 26px;
+  overflow: hidden;
+  width: 27px;
+  position: relative;
+  left: 13px;
+  top: 13px;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+.likert {
+  display: inline;
+  list-style: none;
+  padding: 0;
+}
+
+.likert li {
+  display: inline-block;
+  height: auto;
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+
+input[type="radio"] + .aq-radio,
+input[type="radio"] + .aq-radio-sq,
+input[type="radio"] + .aq-radio-crcl,
+input[type="radio"] + .aq-radio-rec,
+input[type="checkbox"] + .aq-checkbox {
+  background: #ddd;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+input[type="radio"][disabled] + .aq-radio,
+input[type="radio"][disabled] + .aq-radio:focus,
+input[type="radio"][disabled] + .aq-radio:active,
+input[type="radio"][disabled] + .aq-radio:hover,
+label:focus input[type="radio"][disabled] + .aq-radio,
+label:active input[type="radio"][disabled] + .aq-radio,
+label:hover input[type="radio"][disabled] + .aq-radio,
+input[type="radio"][disabled] + .aq-radio-sq,
+input[type="radio"][disabled] + .aq-radio-sq:focus,
+input[type="radio"][disabled] + .aq-radio-sq:active,
+input[type="radio"][disabled] + .aq-radio-sq:hover,
+label:focus input[type="radio"][disabled] + .aq-radio-sq,
+label:active input[type="radio"][disabled] + .aq-radio-sq,
+label:hover input[type="radio"][disabled] + .aq-radio-sq,
+input[type="radio"][disabled] + .aq-radio-crcl,
+input[type="radio"][disabled] + .aq-radio-crcl:focus,
+input[type="radio"][disabled] + .aq-radio-crcl:active,
+input[type="radio"][disabled] + .aq-radio-crcl:hover,
+label:focus input[type="radio"][disabled] + .aq-radio-crcl,
+label:active input[type="radio"][disabled] + .aq-radio-crcl,
+label:hover input[type="radio"][disabled] + .aq-radio-crcl,
+input[type="radio"][disabled] + .aq-radio-rec,
+input[type="radio"][disabled] + .aq-radio-rec:focus,
+input[type="radio"][disabled] + .aq-radio-rec:active,
+input[type="radio"][disabled] + .aq-radio-rec:hover,
+label:focus input[type="radio"][disabled] + .aq-radio-rec,
+label:active input[type="radio"][disabled] + .aq-radio-rec,
+label:hover input[type="radio"][disabled] + .aq-radio-rec,
+input[type="checkbox"][disabled] + .aq-checkbox,
+input[type="checkbox"][disabled] + .aq-checkbox:focus,
+input[type="checkbox"][disabled] + .aq-checkbox:active,
+input[type="checkbox"][disabled] + .aq-checkbox:hover,
+label:focus input[type="checkbox"][disabled] + .aq-checkbox,
+label:active input[type="checkbox"][disabled] + .aq-checkbox,
+label:hover input[type="checkbox"][disabled] + .aq-checkbox {
+  background: #ddd;
+}
+
+input[type="radio"] + .aq-radio-sq.med.check:hover,
+input[type="radio"] + .aq-radio-crcl.med.check:hover,
+input[type="checkbox"]:focus + .aq-checkbox,
+input[type="radio"] + .aq-radio:focus,
+input[type="radio"] + .aq-radio:active,
+input[type="radio"] + .aq-radio:hover,
+input[type="radio"] + .aq-radio-sq:focus,
+input[type="radio"] + .aq-radio-sq:active,
+input[type="radio"] + .aq-radio-sq:hover,
+input[type="radio"] + .aq-radio-crcl:focus,
+input[type="radio"] + .aq-radio-crcl:active,
+input[type="radio"] + .aq-radio-crcl:hover,
+input[type="radio"] + .aq-radio-rec:focus,
+input[type="radio"] + .aq-radio-rec:active,
+input[type="radio"] + .aq-radio-rec:hover,
+input[type="checkbox"] + .aq-checkbox:focus,
+input[type="checkbox"] + .aq-checkbox:active,
+input[type="checkbox"] + .aq-checkbox:hover,
+label:focus input[type="radio"] + .aq-radio,
+label:active input[type="radio"] + .aq-radio,
+label:hover input[type="radio"] + .aq-radio,
+label:focus input[type="checkbox"] + .aq-checkbox,
+label:active input[type="checkbox"] + .aq-checkbox,
+label:hover input[type="checkbox"] + .aq-checkbox,
+label:focus input[type="radio"] + .aq-radio-sq.med.check,
+label:active input[type="radio"] + .aq-radio-sq.med.check,
+label:hover input[type="radio"] + .aq-radio-sq.med.check,
+label:focus input[type="radio"] + .aq-radio-crcl.med.check,
+label:active input[type="radio"] + .aq-radio-crcl.med.check,
+label:hover input[type="radio"] + .aq-radio-crcl.med.check {
+  background: #7accbc;
+}
+
+input[type="radio"]:focus + .aq-radio,
+input[type="radio"]:focus + .aq-radio-sq,
+input[type="radio"]:focus + .aq-radio-crcl,
+input[type="radio"]:focus + .aq-radio-rec,
+input[type="radio"]:checked + .aq-radio:focus,
+input[type="radio"]:checked + .aq-radio:active,
+input[type="radio"]:checked + .aq-radio:hover,
+input[type="radio"]:checked + .aq-radio-sq:focus,
+input[type="radio"]:checked + .aq-radio-sq:active,
+input[type="radio"]:checked + .aq-radio-sq:hover,
+input[type="radio"]:checked + .aq-radio-crcl:focus,
+input[type="radio"]:checked + .aq-radio-crcl:active,
+input[type="radio"]:checked + .aq-radio-crcl:hover,
+input[type="radio"]:checked + .aq-radio-rec:focus,
+input[type="radio"]:checked + .aq-radio-rec:active,
+input[type="radio"]:checked + .aq-radio-rec:hover,
+input[type="checkbox"]:checked + .aq-checkbox:focus,
+input[type="checkbox"]:checked + .aq-checkbox:active,
+input[type="checkbox"]:checked + .aq-checkbox:hover,
+label:focus input[type="checkbox"]:checked + .aq-checkbox,
+label:active input[type="checkbox"]:checked + .aq-checkbox,
+label:hover input[type="checkbox"]:checked + .aq-checkbox,
+label:focus input[type="radio"]:checked + .aq-radio,
+label:active input[type="radio"]:checked + .aq-radio,
+label:hover input[type="radio"]:checked + .aq-radio,
+label:focus input[type="radio"]:checked + .aq-radio-sq.med.check,
+label:active input[type="radio"]:checked + .aq-radio-sq.med.check,
+label:hover input[type="radio"]:checked + .aq-radio-sq.med.check,
+label:focus input[type="radio"]:checked + .aq-radio-crcl.med.check,
+label:active input[type="radio"]:checked + .aq-radio-crcl.med.check,
+label:hover input[type="radio"]:checked + .aq-radio-crcl.med.check {
+  background: #17B6A5;
+}
+
+input[type="radio"]:focus + .aq-radio-sq span,
+input[type="radio"]:focus + .aq-radio-crcl span,
+input[type="radio"]:focus + .aq-radio-rec span,
+input[type="radio"] + .aq-radio:focus span,
+input[type="radio"] + .aq-radio:active span,
+input[type="radio"] + .aq-radio:hover span,
+input[type="radio"] + .aq-radio-sq:focus span,
+input[type="radio"] + .aq-radio-sq:active span,
+input[type="radio"] + .aq-radio-sq:hover span,
+input[type="radio"] + .aq-radio-crcl:focus span,
+input[type="radio"] + .aq-radio-crcl:active span,
+input[type="radio"] + .aq-radio-crcl:hover span,
+input[type="radio"] + .aq-radio-rec:focus span,
+input[type="radio"] + .aq-radio-rec:active span,
+input[type="radio"] + .aq-radio-rec:hover span,
+input[type="checkbox"] + .aq-checkbox:focus span,
+input[type="checkbox"] + .aq-checkbox:active span,
+input[type="checkbox"] + .aq-checkbox:hover span,
+input[type="radio"]:checked + .aq-radio span,
+input[type="radio"]:checked + .aq-radio-sq span,
+input[type="radio"]:checked + .aq-radio-crcl span,
+input[type="radio"]:checked + .aq-radio-rec span,
+input[type="checkbox"]:checked + .aq-checkbox span {
+  color: #fff;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+input[type="radio"]:checked + .aq-radio,
+input[type="radio"]:checked + .aq-radio-sq,
+input[type="radio"]:checked + .aq-radio-crcl,
+input[type="radio"]:checked + .aq-radio-rec,
+input[type="checkbox"]:checked + .aq-checkbox {
+  background: #17B6A5;
+}
+
+input[type="radio"] + .aq-radio:before,
+input[type="checkbox"] + .aq-checkbox:before {
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+input[type="text"] {
+  background: none;
+  border: 1px solid #bbb;
+  color: #555;
+  display: block;
+  font-size: 1em;
+  font-weight: 300;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 8px;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+  width: 250px;
+}
+
+input[type="text"][placeholder] {color: #aaa;}
+
+textarea:focus,
+input[type="text"]:focus {
+  border: 1px solid #1abc9c;
+  outline: none;
+}
+
+textarea {
+  background: none;
+  border: 1px solid #bbb;
+  color: #555;
+  display: block;
+  font-size: 1em;
+  font-weight: 300;
+  height: 120px;
+  margin: 0 0 10px 0;
+  max-width: 460px;
+  padding: 8px;
+  resize: none;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+  width: 100%;
+}
+
+/* Question Wrap */
+
+.ques-wrap {margin: 0 0 40px 40px;}
+
+.ques-wrap.name {position: relative;}
+
+.ques {
+  color: #555;
+  display: inline-block;
+  font-size: 1.3em;
+  font-weight: 400;
+  line-height: 1.4em;
+  margin-bottom: 15px;
+  max-width: 840px;
+  text-indent: -1.8em;
+}
+
+.ques span {margin-right: 12px;}
+
+.ques.dbl-digit span {margin-right: 0;}
+
+.end-msg {
+  color: #555;
+  display: inline-block;
+  font-size: 1.3em;
+  font-weight: 400;
+  line-height: 1.4em;
+  margin-bottom: 25px;
+  max-width: 840px;
+}
+
+.end-msg p {
+  font-size: 0.8em;
+  margin: 0;
+}
+
+.end-msg p:first-child {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.ques-sub {display: inline-block;}
+
+legend.ques-sub {
+  float: left;
+  font-weight: normal;
+  margin-right: 15px;
+  margin-top: 12px;
+  width: 80px;
+}
+
+.end-msg {
+  color: #555;
+  display: inline-block;
+  font-size: 1.3em;
+  font-weight: 400;
+  line-height: 1.4em;
+  margin-bottom: 25px;
+  max-width: 840px;
+}
+
+/* Single Radio */
+
+.single-radio .ques-sub {
+  margin-bottom: 3px;
+  margin-right: 20px;
+  width: 800px;
+}
+
+.single-radio label {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+
+.ques-radio-group {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+/* Multi Image */
+
+.multi-img ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.multi-img ul li {
+  display: inline-block;
+  text-align: center;
+  vertical-align: top;
+  width: 140px;
+}
+
+.multi-img label img {
+  display: block;
+  height: 60px;
+  margin: 0 auto 5px auto;
+}
+
+.multi-img label span {
+  display: block;
+  height: 68px;
+  margin: 8px 0;
+}
+
+.multi-img label input[type="text"] {
+  margin: 0 auto;
+  text-align: center;
+  width: 50px;
+}
+
+/* Five Multiple Images */
+.multi-img.five label {margin-right: 40px;}
+
+/* Seven Multiple Images */
+.multi-img.seven {}
+
+.ques-wrap.multi-img {padding-bottom: 0;}
+
+/* WW Top Banner */
+
+.aq-ww-banner {
+  background-color: #404596;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#403292), to(#46bea5));
+  background-image: -webkit-linear-gradient(left, #403292, #46bea5); 
+  background-image: -moz-linear-gradient(left, #403292, #46bea5);
+  background-image: -ms-linear-gradient(left, #403292, #46bea5);
+  background-image: -o-linear-gradient(left, #403292, #46bea5);
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#403292',endColorstr='#46bea5',GradientType=1); /* IE6-9 */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 80px;
+  margin-bottom: 60px;
+  padding: 11px 0 11px 6%;
+  width: 100%;
+  z-index: 101;
+}
+
+.aq-wrap {
+  margin: 0 6% 50px 6%;
+  padding-top: 130px;
+  width: 1024px;
+}
+
+/* Header */
+
+.sub-header {
+  font-size: 22px;
+  line-height: 1.4em;
+  color: #555;
+  font-weight: 300;
+  margin-bottom: 50px;
+  width:600px;
+}
+
+/* Buttons */
+
+.submit-wrap {width: 100%;}
+.submit-wrap button {margin: 0 auto;}
+
+.aq-btn {
+  border-radius: 4px;
+  color: #fff;
+  border: 0;
+  display: inline-block;
+  height: 65px;
+  padding: 10px 15px;
+  text-align: center;
+  -webkit-transition: background .25s ease;
+  -moz-transition: background .25s ease;
+  -ms-transition: background .25s ease;
+  -o-transition: background .25s ease;
+  transition: background .25s ease;
+  font-size: 1.6em;
+  font-weight: 300;
+  width: 170px;
+  cursor: pointer;
+  margin: 0 5px
+}
+
+.aq-btn:focus,
+.aq-btn:active,
+.aq-btn:hover {
+  text-decoration: none;
+}
+
+/* Teal Button */
+.aq-btn.teal {background: #56B9AF;}
+
+.aq-btn.teal:focus,
+.aq-btn.teal:active,
+.aq-btn.teal:hover {
+  background: #45A79C;
+}
+
+/* WW Font Class */
+.wwdisplay-bold {font-family: 'wwdisplay_bold';}
+
+/* Thank you page WW "signature" text */
+.ww-thanks-sig {
+  font-size: 1.3em;
+  color: #333;
+}
+
+/* Sectioning */
+
+.sec-wrap {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sec {
+  background: #fff;
+  display: none;
+  height: auto;
+  margin-bottom: 50px;
+  max-width: 1024px;
+}
+
+.sec.active {
+  display: block;
+  z-index: 100;
+}
+
+/* Button Wrap */
+
+.btn-wrap {
+  width: 100%;
+  text-align: center;
+  margin-left: 25px;
+}
+
+.btwn-msg {
+  display: none;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 250px;
+}
+
+.btwn-msg span {
+  display: block;
+  font-size: 3.8em;
+  font-weight: 300;
+  margin-bottom: 60px;
+  color: #555;
+}
+
+.btwn-msg img {height: 50px;}
+
+.ques-cond {
+  color: #555;
+  display: inline-block;
+  font-size: 1.3em;
+  font-weight: 400;
+  line-height: 1.4em;
+  margin-bottom: 25px;
+  max-width: 840px;
+  text-indent: -1.8em;
+}
+
+input[type="text"].other-input,
+textarea.other-input {
+  display: none;
+  margin: 10px 0 10px 33px;
+  opacity: 0;
+}
+
+.multi-img.radio-imgs ul li {vertical-align: top;}
+
+.multi-img.radio-imgs label input[type="text"] {
+  display: none;
+  margin: -15px 0px -35px -15px;
+  opacity: 0;
+  text-align: left;
+  width: 180px;
+}
+
+input[type="radio"] + .aq-radio-img,
+input[type="checkbox"] + .aq-check-img {
+  background: #dddddd;
+  margin: 0 auto 10px auto;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -ms-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+input[type="radio"]:checked + .aq-radio-img,
+input[type="radio"]:checked + .aq-radio-img:focus,
+input[type="radio"]:checked + .aq-radio-img:active,
+input[type="radio"]:checked + .aq-radio-img:hover,
+input[type="checkbox"]:checked + .aq-check-img,
+input[type="checkbox"]:checked + .aq-check-img:focus,
+input[type="checkbox"]:checked + .aq-check-img:active,
+input[type="checkbox"]:checked + .aq-check-img:hover {
+  background: #17b6a5;
+}
+
+input[type="radio"] + .aq-radio-img:focus,
+input[type="radio"] + .aq-radio-img:active,
+input[type="radio"] + .aq-radio-img:hover,
+input[type="checkbox"] + .aq-check-img:focus,
+input[type="checkbox"] + .aq-check-img:active,
+input[type="checkbox"] + .aq-check-img:hover {
+  background: #7accbc;
+}
+
+.aq-radio-img div, .aq-check-img div {background: url('../img/sprite1.png') 0 0;}
+
+/* Clock radio images */
+.aq-radio-img.clock div {
+  background-position: -6px 229px;
+  height: 120px;
+  width: 100%;
+}
+
+/* Location radio images */
+.aq-radio-img.loc1 div,
+.aq-radio-img.loc2 div,
+.aq-radio-img.loc3 div,
+.aq-radio-img.loc4 div,
+.aq-radio-img.loc5 div,
+.aq-radio-img.loc6 div {
+  height: 73px;
+  width: 100%;
+}
+
+.aq-radio-img.loc1 div {background-position: 16px 431px;}
+.aq-radio-img.loc2 div {background-position: -112px 426px;}
+.aq-radio-img.loc3 div {background-position: -245px 431px;}
+.aq-radio-img.loc4 div {background-position: -379px 431px;}
+.aq-radio-img.loc5 div {background-position: -509px 431px;}
+.aq-radio-img.loc6 div {background-position: -630px 431px;}
+
+/* Time of day checkbox images */
+.aq-check-img.tod1 div,
+.aq-check-img.tod2 div,
+.aq-check-img.tod3 div,
+.aq-check-img.tod4 div {
+  height: 99px;
+  width: 100%;
+}
+
+.aq-check-img.tod1 div {background-position: 0 338px;}
+.aq-check-img.tod2 div {background-position: -163px 338px;}
+.aq-check-img.tod3 div {background-position: -290px 338px;}
+.aq-check-img.tod4 div {background-position: -420px 338px;}
+
+/* Errors */
+
+.error input[type="text"] {border: 1px solid red;}
+
+.error-txt {display: none;}
+
+.error .error-txt {
+  color: #FF0000;
+  display: inline;
+  left: 360px;
+  margin: 0;
+  position: absolute;
+}
+
+.note-paper {
+  background: url('../img/note_paper.png') no-repeat;
+  height: 300px;
+  margin: 0 auto;
+  width: 650px;
+  position: relative;
+}
+
+.note-paper textarea {
+  background: transparent;
+  border: 0;
+  height: 150px;
+  left: 45px;
+  padding: 0;
+  position: relative;
+  max-width: 575px;
+  top: 125px;
+}
+
+.note-paper textarea:focus {border: 0;}
+
+.note-paper span {
+  width: 200px;
+  font-size: 2em;
+  color: #56B9AF;
+  display: block;
+  position: absolute;
+  left: 203px;
+  top: 57px;
+}
+
+#qstn_assess {text-align: center;}
+
+.aq-divider {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 30px;
+}
+
+
+/* IE8 "fixes" TEMP!!! */
+.ie8 label {text-align: left;}
+
+.ie8 input[type="checkbox"],
+.ie8 input[type="radio"] {
+  left: inherit;
+  position: static;
+  float: left;
+  clear: left;
+    margin-right: 10px;
+}
+
+.ie8 input[type="radio"] + .aq-radio-sq.med.check:before,
+.ie8 input[type="radio"] + .aq-radio-crcl.med.check:before {
+  background: transparent;
+}
+
+.ie8 .ques-wrap.multi-img.seven span {text-align: center;}
+
+.ie8 .check-group ul li {display: inline !important;}
+.ie8 .check-group ul li label {height: auto;}
+
+.ie8 .single-line label, .ie8 .single-line input[type="text"] {display: block;}
+
+.ie8 .check-group fieldset ul li label .aq-radio-sq,
+.ie8 .check-group fieldset ul li label .aq-radio-crcl {
+  margin: 0 !important;
+}
+
+.ie8 .aq-radio-img div, .ie8 .aq-check-img div {
+  background: transparent;
+}
+
+.ie8 input[type="radio"] + .aq-radio-img, .ie8 input[type="checkbox"] + .aq-check-img {
+  background: transparent;
+  height: 0;
+  display: inline-block;
+}
+
+.ie8 input[type="radio"] + .aq-radio,
+.ie8 input[type="radio"] + .aq-radio-sq,
+.ie8 input[type="radio"] + .aq-radio-crcl,
+.ie8 input[type="radio"] + .aq-radio-rec,
+.ie8 input[type="checkbox"] + .aq-checkbox {
+  background: transparent;
+  height: 0 !important;
+  padding: 0 !important;
+  max-width: inherit !important;
+  min-width: inherit !important;
+  width: 0;
+}
+
+.ie8 input[type="radio"] + .aq-radio-rec.lrg {width: inherit;}
+
+.ie8 input[type="radio"] + .aq-radio-rec {margin-left: 10px;}
+
+.ie8 input[type="radio"][disabled] + .aq-radio,
+.ie8 input[type="radio"][disabled] + .aq-radio:focus,
+.ie8 input[type="radio"][disabled] + .aq-radio:active,
+.ie8 input[type="radio"][disabled] + .aq-radio:hover,
+.ie8 label:focus input[type="radio"][disabled] + .aq-radio,
+.ie8 label:active input[type="radio"][disabled] + .aq-radio,
+.ie8 label:hover input[type="radio"][disabled] + .aq-radio,
+.ie8 input[type="radio"][disabled] + .aq-radio-sq,
+.ie8 input[type="radio"][disabled] + .aq-radio-sq:focus,
+.ie8 input[type="radio"][disabled] + .aq-radio-sq:active,
+.ie8 input[type="radio"][disabled] + .aq-radio-sq:hover,
+.ie8 label:focus input[type="radio"][disabled] + .aq-radio-sq,
+.ie8 label:active input[type="radio"][disabled] + .aq-radio-sq,
+.ie8 label:hover input[type="radio"][disabled] + .aq-radio-sq,
+.ie8 input[type="radio"][disabled] + .aq-radio-crcl,
+.ie8 input[type="radio"][disabled] + .aq-radio-crcl:focus,
+.ie8 input[type="radio"][disabled] + .aq-radio-crcl:active,
+.ie8 input[type="radio"][disabled] + .aq-radio-crcl:hover,
+.ie8 label:focus input[type="radio"][disabled] + .aq-radio-crcl,
+.ie8 label:active input[type="radio"][disabled] + .aq-radio-crcl,
+.ie8 label:hover input[type="radio"][disabled] + .aq-radio-crcl,
+.ie8 input[type="radio"][disabled] + .aq-radio-rec,
+.ie8 input[type="radio"][disabled] + .aq-radio-rec:focus,
+.ie8 input[type="radio"][disabled] + .aq-radio-rec:active,
+.ie8 input[type="radio"][disabled] + .aq-radio-rec:hover,
+.ie8 label:focus input[type="radio"][disabled] + .aq-radio-rec,
+.ie8 label:active input[type="radio"][disabled] + .aq-radio-rec,
+.ie8 label:hover input[type="radio"][disabled] + .aq-radio-rec,
+.ie8 input[type="checkbox"][disabled] + .aq-checkbox,
+.ie8 input[type="checkbox"][disabled] + .aq-checkbox:focus,
+.ie8 input[type="checkbox"][disabled] + .aq-checkbox:active,
+.ie8 input[type="checkbox"][disabled] + .aq-checkbox:hover,
+.ie8 label:focus input[type="checkbox"][disabled] + .aq-checkbox,
+.ie8 label:active input[type="checkbox"][disabled] + .aq-checkbox,
+.ie8 label:hover input[type="checkbox"][disabled] + .aq-checkbox {
+  background: transparent;
+}
+
+.ie8 input[type="radio"] + .aq-radio-sq.med.check:hover,
+.ie8 input[type="radio"] + .aq-radio-crcl.med.check:hover,
+.ie8 input[type="checkbox"]:focus + .aq-checkbox,
+.ie8 input[type="radio"] + .aq-radio:focus,
+.ie8 input[type="radio"] + .aq-radio:active,
+.ie8 input[type="radio"] + .aq-radio:hover,
+.ie8 input[type="radio"] + .aq-radio-sq:focus,
+.ie8 input[type="radio"] + .aq-radio-sq:active,
+.ie8 input[type="radio"] + .aq-radio-sq:hover,
+.ie8 input[type="radio"] + .aq-radio-crcl:focus,
+.ie8 input[type="radio"] + .aq-radio-crcl:active,
+.ie8 input[type="radio"] + .aq-radio-crcl:hover,
+.ie8 input[type="radio"] + .aq-radio-rec:focus,
+.ie8 input[type="radio"] + .aq-radio-rec:active,
+.ie8 input[type="radio"] + .aq-radio-rec:hover,
+.ie8 input[type="checkbox"] + .aq-checkbox:focus,
+.ie8 input[type="checkbox"] + .aq-checkbox:active,
+.ie8 input[type="checkbox"] + .aq-checkbox:hover,
+.ie8 label:focus input[type="radio"] + .aq-radio,
+.ie8 label:active input[type="radio"] + .aq-radio,
+.ie8 label:hover input[type="radio"] + .aq-radio,
+.ie8 label:focus input[type="checkbox"] + .aq-checkbox,
+.ie8 label:active input[type="checkbox"] + .aq-checkbox,
+.ie8 label:hover input[type="checkbox"] + .aq-checkbox,
+.ie8 label:focus input[type="radio"] + .aq-radio-sq.med.check,
+.ie8 label:active input[type="radio"] + .aq-radio-sq.med.check,
+.ie8 label:hover input[type="radio"] + .aq-radio-sq.med.check,
+.ie8 label:focus input[type="radio"] + .aq-radio-crcl.med.check,
+.ie8 label:active input[type="radio"] + .aq-radio-crcl.med.check,
+.ie8 label:hover input[type="radio"] + .aq-radio-crcl.med.check {
+  background: transparent;
+}
+
+.ie8 input[type="radio"]:focus + .aq-radio,
+.ie8 input[type="radio"]:focus + .aq-radio-sq,
+.ie8 input[type="radio"]:focus + .aq-radio-crcl,
+.ie8 input[type="radio"]:focus + .aq-radio-rec,
+.ie8 input[type="radio"]:checked + .aq-radio:focus,
+.ie8 input[type="radio"]:checked + .aq-radio:active,
+.ie8 input[type="radio"]:checked + .aq-radio:hover,
+.ie8 input[type="radio"]:checked + .aq-radio-sq:focus,
+.ie8 input[type="radio"]:checked + .aq-radio-sq:active,
+.ie8 input[type="radio"]:checked + .aq-radio-sq:hover,
+.ie8 input[type="radio"]:checked + .aq-radio-crcl:focus,
+.ie8 input[type="radio"]:checked + .aq-radio-crcl:active,
+.ie8 input[type="radio"]:checked + .aq-radio-crcl:hover,
+.ie8 input[type="radio"]:checked + .aq-radio-rec:focus,
+.ie8 input[type="radio"]:checked + .aq-radio-rec:active,
+.ie8 input[type="radio"]:checked + .aq-radio-rec:hover,
+.ie8 input[type="checkbox"]:checked + .aq-checkbox:focus,
+.ie8 input[type="checkbox"]:checked + .aq-checkbox:active,
+.ie8 input[type="checkbox"]:checked + .aq-checkbox:hover,
+.ie8 label:focus input[type="checkbox"]:checked + .aq-checkbox,
+.ie8 label:active input[type="checkbox"]:checked + .aq-checkbox,
+.ie8 label:hover input[type="checkbox"]:checked + .aq-checkbox,
+.ie8 label:focus input[type="radio"]:checked + .aq-radio,
+.ie8 label:active input[type="radio"]:checked + .aq-radio,
+.ie8 label:hover input[type="radio"]:checked + .aq-radio,
+.ie8 label:focus input[type="radio"]:checked + .aq-radio-sq.med.check,
+.ie8 label:active input[type="radio"]:checked + .aq-radio-sq.med.check,
+.ie8 label:hover input[type="radio"]:checked + .aq-radio-sq.med.check,
+.ie8 label:focus input[type="radio"]:checked + .aq-radio-crcl.med.check,
+.ie8 label:active input[type="radio"]:checked + .aq-radio-crcl.med.check,
+.ie8 label:hover input[type="radio"]:checked + .aq-radio-crcl.med.check {
+  background: transparent;
+}
+
+.ie8 input[type="radio"]:focus + .aq-radio-sq span,
+.ie8 input[type="radio"]:focus + .aq-radio-crcl span,
+.ie8 input[type="radio"]:focus + .aq-radio-rec span,
+.ie8 input[type="radio"] + .aq-radio:focus span,
+.ie8 input[type="radio"] + .aq-radio:active span,
+.ie8 input[type="radio"] + .aq-radio:hover span,
+.ie8 input[type="radio"] + .aq-radio-sq:focus span,
+.ie8 input[type="radio"] + .aq-radio-sq:active span,
+.ie8 input[type="radio"] + .aq-radio-sq:hover span,
+.ie8 input[type="radio"] + .aq-radio-crcl:focus span,
+.ie8 input[type="radio"] + .aq-radio-crcl:active span,
+.ie8 input[type="radio"] + .aq-radio-crcl:hover span,
+.ie8 input[type="radio"] + .aq-radio-rec:focus span,
+.ie8 input[type="radio"] + .aq-radio-rec:active span,
+.ie8 input[type="radio"] + .aq-radio-rec:hover span,
+.ie8 input[type="checkbox"] + .aq-checkbox:focus span,
+.ie8 input[type="checkbox"] + .aq-checkbox:active span,
+.ie8 input[type="checkbox"] + .aq-checkbox:hover span,
+.ie8 input[type="radio"]:checked + .aq-radio span,
+.ie8 input[type="radio"]:checked + .aq-radio-sq span,
+.ie8 input[type="radio"]:checked + .aq-radio-crcl span,
+.ie8 input[type="radio"]:checked + .aq-radio-rec span,
+.ie8 input[type="checkbox"]:checked + .aq-checkbox span {
+  color: inherit;
+}
+
+.ie8 input[type="radio"]:checked + .aq-radio,
+.ie8 input[type="radio"]:checked + .aq-radio-sq,
+.ie8 input[type="radio"]:checked + .aq-radio-crcl,
+.ie8 input[type="radio"]:checked + .aq-radio-rec,
+.ie8 input[type="checkbox"]:checked + .aq-checkbox {
+  background: transparent;
+}
+

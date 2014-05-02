@@ -16,18 +16,23 @@ app.configure(function () {
     app.set('view engine', 'jade');
     app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
     app.use(express.methodOverride());
-    app.use(express.bodyParser()),
+    app.use(express.bodyParser());
     app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded())
+    app.use(bodyParser.urlencoded());
+    //app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
 
 
 app.get('/',home.index);
+
 //*************************************************
 //*****This section is for the coaches data********
 //*************************************************
+//  app.get('/CoachDashboard.html',function(req,res){
+//      res.render('CoachDashboard.html');
+//  });
 app.get('/coaches',coaches.getAllCoaches);
 app.get('/coaches/:id',coaches.getCoachById);
 app.post('/coaches', coaches.addCoach);
@@ -38,6 +43,7 @@ app.put('/coaches/:id', coaches.updateCoach);
 //*************************************************
 app.get('/users',users.getAllUsers);
 app.get('/users/:id',users.getUserById);
+app.get('/cusers/:cid',users.getUserByCoachId);
 app.post('/users', users.addUser);
 app.put('/users/:id', users.updateUser);
 
