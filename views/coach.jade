@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    
+    .jumbotron
+        .container
+             p Hi #{coach.FirstName}! Welcome to the Coaches' Dashboard. 
+                | Click on the links below to see your coachees' information, select your available schedule or update your profile
+    
+    .container
+        .row
+            ul.nav.nav-tabs
+                
+                li.active.col-md-4
+                    h2 
+                        a(id="aMyUsers" href='#users', data-toggle='tab') Users
+                li.col-md-4
+                    h2
+                        a(href='#scheduler', data-toggle='tab') Scheduler
+                li.col-md-4
+                    h2
+                        a(href='#profile', data-toggle='tab') Profile
+                
+            // Tab panes
+            .tab-content
+                #users.tab-pane.active
+                    .container
+                        #myUsers
+                        p this is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tab
+                #scheduler.tab-pane 
+                    .container
+                        p this is the scheduler tab
+                #profile.tab-pane 
+                    .container
+                        p this is the profile tab
+                    
+
+    
+    
+        hr
+        footer
+            p © Company 2014
+// /container

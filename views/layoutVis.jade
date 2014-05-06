@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+    head
+        title Coaching Pilot
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+        link(rel='stylesheet', href='/css/custom.css')
+    body
+        .navbar.navbar-inverse.aq-ww-banner.navbar-fixed-top(role='navigation' style='border:none;')
+            .container
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', style='border:none;' data-toggle='collapse', data-target='.navbar-collapse')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    img(src='/img/ww_logo_white_sm.png' style='padding-top:15px;')
+                .navbar-collapse.collapse(style='border:none;')
+                    form#loginForm.navbar-form.navbar-right(role='form',action='/' method='POST' style='border:none')
+                        .form-group
+                            input#username.form-control(type='text',name='username' placeholder='username',required='')
+                        .form-group
+                            input#password.form-control(type='password',name='password' placeholder='password',required='')
+                        button#signin.btn.btn-success(type='submit') Sign in
+                        #a_dderr.err(style='color:red;float:left;margin-left:-60px')=message
+                // /.navbar-collapse
+    
+        block content
+        
+        script(src='/js/jquery.min.js')
+        script(src='/js/bootstrap.min.js')
+        script(src='/js/wwcoaching.js')
+       
