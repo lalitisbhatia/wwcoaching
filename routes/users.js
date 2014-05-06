@@ -35,19 +35,30 @@ exports.getUserById = function(req, res) {helper.getConnection(function(err,db){
 });
 };
 
-exports.getUserByCoachId = function(req, res) {helper.getConnection(function(err,db){
-  var id = req.params.cid.toString();
-    //console.log('Retrieving user: ' + id);
+// exports.getUsersByCoachId = function(req, res) {helper.getConnection(function(err,db){
+//   var id = req.session.userId.toString(); // the userid here is the coach id
+//     //console.log('Retrieving user: ' + id);
+//     db.collection(usersCollName, function(err, collection) {
+//         collection.find().toArray(function(err, items) {
+//             res.send(items);
+//         });
+//     });
+     
+// });
+// };
+ 
+exports.getUsersByCoachId = function(req, res) {helper.getConnection(function(err,db){
+    var id = req.session.userId.toString();
+    id='81b97fab-851a-41e6-9468-d368870d6957';
+    console.log('coachId: ' + id);
     db.collection(usersCollName, function(err, collection) {
-        collection.findOne({'CoachId':id}, function(err, item) {
-            //res.send(item);
-            res.render('user',item);
+        collection.find({'CoachId':id}).toArray(function(err, items) {
+            res.send(items);
         });
     });
-     
 });
 };
-     
+    
 exports.addUser = function(req, res) {helper.getConnection(function(err,db){
     var user = req.body;
     db.collection(usersCollName, function(err, collection) {

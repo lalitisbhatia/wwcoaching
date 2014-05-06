@@ -1,31 +1,9 @@
-doctype
-html(lang="en" ng-app)
-    head
+extends layoutVis
+
+block content
+    .jumbotron
+        .container
+            h2 Welcome to the Coaches' Dashboard
+            p 
+                | Here you can find all the information related to the users assigned tou you for the coaching pilot. First, please login.
         
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet" href="./css/bootstrap.min.css")
-        link(rel="stylesheet" href="./css/bootstrap-responsive.min.css")
-        // link(rel="stylesheet" href="./css/style.css")
-        // link(rel="stylesheet" href="./css/Assessment.css")
-    body
-        .container(ng-controller='ChatController')
-            
-            .navbar.navbar-fixed-top.navbar-inverse
-                .navbar-inner
-                    .pull-right
-                        p.brand Nav1
-            .page-header
-                h1 Welcome to the 1:1 coaching 
-                br 
-                h3 Please Login
-  
-        
-    
-        script.
-            function LoginController($scope) {
-            console.log('calling the script')
-            }
-      
-        script(src='./js/bootstrap.min.js')
-        script(src='./js/angular.min.js')
-        script(src='./js/jquery.min.js')
