@@ -4,10 +4,11 @@ block content
     
     .jumbotron
         .container(ng-controller='CoachController')
-             p Hi {{FirstName}}! Welcome to the Coaches' Dashboard. 
-                | Click on the links below to see your coachees' information, select your available schedule or update your profile
+             h3(style='padding-bottom:0px;') Hi {{FirstName}}! Welcome to the Coaches' Dashboard. 
+             p  Click on the links below to see your coachees' information, select your available schedule or......
     
     .container(ng-controller='UsersController')
+       
         .row
             ul.nav.nav-tabs(style='font-size:20px;')
                 
@@ -15,29 +16,30 @@ block content
                     a(id="aMyUsers" href='#users', data-toggle='tab'  ) Users 
                         
                 li(style='margin-left:50px;')
-                    a(href='#scheduler', data-toggle='tab') Scheduler
+                    a(href='#scheduler', data-toggle='tab') Resources
                         
-                li(style='margin-left:50px;')
-                    a(href='#profile', data-toggle='tab') Profile
+                
                         
                 
             // Tab panes
             .tab-content
                 #users.tab-pane.active
                     .container
-                        ul
-                          li(ng-repeat="message in emails.messages")  {{ message.from }} 
-                        ul
+                        ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
                           li(ng-repeat="user in users")  
-                            a(href='/getuser/{{user._id}}') {{ user.FirstName }} {{ user.LastName }} 
+                            ul.navlist
+                                li 
+                                    a(href='/getuser/{{user._id}}') {{ user.FirstName }} {{ user.LastName }} 
+                                li 
+                                    {{user.Email}}
+                                li 
+                                    {{user.Phone}}
                             
                         
                 #scheduler.tab-pane 
                     .container
-                        p this is the scheduler tab
-                #profile.tab-pane 
-                    .container
-                        p this is the profile tab
+                        p this is the Resources tab
+               
                     
         
         hr

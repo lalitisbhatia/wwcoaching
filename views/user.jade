@@ -1,13 +1,38 @@
 extends layout
 
 block content
-    .jumbotron
-        .container(ng-controller='UserDetailsController')
+    
+    .container
         
-            h2 {{FirstName}} {{LastName}}
-                h3 Contact Information
-                    p Email: {{Email}}
-                    p Phone: {{Phone}}
+            .col-sm-3.col-md-2.sidebar
+                ul.nav.nav-sidebar
+                    li.active 
+                        a(href="#overview" data-toggle="tab") Overview
+                    li 
+                        a(href="#wwprofile" data-toggle="tab") WW Profile
+                    li 
+                        a(href="#assessment" data-toggle="tab") Assessment
+                    li 
+                        a(href="#tracker" data-toggle="tab") Tracker
+                    li 
+                        a(href="#calls" data-toggle="tab") Calls
+                    li
+                        a(href="#eamils" data-toggle="tab") Email Communications
+            .col-sm-9     
+                .tab-content
+                    #overview.tab-pane.active.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main(ng-controller='UserDetailsController')
+                        h1.page-header {{FirstName}} {{LastName}}
+                    #wwprofile.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+                        h1.page-header WW Profile Info Here
+                    #assessment.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+                        h1.page-header Assessment Results here
+                    #tracker.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+                        h1.page-header Tracker Info Here
+                    #calls.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+                        h1.page-header Calls Info Here
+                    #eamils.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+                        h1.page-header Emails communication Here
+                            
             
                 
             

@@ -1,3 +1,14 @@
+/* Custom Propriotary Typeface */
+@font-face {
+  font-family:'wwdisplay_bold';
+  src: url('../fonts/wwdisplay-bold.eot');
+  src: url('../fonts/wwdisplay-bold.eot?#iefix') format('embedded-opentype'), 
+       url('../fonts/wwdisplay-bold.woff') format('woff'),
+       url('../fonts/wwdisplay-bold.ttf') format('truetype'),
+       url('../fonts/wwdisplay-bold.svg#wwdisplay_bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   padding-top: 50px;
   padding-bottom: 20px;
@@ -20,3 +31,30 @@ body {
   width: 100%;
   z-index: 101;
 }
+
+.tblHeader 
+{
+    font-weight:bold;
+    font-family:Arial;
+    color: #fff;
+    background-color:rgb(46, 185, 185);
+    padding-left:15px;
+    border:1px;
+    
+}
+.tblUsers
+{
+    border:1px;
+    width:700px
+    
+}
+.tblUsers.tr:nth-child(odd){background:#dae5f4;}
+
+.navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}
+
+

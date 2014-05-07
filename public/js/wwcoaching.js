@@ -159,9 +159,9 @@ function UsersController($scope,$http) {
             url: '/cusers'
         })
         .success(function (data, status, headers, config) {    
-            //console.log((data)) ;
+            console.log((data)) ;
             $scope.users = data;
-            console.log('$scope.users = '+  $scope.users[0]);
+            //console.log('$scope.users = '+  $scope.users[0]);
         });
     
     

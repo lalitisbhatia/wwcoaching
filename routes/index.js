@@ -9,15 +9,12 @@ exports.index = function(req, res,next){
     if(req.session.auth){
         if(req.session.admin){
             res.render('admin');    
-           // next();
         }else {
             console.log('redirecting to coach home');
             res.render('coach')
-            //next();
         }
     }else{
         res.render('index');
-        //next();
     }
 };
 
