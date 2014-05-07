@@ -31,12 +31,12 @@ exports.login = function(req, res,next) {helper.getConnection(function(err,db){
                 
                 if(item.admin){
                     req.session.admin=true;
-                    res.render('admin');
+                    //res.render('admin');
                  }else{
                      console.log(item);
-                     res.render('coach',{coach:item});
+                     //res.render('coach',{coach:item});
                 }
-                 //res.redirect('/');
+                 res.redirect('/');
             }else
             {
                 res.render('index',{'message':'no user found'});

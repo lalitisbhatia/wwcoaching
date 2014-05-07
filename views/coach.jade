@@ -3,30 +3,35 @@ extends layout
 block content
     
     .jumbotron
-        .container
-             p Hi #{coach.FirstName}! Welcome to the Coaches' Dashboard. 
+        .container(ng-controller='CoachController')
+             p Hi {{FirstName}}! Welcome to the Coaches' Dashboard. 
                 | Click on the links below to see your coachees' information, select your available schedule or update your profile
     
-    .container
+    .container(ng-controller='UsersController')
         .row
-            ul.nav.nav-tabs
+            ul.nav.nav-tabs(style='font-size:20px;')
                 
-                li.active.col-md-4
-                    h2 
-                        a(id="aMyUsers" href='#users', data-toggle='tab') Users
-                li.col-md-4
-                    h2
-                        a(href='#scheduler', data-toggle='tab') Scheduler
-                li.col-md-4
-                    h2
-                        a(href='#profile', data-toggle='tab') Profile
+                li.active(style='margin-left:50px;')
+                    a(id="aMyUsers" href='#users', data-toggle='tab'  ) Users 
+                        
+                li(style='margin-left:50px;')
+                    a(href='#scheduler', data-toggle='tab') Scheduler
+                        
+                li(style='margin-left:50px;')
+                    a(href='#profile', data-toggle='tab') Profile
+                        
                 
             // Tab panes
             .tab-content
                 #users.tab-pane.active
                     .container
-                        #myUsers
-                        p this is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tabthis is the users tab
+                        ul
+                          li(ng-repeat="message in emails.messages")  {{ message.from }} 
+                        ul
+                          li(ng-repeat="user in users")  
+                            a(href='/getuser/{{user._id}}') {{ user.FirstName }} {{ user.LastName }} 
+                            
+                        
                 #scheduler.tab-pane 
                     .container
                         p this is the scheduler tab
@@ -34,9 +39,7 @@ block content
                     .container
                         p this is the profile tab
                     
-
-    
-    
+        
         hr
         footer
             p © Company 2014

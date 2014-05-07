@@ -1,12 +1,14 @@
-doctype
-html
-    head
-        title
-    body
-        #wrapper
-            table
-                tr
-                    td=FirstName
-                    td=LastName
-                    td=Phone
-                    td=Email
+extends layout
+
+block content
+    .jumbotron
+        .container(ng-controller='UserDetailsController')
+        
+            h2 {{FirstName}} {{LastName}}
+                h3 Contact Information
+                    p Email: {{Email}}
+                    p Phone: {{Phone}}
+            
+                
+            
+                

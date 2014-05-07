@@ -1,5 +1,5 @@
-//##### Services related to user info ###########
-//################################################
+//##### API routes handlers related to user info ###########
+//##########################################################
 var mongo = require("mongodb");
 var helper = require('../public/lib/dbhelper');
 var BSON = mongo.BSONPure;
@@ -23,12 +23,13 @@ exports.getAllUsers = function(req, res) {helper.getConnection(function(err,db){
 
 
 exports.getUserById = function(req, res) {helper.getConnection(function(err,db){
-  var id = req.params.id.toString();
-    //console.log('Retrieving user: ' + id);
+    var id = req.params.id.toString();
+    console.log('Retrieving user: ' + id);
     db.collection(usersCollName, function(err, collection) {
         collection.findOne({'_id':id}, function(err, item) {
-            //res.send(item);
-            res.render('user',item);
+            //console.log(item);
+            res.send(item);
+            //res.render('user',item);
         });
     });
      

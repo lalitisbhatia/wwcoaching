@@ -1,7 +1,6 @@
 doctype html
-html(lang="en")
+html(lang="en" ng-app="myApp")
     head
-        title Coach #{coach.FirstName}'s Dashboard
         link(rel='stylesheet', href='/css/bootstrap.min.css')
         link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
         link(rel='stylesheet', href='/css/custom.css')
@@ -18,11 +17,11 @@ html(lang="en")
                 .navbar-collapse.collapse(style='border:none;')
                     ul.nav.navbar-nav.navbar-brand
                         li
-                            a(href='#') Link
+                            a(href='/' style='padding-top:5px;') Home
                         li
-                            a(href='#') Link
+                            a(href='#' style='padding-top:5px;') Scheduler
                         li
-                            a(href='#') Link
+                            a(href='#' style='padding-top:5px;') Profile
                     a.navbar-brand.navbar-right(id='logout' href='/logout' style="color:#E6E0E0;") Logout
                 // /.navbar-collapse
     
@@ -31,5 +30,8 @@ html(lang="en")
         
         script(src='/js/jquery.min.js')
         script(src='/js/bootstrap.min.js')
+        script(src='/js/angular.min.js')
+        script(src='/js/angular-route.min.js')
         script(src='/js/wwcoaching.js')
+        
        

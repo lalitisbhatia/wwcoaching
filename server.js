@@ -23,30 +23,36 @@ app.configure(function () {
     app.use(express.session());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded());
-    
-    app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use(app.router);
 });
 
 
 
+
+
+
+//*************************************************
+//**************Handle UI routes ******************
+//*************************************************
+
 app.get('/',home.index);
+app.get('/getuser/:id',function(req,res){
+    res.render('user');
+})
 app.post('/',admin.login);
 app.get('/logout',admin.logout);
 
 // app.get('/coachhome',admin.checkUser,coaches.getCoachInfo);
 // app.get('/adminhome',admin.checkAdmin,home.adminhome);
 
-//*************************************************
-//*****This section is for the coaches data********
-//*************************************************
-//  app.get('/CoachDashboard.html',function(req,res){
-//      res.render('CoachDashboard.html');
-//  });
+//***********************************************************
+//*****This section is for the API routes to get data********
+//***********************************************************
 
 app.get('/coaches',admin.checkAdmin,coaches.getAllCoaches);
 app.get('/coaches/:id',coaches.getCoachById);
-//app.get('/coach',admin.checkUser, coaches.getCoachInfo);
+app.get('/coach',admin.checkUser, coaches.getCoachInfo);
 app.post('/coaches', coaches.addCoach);
 app.put('/coaches/:id', coaches.updateCoach);
 
@@ -54,9 +60,11 @@ app.put('/coaches/:id', coaches.updateCoach);
 //*****This section is for the users data********
 //*************************************************
 app.get('/users',admin.checkAdmin,users.getAllUsers);
-app.get('/users/:id',admin.checkAdmin,users.getUserById);
+app.get('/users/:id',admin.checkUser,users.getUserById);
 app.get('/cusers',admin.checkUser, users.getUsersByCoachId);
 app.put('/users/:id', users.updateUser);
+
+
 
 //****************************************************
 //*****This section is for the assessment data********
@@ -68,6 +76,7 @@ app.post('/assm', assmnt.saveAssm);
 //*****This section is for the schedule data********
 //****************************************************
 app.get('/schedule', schedule.getCoachAvails);
+//app.get('*',home.index);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
