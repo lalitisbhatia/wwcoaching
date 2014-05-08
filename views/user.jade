@@ -2,7 +2,7 @@ extends layout
 
 block content
     
-    .container
+    .container(ng-controller='UserDetailsController' data-ng-init='initApp()')
         
             .col-sm-3.col-md-2.sidebar
                 ul.nav.nav-sidebar
@@ -20,10 +20,18 @@ block content
                         a(href="#eamils" data-toggle="tab") Email Communications
             .col-sm-9     
                 .tab-content
-                    #overview.tab-pane.active.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main(ng-controller='UserDetailsController')
+                    
+                    #overview.tab-pane.active.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h1.page-header {{FirstName}} {{LastName}}
                     #wwprofile.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                        h1.page-header WW Profile Info Here
+                        h1.page-header WW Profile for {{FirstName}} {{LastName}} 
+                            p Age: {{Age}}
+                            div Gender: {{Gender}}
+                            div Height: {{Height}}
+                            div Weight: {{Weight}}
+                            div Min Safe Weight: {{MinSafeWeight}}
+                            div Max Safe Weight: {{MaxSafeWeight}}
+                                
                     #assessment.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h1.page-header Assessment Results here
                     #tracker.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
