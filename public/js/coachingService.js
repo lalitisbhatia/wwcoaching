@@ -25,10 +25,10 @@ myApp.factory('wwCoachingService',function($http,$log,$q){
                 .success(function(data) { 
                     $log.info("Successfully retrieved user's pilot profile ."); 
                     userProfile.pilotProfile =data;
-                    //$log.info('logging user profile');
-                    //$log.info(data);
+                    
+                    
                     var loginInfo = { "U": data.Username, "P": data.Password, "R": "true" };
-                    //$log.log(loginInfo);
+                    
                     $http({
                         method:'POST',
                         url: 'https://mobile.weightwatchers.com/authservice.svc/login',
@@ -51,11 +51,86 @@ myApp.factory('wwCoachingService',function($http,$log,$q){
      myService.userProfile = function () {
         return userProfile;
     };
-    
-    myService.getAssessmentResults = function(){
+
+//##############################################################
+//############## COACH Related Services  ####################
+//##############################################################    
+    var coach={};
+    myService.getCoachInfo = function(){
+        if(!promise){
+                promise= $http({
+                    method: 'GET',
+                    url: '/coach'
+                })
+                .success(function(data) { 
+                    $log.info("Successfully retrieved coach information ."); 
+                    coach = data;
+                    deffered.resolve(); 
+                    
+                })  
+                .error(function(status, headers, config){
+                        $log.log('failed to get coach info:' + status);
+                });
+                return deffered.promise;
+            } // closing brace for if(!promise)
+        };
         
-    }
+     myService.coach = function () {
+        return coach;
+    };
+
    
+    var coachUsers={};
+    myService.getCoachUsers = function(){
+        if(!promise){
+                promise= $http({
+                    method: 'GET',
+                    url: '/cusers'
+                })
+                .success(function(data) {    
+                    $log.info("Successfully retrieved users for coach."); 
+                    coachUsers = data;
+                    deffered.resolve(); 
+                })
+                .error(function(status, headers, config){
+                        $log.log('failed to getusers for coach' + status);
+                });
+                return deffered.promise;
+            } // closing brace for if(!promise)
+        };
+        
+     myService.coachUsers = function () {
+        return coachUsers;
+    };
+    
+    
+    /********************************************************
+     ******************  SCHEDULER  *************************
+     ********************************************************/
+    var coachScheduler={};
+    myService.getCoachScheduler = function(){
+         if(!promise){
+                promise= $http({
+                    method: 'GET',
+                    url: '/schedule'
+                })
+                .success(function(data) {    
+                    $log.info("Successfully retrieved coachm availability."); 
+                    coachScheduler = data;
+                    deffered.resolve(); 
+                })
+                .error(function(status, headers, config){
+                        $log.log('failed to coach availabilities' + status);
+                });
+                return deffered.promise;
+            } // closing brace for if(!promise)
+        };
+        
+     myService.coachScheduler = function () {
+        return coachScheduler;
+    };    
+    
+    
     
     return myService;
     

@@ -8,15 +8,15 @@ function UserDetailsController($scope, $http,$routeParams,$log,wwCoachingService
     $scope.initApp=function(){
         $log.log('initialized');
         
-        $log.log($scope.getGreeting());
+        //$log.log($scope.getGreeting());
         
-        wwCoachingService.setGreeting('Go to sleep!!!');
+        //wwCoachingService.setGreeting('Go to sleep!!!');
         
-        $log.log($scope.getGreeting());
+        //$log.log($scope.getGreeting());
         
         wwCoachingService.getUserProfile().then(function () {
             $scope.data = wwCoachingService.userProfile();
-             $log.log($scope.data);
+            $log.log($scope.data);
             $scope.FirstName = $scope.data.pilotProfile.FirstName;
             $scope.LastName = $scope.data.pilotProfile.LastName; 
             $scope.Age = $scope.data.wwProfile.Age; 
@@ -36,10 +36,6 @@ function UserDetailsController($scope, $http,$routeParams,$log,wwCoachingService
    
     $scope.getGreeting = function () { return wwCoachingService.greeting; };
    
-   
-   
-  
-    
     //$scope.profile = function(){ return wwProfileService.getUserProfile()};
     
     // $scope.getProfile = function () { return wwProfileService.getUserProfile().then(function(userProfile) {
@@ -95,10 +91,18 @@ function UserDetailsController($scope, $http,$routeParams,$log,wwCoachingService
 //##############################################################
 
 
-function CoachController($scope,$http) {
+function CoachController($scope,$http,$log,wwCoachingService) {
+
+//     wwCoachingService.getCoachInfo().then(function () {
+//             $scope.data = wwCoachingService.coach();
+//              $log.log($scope.data);
+             
+//             $scope.FirstName = $scope.data.FirstName;
+// //            $scope.LastName = $scope.data.pilotProfile.LastName; 
+//         });
 
 //    var users;
-    //$scope.getUsers = function(){ 
+    
         console.log('Getting coach info') ;
         $http({
             method: 'GET',
@@ -111,49 +115,57 @@ function CoachController($scope,$http) {
         });
 }
     
+function CoachController2($scope,$http,$log,wwCoachingService) {
 
+//     wwCoachingService.getCoachInfo().then(function () {
+//             $scope.data = wwCoachingService.coach();
+//              $log.log($scope.data);
+             
+//             $scope.FirstName = $scope.data.FirstName;
+// //            $scope.LastName = $scope.data.pilotProfile.LastName; 
+//         });
+
+// //    var users;
+//     //$scope.getUsers = function(){ 
+//         console.log('Getting coach info') ;
+//         $http({
+//             method: 'GET',
+//             url: '/coach'
+//         })
+//         .success(function (data, status, headers, config) {    
+//             console.log((data.FirstName)) ;
+//             $scope.FirstName = data.FirstName;
+            
+//         });
+}
+    
 
 
 //List of users for a coach
-function UsersController($scope,$http) {
+function UsersController($scope,$http,$log,wwCoachingService) {
+
+    wwCoachingService.getCoachUsers().then(function () {
+            $scope.data = wwCoachingService.coachUsers();
+             $log.log($scope.data);
+              $scope.users = $scope.data;
+        });
 
 //    var users;
-    //$scope.getUsers = function(){
-        console.log('My users link clicked') ;
-        $http({
-            method: 'GET',
-            url: '/cusers'
-        })
-        .success(function (data, status, headers, config) {    
-            console.log((data)) ;
-            $scope.users = data;
-            //console.log('$scope.users = '+  $scope.users[0]);
-        });
     
+        // console.log('My users link clicked') ;
+        // $http({
+        //     method: 'GET',
+        //     url: '/cusers'
+        // })
+        // .success(function (data, status, headers, config) {    
+        //     console.log((data)) ;
+        //     $scope.users = data;
+        //     //console.log('$scope.users = '+  $scope.users[0]);
+        // });
     
-    //};
  
 }
 
-//List of users for a coach
-function wwProfileController(username, pwd,callback) {
-    
-         var loginInfo = { "U": username, "P": pwd, "R": "true" };
-         $.ajax({
-            url: 'https://mobile.weightwatchers.com/authservice.svc/login',
-            type: "POST",
-            data: JSON.stringify(loginInfo),
-            xhrFields: {
-                withCredentials: true
-            },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            processData: false,
-            success: function (data, status, xhr) {    
-                callback(data);
-            }
-        });
-}
 
 
 // // Coach Schedule related controllers
@@ -162,21 +174,18 @@ function wwProfileController(username, pwd,callback) {
 //############## USER Related Controllers  ####################
 //##############################################################
 
-// //User Details
-// myAppModule.controller('UserDetailsController', ['$scope', '$http','$routeParams',function ($scope,$http,$routeParams) {
+//List of users for a coach
+function CoachAvailController($scope,$http,$log,wwCoachingService) {
 
-//         console.log('calling route controller');
-//         console.log($routeParams.id);
-        
-//         // $http({
-//         //     method: 'GET',
-//         //     url: '/users/'
-//         // })
-//         // .success(function (data, status, headers, config) {    
-//         //     console.log((data)) ;
-//         //     $scope.FirstName = data.FirstName;
-//         //     //console.log('$scope.users = '+  $scope.users[0]);
-//         // });
-
-// }]);
-
+   console.log('Getting coach info') ;
+        $http({
+            method: 'GET',
+            url: '/schedule'
+        })
+        .success(function (data, status, headers, config) {    
+            console.log((data)) ;
+            $scope.timeslots = data;
+            
+        });
+ 
+}

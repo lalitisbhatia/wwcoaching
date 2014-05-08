@@ -84,7 +84,7 @@ app.post('/assessment', assmnt.saveAssm);
 //****************************************************
 //*****This section is for the schedule data********
 //****************************************************
-app.get('/schedule', schedule.getCoachAvails);
+app.get('/schedule', api.getCoachAvails);
 
 
 http.createServer(app).listen(app.get('port'), function () {
