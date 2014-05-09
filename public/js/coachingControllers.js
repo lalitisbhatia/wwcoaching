@@ -189,3 +189,62 @@ function CoachAvailController($scope,$http,$log,wwCoachingService) {
         });
  
 }
+
+var uid=1;
+myApp.controller('NotesController', ['$scope', function($scope) {
+    
+   
+   $scope.notes = [
+        { id:0, 'date': '12/3/2014 - 11:35 pm', 
+          'duration': '35 mins',
+          'note':'went well'
+        }
+    ];
+    
+     $scope.savenote = function() {
+         
+        if($scope.newnote.id == null) {
+        $scope.newnote.date=$('#datetimepicker').val(); //hack because the ng-model does not bind with datepicker
+        $scope.newnote.id = uid++;
+        $scope.notes.push($scope.newnote);
+        } else {
+        
+        //for existing contact, find this contact using id
+        //and update it.
+        for(var i in $scope.notes) {
+            if($scope.notes[i].id == $scope.newnote.id) {
+            $scope.notes[i] = $scope.newnote;
+            }
+         }                
+        }
+        //clear the add contact form
+        $scope.newnote = {};
+    
+     };  
+     
+    $scope.delete = function(id) {
+         
+        //search note with given id and delete it
+        for(var i in $scope.notes) {
+            if($scope.notes[i].id == id) {
+                $scope.notes.splice(i,1);
+                $scope.newnote = {};
+            }
+        }
+         
+    };
+        //clear the add contact form
+        $scope.newnote = {};
+    
+    $scope.edit = function(id) {
+    //search contact with given id and update it
+        for(var i in $scope.notes) {
+            if($scope.notes[i].id == id) {
+                //we use angular.copy() method to create 
+                //copy of original object
+                $scope.newnote = angular.copy($scope.notes[i]);
+            }
+        }
+    };
+    
+}]);

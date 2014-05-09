@@ -8,4 +8,5 @@ config(
         controller: UserDetailsController
       })
 }]);
-    
+
+var userModule = angular.module('userModule',[])

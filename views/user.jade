@@ -33,15 +33,45 @@ block content
                             div Max Safe Weight: {{MaxSafeWeight}}
                                 
                     #assessment.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                        h1.page-header Assessment Results here
+                        h2.page-header {{FirstName}} {{LastName}}'s Assessment Results
                     #tracker.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h1.page-header Tracker Info Here
                     #calls.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                        h1.page-header Calls Info Here
+                        h2.page-header {{FirstName}} {{LastName}}'s call details
+                        .ng-scope(ng-controller='NotesController')
+                             form.well.ng-pristine.ng-valid
+                                div
+                                    label Date/Time
+                                div(ng-model='newnote.date')
+                                    input#datetimepicker.ng-pristine.ng-valid(type='text', name='date')
+                                div
+                                    label Duration
+                                div
+                                    input.ng-pristine.ng-valid(type='text', name='duration', ng-model='newnote.duration')
+                                div
+                                    label Note
+                                div
+                                    textarea.ng-pristine.ng-valid(rows='4' cols='50' name='note', ng-model='newnote.note')
+                                br
+                                input(type='hidden', ng-model='newnote.id')
+                                input(type='button', value='Save', ng-click='savenote()').btn.btn-primary
+                              table.table.table-striped.table-bordered
+                                thead
+                                  tr
+                                    th Date/Time
+                                    th Duration
+                                    th Note
+                                    th Action
+                                tbody
+                                  tr.ng-scope(ng-repeat='note in notes')
+                                    td.ng-binding {{ note.date }}
+                                    td.ng-binding {{ note.duration }}
+                                    td.ng-binding {{ note.note }}
+                                    td
+                                      a(href='#', ng-click='edit(note.id)') edit
+                                      | |
+                                      a(href='#', ng-click='delete(note.id)') delete
+    
                     #eamils.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h1.page-header Emails communication Here
                             
-            
-                
-            
-                

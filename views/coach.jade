@@ -51,8 +51,21 @@ block content
                 
                  #availability.tab-pane 
                     .container
-                        input#datetimepicker(type='text')
-                        div#selectedDate
+                        table
+                            th
+                                tr
+                                    td(width="400") 
+                                        h4 Pick your availability
+                                    td(width="150") 
+                                        h4 Dates Selected
+                            tbody
+                                tr
+                                    td
+                                        input#datetimepicker(type='text') 
+                                    td(style="position:fixed;")
+                                        div#selectedDate 
+                        
+                            
 
         
         hr
