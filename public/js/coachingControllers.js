@@ -8,34 +8,48 @@ function UserDetailsController($scope, $http,$routeParams,$log,wwCoachingService
     $scope.initApp=function(){
         $log.log('initialized');
         
-        //$log.log($scope.getGreeting());
         
-        //wwCoachingService.setGreeting('Go to sleep!!!');
-        
-        //$log.log($scope.getGreeting());
         
         wwCoachingService.getUserProfile().then(function () {
             $scope.data = wwCoachingService.userProfile();
             $log.log($scope.data);
             $scope.FirstName = $scope.data.pilotProfile.FirstName;
-            $scope.LastName = $scope.data.pilotProfile.LastName; 
+            $scope.LastName = $scope.data.pilotProfile.LastName;
+            $scope._id = $scope.data.pilotProfile._id; 
             $scope.Age = $scope.data.wwProfile.Age; 
             $scope.Gender = $scope.data.wwProfile.Gender; 
             $scope.Height = $scope.data.wwProfile.Height; 
             $scope.Weight = $scope.data.wwProfile.Weight; 
             $scope.MinSafeWeight = $scope.data.wwProfile.MinSafeWeight; 
             $scope.MaxSafeWeight = $scope.data.wwProfile.MaxSafeWeight; 
+            
+            //call the broadcast method to set the userid globally
+            $scope.setPilotUser($scope.data.pilotProfile);
         });
         
-       
+      
     };
+    
+    // $scope.setUserId = function(userid){
+    //     console.log('calling set user id with userid = '+ userid);
+    //     //broadcast the userid 
+    //     wwCoachingService.prepForBroadcast(userid);
+            
+    // }
+    $scope.setPilotUser = function(pilotUser){
+        //broadcast the user 
+        wwCoachingService.prepForBroadcast(pilotUser);
+            
+    }
     
     $scope.clearData = function() {
         $scope.data = {};
     };
-   
+    
     $scope.getGreeting = function () { return wwCoachingService.greeting; };
    
+    
+    
     //$scope.profile = function(){ return wwProfileService.getUserProfile()};
     
     // $scope.getProfile = function () { return wwProfileService.getUserProfile().then(function(userProfile) {
@@ -190,33 +204,73 @@ function CoachAvailController($scope,$http,$log,wwCoachingService) {
  
 }
 
+/***************************************************************
+ * Call Notes
+ ***************************************************************/
 var uid=1;
-myApp.controller('NotesController', ['$scope', function($scope) {
-    
+myApp.controller('NotesController', ['$scope','$http','wwCoachingService', function($scope,$http,wwCoachingService) {
+     $scope.initCtrlr=function(){
+        //Load the call Notes
+        //console.log('user_id: ' + $scope._id);
+      
+    };
    
+    //Handle brodcast of user id
+    $scope.$on('handleUserBroadcast', function() {
+        $scope.pilotUser = wwCoachingService.PilotUser;
+        console.log(wwCoachingService.PilotUser.CallNotes);
+        $scope.notes= wwCoachingService.PilotUser.CallNotes;
+        if(!$scope.notes){
+              $scope.notes = [ ];
+        };
+        //console.log($scope.notes);
+        
+    });   
+    
+    
    $scope.notes = [
-        { id:0, 'date': '12/3/2014 - 11:35 pm', 
-          'duration': '35 mins',
-          'note':'went well'
-        }
+        // { id:0, 'date': '12/3/2014 - 11:35 pm', 
+        //   'duration': '35 mins',
+        //   'note':'went well'
+        // }
     ];
     
-     $scope.savenote = function() {
-         
-        if($scope.newnote.id == null) {
-        $scope.newnote.date=$('#datetimepicker').val(); //hack because the ng-model does not bind with datepicker
-        $scope.newnote.id = uid++;
-        $scope.notes.push($scope.newnote);
+    
+    $scope.savenote = function() {
+        console.log($scope.newnote);
+        if($scope.newnote.callid == null) {
+           
+            $scope.newnote.date=$('#pickdatetime').val(); //hack because the ng-model does not bind with datepicker
+            $scope.newnote.userid=$scope.pilotUser._id;
+            $scope.newnote.callid = $scope.notes.length+1;
+            console.log($scope.newnote) ;
+            $scope.notes.push($scope.newnote);    
+            console.log($scope.notes);
         } else {
         
         //for existing contact, find this contact using id
         //and update it.
         for(var i in $scope.notes) {
-            if($scope.notes[i].id == $scope.newnote.id) {
-            $scope.notes[i] = $scope.newnote;
+            if($scope.notes[i].callid == $scope.newnote.callid) {
+                console.log('date = '+ $scope.newnote.date);
+                $scope.notes[i] = $scope.newnote;
             }
          }                
         }
+        /*************************************
+        //TO-DO - Save to DB
+        ************************************/
+        $http({
+            method:'POST',
+            url: '/addCallNote',
+            data: $scope.newnote
+        })
+        .success(function (d, status, headers, config) {    
+            console.log(d);
+        })     
+        .error(function(status, headers, config){
+            console.log('failed to save note:' + status);
+        })
         //clear the add contact form
         $scope.newnote = {};
     
@@ -237,14 +291,22 @@ myApp.controller('NotesController', ['$scope', function($scope) {
         $scope.newnote = {};
     
     $scope.edit = function(id) {
+        console.log('note id = '+id);
     //search contact with given id and update it
         for(var i in $scope.notes) {
-            if($scope.notes[i].id == id) {
+            if($scope.notes[i].callid == id) {
                 //we use angular.copy() method to create 
                 //copy of original object
+                console.log('id = '+ $scope.notes[i].callid + '  date = '+ $scope.notes[i].date);
                 $scope.newnote = angular.copy($scope.notes[i]);
+                console.log($scope.newnote.date);
+                $('#pickdatetime').val(($scope.notes[i].date));
             }
         }
+        
+        
+        //clear the add contact form
+       // $scope.newnote = {};
     };
     
 }]);

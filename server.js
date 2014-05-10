@@ -27,9 +27,7 @@ app.configure(function () {
 });
 
 
-
-
-
+/********************************************************************************************************/
 
 //*************************************************
 //**************Handle UI routes ******************
@@ -85,6 +83,14 @@ app.post('/assessment', assmnt.saveAssm);
 //*****This section is for the schedule data********
 //****************************************************
 app.get('/schedule', api.getCoachAvails);
+
+/****************************************************
+  This section is for the call Notes and action plans
+/****************************************************/
+app.get('/getCallNotes/:userid',admin.checkUser, api.getCallNotes);
+app.post('/addCallNote',admin.checkUser, api.addCallNote);
+app.post('/updateCallNote',admin.checkUser, api.updateCallNote);
+
 
 
 http.createServer(app).listen(app.get('port'), function () {

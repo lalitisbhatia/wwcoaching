@@ -1,5 +1,5 @@
 'use strict';
-myApp.factory('wwCoachingService',function($http,$log,$q){
+myApp.factory('wwCoachingService',function($http,$log,$q,$rootScope){
     var deffered = $q.defer();
     var promise;
     var userProfile={};
@@ -11,7 +11,37 @@ myApp.factory('wwCoachingService',function($http,$log,$q){
     myService.setGreeting = function(newGreeting) {
             this.greeting = newGreeting;
         };
-        
+    
+    // myService.userId ; //we'll use this vale to share across the app among different controllers
+
+    // myService.prepForBroadcast = function(uid) {
+    //     this.userId = uid;
+    //     this.broadcastItem();
+    // };
+
+    // myService.broadcastItem = function() {
+    //     $rootScope.$broadcast('handleBroadcast');
+    // };
+    
+    
+    /**************************************************************************
+     ** User's pilot profile to be made available to all controllers
+    **************************************************************************/
+     
+    myService.PilotUser ; //we'll use this vale to share across the app among different controllers
+
+    myService.prepForBroadcast = function(pilotUser) {
+        this.PilotUser = pilotUser;
+        this.broadcastItem();
+    };
+
+    myService.broadcastItem = function() {
+        $rootScope.$broadcast('handleUserBroadcast');
+    };
+    
+    /**************************************************************************/
+     
+     
     myService.getUserProfile = function(){
             
             var path = '';
