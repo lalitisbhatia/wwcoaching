@@ -186,7 +186,7 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
     var note = req.body;
     console.log(note);
     db.collection(usersCollName, function(err, collection) {
-        collection.update({'_id':note.userid},{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}, { upsert: true }, function(err, result) {
+        collection.update({$and:[{'_id':note.userid},{"CallNotes":{"callid":note.callid}}]},{"date":note.date,"duration":note.duration,"note":note.note}, { upsert: true }, function(err, result) {
             if (err) {
                 res.send({'error':'error occurred while saving the call note'});
             } else {

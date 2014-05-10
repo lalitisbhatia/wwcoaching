@@ -210,8 +210,6 @@ function CoachAvailController($scope,$http,$log,wwCoachingService) {
 var uid=1;
 myApp.controller('NotesController', ['$scope','$http','wwCoachingService', function($scope,$http,wwCoachingService) {
      $scope.initCtrlr=function(){
-        //Load the call Notes
-        //console.log('user_id: ' + $scope._id);
       
     };
    
