@@ -191,7 +191,7 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
                 res.send({'error':'error occurred while saving the call note'});
             } else {
                 console.log('Success: ' + JSON.stringify(result[0]));
-                res.send(result[0]);
+                res.send('successful update - ' + result);
             }
         });
     });

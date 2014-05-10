@@ -266,6 +266,7 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
                 $scope.notes[i] = $scope.newnote;
             }
          }
+            console.log($scope.newnote);
             $http({
                 method:'POST',
                 url: '/updateCallNote',
