@@ -202,10 +202,10 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
 
 function noteExists(userid,noteid){helper.getConnection(function(err,db){
     var projection = {'_id':userid,CallNotes:{callid:noteid}};
-    var item = db.usersCollName.findOne(projection);
+    var item = db.usersCollName.findOne({'_id':userid,CallNotes:{callid:noteid}});
      return item;
 });
-};
+}
 
 exports.addCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
