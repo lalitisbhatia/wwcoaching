@@ -185,19 +185,16 @@ exports.getCallNotes = function(req, res) {helper.getConnection(function(err,db)
 exports.updateCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
     console.log(note);
-    //check if the user and the note already exists
-    var exists = noteExists(note.userid,note.id);
-    console.log(exists);
-    // db.collection(usersCollName, function(err, collection) {
-    //     collection.update({'_id':note.userid},{"$set":{"CallNotes":{"call":{"callid":note.id,"date":note.date,"duration":note.duration,"note":note.note}}}}, { upsert: true }, function(err, result) {
-    //         if (err) {
-    //             res.send({'error':'error occurred while saving the call note'});
-    //         } else {
-    //             console.log('Success: ' + JSON.stringify(result[0]));
-    //             res.send(result[0]);
-    //         }
-    //     });
-    // });
+    db.collection(usersCollName, function(err, collection) {
+        collection.update({'_id':note.userid},{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}, { upsert: true }, function(err, result) {
+            if (err) {
+                res.send({'error':'error occurred while saving the call note'});
+            } else {
+                console.log('Success: ' + JSON.stringify(result[0]));
+                res.send(result[0]);
+            }
+        });
+    });
 });
 };
 
@@ -212,7 +209,7 @@ exports.addCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
     console.log(note);
     db.collection(usersCollName, function(err, collection) {
-        collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.id,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
+        collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
             if (err) {
                 res.send({'error':'error occurred while saving the call note'});
             } else {
