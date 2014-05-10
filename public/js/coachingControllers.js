@@ -243,6 +243,18 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
             $scope.newnote.callid = $scope.notes.length+1;
             console.log($scope.newnote) ;
             $scope.notes.push($scope.newnote);    
+            
+            $http({
+                method:'POST',
+                url: '/addCallNote',
+                data: $scope.newnote
+            })
+            .success(function (d, status, headers, config) {    
+                console.log(d);
+            })     
+            .error(function(status, headers, config){
+                console.log('failed to save note:' + status);
+            })
             console.log($scope.notes);
         } else {
         
@@ -253,22 +265,23 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
                 console.log('date = '+ $scope.newnote.date);
                 $scope.notes[i] = $scope.newnote;
             }
-         }                
+         }
+            $http({
+                method:'POST',
+                url: '/updateCallNote',
+                data: $scope.newnote
+            })
+            .success(function (d, status, headers, config) {    
+                console.log(d);
+            })     
+            .error(function(status, headers, config){
+                console.log('failed to save note:' + status);
+            })
         }
         /*************************************
         //TO-DO - Save to DB
         ************************************/
-        $http({
-            method:'POST',
-            url: '/addCallNote',
-            data: $scope.newnote
-        })
-        .success(function (d, status, headers, config) {    
-            console.log(d);
-        })     
-        .error(function(status, headers, config){
-            console.log('failed to save note:' + status);
-        })
+        
         //clear the add contact form
         $scope.newnote = {};
     

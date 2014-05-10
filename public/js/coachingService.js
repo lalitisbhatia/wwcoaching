@@ -30,11 +30,13 @@ myApp.factory('wwCoachingService',function($http,$log,$q,$rootScope){
      
     myService.PilotUser ; //we'll use this vale to share across the app among different controllers
 
+    //this is the method that sets the value of the PilotUser property and calls the method to do the broadcasting
     myService.prepForBroadcast = function(pilotUser) {
         this.PilotUser = pilotUser;
         this.broadcastItem();
     };
 
+    //this is the method that broadcasts/publishes the event 'handleUserBroadcast'
     myService.broadcastItem = function() {
         $rootScope.$broadcast('handleUserBroadcast');
     };
