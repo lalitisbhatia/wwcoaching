@@ -185,22 +185,24 @@ exports.getCallNotes = function(req, res) {helper.getConnection(function(err,db)
 exports.updateCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
     console.log(note);
-    db.collection(usersCollName, function(err, collection) {
-        collection.update({$and:[{'_id':note.userid},{"CallNotes":{"callid":note.callid}}]},{"date":note.date,"duration":note.duration,"note":note.note}, { upsert: true }, function(err, result) {
-            if (err) {
-                res.send({'error':'error occurred while saving the call note'});
-            } else {
-                console.log('Success: ' + JSON.stringify(result[0]));
-                res.send('successful update - ' + result);
-            }
-        });
-    });
+    // db.collection(usersCollName, function(err, collection) {
+    //     collection.update({$and:[{'_id':note.userid},{"CallNotes":{"callid":note.callid}}]},{"date":note.date,"duration":note.duration,"note":note.note}, { upsert: true }, function(err, result) {
+    //         if (err) {
+    //             res.send({'error':'error occurred while saving the call note'});
+    //         } else {
+    //             console.log('Success: ' + JSON.stringify(result[0]));
+    //             res.send('successful update - ' + result);
+    //         }
+    //     });
+    // });
+    
+    res.send(noteExists(note.userid,note.callid));
 });
 };
 
 function noteExists(userid,noteid){helper.getConnection(function(err,db){
-    var projection = {'_id':userid,CallNotes:{call:{callid:noteid}}};
-    var item = db.usersCollName.findOne({'_id':userid },projection);
+    var projection = {'_id':userid,CallNotes:{callid:noteid}};
+    var item = db.usersCollName.findOne(projection);
      return item;
 });
 };
