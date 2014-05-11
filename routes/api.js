@@ -187,7 +187,7 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
     console.log(note);
     
     db.collection(usersCollName, function(err, collection) {
-        collection.update({'_id':note.userid,CallNotes:{callid:note.callid}},{$set:{"date":note.date,"duration":note.duration,"note":note.note}}, function(err, item) {
+        collection.update({'_id':note.userid},{CallNotes:{$elemMatch:{callid:note.callid}}},{$set:{"date":note.date,"duration":note.duration,"note":note.note}}, function(err, item) {
             //console.log(item);
             res.send(item);
             //res.render('user',item);
