@@ -186,13 +186,16 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
     var note = req.body;
     console.log(note);
     
-    // db.collection(usersCollName, function(err, collection) {
-    //     collection.update({'_id':note.userid},{CallNotes:{$elemMatch:{callid:note.callid}}},{$set:{"date":note.date,"duration":note.duration,"note":note.note}}, function(err, item) {
-    //         //console.log(item);
-    //         res.send(item);
-    //         //res.render('user',item);
-    //     });
-    // });
+    db.collection(usersCollName, function(err, collection) {
+        collection.update({'_id':note.userid},{CallNotes:{$elemMatch:{callid:note.callid}}},{$set:{"date":note.date,"duration":note.duration,"note":note.note}}, function(err, item) {
+             if (err) {
+                 res.send({'error':'error occurred while saving the call note' + err});
+             } else {
+            res.send(item);
+            //res.render('user',item);
+             }
+        });
+    });
     
     //  db.collection(usersCollName, function(err, collection) {
     //      var item = usersCollName.findOne({'_id':note.userid,CallNotes:{callid:note.callid}});
