@@ -196,7 +196,8 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
     //     });
     // });
     
-    res.send(noteExists(note.userid,note.callid));
+    var item = db.usersCollName.findOne({'_id':note.userid,CallNotes:{callid:note.callid}});
+     return item;
 });
 };
 
