@@ -262,18 +262,18 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
         //and update it.
         for(var i in $scope.notes) {
             if($scope.notes[i].callid == $scope.newnote.callid) {
-                console.log('date = '+ $scope.newnote.date);
+                //console.log('date = '+ $scope.newnote.date);
                 $scope.notes[i] = $scope.newnote;
             }
          }
-            console.log($scope.newnote);
+            //console.log($scope.newnote);
             $http({
                 method:'POST',
                 url: '/updateCallNote',
                 data: $scope.newnote
             })
             .success(function (d, status, headers, config) {    
-                console.log(d);
+                console.log('Successful call to db - ' + d);
             })     
             .error(function(status, headers, config){
                 console.log('failed to save note:' + status);
