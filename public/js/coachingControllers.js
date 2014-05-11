@@ -260,6 +260,7 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
         
         //for existing contact, find this contact using id
         //and update it.
+        $scope.newnote.userid=$scope.pilotUser._id;
         for(var i in $scope.notes) {
             if($scope.notes[i].callid == $scope.newnote.callid) {
                 //console.log('date = '+ $scope.newnote.date);
@@ -276,7 +277,7 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
                 console.log('Successful call to db - ' + d);
             })     
             .error(function(status, headers, config){
-                console.log('failed to save note:' + status);
+                console.log('failed to save note:' + config);
             })
         }
         /*************************************
