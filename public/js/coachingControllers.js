@@ -258,7 +258,7 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
             console.log($scope.notes);
         } else {
         
-        //for existing contact, find this contact using id
+        //for existing contact, find this note using id
         //and update it.
         $scope.newnote.userid=$scope.pilotUser._id;
         for(var i in $scope.notes) {
@@ -267,7 +267,7 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
                 $scope.notes[i] = $scope.newnote;
             }
          }
-            //console.log($scope.newnote);
+            console.log($scope.newnote);
             $http({
                 method:'POST',
                 url: '/updateCallNote',
