@@ -185,10 +185,19 @@ exports.getCallNotes = function(req, res) {helper.getConnection(function(err,db)
 exports.updateCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
     console.log(note);
-     db.collection(usersCollName, function(err, collection) {
-         var item = db.usersCollName.findOne({'_id':note.userid,CallNotes:{callid:note.callid}});
-         res.send(item);
-    //     collection.update({$and:[{'_id':note.userid},{"CallNotes":{"callid":note.callid}}]},{"date":note.date,"duration":note.duration,"note":note.note}, { upsert: true }, function(err, result) {
+    
+    db.collection(usersCollName, function(err, collection) {
+        collection.findOne({'_id':note.userid,CallNotes:{callid:note.callid}}, function(err, item) {
+            //console.log(item);
+            res.send(item);
+            //res.render('user',item);
+        });
+    });
+    
+    //  db.collection(usersCollName, function(err, collection) {
+    //      var item = usersCollName.findOne({'_id':note.userid,CallNotes:{callid:note.callid}});
+    //      res.send(item);
+    // //     collection.update({$and:[{'_id':note.userid},{"CallNotes":{"callid":note.callid}}]},{"date":note.date,"duration":note.duration,"note":note.note}, { upsert: true }, function(err, result) {
     //         if (err) {
     //             res.send({'error':'error occurred while saving the call note'});
     //         } else {
@@ -196,7 +205,7 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
     //             res.send('successful update - ' + result);
     //         }
     //     });
-     });
+     //});
     
     
     
