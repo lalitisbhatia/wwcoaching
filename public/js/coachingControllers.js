@@ -279,9 +279,7 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
                 console.log('failed to save note:' + status);
             })
         }
-        /*************************************
-        //TO-DO - Save to DB
-        ************************************/
+
         
         //clear the add contact form
         $scope.newnote = {};
