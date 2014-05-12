@@ -1,10 +1,10 @@
 extends layout
 
 block content
-    .jumbotron
-        .container(ng-controller='CoachController')
-            h3(style='padding-bottom:0px;') Hi {{FirstName}}! Welcome to the Coaches' Dashboard.
-            p  Click on the links below to see your coachees' information, select your available schedule or......
+
+    .container(ng-controller='CoachController')
+        h3(style='padding-bottom:0px;') Hi {{FirstName}}! Welcome to the Coaches' Dashboard.
+        p  Click on the links below to see your coachees' information, select your available schedule or......
     .container
         .row
             ul.nav.nav-tabs(style='font-size:20px;')
@@ -14,25 +14,91 @@ block content
                     a(href='#aCoaches', data-toggle='tab') Coaches
                 li(style='margin-left:50px;')
                     a(href='#aSchedules', data-toggle='tab') Schedules
-
+        .col-sm-9
             // Tab panes
             .tab-content
-                #users.tab-pane.active(ng-controller='AllUsersController')
-                    .container
-                        p this is the users section
-                        ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
-                            li(ng-repeat="user in users")
-                                ul.navlist
-                                    li
-                                        a(href='/getuser/{{user._id}}') {{ user.FirstName }} {{ user.LastName }}
-                                    li
-                                        {{user.Email}}
-                                    li
-                                        {{user.Phone}}
-                #aCoaches.tab-pane
-                    .container
-                        p this is the Coaches tab
-                #aSchedules.tab-pane(ng-controller='AllCoachesController')
+                #users.tab-pane.active.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+                    h2.page-header All Users
+                        .ng-scope(ng-controller='NotesController' data-ng-init='initCtrlr()')
+                            form.well.ng-pristine.ng-valid
+                                div
+                                    label First Name
+                                div
+                                    input#LastName.ng-pristine.ng-valid(type='text', name='firstname', ng-model='newuser.firstname')
+                                div
+                                    label Last Name
+                                div
+                                    input#FirstName.ng-pristine.ng-valid(type='text', name='lastname', ng-model='newuser.lastname')
+                                div
+                                    label Email
+                                div
+                                    input.ng-pristine.ng-valid(type='text', name='email', ng-model='newuser.email')
+                                div
+                                    label Phone
+                                div
+                                    input.ng-pristine.ng-valid(type='text', name='phone', ng-model='newuser.phone')
+                                div
+                                    label Coach
+                                div
+                                    input.ng-pristine.ng-valid(type='text', name='coach', ng-model='newuser.coach')
+
+                                br
+
+                                input#userid(type='hidden' ng-model='newuser._id' value='{{_id}}')
+                                input(type='button', value='Save', ng-click='saveuser()').btn.btn-primary
+                                table.table.table-striped.table-bordered
+                                    thead
+                                        tr
+                                            th Date/Time
+                                            th Duration
+                                            th Note
+                                            th Action
+                                    tbody
+                                        tr.ng-scope(ng-repeat='callNote in notes')
+                                            td.ng-binding {{ callNote.date }}
+                                            td.ng-binding {{ callNote.duration }}
+                                            td.ng-binding {{ callNote.note }}
+                                            td
+                                                a(href='#', ng-click='edit(callNote.callid)') edit
+                                                | |
+                                                a(href='#', ng-click='delete(callNote.callid)') delete
+                #aCoaches.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+                    h2.page-header All Coaches
+                        .ng-scope(ng-controller='NotesController' data-ng-init='initCtrlr()')
+                            form.well.ng-pristine.ng-valid
+                                div
+                                    label Date/Time
+                                div(ng-model='newnote.date')
+                                    input#pickdatetime.ng-pristine.ng-valid(type='text', name='date')
+                                div
+                                    label Duration
+                                div
+                                    input.ng-pristine.ng-valid(type='text', name='duration', ng-model='newnote.duration')
+                                div
+                                    label Note
+                                div
+                                    textarea.ng-pristine.ng-valid(rows='4' cols='50' name='note', ng-model='newnote.note')
+                                br
+                                input(type='hidden' ng-model='newnote.id')
+                                input#userid(type='hidden' ng-model='newnote._id' value='{{_id}}')
+                                input(type='button', value='Save', ng-click='savenote()').btn.btn-primary
+                                table.table.table-striped.table-bordered
+                                    thead
+                                        tr
+                                            th Date/Time
+                                            th Duration
+                                            th Note
+                                            th Action
+                                    tbody
+                                        tr.ng-scope(ng-repeat='callNote in notes')
+                                            td.ng-binding {{ callNote.date }}
+                                            td.ng-binding {{ callNote.duration }}
+                                            td.ng-binding {{ callNote.note }}
+                                            td
+                                                a(href='#', ng-click='edit(callNote.callid)') edit
+                                                | |
+                                                a(href='#', ng-click='delete(callNote.callid)') delete
+                #aSchedules.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                     .container
                         ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
                             li(ng-repeat="coach in coaches")
