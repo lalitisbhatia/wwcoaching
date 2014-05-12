@@ -90,6 +90,7 @@ app.get('/schedule', api.getCoachAvails);
 app.get('/getCallNotes/:userid',admin.checkUser, api.getCallNotes);
 app.post('/addCallNote',admin.checkUser, api.addCallNote);
 app.post('/updateCallNote',admin.checkUser, api.updateCallNote);
+app.post('/deleteCallNote',admin.checkUser, api.deleteCallNote);
 
 
 

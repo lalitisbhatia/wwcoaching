@@ -209,20 +209,28 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
             }
         });
     });
-
-
-    
-    
 });
 };
 
-//function noteExists(userid,noteid){helper.getConnection(function(err,db){
-//    var projection = {'_id':userid,CallNotes:{callid:noteid}};
-//    var item = db.usersCollName.findOne({'_id':userid,CallNotes:{callid:noteid}});
-//     return item;
-//});
-//}
+exports.deleteCallNote = function(req, res) {helper.getConnection(function(err,db){
+    var note = req.body;
 
+    console.log(note);
+
+    db.collection(usersCollName, function(err, collection) {
+        //first remove the note
+        collection.update({_id:note.userid},{$pull:{CallNotes:{callid:note.callid}}}, function(err, item) {
+            if (!err) {
+                console.log('successfully removed note');
+
+                res.render('user',item);
+            } else {
+                res.send({'error': 'error occurred while saving the call note' + err});
+            }
+        });
+    });
+});
+};
 exports.addCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
     console.log(note);

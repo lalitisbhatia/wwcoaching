@@ -289,15 +289,30 @@ myApp.controller('NotesController', ['$scope','$http','wwCoachingService', funct
      };  
      
     $scope.delete = function(id) {
-         
+        ;
         //search note with given id and delete it
         for(var i in $scope.notes) {
-            if($scope.notes[i].id == id) {
+            if($scope.notes[i].callid == id) {
+                $scope.newnote.userid=$scope.pilotUser._id
+                $scope.newnote.callid= id;
+
+                console.log($scope.newnote);
+                $http({
+                    method:'POST',
+                    url: '/deleteCallNote',
+                    data: $scope.newnote
+                })
+                    .success(function (d, status, headers, config) {
+                        console.log('Successful call to db - ' + d);
+                    })
+                    .error(function(status, headers, config){
+                        console.log('failed to save note:' + status);
+                 });
                 $scope.notes.splice(i,1);
-                $scope.newnote = {};
             }
+            $scope.newnote = {};
         }
-         
+
     };
         //clear the add contact form
         $scope.newnote = {};
