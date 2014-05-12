@@ -9,4 +9,5 @@ config(
       })
 }]);
 
-var userModule = angular.module('userModule',[])
+var coachingModule = angular.module('coachingModule', ['ngRoute']);
+var adminModule = angular.module('adminModule', ['ngRoute']);

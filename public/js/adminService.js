@@ -11,17 +11,17 @@ adminModule.factory('adminService',function($http,$log,$q,$rootScope){
      ** User's pilot profile to be made available to all controllers
      **************************************************************************/
 
-    myService.PilotUser ; //we'll use this vale to share across the app among different controllers
+    myService.Coaches ; //we'll use this vale to share across the app among different controllers
 
-    //this is the method that sets the value of the PilotUser property and calls the method to do the broadcasting
-    myService.prepForBroadcast = function(pilotUser) {
-        this.PilotUser = pilotUser;
+    //this is the method that sets the value of the coaches property and calls the method to do the broadcasting
+    myService.prepForBroadcast = function(coaches) {
+        this.Coaches = coaches;
         this.broadcastItem();
     };
 
-    //this is the method that broadcasts/publishes the event 'handleUserBroadcast'
+    //this is the method that broadcasts/publishes the event 'handleCoachesBroadcast'
     myService.broadcastItem = function() {
-        $rootScope.$broadcast('handleUserBroadcast');
+        $rootScope.$broadcast('handleCoachesBroadcast');
     };
 
 

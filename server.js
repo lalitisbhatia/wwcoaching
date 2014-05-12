@@ -69,9 +69,9 @@ app.put('/coaches/:id', admin.checkAdmin,api.updateCoach);
 app.get('/users',admin.checkAdmin,api.getAllUsers);
 app.get('/users/:id',admin.checkUser,api.getUserById);
 app.get('/cusers',admin.checkUser, api.getUsersByCoachId);
-app.post('/users', admin.checkAdmin,api.addUser);
-app.put('/users/:id',admin.checkAdmin, api.updateUser);
-
+app.post('/addUser', admin.checkAdmin,api.addUser);
+app.post('/updateUser',admin.checkAdmin, api.updateUser);
+app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
 
 
 //****************************************************

@@ -2,6 +2,7 @@
 //############### Data Services  #################
 //################################################
 var mongo = require("mongodb");
+var guid = require("guid");
 var helper = require('../public/lib/dbhelper');
 var BSON = mongo.BSONPure;
 
@@ -134,6 +135,8 @@ exports.getUsersByCoachId = function(req, res) {helper.getConnection(function(er
     
 exports.addUser = function(req, res) {helper.getConnection(function(err,db){
     var user = req.body;
+    user._id= guid.create().value.toString();
+    console.log('new user id = ' + user._id);
     db.collection(usersCollName, function(err, collection) {
         collection.insert(user, {safe:true}, function(err, result) {
             if (err) {
@@ -149,12 +152,12 @@ exports.addUser = function(req, res) {helper.getConnection(function(err,db){
 
 
 exports.updateUser = function(req, res) {helper.getConnection(function(err,db){
-    var id = req.params.id;
+
     var user = req.body;
-    //console.log('Updating user: ' + id);
+    console.log('Updating user: ' + user._id);
     //console.log(JSON.stringify(user));
     db.collection(usersCollName, function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, user, {safe:true}, function(err, result) {
+        collection.update({'_id':user._id}, user, {safe:true}, function(err, result) {
             if (err) {
                 console.log('Error updating user: ' + err);
                 res.send({'error':'An error has occurred'});
@@ -167,6 +170,24 @@ exports.updateUser = function(req, res) {helper.getConnection(function(err,db){
 });
 };
 
+exports.deleteUser = function(req, res) {helper.getConnection(function(err,db){
+
+    var user = req.body;
+    console.log('Deleting user: ' + user._id);
+    //console.log(JSON.stringify(user));
+    db.collection(usersCollName, function(err, collection) {
+        collection.remove({'_id':user._id}, {safe:true}, function(err, result) {
+            if (err) {
+                console.log('Error deleting user: ' + err);
+                res.send({'error':'An error has occurred'});
+            } else {
+                console.log('' + result + ' document(s) deleted');
+                res.send(user);
+            }
+        });
+    });
+});
+};
 /********************************************************************
  * CALL NOTES CRUD
  *******************************************************************/
