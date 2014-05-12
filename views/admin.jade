@@ -17,9 +17,9 @@ block content
         .col-sm-9
             // Tab panes
             .tab-content
-                h2.page-header All Users
-                #users.tab-pane.active.col-sm-9.col-md-10.main
 
+                #users.tab-pane.active.col-sm-9.col-md-10.main
+                    p All Users
                     .ng-scope(ng-controller='AllUsersController' data-ng-init='initApp()' style='width:800px;')
                         form.well.ng-pristine
                             div
@@ -65,22 +65,25 @@ block content
                                             a(href='#', ng-click='edit(user._id)') edit
                                             | |
                                             a(href='#', ng-click='delete(user._id)') delete
-                #aCoaches.tab-pane.col-sm-9.col-md-10.main
-                    h2.page-header All Coaches
-                        .ng-scope(ng-controller='AllCoachesController' data-ng-init='initApp()')
-                            form.well.ng-pristine.ng-valid
-                                div
-                                    label Date/Time
-                                div
-                                    input.ng-pristine.ng-valid(type='text', name='date')
-                                div
-                                    label Duration
-                                div
-                                    input.ng-pristine.ng-valid(type='text', name='duration', ng-model='newnote.duration')
-                                div
-                                    label Note
-                                div
-                                    textarea.ng-pristine.ng-valid(rows='4' cols='50' name='note', ng-model='newnote.note')
+                #aCoaches.tab-pane.active.col-sm-9.col-md-10.main
+                    p All Coaches
+                        .ng-scope(ng-controller='AllCoachesController' data-ng-init='initApp()' style='width:800px;')
+                            form.well.ng-pristine
+                            div
+                                label First Name
+                                input.ng-pristine.ng-valid(type='text', name='firstname', ng-model='newuser.FirstName')
+                            div
+                                label Last Name
+                                input.ng-pristine.ng-valid(type='text', name='lastname', ng-model='newuser.LastName')
+                            div
+                                label Email
+                                input.ng-pristine.ng-valid(type='text', name='email', ng-model='newuser.Email')
+                            div
+                                label Phone
+                                input.ng-pristine.ng-valid(type='text', name='phone', ng-model='newuser.Phone')
+                            div
+                                label Bio
+                                textarea.ng-pristine.ng-valid(rows='4' cols='50' name='note', ng-model='newnote.note')
                                 br
                                 input(type='hidden' ng-model='newnote.id')
                                 input#userid(type='hidden' ng-model='newnote._id' value='{{_id}}')
@@ -88,15 +91,17 @@ block content
                                 table.table.table-striped.table-bordered
                                     thead
                                         tr
-                                            th Date/Time
-                                            th Duration
-                                            th Note
+                                            th Name
+                                            th Phone
+                                            th Email
+                                            th Bio
                                             th Action
                                     tbody
                                         tr.ng-scope(ng-repeat='coach in coaches')
-                                            td.ng-binding {{ callNote.date }}
-                                            td.ng-binding {{ callNote.duration }}
-                                            td.ng-binding {{ callNote.note }}
+                                            td.ng-binding {{ coach.FirstName}} {{ coach.LastName }}
+                                            td.ng-binding {{ coach.Phone }}
+                                            td.ng-binding {{ coach.Email }}
+                                            td.ng-binding {{ coach.Bio }}
                                             td
                                                 a(href='#', ng-click='edit(callNote.callid)') edit
                                                 | |
