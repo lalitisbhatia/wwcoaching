@@ -36,16 +36,16 @@ app.configure(function () {
 app.get('/',home.index);
 app.get('/getuser/:id',function(req,res){
     res.render('user');
-})
+});
 app.get('/getcoach/:id',function(req,res){
     res.render('coach');
-})
+});
 app.get('/getassessment/:id',function(req,res){
     res.render('assessment');
-})
+});
 app.get('/getschedule/',function(req,res){
     res.render('schedule');
-})
+});
 
 app.post('/',admin.login);
 app.get('/logout',admin.logout);
