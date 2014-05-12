@@ -2,68 +2,45 @@ extends layout
 
 block content
     .jumbotron
-        .container
-            h3(style='padding-bottom:0px;') Hi Admin! Welcome to the Coaching Dashboard.
-            p  Here you can manage users, coaches and schedules...
-        .container
-            .row
-                ul.nav.nav-tabs(style='font-size:20px;')
-                    li.active(style='margin-left:50px;')
-                        a(id="aUsers" href='#users', data-toggle='tab'  ) Users
-                    li(style='margin-left:50px;')
-                        a(href='#aCoaches', data-toggle='tab') Coaches
-                    li(style='margin-left:50px;')
-                        a(href='#aSchedules', data-toggle='tab') Schedules
+        .container(ng-controller='CoachController')
+            h3(style='padding-bottom:0px;') Hi {{FirstName}}! Welcome to the Coaches' Dashboard.
+            p  Click on the links below to see your coachees' information, select your available schedule or......
+    .container
+        .row
+            ul.nav.nav-tabs(style='font-size:20px;')
+                li.active(style='margin-left:50px;')
+                    a(id="aUsers" href='#users', data-toggle='tab'  ) Users
+                li(style='margin-left:50px;')
+                    a(href='#aCoaches', data-toggle='tab') Coaches
+                li(style='margin-left:50px;')
+                    a(href='#aSchedules', data-toggle='tab') Schedules
 
-                // Tab panes
-                .tab-content
-                    #aUsers.tab-pane.active
-                        h2.page-header {{FirstName}} {{LastName}}'s call details
-                        .ng-scope(ng-controller='NotesController' data-ng-init='initCtrlr()')
-                            form.well.ng-pristine.ng-valid
-                                div
-                                    label Date/Time
-                                div(ng-model='newnote.date')
-                                    input#pickdatetime.ng-pristine.ng-valid(type='text', name='date')
-                                div
-                                    label Duration
-                                div
-                                    input.ng-pristine.ng-valid(type='text', name='duration', ng-model='newnote.duration')
-                                div
-                                    label Note
-                                div
-                                    textarea.ng-pristine.ng-valid(rows='4' cols='50' name='note', ng-model='newnote.note')
-                                br
-                                input(type='hidden' ng-model='newnote.id')
-                                input#userid(type='hidden' ng-model='newnote._id' value='{{_id}}')
-                                input(type='button', value='Save', ng-click='savenote()').btn.btn-primary
-                                table.table.table-striped.table-bordered
-                                    thead
-                                        tr
-                                            th Date/Time
-                                            th Duration
-                                            th Note
-                                            th Action
-                                    tbody
-                                        tr.ng-scope(ng-repeat='callNote in notes')
-                                            td.ng-binding {{ callNote.date }}
-                                            td.ng-binding {{ callNote.duration }}
-                                            td.ng-binding {{ callNote.note }}
-                                            td
-                                                a(href='#', ng-click='edit(callNote.callid)') edit
-                                                | |
-                                                a(href='#', ng-click='delete(callNote.callid)') delete
+            // Tab panes
+            .tab-content
+                #users.tab-pane.active(ng-controller='AllUsersController')
+                    .container
+                        p this is the users section
+                        ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
+                            li(ng-repeat="user in users")
+                                ul.navlist
+                                    li
+                                        a(href='/getuser/{{user._id}}') {{ user.FirstName }} {{ user.LastName }}
+                                    li
+                                        {{user.Email}}
+                                    li
+                                        {{user.Phone}}
+                #aCoaches.tab-pane
+                    .container
+                        p this is the Coaches tab
+                #aSchedules.tab-pane(ng-controller='AllCoachesController')
+                    .container
+                        ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
+                            li(ng-repeat="coach in coaches")
 
-                    #aCoaches.tab-pane
+                    #availability.tab-pane
                         .container
-                            p this is the Resources tab
-                    #aSchedules.tab-pane
-                        .container
-                            ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
-                                li(ng-repeat="timeslot in timeslots")
-                                 
 
-            hr
+        hr
         footer
             p © Company 2014
-    // /container
+// /container
