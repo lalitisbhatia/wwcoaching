@@ -38,7 +38,7 @@ exports.getCoachInfo = function(req, res) {helper.getConnection(function(err,db)
     var id = req.session.userId.toString();
     console.log('Retrieving user: ' + id);
     db.collection(coachesCollName, function(err, collection) {
-        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
+        collection.findOne({'_id':id}, function(err, item) {
              if(err){
                 console.log('no user found: '+ err);
             }

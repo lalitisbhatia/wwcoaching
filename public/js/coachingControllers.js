@@ -75,10 +75,69 @@ coachingModule.controller('UsersController',['$scope','$http','$log','wwCoaching
 //############## USER Related Controllers  ####################
 //##############################################################
 
-//List of users for a coach
+//controller for coaches to choose their availability
 function CoachAvailController($scope,$http,$log,wwCoachingService) {
 
-   console.log('Getting coach info') ;
+    $scope.initApp=function() {
+        $log.log('initialized CoachAvailController');
+        $scope.selectedDates = [ ];
+        $scope.newDate= {};
+        $('#datetimepicker').datetimepicker({
+            format:'D,M-d, H:iA',
+            inline:true,
+            lang:'en',
+            //minTime:'10:00',
+            //maxTime:'20:00',
+            allowTimes:[
+                '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30','13:00', '13:30', '15:00', '17:00', '17:05', '17:20', '19:00', '20:00'
+            ],
+            step:30
+            ,
+            onSelectTime:function(dp,$input){
+                $scope.addDate($('#datetimepicker').val());
+
+            }
+        });
+    };
+
+    $scope.removeDate = function(d) {
+        var dateId = d.next("input[type='hidden']").val();
+        console.log(dateId);
+        d.parent().remove();
+
+        for(var i in $scope.selectedDates) {
+            if($scope.selectedDates[i].id == dateId) {
+                $scope.selectedDates.splice(i,1);
+            }
+            $scope.newDate = {};
+        }
+        console.log(' selectedDates after delete');
+        console.log($scope.selectedDates);
+
+    };
+
+    $scope.addDate = function(d) {
+        //check if the date is already selected
+        if ($.grep($scope.selectedDates, function(e){ return e.date == d; }).length>0){
+            console.log('already added ' + d);
+        }else{
+            $scope.newDate.id=$scope.selectedDates.length + 1;
+            $scope.newDate.date = d;
+
+            $scope.selectedDates.push($scope.newDate);
+            console.log($scope.selectedDates);
+
+            $('#dates').append("<li>" + $scope.newDate.date + "<a href='#' style='padding-left: 30px;'><b>X</b></a><input type='hidden' value=" +$scope.newDate.id + "></li>");
+            $scope.newDate={};
+        }
+    };
+
+    $('#dates').on('click','a',function(){
+        $scope.removeDate($(this));
+    });
+
+
+    console.log('Getting coach info') ;
         $http({
             method: 'GET',
             url: '/schedule'
@@ -88,6 +147,7 @@ function CoachAvailController($scope,$http,$log,wwCoachingService) {
             $scope.timeslots = data;
             
         });
+
  
 }
 
@@ -174,7 +234,7 @@ coachingModule.controller('NotesController', ['$scope','$http','wwCoachingServic
      };  
      
     $scope.delete = function(id) {
-        ;
+
         //search note with given id and delete it
         for(var i in $scope.notes) {
             if($scope.notes[i].callid == id) {

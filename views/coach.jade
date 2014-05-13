@@ -43,29 +43,40 @@ block content
                     .container
                         p this is the Resources tab
                
-                #scheduler.tab-pane(ng-controller='CoachAvailController')
-                    .container
+                #scheduler.tab-pane.col-sm-9.col-md-10.main
+                    .ng-scope(ng-controller='CoachAvailController' data-ng-init='initApp()' style='width:800px;')
                         ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
                             li(ng-repeat="timeslot in timeslots")  
                                 {{timeslot.Day}},{{timeslot.Date}} {{timeslot.time}}
                 
-                 #availability.tab-pane 
-                    .container
-                        table
-                            th
-                                tr
-                                    td(width="400") 
-                                        h4 Pick your availability
-                                    td(width="150") 
-                                        h4 Dates Selected
-                            tbody
-                                tr
-                                    td
-                                        input#datetimepicker(type='text') 
-                                    td(style="position:fixed;")
-                                        div#selectedDate 
-                        
-                            
+                 #availability.tab-pane.col-sm-12.col-md-12.main
+                    .ng-scope(ng-controller='CoachAvailController' data-ng-init='initApp()')
+                        .container
+                            .row
+                                .col-md-7
+                                    form.well.ng-pristine
+                                        fieldset
+                                            // Form Name
+                                            legend Pick your availability
+                                            p Choose the dates and times that you're available for your caoching calls
+                                                | Once you've made your selections, your choices will display on right. Please
+                                                | review them and hit save
+                                            // Text input
+                                            .form-group
+                                                .col-md-12
+                                                    input#datetimepicker.form-control.input-md(type='text', name='datetime', ng-model='newDate' )
+                                .col-md-3
+                                    .well(style="padding:10px;").ng-pristine
+                                        fieldset(style="padding:0px;")
+                                            // Form Name
+                                            legend You selected
+                                            ul#dates(style="list-style-type: none;padding-left:0px;padding-right:0px;")
+                                .col-md-2
+                                    .well(style="padding:10px;").ng-pristine
+                                        fieldset
+                                            // Form Name
+                                            legend Previously selected
+                                            ul#dates(style="list-style-type: none;padding-left:10px;")
 
         
         hr
