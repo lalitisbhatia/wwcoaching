@@ -60,9 +60,9 @@ app.get('/logout',admin.logout);
 app.get('/coaches',admin.checkAdmin,api.getAllCoaches);
 app.get('/coaches/:id',admin.checkAdmin,api.getCoachById);
 app.get('/coach',admin.checkUser, api.getCoachInfo);
-app.post('/coaches', admin.checkAdmin,api.addCoach);
-app.put('/coaches/:id', admin.checkAdmin,api.updateCoach);
-
+app.post('/addCoach', admin.checkAdmin,api.addCoach);
+app.post('/updateCoach', admin.checkAdmin,api.updateCoach);
+app.post('/deleteCoach',admin.checkAdmin, api.deleteCoach);
 //*************************************************
 //*****This section is for the users data********
 //*************************************************
@@ -72,7 +72,6 @@ app.get('/cusers',admin.checkUser, api.getUsersByCoachId);
 app.post('/addUser', admin.checkAdmin,api.addUser);
 app.post('/updateUser',admin.checkAdmin, api.updateUser);
 app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
-
 
 //****************************************************
 //*****This section is for the assessment data********
@@ -92,8 +91,6 @@ app.get('/getCallNotes/:userid',admin.checkUser, api.getCallNotes);
 app.post('/addCallNote',admin.checkUser, api.addCallNote);
 app.post('/updateCallNote',admin.checkUser, api.updateCallNote);
 app.post('/deleteCallNote',admin.checkUser, api.deleteCallNote);
-
-
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));

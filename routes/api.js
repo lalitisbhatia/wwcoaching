@@ -52,6 +52,7 @@ exports.getCoachInfo = function(req, res) {helper.getConnection(function(err,db)
      
 exports.addCoach = function(req, res) {helper.getConnection(function(err,db){
     var coach = req.body;
+    coach._id= guid.create().value.toString();
     db.collection(coachesCollName, function(err, collection) {
         collection.insert(coach, {safe:true}, function(err, result) {
             if (err) {
@@ -67,12 +68,12 @@ exports.addCoach = function(req, res) {helper.getConnection(function(err,db){
 
 
 exports.updateCoach = function(req, res) {helper.getConnection(function(err,db){
-    var id = req.params.id;
+
     var coach = req.body;
-    //console.log('Updating coach: ' + id);
-    //console.log(JSON.stringify(coach));
+    console.log('Updating coach: ' + coach._id);
+    console.log((coach));
     db.collection(coachesCollName, function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, coach, {safe:true}, function(err, result) {
+        collection.update({'_id':coach._id}, coach, {safe:true}, function(err, result) {
             if (err) {
                 console.log('Error updating coach: ' + err);
                 res.send({'error':'An error has occurred'});
@@ -85,6 +86,24 @@ exports.updateCoach = function(req, res) {helper.getConnection(function(err,db){
 });
 };
 
+exports.deleteCoach = function(req, res) {helper.getConnection(function(err,db){
+
+    var coach = req.body;
+    console.log('Deleting coach: ' + coach._id);
+
+    db.collection(coachesCollName, function(err, collection) {
+        collection.remove({'_id':coach._id}, {safe:true}, function(err, result) {
+            if (err) {
+                console.log('Error deleting coach: ' + err);
+                res.send({'error':'An error has occurred'});
+            } else {
+                console.log('' + result + ' document(s) deleted');
+                res.send(coach);
+            }
+        });
+    });
+});
+};
 
 //################################################
 //##### USER ###########
@@ -123,7 +142,7 @@ exports.getUsersByCoachId = function(req, res) {helper.getConnection(function(er
     /***************************************/
     /* HARDCODED COACH ID - TO BE REMOVED */
     /***************************************/
-    id='94d1a323-cf5a-4805-b63c-d5a8f66fb616';
+//    id='94d1a323-cf5a-4805-b63c-d5a8f66fb616';
     console.log('coachId: ' + id);
     db.collection(usersCollName, function(err, collection) {
         collection.find({'CoachId':id}).toArray(function(err, items) {
