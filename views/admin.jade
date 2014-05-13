@@ -4,8 +4,10 @@ block content
 
     .container
         h3(style='padding-bottom:0px;') Hi Admin! Welcome to the Admin Dashboard.
-        p  Her you can manage coaches, users and schedules
+        p  Here you can manage coaches, users and schedules
+
     .container
+        legend
         .row
             ul.nav.nav-tabs(style='font-size:20px;')
                 li.active(style='margin-left:50px;')
@@ -54,6 +56,10 @@ block content
                                         button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='savecoach()') Save
                         legend
                         legend All Users
+                        label.col-md-2.control-label Search users
+                        .col-md-2
+                            input(type='text' ng-model="query.FirstName")
+                        legend
                         table.table.table-striped.table-bordered
                             thead
                                 tr
@@ -63,7 +69,7 @@ block content
                                     th Coach
                                     th Action
                             tbody
-                                tr.ng-scope(ng-repeat='user in users')
+                                tr.ng-scope(ng-repeat='user in users | filter:query')
                                     td.ng-binding {{ user.FirstName}} {{ user.LastName }}
                                     td.ng-binding {{ user.Email }}
                                     td.ng-binding {{ user.Phone }}
@@ -132,7 +138,7 @@ block content
                                         td.ng-binding {{ coach.Bio }}
                                         td
                                             a(href='#', ng-click='edit(coach._id)') edit
-                                                | |
+                                                | /
                                             a(href='#', ng-click='delete(coach._id)') delete
                 #aSchedules.tab-pane.col-sm-9.col-md-10.main
                     .container
