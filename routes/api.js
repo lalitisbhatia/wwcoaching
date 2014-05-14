@@ -38,7 +38,7 @@ exports.getCoachInfo = function(req, res) {helper.getConnection(function(err,db)
     var id = req.session.userId.toString();
     console.log('Retrieving user: ' + id);
     db.collection(coachesCollName, function(err, collection) {
-        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
+        collection.findOne({'_id':id}, function(err, item) {
              if(err){
                 console.log('no user found: '+ err);
             }
@@ -52,6 +52,7 @@ exports.getCoachInfo = function(req, res) {helper.getConnection(function(err,db)
      
 exports.addCoach = function(req, res) {helper.getConnection(function(err,db){
     var coach = req.body;
+    coach._id= guid.create().value.toString();
     db.collection(coachesCollName, function(err, collection) {
         collection.insert(coach, {safe:true}, function(err, result) {
             if (err) {
@@ -67,12 +68,12 @@ exports.addCoach = function(req, res) {helper.getConnection(function(err,db){
 
 
 exports.updateCoach = function(req, res) {helper.getConnection(function(err,db){
-    var id = req.params.id;
+
     var coach = req.body;
-    //console.log('Updating coach: ' + id);
-    //console.log(JSON.stringify(coach));
+    console.log('Updating coach: ' + coach._id);
+    console.log((coach));
     db.collection(coachesCollName, function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, coach, {safe:true}, function(err, result) {
+        collection.update({'_id':coach._id}, coach, {safe:true}, function(err, result) {
             if (err) {
                 console.log('Error updating coach: ' + err);
                 res.send({'error':'An error has occurred'});
@@ -85,6 +86,24 @@ exports.updateCoach = function(req, res) {helper.getConnection(function(err,db){
 });
 };
 
+exports.deleteCoach = function(req, res) {helper.getConnection(function(err,db){
+
+    var coach = req.body;
+    console.log('Deleting coach: ' + coach._id);
+
+    db.collection(coachesCollName, function(err, collection) {
+        collection.remove({'_id':coach._id}, {safe:true}, function(err, result) {
+            if (err) {
+                console.log('Error deleting coach: ' + err);
+                res.send({'error':'An error has occurred'});
+            } else {
+                console.log('' + result + ' document(s) deleted');
+                res.send(coach);
+            }
+        });
+    });
+});
+};
 
 //################################################
 //##### USER ###########
@@ -123,7 +142,7 @@ exports.getUsersByCoachId = function(req, res) {helper.getConnection(function(er
     /***************************************/
     /* HARDCODED COACH ID - TO BE REMOVED */
     /***************************************/
-    id='94d1a323-cf5a-4805-b63c-d5a8f66fb616';
+//    id='94d1a323-cf5a-4805-b63c-d5a8f66fb616';
     console.log('coachId: ' + id);
     db.collection(usersCollName, function(err, collection) {
         collection.find({'CoachId':id}).toArray(function(err, items) {
@@ -270,7 +289,7 @@ exports.addCallNote = function(req, res) {helper.getConnection(function(err,db){
 //################################################
 //################  SCHEDULER  ###################
 //################################################
-var schCollName = 'schedule';
+var schCollName = 'scheduler';
 
 
 
@@ -279,14 +298,14 @@ var schCollName = 'schedule';
 //################################################
 
 //This is the schedule that users sees - which coaches are available when
-exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
-    db.collection(schCollName, function(err, collection) {
-        collection.find().toArray(function(err, items) { //add logic filters
-            res.send(items);
-        });
-    });
-});
-};
+//exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+//    db.collection(schCollName, function(err, collection) {
+//        collection.find().toArray(function(err, items) { //add logic filters
+//            res.send(items);
+//        });
+//    });
+//});
+//};
 
 //method to allow users to choose an available slot
 exports.getAppts = function(req, res) {helper.getConnection(function(err,db){
@@ -302,16 +321,89 @@ exports.getAppts = function(req, res) {helper.getConnection(function(err,db){
 //##### coach view/action  methods ###########
 //################################################
 
-//see scheduled appts
-exports.getCoachApptsById = function(req, res) {helper.getConnection(function(err,db){
-  var id = req.params.id.toString();
-    //console.log('Retrieving user: ' + id);
+//see a coach's availability
+exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    var id = req.session.userId.toString();//here the userId is the coach id
+    console.log('Retrieving availability for coachId: ' + id);
     db.collection(schCollName, function(err, collection) {
-        collection.findOne({'_id':id}, function(err, item) {
-            //res.send(item);
-            res.render('user',item);
+        collection.findOne({"Coach.coachId":id}, function(err, item) {
+            if (err) {
+                res.send({'error':'error occurred while getting coach availabilities'});
+            } else {
+                if(item) {
+                    console.log(item);
+                    res.send(item);
+                }else{
+                    console.log('no results found');
+                }
+            }
         });
     });
      
 });
 };
+
+exports.deleteCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    var note = req.body;
+
+    console.log(note);
+
+    db.collection(usersCollName, function(err, collection) {
+        //first remove the note
+        collection.update({_id:note.userid},{$pull:{CallNotes:{callid:note.callid}}}, function(err, item) {
+            if (!err) {
+                console.log('successfully removed note');
+
+                res.render('user',item);
+            } else {
+                res.send({'error': 'error occurred while saving the call note' + err});
+            }
+        });
+    });
+});
+};
+exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    var coach = req.body.Coach;
+    var schedules = req.body.Dates;
+    console.log(coach);
+    console.log(schedules);
+    //first check if the coach exists
+    db.collection(schCollName, function(err, collection) {
+        collection.findOne({"Coach.coachId":coach._id}, function(err, item) {
+            if(err){
+                console.log('error inserting coach schedule');
+            }else {
+                if(item) {
+                    console.log('updating appointments array');
+                    //loop thru each appt and update or insert
+                    res.send(item);
+                }else {
+                    console.log('coach does not exist in scheduler yet - inserting coach schedule');
+                    collection.insert(
+                                {'Coach':{'coachId':coach._id,'coachName':coach.FirstName + coach.LastName,'coachEmail':coach.Email,'coachPhone':coach.Phone},'Appointments':schedules}, {safe:true}, function(err, result) {
+                        if (err) {
+                            res.send({'error':'An error inserting coach'});
+                        } else {
+                            console.log('Success: ' + (result[0]));
+                            res.send(result[0]);
+                        }
+                    });
+
+                }
+            }
+        });
+    });
+
+//    db.collection(usersCollName, function(err, collection) {
+//        collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
+//            if (err) {
+//                res.send({'error':'error occurred while saving the call note'});
+//            } else {
+//                console.log('Success: ' + JSON.stringify(result[0]));
+//                res.send(result[0]);
+//            }
+//        });
+//    });
+});
+};
+

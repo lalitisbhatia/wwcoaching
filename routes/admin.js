@@ -15,18 +15,20 @@ exports.login = function(req, res,next) {helper.getConnection(function(err,db){
     db.collection(coachesCollName, function(err, collection) {
         collection.findOne(
             { 
-                'username':req.body.username,
-                'password':req.body.password
+                'Username':req.body.username,
+                'Password':req.body.password
             }, function(err, item) {
             if(err){
+                console.log(err);
                 res.send('no user found: '+ err);
                 return(next(err));
             };
             
             if(item)
-            {  
+            {
+                //console.log(item);
                 req.session.auth=true;
-                req.session.userId=item._id.toHexString();
+                req.session.userId=item._id;
                 req.session.user=item;
                 
                 if(item.admin){
@@ -39,7 +41,9 @@ exports.login = function(req, res,next) {helper.getConnection(function(err,db){
                  res.redirect('/');
             }else
             {
+                console.log('user not found');
                 res.render('index',{'message':'no user found'});
+
             }
             
         });
