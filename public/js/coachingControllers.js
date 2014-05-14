@@ -83,13 +83,14 @@ coachingModule.controller('UsersController',['$scope','$http','$log','wwCoaching
 
 coachingModule.controller('NotesController', ['$scope','$http','wwCoachingService', function($scope,$http,wwCoachingService) {
      $scope.initCtrlr=function(){
-      
+      $scope.User={};
     };
    
     //Handle brodcast of user id
     $scope.$on('handleUserBroadcast', function() {
-        $scope.pilotUser = wwCoachingService.PilotUser;
-        console.log(wwCoachingService.PilotUser.CallNotes);
+        $scope.User = wwCoachingService.PilotUser;
+        console.log('handle broadcast');
+        console.log($scope.User);
         $scope.notes= wwCoachingService.PilotUser.CallNotes;
         if(!$scope.notes){
               $scope.notes = [ ];
@@ -108,11 +109,11 @@ coachingModule.controller('NotesController', ['$scope','$http','wwCoachingServic
     
     
     $scope.savenote = function() {
-        console.log($scope.newnote);
+        console.log($scope.User);
         if($scope.newnote.callid == null) {
            
             $scope.newnote.date=$('#pickdatetime').val(); //hack because the ng-model does not bind with datepicker
-            $scope.newnote.userid=$scope.pilotUser._id;
+            $scope.newnote.userid=$scope.User._id;
             $scope.newnote.callid = $scope.notes.length+1;
             console.log($scope.newnote) ;
             $scope.notes.push($scope.newnote);    
@@ -130,7 +131,7 @@ coachingModule.controller('NotesController', ['$scope','$http','wwCoachingServic
             });
             console.log($scope.notes);
         } else {
-            $scope.newnote.userid=$scope.pilotUser._id;
+            $scope.newnote.userid=$scope.User._id;
         //for existing contact, find this contact using id
         //and update it.
         for(var i in $scope.notes) {
@@ -164,7 +165,7 @@ coachingModule.controller('NotesController', ['$scope','$http','wwCoachingServic
         //search note with given id and delete it
         for(var i in $scope.notes) {
             if($scope.notes[i].callid == id) {
-                $scope.newnote.userid=$scope.pilotUser._id
+                $scope.newnote.userid=$scope.User._id
                 $scope.newnote.callid= id;
 
                 console.log($scope.newnote);

@@ -23,11 +23,11 @@ coachingModule.factory('wwCoachingService',function($http,$log,$q,$rootScope){
     //this is the method that sets the value of the PilotUser property and calls the method to do the broadcasting
     myService.prepForBroadcast = function(pilotUser) {
         this.PilotUser = pilotUser;
-        this.broadcastItem();
+        this.broadcastUser();
     };
 
     //this is the method that broadcasts/publishes the event 'handleUserBroadcast'
-    myService.broadcastItem = function() {
+    myService.broadcastUser = function() {
         $rootScope.$broadcast('handleUserBroadcast');
     };
 
@@ -41,11 +41,11 @@ coachingModule.factory('wwCoachingService',function($http,$log,$q,$rootScope){
     //this is the method that sets the value of the Coach property and calls the method to do the broadcasting
     myService.prepCoachBroadcast = function(coach) {
         this.Coach = coach;
-        this.broadcastItem();
+        this.broadcastCoach();
     };
 
     //this is the method that broadcasts/publishes the event 'handleCoachBroadcast'
-    myService.broadcastItem = function() {
+    myService.broadcastCoach = function() {
         $rootScope.$broadcast('handleCoachBroadcast');
     };
 
