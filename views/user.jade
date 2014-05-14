@@ -2,42 +2,49 @@ extends layout
 
 block content
     
-    .container(ng-controller='UserDetailsController' data-ng-init='initApp()')
-        
-            .col-sm-3.col-md-2.sidebar
-                ul.nav.nav-sidebar
-                    li.active 
-                        a(href="#overview" data-toggle="tab") Overview
-                    li 
-                        a(href="#wwprofile" data-toggle="tab") WW Profile
-                    li 
-                        a(href="#assessment" data-toggle="tab") Assessment
-                    li 
-                        a(href="#tracker" data-toggle="tab") Tracker
-                    li 
-                        a(href="#calls" data-toggle="tab") Calls
-                    li
-                        a(href="#eamils" data-toggle="tab") Email Communications
-            .col-sm-9     
-                .tab-content
-                    
-                    #overview.tab-pane.active.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                        h1.page-header {{FirstName}} {{LastName}}
-                    #wwprofile.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                        h1.page-header WW Profile for {{FirstName}} {{LastName}} 
-                            p Age: {{Age}}
-                            div Gender: {{Gender}}
-                            div Height: {{Height}}
-                            div Weight: {{Weight}}
-                            div Min Safe Weight: {{MinSafeWeight}}
-                            div Max Safe Weight: {{MaxSafeWeight}}
-                                
+    .container(ng-controller='UserDetailsController' data-ng-init='initApp()' style="padding-top:50px;padding-left:200px;")
+        .sub-head NAME: {{FirstName}} {{LastName}}
+
+        legend
+        p(style='padding-bottom:10px;')
+        .row
+            ul.nav.nav-pills(style='font-size:20px;margin-left:10px;')
+                li.active
+                    a(href="#wwprofile" data-toggle="tab") WW Profile
+                li(style='margin-left:80px;')
+                    a(href="#assessment" data-toggle="tab") Assessment
+                li(style='margin-left:80px;')
+                    a(href="#tracker" data-toggle="tab") Tracker
+                li(style='margin-left:80px;')
+                    a(href="#calls" data-toggle="tab") Calls
+                li(style='margin-left:80px;')
+                    a(href="#eamils" data-toggle="tab") Email Communications
+            legend
+            // Tab panes
+            .tab-content
+                    #wwprofile.tab-pane.active
+                        .container
+                            table
+                                thead.t-head
+                                    tr
+                                        th AGE
+                                        th GENDER
+                                        th HEIGHT/WEIGHT
+                                        th MIN SAFE WEIGHT
+                                        th MAX SAFE WEIGHT
+                                tbody
+                                    tr.ng-scope
+                                        td {{Age}}
+                                        td {{Gender}}
+                                        td {{Height}}
+                                        td {{MinSafeWeight}}
+                                        td {{MaxSafeWeight}}
+
                     #assessment.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h2.page-header {{FirstName}} {{LastName}}'s Assessment Results
                     #tracker.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h1.page-header Tracker Info Here
-                    #calls.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                        h2.page-header {{FirstName}} {{LastName}}'s call details
+                    #calls.tab-pane
                         .ng-scope(ng-controller='NotesController' data-ng-init='initCtrlr()')
                              form.well.ng-pristine.ng-valid
                                 div
@@ -67,12 +74,11 @@ block content
                                   tr.ng-scope(ng-repeat='callNote in notes')
                                     td.ng-binding {{ callNote.date }}
                                     td.ng-binding {{ callNote.duration }}
-                                    td.ng-binding {{ callNote.note }} 
+                                    td.ng-binding {{ callNote.note }}
                                     td
                                       a(href='#', ng-click='edit(callNote.callid)') edit
                                       | |
                                       a(href='#', ng-click='delete(callNote.callid)') delete
-    
+
                     #eamils.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h1.page-header Emails communication Here
-                            

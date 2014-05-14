@@ -70,19 +70,36 @@ padding-right: 20px;
     padding-top:10px;
     padding-bottom:10px;
 }
-#users tbody>tr:nth-child(odd){
+#wwprofile td{
+    padding-left:60px;
+    padding-right:60px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+tbody>tr:nth-child(odd){
     background: rgba(141, 130, 170, 0.16);
 }
+
 .t-head {
-    font-size: 13px;
+     font-size: 13px;
+     line-height: 1.4em;
+     color: #555;
+     font-weight: 300;
+     padding-bottom: 50px;
+     text-align:center;
+ }
+.sub-head {
+    font-size: 18px;
     line-height: 1.4em;
     color: #555;
     font-weight: 300;
     margin-bottom: 50px;
-    text-align:center;
 }
 th{
     text-align: center;
+    padding-bottom: 10px;
 }
 
-
+.wwdisplay-bold {
+    font-family: wwdisplay_boldregular;
+}

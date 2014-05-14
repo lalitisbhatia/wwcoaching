@@ -1,7 +1,6 @@
 extends layout
 
 block content
-    
 
     .container(ng-controller='CoachController' style="padding-top:50px;padding-left:200px;")
         h3(style='padding-left:0px;') Hi {{FirstName}}! Welcome to the Coaches' Dashboard.
@@ -10,13 +9,10 @@ block content
         p(style='padding-bottom:10px;')
         .row
             ul.nav.nav-pills(style='font-size:20px;margin-left:10px;')
-                
                 li.active
                     a(id="aMyUsers" href='#users', data-toggle='tab' ) Users
-                        
                 li(style='margin-left:80px;')
                     a(href='#resources', data-toggle='tab') Resources
-                
                 li(style='margin-left:80px;')
                     a(href='#scheduler', data-toggle='tab') Schedules
                 li(style='margin-left:80px;')
