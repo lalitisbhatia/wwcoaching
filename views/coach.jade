@@ -62,9 +62,13 @@ block content
                                                 |   You can chhose multiple times but remember to click on the Save button
                                             ul#dates(style="list-style-type: none;padding:10px;")
                                                 li(ng-repeat="savedDate in savedDates")
-                                                    p {{savedDate.date}}
-                                                        a(href='#' style='padding-left: 30px;') X
-                                                        input(type='hidden' value='{{savedDate.id}}')
+                                                    p
+                                                        b {{savedDate.Date}}
+                                                    ul#times(style="list-style-type: none;padding:10px;")
+                                                        li(ng-repeat="savedTime in savedDate.Times")
+                                                            p {{savedTime.time}}
+                                                                a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
+
                                             input(type='button', id="btnSave" value='Save', ng-click='saveSchedule()').btn.btn-primary
                                             input(type='button', id="fakeSave" , ng-click='' style="display:none;")
                                 .col-md-7

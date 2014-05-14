@@ -3,6 +3,11 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
 
     $scope.initApp=function() {
         $log.log('initialized CoachAvailController');
+//        $scope.savedDates = [
+//            {Date:'Tue,May-13, 2014',Times:[{time:'10:00AM'},{time:'10:30AM'},{time:'12:30PM'}]},
+//            {Date:'Thu,May-15, 2014',Times:[{time:'11:00AM'},{time:'11:30AM'},{time:'2:30PM'}]}
+//        ];
+        $log.log($scope.savedDates);
         $scope.newDate= {};
         $('#datetimepicker').datetimepicker({
             format:'D,M-d, Y h:iA',
@@ -45,40 +50,82 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
         })
     });
     //these are the availability dates already saved by the user ( to be retrieved from db)
-    //$scope.savedDates = [ {id:1,date:'Tue,May-13, 9:30AM'},{id:2,date:'Tue,May-14, 8:30AM'}];
+
 
     $scope.removeDate = function(d) {
-        var dateId = d.next("input[type='hidden']").val();
-        console.log(dateId);
-        d.parent().remove();
+        //remove is based on the data-date and data-time attributes of the link
+        //by finding the date and time in teh savedDates array and splicing it
+        var inputDate = d.attr('data-date');
+        var inputTime = d.attr('data-time');
+        //console.log(inputDate + ' - ' + inputTime);
+        //console.log($scope.savedDates);
 
         for(var i in $scope.savedDates) {
-            if($scope.savedDates[i].id == dateId) {
-                $scope.savedDates.splice(i,1);
+            if($scope.savedDates[i].Date == inputDate) {
+                //console.log('Date exists');
+                //check if time also exists
+                for(var j in $scope.savedDates[i].Times){
+                    if($scope.savedDates[i].Times[j].time == inputTime){
+                        //console.log('Date and time found - ready to splice the array');
+                        $scope.savedDates[i].Times.splice(j,1);
+
+                        //if the date has no more times, remove the date as well
+                        if($scope.savedDates[i].Times.length == 0){
+                            $scope.savedDates.splice(i,1);
+                        }
+                        $('#fakeSave').click();
+                        //console.log('savedDates after delete');
+                        //console.log($scope.savedDates);
+                        break;
+                    }
+                }
             }
-            $scope.newDate = {};
+
         }
-        //console.log('savedDates after delete');
-        //console.log($scope.savedDates);
 
     };
 
     $scope.addDate = function(d,dp) {
-        //check if the date is already selected
-        if ($.grep($scope.savedDates, function(e){ return e.date == d; }).length>0){
-            console.log('already added ' + d);
-        }else{
-            $scope.newDate.id=$scope.savedDates.length + 1;
-            $scope.newDate.date = d;
-            $scope.newDate.savedDate =dp.dateFormat('m/d/y');
-            $scope.newDate.savedTime =dp.dateFormat('h:iA');
+        $log.log(dp);
+        var inputDate = dp.dateFormat('D,M-d, Y');
+        var inputTime = dp.dateFormat('h:iA');
+        var dateExists = false;
+        var timeExists = false;
 
-            $scope.savedDates.push($scope.newDate);
-            console.log($scope.savedDates);
-            $('#fakeSave').click();
-            //$('#dates').append("<li style='padding-top: 5px; color: #bd362f;'>" + $scope.newDate.date + "<a href='#' style='padding-left: 30px;'><b>X</b></a><input type='hidden' value=" +$scope.newDate.id + "></li>");
-            $scope.newDate={};
+        $scope.newDate.Date =inputDate;
+        $scope.newDate.Times=[{time:inputTime}];
+
+        // Before adding to the array of dates, check if the date already exists in savedDates.
+        // If so, only add the time
+        for(var i in $scope.savedDates) {
+            if($scope.savedDates[i].Date == inputDate) {
+                dateExists = true;
+                //check if time also exists
+                for(var j in $scope.savedDates[i].Times){
+                    if($scope.savedDates[i].Times[j].time == inputTime){
+                        timeExists = true;
+                        console.log('Date and time already exist - do nothing');
+                        break;
+                    }
+                }
+                if(!timeExists){
+                    console.log('date exists but not time - add time to the list');
+                    $scope.savedDates[i].Times.push({time:inputTime});
+                }
+                //out of loop to check time
+                break;
+            }
+
         }
+        if(!dateExists){
+            console.log('date does not exists -  add date and times');
+            $scope.savedDates.push($scope.newDate);
+        }
+
+         console.log($scope.savedDates);
+         $('#fakeSave').click();
+         //$('#dates').append("<li style='padding-top: 5px; color: #bd362f;'>" + $scope.newDate.date + "<a href='#' style='padding-left: 30px;'><b>X</b></a><input type='hidden' value=" +$scope.newDate.id + "></li>");
+         $scope.newDate={};
     };
 
     $('#dates').on('click','a',function(){

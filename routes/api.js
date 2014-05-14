@@ -375,7 +375,21 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
             }else {
                 if(item) {
                     console.log('updating appointments array');
-                    //loop thru each appt and update or insert
+                    //remove all appts and re-insert
+                    collection.update({"Coach.coachId":coach._id},{$unset:{Appointments:{}}}, function(err, item){
+                        if (err) {
+                            res.send({'error':'An error removing appointmets coach '+ err});
+                        }else {
+                            //now add the appointments
+                            collection.update({"Coach.coachId":coach._id},{$set:{Appointments:schedules}}, function(err, item){
+                                if(err){
+                                    res.send({'error':'An error updating appointmets coach '+ err});
+                                }else{
+                                    res.send(item);
+                                }
+                            });
+                        }
+                    });
                     res.send(item);
                 }else {
                     console.log('coach does not exist in scheduler yet - inserting coach schedule');
