@@ -127,7 +127,7 @@ coachingModule.controller('NotesController', ['$scope','$http','wwCoachingServic
             })     
             .error(function(status, headers, config){
                 console.log('failed to save note:' + status);
-            })
+            });
             console.log($scope.notes);
         } else {
             $scope.newnote.userid=$scope.pilotUser._id;

@@ -5,9 +5,10 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
         $log.log('initialized CoachAvailController');
         $scope.newDate= {};
         $('#datetimepicker').datetimepicker({
-            format:'D,M-d, H:iA',
+            format:'D,M-d, Y h:iA',
             inline:true,
             lang:'en',
+            hours12:true,
             //minTime:'10:00',
             //maxTime:'20:00',
             allowTimes:[
@@ -18,7 +19,8 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
             step:30
             ,
             onSelectTime:function(dp,$input){
-                $scope.addDate($('#datetimepicker').val());
+                $scope.addDate($('#datetimepicker').val(),dp);
+
 
             }
         });
@@ -27,11 +29,23 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
     //Handle broadcast of coach
     $scope.$on('handleCoachBroadcast', function() {
         $scope.Coach = wwCoachingService.Coach;
-        console.log('printing coach info from scheduler controller');
-        console.log($scope.Coach);
+        //console.log($scope.Coach);
+        $scope.savedDates = [];
+        // now that the coach info is loaded, get the coach schedules
+        $http({
+            method: 'GET',
+            url: '/getCoachAvails'
+        })
+        .success(function (data, status, headers, config) {
+            $scope.savedDates=data.Appointments;
+            console.log(data);
+        })
+        .error(function(status, headers, config){
+            console.log('failed to get schedules:' + status);
+        })
     });
     //these are the availability dates already saved by the user ( to be retrieved from db)
-    $scope.savedDates = [ {id:1,date:'Tue,May-13, 9:30AM'},{id:2,date:'Tue,May-14, 8:30AM'}];
+    //$scope.savedDates = [ {id:1,date:'Tue,May-13, 9:30AM'},{id:2,date:'Tue,May-14, 8:30AM'}];
 
     $scope.removeDate = function(d) {
         var dateId = d.next("input[type='hidden']").val();
@@ -49,13 +63,15 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
 
     };
 
-    $scope.addDate = function(d) {
+    $scope.addDate = function(d,dp) {
         //check if the date is already selected
         if ($.grep($scope.savedDates, function(e){ return e.date == d; }).length>0){
             console.log('already added ' + d);
         }else{
             $scope.newDate.id=$scope.savedDates.length + 1;
             $scope.newDate.date = d;
+            $scope.newDate.savedDate =dp.dateFormat('m/d/y');
+            $scope.newDate.savedTime =dp.dateFormat('h:iA');
 
             $scope.savedDates.push($scope.newDate);
             console.log($scope.savedDates);
@@ -76,6 +92,17 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
         newSchedule.Coach = $scope.Coach;
         newSchedule.Dates = $scope.savedDates;
         console.log(newSchedule);
+        $http({
+            method:'POST',
+            url: '/addCoachAvails',
+            data: newSchedule
+        })
+        .success(function (d, status, headers, config) {
+            console.log(d);
+        })
+        .error(function(status, headers, config){
+            console.log('failed to save schedule:' + status);
+        })
 
     };
 

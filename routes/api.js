@@ -289,7 +289,7 @@ exports.addCallNote = function(req, res) {helper.getConnection(function(err,db){
 //################################################
 //################  SCHEDULER  ###################
 //################################################
-var schCollName = 'schedule';
+var schCollName = 'scheduler';
 
 
 
@@ -298,14 +298,14 @@ var schCollName = 'schedule';
 //################################################
 
 //This is the schedule that users sees - which coaches are available when
-exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
-    db.collection(schCollName, function(err, collection) {
-        collection.find().toArray(function(err, items) { //add logic filters
-            res.send(items);
-        });
-    });
-});
-};
+//exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+//    db.collection(schCollName, function(err, collection) {
+//        collection.find().toArray(function(err, items) { //add logic filters
+//            res.send(items);
+//        });
+//    });
+//});
+//};
 
 //method to allow users to choose an available slot
 exports.getAppts = function(req, res) {helper.getConnection(function(err,db){
@@ -326,12 +326,16 @@ exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,d
     var id = req.session.userId.toString();//here the userId is the coach id
     console.log('Retrieving availability for coachId: ' + id);
     db.collection(schCollName, function(err, collection) {
-        collection.find({appointments:{coachId:id}}, function(err, items) {
+        collection.findOne({"Coach.coachId":id}, function(err, item) {
             if (err) {
                 res.send({'error':'error occurred while getting coach availabilities'});
             } else {
-                console.log(items);
-                res.send(items);
+                if(item) {
+                    console.log(item);
+                    res.send(item);
+                }else{
+                    console.log('no results found');
+                }
             }
         });
     });
@@ -359,18 +363,47 @@ exports.deleteCoachAvails = function(req, res) {helper.getConnection(function(er
 });
 };
 exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,db){
-    var note = req.body;
-    console.log(note);
-    db.collection(usersCollName, function(err, collection) {
-        collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
-            if (err) {
-                res.send({'error':'error occurred while saving the call note'});
-            } else {
-                console.log('Success: ' + JSON.stringify(result[0]));
-                res.send(result[0]);
+    var coach = req.body.Coach;
+    var schedules = req.body.Dates;
+    console.log(coach);
+    console.log(schedules);
+    //first check if the coach exists
+    db.collection(schCollName, function(err, collection) {
+        collection.findOne({"Coach.coachId":coach._id}, function(err, item) {
+            if(err){
+                console.log('error inserting coach schedule');
+            }else {
+                if(item) {
+                    console.log('updating appointments array');
+                    //loop thru each appt and update or insert
+                    res.send(item);
+                }else {
+                    console.log('coach does not exist in scheduler yet - inserting coach schedule');
+                    collection.insert(
+                                {'Coach':{'coachId':coach._id,'coachName':coach.FirstName + coach.LastName,'coachEmail':coach.Email,'coachPhone':coach.Phone},'Appointments':schedules}, {safe:true}, function(err, result) {
+                        if (err) {
+                            res.send({'error':'An error inserting coach'});
+                        } else {
+                            console.log('Success: ' + (result[0]));
+                            res.send(result[0]);
+                        }
+                    });
+
+                }
             }
         });
     });
+
+//    db.collection(usersCollName, function(err, collection) {
+//        collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
+//            if (err) {
+//                res.send({'error':'error occurred while saving the call note'});
+//            } else {
+//                console.log('Success: ' + JSON.stringify(result[0]));
+//                res.send(result[0]);
+//            }
+//        });
+//    });
 });
 };
 
