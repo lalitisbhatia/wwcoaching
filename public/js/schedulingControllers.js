@@ -150,7 +150,7 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
         .error(function(status, headers, config){
             console.log('failed to save schedule:' + status);
         })
-
+        $scope.ConfirmMessage="Thanks for updating your schedule";
     };
 
 }]);

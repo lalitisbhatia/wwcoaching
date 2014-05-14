@@ -2,41 +2,59 @@ extends layout
 
 block content
     
-    .jumbotron
-        .container(ng-controller='CoachController')
-             h3(style='padding-bottom:0px;') Hi {{FirstName}}! Welcome to the Coaches' Dashboard. 
-             p  Click on the links below to see your coachees' information, select your available schedule or......
-    
-    .container
-       
+
+    .container(ng-controller='CoachController' style="padding-top:50px;padding-left:200px;")
+        h3(style='padding-left:0px;') Hi {{FirstName}}! Welcome to the Coaches' Dashboard.
+        p  Click on the links below to see your coachees' information, select your available schedule or......
+        legend
+        p(style='padding-bottom:10px;')
         .row
-            ul.nav.nav-tabs(style='font-size:20px;')
+            ul.nav.nav-pills(style='font-size:20px;margin-left:10px;')
                 
-                li.active(style='margin-left:50px;')
-                    a(id="aMyUsers" href='#users', data-toggle='tab'  ) Users 
+                li.active
+                    a(id="aMyUsers" href='#users', data-toggle='tab' ) Users
                         
-                li(style='margin-left:50px;')
+                li(style='margin-left:80px;')
                     a(href='#resources', data-toggle='tab') Resources
                 
-                li(style='margin-left:50px;')
+                li(style='margin-left:80px;')
                     a(href='#scheduler', data-toggle='tab') Schedules
-                li(style='margin-left:50px;')
+                li(style='margin-left:80px;')
                     a(href='#availability', data-toggle='tab') Availability
                         
-                
+            legend
             // Tab panes
             .tab-content
                 #users.tab-pane.active(ng-controller='UsersController')
                     .container
-                        ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
-                          li(ng-repeat="user in users")  
-                            ul.navlist
-                                li 
-                                    a(href='/getuser/{{user._id}}') {{ user.FirstName }} {{ user.LastName }} 
-                                li 
-                                    {{user.Email}}
-                                li 
-                                    {{user.Phone}}
+                        table
+                            thead.t-head
+                                tr
+                                    th NAME
+                                    th EMAIL
+                                    th PHONE
+                                    th OTHER
+                                    th OTHER
+                            tbody
+                                tr.ng-scope(ng-repeat='user in users')
+                                    td
+                                        a(href='/getuser/{{user._id}}') {{ user.FirstName }} {{ user.LastName }}
+                                    td
+                                        {{user.Email}}
+                                    td
+                                        {{user.Phone}}
+                                    td xxxxxxxxxx
+                                    td xxxxxxxxxx
+
+                        //ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
+                        //  li(ng-repeat="user in users")
+                        //    ul.navlist
+                        //        li
+                        //            a(href='/getuser/{{user._id}}') {{ user.FirstName }} {{ user.LastName }}
+                        //        li
+                        //            {{user.Email}}
+                        //        li
+                        //            {{user.Phone}}
                             
                         
                 #resources.tab-pane 
@@ -49,30 +67,12 @@ block content
                             li(ng-repeat="timeslot in timeslots")  
                                 {{timeslot.Day}},{{timeslot.Date}} {{timeslot.time}}
                 
-                 #availability.tab-pane.col-sm-12.col-md-12.main
+                 #availability.tab-pane.col-sm-10.col-md-10.main
                     .ng-scope(ng-controller='CoachAvailController' data-ng-init='initApp()')
                         .container
-                            .row
-                                .col-md-5
-                                    .well(style="padding:10px;").ng-pristine
-                                        fieldset(style="padding:0px;")
-                                            // Form Name
-                                            legend Your Current availability
-                                            p   To add more available time, use the calendar on the right.
-                                                |   You can chhose multiple times but remember to click on the Save button
-                                            ul#dates(style="list-style-type: none;padding:10px;")
-                                                li(ng-repeat="savedDate in savedDates")
-                                                    p
-                                                        b {{savedDate.Date}}
-                                                    ul#times(style="list-style-type: none;padding:10px;")
-                                                        li(ng-repeat="savedTime in savedDate.Times")
-                                                            p {{savedTime.time}}
-                                                                a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
-
-                                            input(type='button', id="btnSave" value='Save', ng-click='saveSchedule()').btn.btn-primary
-                                            input(type='button', id="fakeSave" , ng-click='' style="display:none;")
-                                .col-md-7
-                                    form.well.ng-pristine
+                            .row.well.col-md-10
+                                .col-md-7(style="border-right:ridge;")
+                                    form.ng-pristine
                                         fieldset
                                             // Form Name
                                             legend Add available times
@@ -83,8 +83,26 @@ block content
                                             .form-group
                                                 .col-md-12
                                                     input#datetimepicker.form-control.input-md(type='text', name='datetime', ng-model='newDate' )
+                                .col-md-4
+                                    .ng-pristine
+                                        fieldset(style="padding:0px;")
+                                            // Form Name
+                                            legend Your Current availability
+                                            ul#dates(style="list-style-type: none;padding-left:10px;")
+                                                li(ng-repeat="savedDate in savedDates")
+                                                    b {{savedDate.Date}}
+                                                    ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
+                                                        legend
+                                                        li(ng-repeat="savedTime in savedDate.Times") {{savedTime.time}}
 
-        
+                                                                a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
+
+                                        input(type='button', id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
+                                        p(style="color:green") {{ConfirmMessage}}
+                                        input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+
+
+
         hr
         footer
             p © Company 2014
