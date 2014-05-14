@@ -82,8 +82,9 @@ app.post('/assessment', assmnt.saveAssm);
 //****************************************************
 //*****This section is for the schedule data********
 //****************************************************
-app.get('/schedule', api.getCoachAvails);
-
+app.get('/getCoachAvails', api.getCoachAvails);
+app.post('/addCoachAvails', api.addCoachAvails);
+app.post('/deleteCoachAvails', api.deleteCoachAvails);
 /****************************************************
   This section is for the call Notes and action plans
 /****************************************************/

@@ -30,7 +30,27 @@ coachingModule.factory('wwCoachingService',function($http,$log,$q,$rootScope){
     myService.broadcastItem = function() {
         $rootScope.$broadcast('handleUserBroadcast');
     };
-    
+
+
+    /**************************************************************************
+     ** Coach profile to be made available to all controllers
+     **************************************************************************/
+
+    myService.Coach ; //we'll use this vale to share across the app among different controllers
+
+    //this is the method that sets the value of the Coach property and calls the method to do the broadcasting
+    myService.prepCoachBroadcast = function(coach) {
+        this.Coach = coach;
+        this.broadcastItem();
+    };
+
+    //this is the method that broadcasts/publishes the event 'handleCoachBroadcast'
+    myService.broadcastItem = function() {
+        $rootScope.$broadcast('handleCoachBroadcast');
+    };
+
+    /**************************************************************************/
+
     /**************************************************************************/
      
     //this method gets the user's pilot profile and then the ww profile
@@ -129,28 +149,29 @@ coachingModule.factory('wwCoachingService',function($http,$log,$q,$rootScope){
 //    /********************************************************
 //     ******************  SCHEDULER  *************************
 //     ********************************************************/
-//    var coachScheduler={};
-//    myService.getCoachScheduler = function(){
-//         if(!promise){
-//                promise= $http({
-//                    method: 'GET',
-//                    url: '/schedule'
-//                })
-//                .success(function(data) {
-//                    $log.info("Successfully retrieved coachm availability.");
-//                    coachScheduler = data;
-//                    deffered.resolve();
-//                })
-//                .error(function(status, headers, config){
-//                        $log.log('failed to coach availabilities' + status);
-//                });
-//                return deffered.promise;
-//            } // closing brace for if(!promise)
-//        };
-//
-//     myService.coachScheduler = function () {
-//        return coachScheduler;
-//    };
+
+    var coachScheduler={};
+    myService.getCoachScheduler = function(){
+         if(!promise){
+                promise= $http({
+                    method: 'GET',
+                    url: '/coachSchedule'
+                })
+                .success(function(data) {
+                    $log.info("Successfully retrieved coach availability.");
+                    coachScheduler = data;
+                    deffered.resolve();
+                })
+                .error(function(status, headers, config){
+                        $log.log('failed to coach availabilities' + status);
+                });
+                return deffered.promise;
+            } // closing brace for if(!promise)
+        };
+
+     myService.coachScheduler = function () {
+        return coachScheduler;
+    };
 //
     
     

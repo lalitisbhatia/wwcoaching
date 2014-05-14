@@ -321,16 +321,56 @@ exports.getAppts = function(req, res) {helper.getConnection(function(err,db){
 //##### coach view/action  methods ###########
 //################################################
 
-//see scheduled appts
-exports.getCoachApptsById = function(req, res) {helper.getConnection(function(err,db){
-  var id = req.params.id.toString();
-    //console.log('Retrieving user: ' + id);
+//see a coach's availability
+exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    var id = req.session.userId.toString();//here the userId is the coach id
+    console.log('Retrieving availability for coachId: ' + id);
     db.collection(schCollName, function(err, collection) {
-        collection.findOne({'_id':id}, function(err, item) {
-            //res.send(item);
-            res.render('user',item);
+        collection.find({appointments:{coachId:id}}, function(err, items) {
+            if (err) {
+                res.send({'error':'error occurred while getting coach availabilities'});
+            } else {
+                console.log(items);
+                res.send(items);
+            }
         });
     });
      
 });
 };
+
+exports.deleteCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    var note = req.body;
+
+    console.log(note);
+
+    db.collection(usersCollName, function(err, collection) {
+        //first remove the note
+        collection.update({_id:note.userid},{$pull:{CallNotes:{callid:note.callid}}}, function(err, item) {
+            if (!err) {
+                console.log('successfully removed note');
+
+                res.render('user',item);
+            } else {
+                res.send({'error': 'error occurred while saving the call note' + err});
+            }
+        });
+    });
+});
+};
+exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    var note = req.body;
+    console.log(note);
+    db.collection(usersCollName, function(err, collection) {
+        collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
+            if (err) {
+                res.send({'error':'error occurred while saving the call note'});
+            } else {
+                console.log('Success: ' + JSON.stringify(result[0]));
+                res.send(result[0]);
+            }
+        });
+    });
+});
+};
+
