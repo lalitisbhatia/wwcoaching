@@ -66,8 +66,8 @@ block content
                  #availability.tab-pane.col-sm-10.col-md-10.main
                     .ng-scope(ng-controller='CoachAvailController' data-ng-init='initApp()')
                         .container
-                            .row.well.col-md-10
-                                .col-md-7(style="border-right:ridge;")
+                            .row.well.col-md-12
+                                .col-lg-4(style="border-right:ridge;")
                                     form.ng-pristine
                                         fieldset
                                             // Form Name
@@ -79,20 +79,34 @@ block content
                                             .form-group
                                                 .col-md-12
                                                     input#datetimepicker.form-control.input-md(type='text', name='datetime', ng-model='newDate' )
-                                .col-md-4
+                                .col-md-7
                                     .ng-pristine
                                         fieldset(style="padding:0px;")
                                             // Form Name
                                             legend Your Current availability
-                                            ul#dates(style="list-style-type: none;padding-left:10px;")
-                                                li(ng-repeat="savedDate in savedDates")
-                                                    b {{savedDate.Date}}
-                                                    ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                        legend
-                                                        li(ng-repeat="savedTime in savedDate.Times") {{savedTime.time}}
+                                            //ul#dates(style="list-style-type: none;padding-left:10px;")
+                                            //    li(ng-repeat="savedDate in savedDates")
+                                            //        b {{savedDate.Date}}
+                                            //        ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
+                                            //            legend
+                                            //            li(ng-repeat="savedTime in savedDate.Times") {{savedTime.time}}
+                                            //
+                                            //                    a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
 
-                                                                a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
+                                        table(border='1px;')
+                                            tr#dates
+                                                td(style="vertical-align:initial;").ng-scope(ng-repeat="savedDate in savedDates")
+                                                    table
+                                                        thead
+                                                            tr
+                                                                th(style="vertical-align:initial;") {{savedDate.Date}}
+                                                        tbody
+                                                            tr(ng-repeat="savedTime in savedDate.Times| orderBy:time")
+                                                                td {{savedTime.time}}
+                                                                    a(href='#' style='padding-left: 10px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
 
+
+                                        p
                                         input(type='button', id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
                                         p(style="color:green") {{ConfirmMessage}}
                                         input(type='button', id="fakeSave" , ng-click='' style="display:none;")

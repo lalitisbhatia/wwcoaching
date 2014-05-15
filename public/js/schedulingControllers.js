@@ -25,8 +25,6 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
             ,
             onSelectTime:function(dp,$input){
                 $scope.addDate($('#datetimepicker').val(),dp);
-
-
             }
         });
     };
@@ -57,7 +55,8 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
         //by finding the date and time in teh savedDates array and splicing it
         var inputDate = d.attr('data-date');
         var inputTime = d.attr('data-time');
-        //console.log(inputDate + ' - ' + inputTime);
+        console.log(d);
+        console.log(inputDate + ' - ' + inputTime);
         //console.log($scope.savedDates);
 
         for(var i in $scope.savedDates) {
@@ -129,6 +128,7 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
     };
 
     $('#dates').on('click','a',function(){
+        console.log('clicked');
         $scope.removeDate($(this));
     });
 
@@ -153,4 +153,5 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
         $scope.ConfirmMessage="Thanks for updating your schedule";
     };
 
+    $scope.orderProp = 'time';
 }]);

@@ -1,9 +1,61 @@
 extends layoutVis
 
 block content
-    .jumbotron
-        .container
-            h2 Welcome to the Coaches' Dashboard
-            p 
-                | Here you can find all the information related to the users assigned tou you for the coaching pilot. First, please login.
-        
+        .container(ng-controller='CoachController' style="padding-top:50px;padding-left:200px;")
+            h3(style='padding-left:0px;') Hi Welcome to the WeightWatchers Coaching Pilot
+            p Coaches, please login using the "Caches" box and participants, please login using the "Participants" box
+            legend
+            p(style='padding-bottom:10px;')
+
+            .row
+                .col-lg-4.well
+                    h2(style="text-align:center;") Participant Login
+                    p ***** Not funcitonal yet ****
+                    legend
+                    form.form-horizontal.ng-pristine
+                        fieldset
+                            // Text input
+                            .form-group(style="margin-top:5px;")
+                                label.col-md-4.control-label(for='username') Username
+                                .col-md-4
+                                    input#textinput.form-control(style="width:160px;" type='text', name='username' placeholder='participant username')
+                            .form-group(style="margin-top:15px;")
+                                label.col-md-4.control-label(for='password') Password
+                                .col-md-4
+                                    input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='participant password')
+                            //.form-group(style="margin-top:15px;")
+                            //    p
+                            //    .col-md-4
+                            //        input.input-medium(type='checkbox', name='ack' style="padding-left:200px;")
+                            //        label.col-md-4.control-label(for='password')
+
+                            .form-group(style="margin-top:15px;")
+                                .col-md-4
+                                    button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='UserLogin()' style="margin-left:110px;") Login
+
+
+                .col-lg-1
+                    p
+                .col-lg-4.well
+                    h2(style="text-align:center;") Coach Login
+                    p ****** Not funcitonal yet **********
+                    legend
+                    form.form-horizontal.ng-pristine
+                        fieldset
+                            // Text input
+                            .form-group(style="margin-top:5px;")
+                                label.col-md-4.control-label(for='username') Username
+                                .col-md-4
+                                    input#textinput.form-control(style="width:160px;" type='text', name='username' placeholder='coach username')
+                            .form-group(style="margin-top:15px;")
+                                label.col-md-4.control-label(for='password') Password
+                                .col-md-4
+                                    input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='coach password')
+
+                            .form-group(style="margin-top:15px;")
+                                .col-md-4
+                                    button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='CoachLogin()' style="margin-left:110px;") Login
+
+
+
+

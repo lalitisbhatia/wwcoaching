@@ -61,13 +61,13 @@
 	display:block;
 }
 .xdsoft_datetimepicker .xdsoft_datepicker{
-	width: 325px;
+	width: 220px;
 	float:left;
 	margin-left:8px;
 }
 .xdsoft_datetimepicker  .xdsoft_timepicker{
-	width: 100px;
-    height: 200px;
+	width: 50px;
+    height: 180px;
 	float:left;
 	text-align:center;
 	margin-left:8px;
@@ -133,7 +133,7 @@
 	margin-top:0px;
 }
 .xdsoft_datetimepicker  .xdsoft_timepicker .xdsoft_time_box{
-	height:235px;
+	height:200px;
 	overflow:hidden;
 	border-bottom:1px solid #DDDDDD;
 }
@@ -216,7 +216,7 @@
 .xdsoft_datetimepicker  .xdsoft_calendar table{
 	border-collapse:collapse;
 	width:100%;
-    height:270px;
+    height:200px;
 	
 }
 .xdsoft_datetimepicker  .xdsoft_calendar td > div{
