@@ -112,7 +112,7 @@ var usersCollName = 'users';
 
 exports.getAllUsers = function(req, res) {helper.getConnection(function(err,db){
     db.collection(usersCollName, function(err, collection) {
-        collection.find().toArray(function(err, items) {
+        collection.find().sort({FirstName:1,LastName:1}).toArray(function(err, items) {
             res.send(items);
         });
     });

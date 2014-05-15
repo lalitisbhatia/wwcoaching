@@ -128,14 +128,17 @@ block content
                                         th Email
                                         th Username
                                         th Bio
+                                        th First Name
                                         th Action
+
                                 tbody
-                                    tr.ng-scope(ng-repeat='coach in coaches')
+                                    tr.ng-scope(ng-repeat="coach in coaches | orderBy:'Email'")
                                         td.ng-binding {{ coach.FirstName}} {{ coach.LastName }}
                                         td.ng-binding {{ coach.Phone }}
                                         td.ng-binding {{ coach.Email }}
                                         td.ng-binding {{ coach.Username }}
                                         td.ng-binding {{ coach.Bio }}
+                                        td.ng-binding {{ coach.FirstName}}
                                         td
                                             a(href='#', ng-click='edit(coach._id)') edit
                                                 | /

@@ -93,16 +93,16 @@ block content
                                             //
                                             //                    a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
 
-                                        table(border='1px;')
+                                        table(border='1px;' ng:init="predicate='Date'")
                                             tr#dates
-                                                td(style="vertical-align:initial;").ng-scope(ng-repeat="savedDate in savedDates")
+                                                td(style="vertical-align:initial;").ng-scope(ng-repeat="savedDate in savedDates | orderBy:'Date'")
                                                     table
                                                         thead
                                                             tr
-                                                                th(style="vertical-align:initial;") {{savedDate.Date}}
+                                                                th(style="vertical-align:initial;") {{savedDate.Date }}
                                                         tbody
-                                                            tr(ng-repeat="savedTime in savedDate.Times| orderBy:time")
-                                                                td {{savedTime.time}}
+                                                            tr(ng-repeat="savedTime in savedDate.Times | orderBy:'time' ")
+                                                                td {{savedTime.time | date:'mm'}}
                                                                     a(href='#' style='padding-left: 10px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}')
                                                                         img(src="./img/delete_icon.png")
 

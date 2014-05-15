@@ -1,16 +1,17 @@
 //controller for coaches to choose their availability
-coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoachingService',function($scope,$http,$log,wwCoachingService){
+coachingModule.controller('CoachAvailController',['$scope','$http','$log','$filter','wwCoachingService',function($scope,$http,$log,$filter,wwCoachingService){
 
     $scope.initApp=function() {
         $log.log('initialized CoachAvailController');
-//        $scope.savedDates = [
-//            {Date:'Tue,May-13, 2014',Times:[{time:'10:00AM'},{time:'10:30AM'},{time:'12:30PM'}]},
-//            {Date:'Thu,May-15, 2014',Times:[{time:'11:00AM'},{time:'11:30AM'},{time:'2:30PM'}]}
-//        ];
+        $scope.savedDates = [
+//            {Date:'13-May-14',Times:[{time:'12:00'},{time:'10:30'},{time:'12:30'},{time:'15:30'},{time:'08:30'},{time:'13:30'}]},
+//            {Date:'15-May-14',Times:[{time:'12:00'},{time:'11:30'},{time:'14:30'}]},
+//            {Date:'11-May-14',Times:[{time:'11:00'},{time:'11:30'},{time:'14:30'}]}
+        ];
         $log.log($scope.savedDates);
         $scope.newDate= {};
         $('#datetimepicker').datetimepicker({
-            format:'D,M-d, Y h:iA',
+            format:'d-M-y H:i',
             inline:true,
             lang:'en',
             hours12:true,
@@ -19,12 +20,17 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
             allowTimes:[
                 '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30','13:00', '13:30', '14:00', '14:30',
                 '15:00', '15:30', '16:00', '16:30','17:00', '17:30', '17:00', '17:30','18:00', '18:30', '19:00',
-                '19:30','20:00', '20:30', '21:00', '22:30','23:00'
+                '19:30','20:00', '20:30', '21:00', '21:30','22:00'
             ],
             step:30
             ,
             onSelectTime:function(dp,$input){
-                $scope.addDate($('#datetimepicker').val(),dp);
+
+                var dateString = $('#datetimepicker').val();
+                var date = new Date(dateString);
+                console.log('date  = ' + date );
+                console.log('date string = ' + dateString );
+                $scope.addDate(date ,dp);
             }
         });
     };
@@ -33,7 +39,7 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
     $scope.$on('handleCoachBroadcast', function() {
         $scope.Coach = wwCoachingService.Coach;
         //console.log($scope.Coach);
-        $scope.savedDates = [];
+        //$scope.savedDates = [];
         // now that the coach info is loaded, get the coach schedules
         $http({
             method: 'GET',
@@ -41,7 +47,8 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
         })
         .success(function (data, status, headers, config) {
             $scope.savedDates=data.Appointments;
-            console.log(data);
+            // convert appointments to time format
+            //console.log(data);
         })
         .error(function(status, headers, config){
             console.log('failed to get schedules:' + status);
@@ -86,8 +93,8 @@ coachingModule.controller('CoachAvailController',['$scope','$http','$log','wwCoa
 
     $scope.addDate = function(d,dp) {
         $log.log(dp);
-        var inputDate = dp.dateFormat('D,M-d, Y');
-        var inputTime = dp.dateFormat('h:iA');
+        var inputDate = dp.dateFormat('d-M-y');
+        var inputTime = dp.dateFormat('H:i');
         var dateExists = false;
         var timeExists = false;
 
