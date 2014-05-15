@@ -66,7 +66,7 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
                 }else {
                     console.log('coach does not exist in scheduler yet - inserting coach schedule');
                     collection.insert(
-                        {'Coach':{'coachId':coach._id,'coachName':coach.FirstName + coach.LastName,'coachEmail':coach.Email,'coachPhone':coach.Phone},'Appointments':schedules}, {safe:true}, function(err, result) {
+                        {'Coach':{'coachId':coach._id,'coachName':coach.FirstName + ' ' + coach.LastName,'coachEmail':coach.Email,'coachPhone':coach.Phone},'Appointments':schedules}, {safe:true}, function(err, result) {
                             if (err) {
                                 res.send({'error':'An error inserting coach'});
                             } else {
@@ -81,3 +81,26 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
     });
 });
 };
+
+exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db){
+
+    console.log('Retrieving availability of all coaches');
+    db.collection(schCollName, function(err, collection) {
+        collection.find().toArray(function(err, items) {
+            if (err) {
+                res.send({'error':'error occurred while getting all availabilities'});
+            } else {
+                if(items) {
+                    console.log(items);
+                    res.send(items);
+                }else{
+                    console.log('no results found');
+                }
+            }
+        });
+    });
+
+});
+};
+
+//This is the user's view. All availabilities based on search criteria

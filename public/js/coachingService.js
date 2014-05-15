@@ -172,6 +172,29 @@ coachingModule.factory('wwCoachingService',function($http,$log,$q,$rootScope){
      myService.coachScheduler = function () {
         return coachScheduler;
     };
+
+    var userScheduler={};
+    myService.getUserScheduler = function(dt){
+        if(!promise){
+            promise= $http({
+                method: 'GET',
+                url: '/getAllAvails'
+            })
+                .success(function(data) {
+                    $log.info("Successfully retrieved coach availability.");
+                    coachScheduler = data;
+                    deffered.resolve();
+                })
+                .error(function(status, headers, config){
+                    $log.log('failed to coach availabilities' + status);
+                });
+            return deffered.promise;
+        } // closing brace for if(!promise)
+    };
+
+    myService.userScheduler = function () {
+        return userScheduler;
+    };
 //
     
     

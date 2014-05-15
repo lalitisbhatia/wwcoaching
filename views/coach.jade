@@ -58,12 +58,41 @@ block content
                         p this is the Resources tab
                
                 #scheduler.tab-pane.col-sm-9.col-md-10.main
-                    .ng-scope(ng-controller='SchedulingController' data-ng-init='initApp()' style='width:800px;')
-                        ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
-                            li(ng-repeat="timeslot in timeslots")  
-                                {{timeslot.Day}},{{timeslot.Date}} {{timeslot.time}}
-                
-                 #availability.tab-pane.col-sm-10.col-md-10.main
+                    .ng-scope(ng-controller='UserSchedulingController' ng-init='initApp()' style='width:800px;')
+                        .container
+                            .row.well.col-md-12
+                                .col-lg-2(style="border-right:ridge;")
+                                    form.ng-pristine
+                                        fieldset
+                                            // Form Name
+                                            legend Serarch for a coach
+                                            p Select a date and time to search
+                                            // Text input
+                                            .form-group
+                                                .col-md-12
+                                                    input#datepicker.form-control.input-large(type='text', name='datetime' )
+                                .col-md-10
+                                    .ng-pristine
+                                        fieldset(style="padding:0px;")
+                                            // Form Name
+                                            legend Following coaches are available on or around {{SelectedDate}}
+
+                                        p {{availdDates.Coach}}
+                                        ul#dates(style="list-style-type:none;padding-left:10px;")
+                                            li(ng-repeat="availdDate in availdDates.Appointments")
+                                                p {{availDate}}
+                                                    ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
+                                                        legend
+                                                        li(ng-repeat="availdTime in availdDate.Times") b {{availDate.Date}}{{availTime.time}}
+
+                                                                a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
+
+
+
+                                        input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+
+
+                #availability.tab-pane.col-sm-10.col-md-10.main
                     .ng-scope(ng-controller='SchedulingController' data-ng-init='initApp()')
                         .container
                             .row.well.col-md-12
@@ -99,16 +128,16 @@ block content
                                                     table
                                                         thead
                                                             tr
-                                                                th(style="vertical-align:initial;") {{savedDate.Date }}
+                                                                th(style="vertical-align:initial;padding:4px;") {{savedDate.Date }}
                                                         tbody
                                                             tr(ng-repeat="savedTime in savedDate.Times | orderBy:'time' ")
-                                                                td {{savedTime.time | date:'mm'}}
+                                                                td(style="padding:4px;") {{savedTime.time | date:'mm'}}
                                                                     a(href='#' style='padding-left: 10px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}')
                                                                         img(src="./img/delete_icon.png")
 
 
                                         p
-                                        input(type='button', id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
+                                        input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
                                         p(style="color:green") {{ConfirmMessage}}
                                         input(type='button', id="fakeSave" , ng-click='' style="display:none;")
 

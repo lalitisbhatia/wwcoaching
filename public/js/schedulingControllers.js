@@ -48,7 +48,7 @@ coachingModule.controller('SchedulingController',['$scope','$http','$log','$filt
         .success(function (data, status, headers, config) {
             $scope.savedDates=data.Appointments;
             // convert appointments to time format
-            //console.log(data);
+            console.log(data);
         })
         .error(function(status, headers, config){
             console.log('failed to get schedules:' + status);
@@ -161,4 +161,64 @@ coachingModule.controller('SchedulingController',['$scope','$http','$log','$filt
     };
 
     $scope.orderProp = 'time';
+}]);
+
+/*##################################################
+  ################ User View #######################
+  ##################################################
+ */
+
+//controller for coaches to choose their availability
+coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$filter','wwCoachingService',function($scope,$http,$log,$filter,wwCoachingService){
+
+    $scope.initApp=function() {
+        $log.log('initialized UserSchedulingController');
+        $scope.availdDates = [];
+        $http({
+            method: 'GET',
+            url: '/getAllAvails'
+        })
+        .success(function(data) {
+            $log.info("Successfully retrieved availability for all coaches.");
+            $scope.availdDates = data;
+            //$log.log($scope.availdDates);
+        })
+        .error(function(status, headers, config){
+            $log.log('failed to coach availabilities' + status);
+        });
+
+        $scope.newDate= {};
+        $('#datepicker').datetimepicker({
+            format:'d-M-y H:i',
+            //inline:true,
+            lang:'en',
+            hours12:true,
+            //minTime:'10:00',
+            //maxTime:'20:00',
+            allowTimes:[
+                '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30','13:00', '13:30', '14:00', '14:30',
+                '15:00', '15:30', '16:00', '16:30','17:00', '17:30', '17:00', '17:30','18:00', '18:30', '19:00',
+                '19:30','20:00', '20:30', '21:00', '21:30','22:00'
+            ],
+            step:30
+            ,
+            onSelectTime:function(dp,$input){
+
+                var dateString = $('#datepicker').val();
+                var date = new Date(dateString);
+                console.log('date  = ' + date );
+                console.log('date string = ' + dateString );
+                $scope.SelectedDate = date.dateFormat('d-M-y, h:i A');
+                $('#fakeSave').click();
+                $log.log('date selected');
+                $log.log($scope.availdDates);
+            }
+        });
+    };
+
+     $scope.getUserScheduler = function(){
+
+
+    };
+
 }]);
