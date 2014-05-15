@@ -58,13 +58,13 @@ block content
                         p this is the Resources tab
                
                 #scheduler.tab-pane.col-sm-9.col-md-10.main
-                    .ng-scope(ng-controller='CoachAvailController' data-ng-init='initApp()' style='width:800px;')
+                    .ng-scope(ng-controller='SchedulingController' data-ng-init='initApp()' style='width:800px;')
                         ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
                             li(ng-repeat="timeslot in timeslots")  
                                 {{timeslot.Day}},{{timeslot.Date}} {{timeslot.time}}
                 
                  #availability.tab-pane.col-sm-10.col-md-10.main
-                    .ng-scope(ng-controller='CoachAvailController' data-ng-init='initApp()')
+                    .ng-scope(ng-controller='SchedulingController' data-ng-init='initApp()')
                         .container
                             .row.well.col-md-12
                                 .col-lg-4(style="border-right:ridge;")

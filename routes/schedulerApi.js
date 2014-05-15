@@ -1,15 +1,14 @@
 //################################################
 //############### Data Services  #################
 //################################################
-var mongo = require("mongodb");
-var guid = require("guid");
+
 var helper = require('../public/lib/dbhelper');
-var BSON = mongo.BSONPure;
+
 
 var schCollName = 'scheduler';
 
 //################################################
-//##### coach view/action  methods ###########
+//##### scheduler APIs ###########
 //################################################
 
 //see a coach's availability
@@ -33,6 +32,7 @@ exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,d
 
 });
 };
+
 
 exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,db){
     var coach = req.body.Coach;
@@ -79,3 +79,5 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
             }
         });
     });
+});
+};

@@ -4,6 +4,7 @@ var express = require('express'),
     util = require('util'),
     bodyParser = require('body-parser'),
     api = require('./routes/api'),
+    schApi = require('./routes/schedulerApi'),
     home = require("./routes/index"),
     admin = require("./routes/admin"),
     assmnt = require("./routes/assessments"),
@@ -82,9 +83,9 @@ app.post('/assessment', assmnt.saveAssm);
 //****************************************************
 //*****This section is for the schedule data********
 //****************************************************
-app.get('/getCoachAvails', api.getCoachAvails);
-app.post('/addCoachAvails', api.addCoachAvails);
-app.post('/deleteCoachAvails', api.deleteCoachAvails);
+app.get('/getCoachAvails', schApi.getCoachAvails);
+app.post('/addCoachAvails', schApi.addCoachAvails);
+
 /****************************************************
   This section is for the call Notes and action plans
 /****************************************************/

@@ -1,5 +1,5 @@
 //controller for coaches to choose their availability
-coachingModule.controller('CoachAvailController',['$scope','$http','$log','$filter','wwCoachingService',function($scope,$http,$log,$filter,wwCoachingService){
+coachingModule.controller('SchedulingController',['$scope','$http','$log','$filter','wwCoachingService',function($scope,$http,$log,$filter,wwCoachingService){
 
     $scope.initApp=function() {
         $log.log('initialized CoachAvailController');
