@@ -1,8 +1,8 @@
 //controller for coaches to choose their availability
-coachingModule.controller('SchedulingController',['$scope','$http','$log','$filter','wwCoachingService',function($scope,$http,$log,$filter,wwCoachingService){
+coachingModule.controller('SchController',['$scope','$http','$log','$filter','wwCoachingService',function($scope,$http,$log,$filter,wwCoachingService){
 
     $scope.initApp=function() {
-        $log.log('initialized CoachAvailController');
+        $log.log('initialized SchController');
         $scope.savedDates = [
 //            {Date:'13-May-14',Times:[{time:'12:00'},{time:'10:30'},{time:'12:30'},{time:'15:30'},{time:'08:30'},{time:'13:30'}]},
 //            {Date:'15-May-14',Times:[{time:'12:00'},{time:'11:30'},{time:'14:30'}]},
@@ -45,14 +45,14 @@ coachingModule.controller('SchedulingController',['$scope','$http','$log','$filt
             method: 'GET',
             url: '/getCoachAvails'
         })
-        .success(function (data, status, headers, config) {
-            $scope.savedDates=data.Appointments;
-            // convert appointments to time format
-            console.log(data);
-        })
-        .error(function(status, headers, config){
-            console.log('failed to get schedules:' + status);
-        })
+            .success(function (data, status, headers, config) {
+                $scope.savedDates=data;
+                // convert appointments to time format
+                console.log(data);
+            })
+            .error(function(status, headers, config){
+                console.log('failed to get schedules:' + status);
+            })
     });
     //these are the availability dates already saved by the user ( to be retrieved from db)
 
@@ -67,26 +67,17 @@ coachingModule.controller('SchedulingController',['$scope','$http','$log','$filt
         //console.log($scope.savedDates);
 
         for(var i in $scope.savedDates) {
-            if($scope.savedDates[i].Date == inputDate) {
+            if($scope.savedDates[i].Date == inputDate && $scope.savedDates[i].Time == inputTime) {
+
                 //console.log('Date exists');
-                //check if time also exists
-                for(var j in $scope.savedDates[i].Times){
-                    if($scope.savedDates[i].Times[j].time == inputTime){
-                        //console.log('Date and time found - ready to splice the array');
-                        $scope.savedDates[i].Times.splice(j,1);
+                //console.log('Date and time found - ready to splice the array');
+                $scope.savedDates[i].splice(i,1);
+                $('#fakeSave').click();
+                //console.log('savedDates after delete');
+                //console.log($scope.savedDates);
+                break;
 
-                        //if the date has no more times, remove the date as well
-                        if($scope.savedDates[i].Times.length == 0){
-                            $scope.savedDates.splice(i,1);
-                        }
-                        $('#fakeSave').click();
-                        //console.log('savedDates after delete');
-                        //console.log($scope.savedDates);
-                        break;
-                    }
-                }
             }
-
         }
 
     };
@@ -95,43 +86,30 @@ coachingModule.controller('SchedulingController',['$scope','$http','$log','$filt
         $log.log(dp);
         var inputDate = dp.dateFormat('d-M-y');
         var inputTime = dp.dateFormat('H:i');
-        var dateExists = false;
+        var timeSlotExists = false;
         var timeExists = false;
 
         $scope.newDate.Date =inputDate;
-        $scope.newDate.Times=[{time:inputTime}];
+        $scope.newDate.Time=inputTime;
+        $scope.newDate.Appointments=[{coachId:$scope.Coach._id,coachName:$scope.Coach.coachName}];
 
         // Before adding to the array of dates, check if the date already exists in savedDates.
         // If so, only add the time
         for(var i in $scope.savedDates) {
-            if($scope.savedDates[i].Date == inputDate) {
-                dateExists = true;
-                //check if time also exists
-                for(var j in $scope.savedDates[i].Times){
-                    if($scope.savedDates[i].Times[j].time == inputTime){
-                        timeExists = true;
-                        console.log('Date and time already exist - do nothing');
-                        break;
-                    }
-                }
-                if(!timeExists){
-                    console.log('date exists but not time - add time to the list');
-                    $scope.savedDates[i].Times.push({time:inputTime});
-                }
-                //out of loop to check time
+            if ($scope.savedDates[i].Date == inputDate && $scope.savedDates[i].Time == inputTime) {
+                console.log('Date and time already exist - do nothing');
+                timeSlotExists = true;
                 break;
             }
-
-        }
-        if(!dateExists){
-            console.log('date does not exists -  add date and times');
-            $scope.savedDates.push($scope.newDate);
         }
 
-         console.log($scope.savedDates);
-         $('#fakeSave').click();
-         //$('#dates').append("<li style='padding-top: 5px; color: #bd362f;'>" + $scope.newDate.date + "<a href='#' style='padding-left: 30px;'><b>X</b></a><input type='hidden' value=" +$scope.newDate.id + "></li>");
-         $scope.newDate={};
+        if(!timeSlotExists){
+            $scope.savedDates.push( {Date:inputDate},{Time:inputTime});
+        }
+
+        console.log($scope.savedDates);
+        $('#fakeSave').click();
+        $scope.newDate={};
     };
 
     $('#dates').on('click','a',function(){
@@ -143,20 +121,19 @@ coachingModule.controller('SchedulingController',['$scope','$http','$log','$filt
         console.log('calling save Schedule');
 
         var newSchedule = {};
-        newSchedule.Coach = $scope.Coach;
-        newSchedule.Dates = $scope.savedDates;
+        newSchedule = $scope.savedDates;
         console.log(newSchedule);
         $http({
             method:'POST',
             url: '/addCoachAvails',
             data: newSchedule
         })
-        .success(function (d, status, headers, config) {
-            console.log(d);
-        })
-        .error(function(status, headers, config){
-            console.log('failed to save schedule:' + status);
-        })
+            .success(function (d, status, headers, config) {
+                console.log(d);
+            })
+            .error(function(status, headers, config){
+                console.log('failed to save schedule:' + status);
+            })
         $scope.ConfirmMessage="Thanks for updating your schedule";
     };
 
@@ -164,8 +141,8 @@ coachingModule.controller('SchedulingController',['$scope','$http','$log','$filt
 }]);
 
 /*##################################################
-  ################ User View #######################
-  ##################################################
+ ################ User View #######################
+ ##################################################
  */
 
 //controller for coaches to choose their availability
@@ -233,7 +210,7 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
             }
         }
     }
-     $scope.getUserScheduler = function(){
+    $scope.getUserScheduler = function(){
 
 
     };

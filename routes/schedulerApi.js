@@ -12,26 +12,26 @@ var schCollName = 'scheduler';
 //################################################
 
 //see a coach's availability
-exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
-    var id = req.session.userId.toString();//here the userId is the coach id
-    console.log('Retrieving availability for coachId: ' + id);
-    db.collection(schCollName, function(err, collection) {
-        collection.findOne({"Coach.coachId":id}, function(err, item) {
-            if (err) {
-                res.send({'error':'error occurred while getting coach availabilities'});
-            } else {
-                if(item) {
-                    console.log(item);
-                    res.send(item);
-                }else{
-                    console.log('no results found');
-                }
-            }
-        });
-    });
-
-});
-};
+//exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+//    var id = req.session.userId.toString();//here the userId is the coach id
+//    console.log('Retrieving availability for coachId: ' + id);
+//    db.collection(schCollName, function(err, collection) {
+//        collection.find({"Coach.coachId":id}, function(err, item) {
+//            if (err) {
+//                res.send({'error':'error occurred while getting coach availabilities'});
+//            } else {
+//                if(item) {
+//                    console.log(item);
+//                    res.send(item);
+//                }else{
+//                    console.log('no results found');
+//                }
+//            }
+//        });
+//    });
+//
+//});
+//};
 
 
 exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,db){
@@ -85,7 +85,7 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
 exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db){
 
     console.log('Retrieving availability of all coaches');
-    db.collection(schCollName, function(err, collection) {
+    db.collection('schedule', function(err, collection) {
         collection.find().toArray(function(err, items) {
             if (err) {
                 res.send({'error':'error occurred while getting all availabilities'});
@@ -103,4 +103,27 @@ exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db)
 });
 };
 
-//This is the user's view. All availabilities based on search criteria
+
+/*
+ ########################## Rewritten ########################
+ */
+exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    var id = req.session.userId.toString();//here the userId is the coach id
+    console.log('Retrieving availability for coachId: ' + id);
+    db.collection('schedule', function(err, collection) {
+        collection.find({"Appointments":{$elemMatch:{"coachId":id}}},{Date:1,Time:1,_id:0}).toArray(function(err, item) {
+            if (err) {
+                res.send({'error':'error occurred while getting coach availabilities'});
+            } else {
+                if(item) {
+                    console.log(item);
+                    res.send(item);
+                }else{
+                    console.log('no results found');
+                }
+            }
+        });
+    });
+
+});
+};
