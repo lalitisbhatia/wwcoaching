@@ -187,3 +187,24 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
     });
 });
 };
+
+exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db){
+
+    console.log('Retrieving availability of all coaches');
+    db.collection(schCollName, function(err, collection) {
+        collection.find().toArray(function(err, items) {
+            if (err) {
+                res.send({'error':'error occurred while getting all availabilities'});
+            } else {
+                if(items) {
+                    console.log(items);
+                    res.send(items);
+                }else{
+                    console.log('no results found');
+                }
+            }
+        });
+    });
+
+});
+};

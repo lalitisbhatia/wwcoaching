@@ -317,6 +317,7 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
                 console.log('date string = ' + dateString );
 
                 $scope.SelectedDate = date.dateFormat('d-M-y, h:i A');
+                $scope.SearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
                 $('#fakeSave').click();
 
                 $http({
@@ -339,6 +340,44 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
         });
     };
 
+    $scope.saveUserAppt = function(coachId) {
+        console.log('calling save Schedule');
 
+        var schedule = {};
+        var selDate = new Date($scope.SelectedDate);
+        console.log(selDate.dateFormat('m/d/Y'));
+        console.log(selDate.dateFormat('H:i'));
+        console.log(coachId);
+//        coachSchedule = {TimeSlots:$scope.coachAvailDates,CoachId:$scope.Coach._id};
+//        console.log(coachSchedule);
+//        $http({
+//            method:'POST',
+//            url: '/addCoachAvails',
+//            data: coachSchedule
+//        })
+//            .success(function (d, status, headers, config) {
+//                console.log(d);
+//            })
+//            .error(function(status, headers, config){
+//                console.log('failed to save schedule:' + status);
+//            })
+//        $scope.ConfirmMessage="Thanks for updating your schedule";
+    };
+
+    // I sort the given collection on the given property.
+    function sortOn(collection, name) {
+
+        collection.sort(
+            function (a, b) {
+                var c = new Date(a[ name ]);
+                var d = new Date(b[ name ]);
+                if (c <=  d) {
+                    return( -1 );
+                }
+                return( 1 );
+            }
+        );
+
+    }
 
 }]);
