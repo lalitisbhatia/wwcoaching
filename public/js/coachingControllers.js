@@ -45,13 +45,13 @@ coachingModule.controller('UserDetailsController', ['$scope','$http','$routePara
 //##############################################################
 
 coachingModule.controller('CoachController', ['$scope','$http','$log','wwCoachingService', function($scope,$http,$log,wwCoachingService) {
-    console.log('Getting coach info') ;
+    //console.log('Getting coach info') ;
     $http({
         method: 'GET',
         url: '/coach'
     })
         .success(function (data, status, headers, config) {
-            console.log((data.FirstName)) ;
+            //console.log((data.FirstName)) ;
             $scope.coach=data;
             $scope.FirstName = data.FirstName;
             //broadcast the coach
@@ -65,7 +65,7 @@ coachingModule.controller('CoachController', ['$scope','$http','$log','wwCoachin
 coachingModule.controller('UsersController',['$scope','$http','$log','wwCoachingService', function($scope,$http,$log,wwCoachingService) {
     wwCoachingService.getCoachUsers().then(function () {
         $scope.data = wwCoachingService.coachUsers();
-        $log.log($scope.data);
+        //$log.log($scope.data);
         $scope.users = $scope.data;
     });
 

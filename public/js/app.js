@@ -30,3 +30,5 @@ adminModule.filter('orderObjectBy', function(){
         return array;
     }
 });
+
+
