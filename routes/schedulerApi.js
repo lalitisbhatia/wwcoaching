@@ -103,6 +103,39 @@ exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db)
 });
 };
 
+exports.searchAvails = function(req, res) {helper.getConnection(function(err,db){
+    var date =  new Date(req.params.date);
+    var mm = date.getMonth()+1;
+    if(mm<10){mm='0'+mm;}
+    var dd = date.getDate();
+    if(dd<10){dd='0'+dd;}
+    var yy = date.getFullYear();
+    var dateString = mm+'/'+dd+'/'+yy;
+
+
+    var time = req.params.time;
+    //var timeForward = time.getHours()+5;
+
+
+    console.log('Retrieving availability of  coaches for '+ dateString + ' '+ time);
+    db.collection(schCollName, function(err, collection) {
+        collection.find({Date:dateString,Time:time}).toArray(function(err, items) {
+            if (err) {
+                res.send({'error':'error occurred while getting all availabilities'});
+            } else {
+                if(items) {
+                    //console.log(items);
+                    res.send(items);
+                }else{
+                    console.log('no results found');
+                }
+            }
+        });
+    });
+
+});
+};
+
 
 /*
  ########################## Rewritten ########################

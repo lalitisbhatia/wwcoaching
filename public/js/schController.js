@@ -321,7 +321,7 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
 
                 $http({
                     method: 'GET',
-                    url: '/getAllAvails'
+                    url: '/searchAvails/'+"'"+date.dateFormat('m-d-Y')+"'"+'/'+date.dateFormat('H:i')
                 })
                     .success(function(data) {
                         $log.info("Successfully retrieved availability for all coaches.");
