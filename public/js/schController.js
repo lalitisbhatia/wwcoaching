@@ -29,8 +29,11 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
 
                 var dateString = $('#datetimepicker').val();
                 var date = new Date(dateString);
-                console.log('date  = ' + date );
+                var dateUTC = Date.parse(dateString);
+
                 console.log('date string = ' + dateString );
+                console.log('date  = ' + date );
+                console.log('dateUTC  = ' + dateUTC );
                 $scope.addDate(date ,dp);
             }
         });
@@ -94,8 +97,6 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
         var timeSlotExists = false;
         var timeExists = false;
 
-
-
         // Before adding to the array of dates, check if the date already exists in coachAvailDates.
         // If so, only add the time
         for(var i in $scope.coachAvailDates) {
@@ -106,7 +107,9 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
             }
         }
         if(!timeSlotExists){
-            $scope.coachAvailDates.push( {Date:inputDate,Time:inputTime,Coach:$scope.coachMin});
+            var dateUTC = Date.parse(dp);
+            console.log('dateUTC = ' + dateUTC);
+            $scope.coachAvailDates.push( {Date:inputDate,Time:inputTime,DateUTC:dateUTC,Coach:$scope.coachMin});
         }
 
         /************************************************************************
@@ -313,8 +316,10 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
                 $log.log('date selected');
                 var dateString = $('#datepicker').val();
                 var date = new Date(dateString);
+                var dateUTC = Date.parse(dp);
                 console.log('date  = ' + date );
                 console.log('date string = ' + dateString );
+                console.log('dateUTC  = ' + dateUTC );
 
                 $scope.SelectedDate = date.dateFormat('d-M-y, h:i A');
                 $scope.SearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
@@ -322,7 +327,7 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
 
                 $http({
                     method: 'GET',
-                    url: '/searchAvails/'+"'"+date.dateFormat('m-d-Y')+"'"+'/'+date.dateFormat('H:i')
+                    url: '/searchAvails/'+dateUTC
                 })
                     .success(function(data) {
                         $log.info("Successfully retrieved availability for all coaches.");

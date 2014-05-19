@@ -111,20 +111,20 @@ exports.searchAvails = function(req, res) {helper.getConnection(function(err,db)
     if(dd<10){dd='0'+dd;}
     var yy = date.getFullYear();
     var dateString = mm+'/'+dd+'/'+yy;
+    console.log(req.params.datetime);
+    var inputUTCDate =req.params.datetime;
+    //var timeForward = inputUTCDate.addHours(5);
+    //console.log(timeForward);
 
 
-    var time = req.params.time;
-    //var timeForward = time.getHours()+5;
-
-
-    console.log('Retrieving availability of  coaches for '+ dateString + ' '+ time);
+    console.log('Retrieving availability of  coaches for '+ inputUTCDate );
     db.collection(schCollName, function(err, collection) {
-        collection.find({Date:dateString,Time:time}).toArray(function(err, items) {
+        collection.find({DateUTC:inputUTCDate}).toArray(function(err, items) {
             if (err) {
                 res.send({'error':'error occurred while getting all availabilities'});
             } else {
                 if(items) {
-                    //console.log(items);
+                    console.log(items);
                     res.send(items);
                 }else{
                     console.log('no results found');

@@ -11,6 +11,7 @@ config(
 
 var coachingModule = angular.module('coachingModule', ['ngRoute']);
 var adminModule = angular.module('adminModule', ['ngRoute']);
+var schModule = angular.module('schModule', ['ngRoute']);
 
 adminModule.filter('orderObjectBy', function(){
     console.log('inside filter');
