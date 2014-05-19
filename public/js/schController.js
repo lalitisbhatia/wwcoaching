@@ -3,11 +3,7 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
 
     $scope.initApp=function() {
         //$log.log('initialized SchController');
-        $scope.coachAvailDates = [
-//            {Date:'13-May-14',Times:[{time:'12:00'},{time:'10:30'},{time:'12:30'},{time:'15:30'},{time:'08:30'},{time:'13:30'}]},
-//            {Date:'15-May-14',Times:[{time:'12:00'},{time:'11:30'},{time:'14:30'}]},
-//            {Date:'11-May-14',Times:[{time:'11:00'},{time:'11:30'},{time:'14:30'}]}
-        ];
+        $scope.coachAvailDates = [];
         $scope.dispAvailDates = [];
         $log.log($scope.coachAvailDates);
         $scope.newDate= {};
@@ -29,11 +25,11 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
 
                 var dateString = $('#datetimepicker').val();
                 var date = new Date(dateString);
-                var dateUTC = Date.parse(dateString);
+                var dateUTC = Date.parse(date);
 
-                console.log('date string = ' + dateString );
-                console.log('date  = ' + date );
-                console.log('dateUTC  = ' + dateUTC );
+                //console.log('date string = ' + dateString );
+                //console.log('date  = ' + date );
+                //console.log('dateUTC on select  = ' + dateUTC );
                 $scope.addDate(date ,dp);
             }
         });
@@ -69,15 +65,15 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
         //by finding the date and time in teh coachAvailDates array and splicing it
         var inputDate = d.attr('data-date');
         var inputTime = d.attr('data-time');
-        console.log(d);
-        console.log(inputDate + ' - ' + inputTime);
+        //console.log(d);
+        //console.log(inputDate + ' - ' + inputTime);
         console.log($scope.coachAvailDates);
 
         for(var i in $scope.coachAvailDates) {
             if($scope.coachAvailDates[i].Date == inputDate && $scope.coachAvailDates[i].Time == inputTime) {
 
                 //console.log('Date exists');
-                console.log('Date and time found - ready to splice the array');
+                //console.log('Date and time found - ready to splice the array');
                 $scope.coachAvailDates.splice(i,1);
                 $('#fakeSave').click();
                 //console.log('coachAvailDates after delete');
@@ -107,8 +103,8 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
             }
         }
         if(!timeSlotExists){
-            var dateUTC = Date.parse(dp);
-            console.log('dateUTC = ' + dateUTC);
+            var dateUTC = new Date(d);
+            console.log('dateUTC from add= ' + dateUTC);
             $scope.coachAvailDates.push( {Date:inputDate,Time:inputTime,DateUTC:dateUTC,Coach:$scope.coachMin});
         }
 
@@ -136,7 +132,7 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
 
         var coachSchedule = {};
         coachSchedule = {TimeSlots:$scope.coachAvailDates,CoachId:$scope.Coach._id};
-        console.log(coachSchedule);
+        console.log($scope.coachAvailDates);
         $http({
             method:'POST',
             url: '/addCoachAvails',
@@ -147,7 +143,7 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
             })
             .error(function(status, headers, config){
                 console.log('failed to save schedule:' + status);
-            })
+            });
         $scope.ConfirmMessage="Thanks for updating your schedule";
     };
 
@@ -316,10 +312,10 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
                 $log.log('date selected');
                 var dateString = $('#datepicker').val();
                 var date = new Date(dateString);
-                var dateUTC = Date.parse(dp);
-                console.log('date  = ' + date );
-                console.log('date string = ' + dateString );
-                console.log('dateUTC  = ' + dateUTC );
+                var dateUTC = new Date(dateString);
+                //console.log('date  = ' + date );
+                //console.log('date string = ' + dateString );
+                console.log('dateUTC from search = ' + dateUTC );
 
                 $scope.SelectedDate = date.dateFormat('d-M-y, h:i A');
                 $scope.SearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;

@@ -104,22 +104,21 @@ exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db)
 };
 
 exports.searchAvails = function(req, res) {helper.getConnection(function(err,db){
-    var date =  new Date(req.params.date);
-    var mm = date.getMonth()+1;
-    if(mm<10){mm='0'+mm;}
-    var dd = date.getDate();
-    if(dd<10){dd='0'+dd;}
-    var yy = date.getFullYear();
-    var dateString = mm+'/'+dd+'/'+yy;
-    console.log(req.params.datetime);
-    var inputUTCDate =req.params.datetime;
-    //var timeForward = inputUTCDate.addHours(5);
-    //console.log(timeForward);
+    console.log(req.params.datetime.toString());
+    var inputUTCDate =new Date(req.params.datetime);
+
+    var timeForward = new Date(inputUTCDate);
+    var timeBack = new Date(inputUTCDate);
+    timeForward.setHours(timeForward.getHours()+10);
+    timeBack.setHours(timeBack.getHours()-2);
+
+    console.log(timeForward.toISOString());
+    console.log(timeBack.toISOString());
 
 
-    console.log('Retrieving availability of  coaches for '+ inputUTCDate );
+    console.log('Retrieving availability of  coaches for '+ timeForward.toISOString() );
     db.collection(schCollName, function(err, collection) {
-        collection.find({DateUTC:inputUTCDate}).toArray(function(err, items) {
+        collection.find({DateUTC:{$gte:timeBack.toISOString(),$lte:timeForward.toISOString()}}).toArray(function(err, items) {
             if (err) {
                 res.send({'error':'error occurred while getting all availabilities'});
             } else {
@@ -164,7 +163,8 @@ exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,d
 exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,db){
     var coachId = req.body.CoachId;
     var schedules = req.body.TimeSlots;
-    console.log(req.body);
+    //console.log(req.body);
+    console.log('printing schedules');
     console.log(schedules);
     //first check if the coach exists
     db.collection(schCollName, function(err, collection) {
@@ -172,16 +172,18 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
             if (err) {
                 console.log('error removing coach schedule');
             } else {
-                //now add the array to the collection
-                collection.insert(schedules, {safe: true}, function (err, result) {
-                    console.log('inserting appointments array');
-                    if (err) {
-                        res.send({'error': 'An error removing appointments for coach ' + err});
-                    } else {
-                        console.log('SUCCESS inserting appointments array');
-                        res.send(result);
-                    }
-                });
+                //now add the array to the collection if its not empty
+                if(schedules.length>0){
+                    collection.insert(schedules, {safe: true}, function (err, result) {
+                        console.log('inserting appointments array');
+                        if (err) {
+                            res.send({'error': 'An error inserting appointments for coach ' + err});
+                        } else {
+                            console.log('SUCCESS inserting appointments array');
+                            res.send(result);
+                        }
+                    });
+                }
             }
         });
     });
