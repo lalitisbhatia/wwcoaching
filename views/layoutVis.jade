@@ -1,5 +1,5 @@
 doctype html
-html(lang="en" ng-app)
+html(lang="en" )
     head
         title Coaching Pilot
         link(rel='stylesheet', href='/css/bootstrap.min.css')
@@ -16,13 +16,13 @@ html(lang="en" ng-app)
                         span.icon-bar
                     img(src='/img/ww_logo_white_sm.png' style='padding-top:15px;')
                 .navbar-collapse.collapse(style='border:none;')
-                    form#loginForm.navbar-form.navbar-right(role='form',action='/' method='POST' style='border:none')
-                        .form-group
-                            input#username.form-control(type='text',name='username' placeholder='username',required='')
-                        .form-group
-                            input#password.form-control(type='password',name='password' placeholder='password',required='')
-                        button#signin.btn.btn-success(type='submit') Sign in
-                        #a_dderr.err(style='color:red;float:left;margin-left:-60px')=message
+                    //form#loginForm.navbar-form.navbar-right(role='form',action='/' method='POST' style='border:none')
+                    //    .form-group
+                    //        input#username.form-control(type='text',name='username' placeholder='username',required='')
+                    //    .form-group
+                    //        input#password.form-control(type='password',name='password' placeholder='password',required='')
+                    //    button#signin.btn.btn-success(type='submit') Sign in
+                    //    #a_dderr.err(style='color:red;float:left;margin-left:-60px')=message
                 // /.navbar-collapse
     
         block content

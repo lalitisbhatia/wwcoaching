@@ -318,6 +318,8 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
                 console.log('dateUTC from search = ' + dateUTC );
 
                 $scope.SelectedDate = date.dateFormat('d-M-y, h:i A');
+                $scope.SelectedDateUTC =dateUTC;
+                console.log('$scope.SelectedDateUTC = ' + $scope.SelectedDateUTC);
                 $scope.SearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
                 $('#fakeSave').click();
 
@@ -345,9 +347,13 @@ coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$
         console.log('calling save Schedule');
 
         var schedule = {};
-        var selDate = new Date($scope.SelectedDate);
-        console.log(selDate.dateFormat('m/d/Y'));
-        console.log(selDate.dateFormat('H:i'));
+        var selDate = new Date($scope.SelectedDateUTC);
+        console.log(selDate.dateFormat('m/d/Y H:i'));
+        console.log(selDate);
+
+        var dateString = $('#datepicker').val();
+        var date = new Date(dateString);
+        var dateUTC = new Date(dateString);
         console.log(coachId);
 //        coachSchedule = {TimeSlots:$scope.coachAvailDates,CoachId:$scope.Coach._id};
 //        console.log(coachSchedule);

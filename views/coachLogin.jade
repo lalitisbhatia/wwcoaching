@@ -1,0 +1,26 @@
+extends layoutVis
+block content
+    .container(style="padding-top:50px;padding-left:200px;")
+        h3(style='padding-left:0px;') Hi! Welcome to the WeightWatchers Coaching Dashboard
+        p Please login using your Coach credentials.
+        legend
+        p(style='padding-bottom:10px;')
+        .row
+            .col-lg-4.well
+                h2(style="text-align:center;") Coach Login
+                legend
+                form.form-horizontal.ng-pristine(role='form',action='/coach' method='POST')
+                    fieldset
+                        // Text input
+                        .form-group(style="margin-top:5px;")
+                            label.col-md-4.control-label(for='username') Username
+                            .col-md-4
+                                input#textinput.form-control(style="width:160px;" type='text', name='username' placeholder='username')
+                        .form-group(style="margin-top:15px;")
+                            label.col-md-4.control-label(for='password') Password
+                            .col-md-4
+                                input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='password')
+                                br
+                        .form-group(style="margin-top:15px;")
+                            .col-md-4
+                                button#singlebutton.btn.btn-primary( type='submit', style="margin-left:110px;") Login

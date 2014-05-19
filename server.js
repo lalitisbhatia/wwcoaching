@@ -34,7 +34,12 @@ app.configure(function () {
 //**************Handle UI routes ******************
 //*************************************************
 
-app.get('/',home.index);
+
+app.get('/admin',home.admin);
+app.get('/coach',home.coach);
+app.get('/participant/:firstname/:lastname',home.participant);
+
+
 app.get('/getuser/:id',function(req,res){
     res.render('user');
 });
@@ -48,8 +53,12 @@ app.get('/getschedule/',function(req,res){
     res.render('schedule');
 });
 
-app.post('/',admin.login);
+app.post('/admin',admin.loginAdmin);
+app.post('/coach',admin.loginCoach);
+app.post('/participant',admin.loginParticipant);
 app.get('/logout',admin.logout);
+
+
 
 // app.get('/coachhome',admin.checkUser,coaches.getCoachInfo);
 // app.get('/adminhome',admin.checkAdmin,home.adminhome);
@@ -60,7 +69,7 @@ app.get('/logout',admin.logout);
 
 app.get('/coaches',admin.checkAdmin,api.getAllCoaches);
 app.get('/coaches/:id',admin.checkAdmin,api.getCoachById);
-app.get('/coach',admin.checkUser, api.getCoachInfo);
+app.get('/coach',admin.checkCoach, api.getCoachInfo);
 app.post('/addCoach', admin.checkAdmin,api.addCoach);
 app.post('/updateCoach', admin.checkAdmin,api.updateCoach);
 app.post('/deleteCoach',admin.checkAdmin, api.deleteCoach);
@@ -68,8 +77,8 @@ app.post('/deleteCoach',admin.checkAdmin, api.deleteCoach);
 //*****This section is for the users data********
 //*************************************************
 app.get('/users',admin.checkAdmin,api.getAllUsers);
-app.get('/users/:id',admin.checkUser,api.getUserById);
-app.get('/cusers',admin.checkUser, api.getUsersByCoachId);
+app.get('/users/:id',admin.checkCoach,api.getUserById);
+app.get('/cusers',admin.checkCoach, api.getUsersByCoachId);
 app.post('/addUser', admin.checkAdmin,api.addUser);
 app.post('/updateUser',admin.checkAdmin, api.updateUser);
 app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
@@ -89,10 +98,10 @@ app.get('/searchAvails/:datetime', schApi.searchAvails);
 /****************************************************
   This section is for the call Notes and action plans
 /****************************************************/
-app.get('/getCallNotes/:userid',admin.checkUser, api.getCallNotes);
-app.post('/addCallNote',admin.checkUser, api.addCallNote);
-app.post('/updateCallNote',admin.checkUser, api.updateCallNote);
-app.post('/deleteCallNote',admin.checkUser, api.deleteCallNote);
+app.get('/getCallNotes/:userid',admin.checkCoach, api.getCallNotes);
+app.post('/addCallNote',admin.checkCoach, api.addCallNote);
+app.post('/updateCallNote',admin.checkCoach, api.updateCallNote);
+app.post('/deleteCallNote',admin.checkCoach, api.deleteCallNote);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));

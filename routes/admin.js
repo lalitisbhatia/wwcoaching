@@ -9,8 +9,8 @@ var BSON = mongo.BSONPure;
 var coachesCollName = 'coaches';
 var participantsCollName = 'users';
 
-exports.login = function(req, res,next) {helper.getConnection(function(err,db){
-    console.log('calling login function for COACH');
+exports.loginAdmin = function(req, res,next) {helper.getConnection(function(err,db){
+    console.log('calling login function for ADMIN');
     console.log('user: ' + req.body.username);
     console.log('password: ' + req.body.password);
     db.collection(coachesCollName, function(err, collection) {
@@ -21,27 +21,28 @@ exports.login = function(req, res,next) {helper.getConnection(function(err,db){
             }, function(err, item) {
                 if(err){
                     console.log(err);
-                    res.send('error while looking for coach: '+ err);
+                    res.send('error while looking for admin user: '+ err);
                     return(next(err));
                 };
 
                 if(item)
                 {
-                    //console.log(item);
-                    req.session.auth=true;
-                    req.session.userId=item._id;
-                    req.session.user=item;
-
+                    console.log(item);
                     if(item.admin){
-                        req.session.admin=true;
+                        req.session.auth=true;
+                        req.session.userId=item._id;
+                        req.session.user=item;
+                        req.session.isAdmin=true;
                     }else{
+
                         console.log(item);
                     }
-                    res.redirect('/');
+                    console.log('redirecting to /admin');
+                    res.redirect('/admin');
                 }else
                 {
-                    console.log('coach not found');
-                    res.render('index',{'message':'no coach found'});
+                    console.log('admin user not found');
+                    res.send('adminLogin',{'message':'admin user not found. Please try again'});
 
                 }
 
@@ -50,6 +51,7 @@ exports.login = function(req, res,next) {helper.getConnection(function(err,db){
 
 });
 };
+
 exports.loginCoach = function(req, res,next) {helper.getConnection(function(err,db){
     console.log('calling login function for COACH');
     console.log('user: ' + req.body.username);
@@ -69,25 +71,67 @@ exports.loginCoach = function(req, res,next) {helper.getConnection(function(err,
                 if(item)
                 {
                     //console.log(item);
-                    req.session.auth=true;
-                    req.session.userId=item._id;
-                    req.session.user=item;
-
-                    if(item.admin){
-                        req.session.admin=true;
-                    }else{
-                        console.log(item);
+                    if(!item.admin) {
+                        req.session.auth=true;
+                        req.session.userId=item._id;
+                        req.session.user=item;
+                        req.session.isCoach = true;
                     }
-                    res.redirect('/');
+
+                    res.redirect('/coach');
                 }else
                 {
                     console.log('coach not found');
-                    res.render('index',{'message':'no coach found'});
+                    res.render('coachLogin',{'message':'Coach credentials are not valid. Please try again'});
 
                 }
 
             });
     });
+
+});
+};
+
+exports.loginParticipant = function(req, res,next) {helper.getConnection(function(err,db){
+    console.log('calling login function for Participant');
+    console.log('logging request object');
+    console.log(req);
+    console.log('user: ' + req.body.pa);
+    console.log('password: ' + req.body.password);
+//    db.collection(participantsCollName, function(err, collection) {
+//        collection.findOne(
+//            {
+//                'Username':req.body.username,
+//                'Password':req.body.password
+//            }, function(err, item) {
+//                if(err){
+//                    console.log(err);
+//                    res.send('error while looking for coach: '+ err);
+//                    return(next(err));
+//                };
+//
+//                if(item)
+//                {
+//                    //console.log(item);
+//                    req.session.auth=true;
+//                    req.session.userId=item._id;
+//                    req.session.user=item;
+//
+//                    if(item.admin){
+//                        req.session.admin=true;
+//                    }else{
+//                        console.log(item);
+//                    }
+//                    res.redirect('/');
+//                }else
+//                {
+//                    console.log('coach not found');
+//                    res.render('index',{'message':'no coach found'});
+//
+//                }
+//
+//            });
+//    });
 
 });
 };
@@ -167,6 +211,8 @@ exports.saveParticipantCreds = function(req, res,next) {helper.getConnection(fun
 };
 
 exports.logout = function(req,res){
+    //build the url to redirect to on logout
+
     req.session.destroy(function(err){
         if(!err){
             res.redirect('/');
@@ -175,17 +221,25 @@ exports.logout = function(req,res){
 }
 
 exports.checkAdmin = function(req,res,next){
-    if(req.session && req.session.auth && req.session.admin){
+    if(req.session && req.session.auth && req.session.isAdmin){
+        next();
+    }else{
+         res.redirect('/admin');
+    }
+};
+
+exports.checkCoach = function(req,res,next){
+    if(req.session && req.session.auth && req.session.isCoach){
         next();
     }else{
          res.redirect('/');
     }
-}
+};
 
-exports.checkUser = function(req,res,next){
+exports.checkParticipant = function(req,res,next){
     if(req.session && req.session.auth ){
         next();
     }else{
-         res.redirect('/');
+        res.redirect('/');
     }
-}
+};
