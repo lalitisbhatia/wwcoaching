@@ -6,6 +6,7 @@ var mongo = require("mongodb");
 var helper = require('../public/lib/dbhelper');
 var BSON = mongo.BSONPure;
 
+
 var coachesCollName = 'coaches';
 var participantsCollName = 'users';
 
@@ -95,43 +96,44 @@ exports.loginCoach = function(req, res,next) {helper.getConnection(function(err,
 exports.loginParticipant = function(req, res,next) {helper.getConnection(function(err,db){
     console.log('calling login function for Participant');
     console.log('logging request object');
-    console.log(req);
-    console.log('user: ' + req.body.pa);
-    console.log('password: ' + req.body.password);
-//    db.collection(participantsCollName, function(err, collection) {
-//        collection.findOne(
-//            {
-//                'Username':req.body.username,
-//                'Password':req.body.password
-//            }, function(err, item) {
-//                if(err){
-//                    console.log(err);
-//                    res.send('error while looking for coach: '+ err);
-//                    return(next(err));
-//                };
-//
-//                if(item)
-//                {
-//                    //console.log(item);
-//                    req.session.auth=true;
-//                    req.session.userId=item._id;
-//                    req.session.user=item;
-//
-//                    if(item.admin){
-//                        req.session.admin=true;
-//                    }else{
-//                        console.log(item);
-//                    }
-//                    res.redirect('/');
-//                }else
-//                {
-//                    console.log('coach not found');
-//                    res.render('index',{'message':'no coach found'});
-//
-//                }
-//
-//            });
-//    });
+    //console.log(req);
+    var fn = req.body.firstname;
+    var ln = req.body.lastname;
+    console.log(fn + ' - ' + ln);
+
+
+
+
+    db.collection(participantsCollName, function(err, collection) {
+        collection.findOne(
+            {
+                'FirstName':fn,
+                'LastName':ln
+            }, function(err, item) {
+                if(err){
+                    console.log(err);
+                    res.send('error while looking for participant: '+ err);
+                    return(next(err));
+                }
+
+                if(item)
+                {
+                    //console.log(item);
+                    req.session.auth=true;
+                    req.session.userId=item._id;
+                    req.session.user=item;
+                    req.session.isParticipant = true;
+
+                    res.redirect('/participant/'+fn+'/'+ln);
+                }else
+                {
+                    console.log('participant not found');
+                    res.render('participantLogin',{'message':'Coach credentials are not valid. Please try again'});
+
+                }
+
+            });
+    });
 
 });
 };
@@ -243,3 +245,43 @@ exports.checkParticipant = function(req,res,next){
         res.redirect('/');
     }
 };
+
+function performRequest(endpoint, method, data, success) {
+    var dataString = JSON.stringify(data);
+    var headers = {};
+
+    if (method == 'GET') {
+        endpoint += '?' + querystring.stringify(data);
+    }
+    else {
+        headers = {
+            'Content-Type': 'application/json',
+            'Content-Length': dataString.length
+        };
+    }
+    var options = {
+        host: host,
+        path: endpoint,
+        method: method,
+        headers: headers
+    };
+
+    var req = https.request(options, function(res) {
+        res.setEncoding('utf-8');
+
+        var responseString = '';
+
+        res.on('data', function(data) {
+            responseString += data;
+        });
+
+        res.on('end', function() {
+            console.log(responseString);
+            var responseObject = JSON.parse(responseString);
+            success(responseObject);
+        });
+    });
+
+    req.write(dataString);
+    req.end();
+}

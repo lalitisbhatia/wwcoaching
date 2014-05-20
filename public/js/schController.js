@@ -104,8 +104,9 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
         }
         if(!timeSlotExists){
             var dateUTC = new Date(d);
-            console.log('dateUTC from add= ' + dateUTC);
-            $scope.coachAvailDates.push( {Date:inputDate,Time:inputTime,DateUTC:dateUTC,Coach:$scope.coachMin});
+            console.log('d input= ' + d);
+            //console.log('dateUTC from add= ' + dateUTC);
+            $scope.coachAvailDates.push( {Date:inputDate,Time:inputTime,DateUTC:d,Coach:$scope.coachMin});
         }
 
         /************************************************************************

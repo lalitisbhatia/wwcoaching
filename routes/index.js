@@ -34,12 +34,15 @@ exports.coach = function(req, res,next){
 };
 
 exports.participant = function(req, res,next){
+    var fn = req.params.firstname;
+    var ln = req.params.lastname;
+    console.log(fn + ' - '+ ln);
     if(req.session.auth){
         if(req.session.isParticipant){
             res.render('participant');
         }
     }else{
-        res.render('participantLogin');
+        res.render('participantLogin',{firstname:fn,lastname:ln});
     }
 };
 

@@ -1,4 +1,4 @@
-extends layoutVis
+extends layoutParticipant
 block content
         .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
             h3(style='padding-left:0px;') Hi Welcome to the WeightWatchers Coaching Pilot
@@ -6,30 +6,32 @@ block content
             legend
             p(style='padding-bottom:10px;')
 
-            .row
+            .row(ng-controller="ParticipantController" ng-init="initApp()")
                 .col-lg-4.well
                     h2(style="text-align:center;") Participant Login
                     legend
-                    form.form-horizontal.ng-pristine(role='form',action='/coach' method='POST')
+                    form.form-horizontal.ng-pristine
                         fieldset
                             // Text input
                             .form-group(style="margin-top:5px;")
                                 label.col-md-4.control-label(for='username') Username
                                 .col-md-4
-                                    input#textinput.form-control(style="width:160px;" type='text', name='username' placeholder='ww username')
+                                    input#textinput.form-control(style="width:160px;" type='text', name='username' placeholder='ww username' ng-model="username")
                             .form-group(style="margin-top:15px;")
                                 label.col-md-4.control-label(for='password') Password
                                 .col-md-4
-                                    input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='ww password')
+                                    input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='ww password' ng-model="password")
                                     br
                                     div(style="display:inline")
                                         input.input-medium(type='checkbox', value="checked" name='ack' style="padding-left:200px;margin-right:10px;")
                                     span Allow the pilot team to save your weightwatchers credentials to help the coached
-
+                                    input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+                                    input(type="hidden" value="#{firstname}" id="firstname" ng-model="firstname")
+                                    input(type="hidden" value="#{lastname}" id="lastname" ng-model="lastname")
 
                             .form-group(style="margin-top:15px;")
                                 .col-md-4
-                                    button#singlebutton.btn.btn-primary( type='submit',style="margin-left:110px;") Login
+                                    button#singlebutton.btn.btn-primary( ng-click='getWWDetails()',style="margin-left:110px;") Login
 
 
 

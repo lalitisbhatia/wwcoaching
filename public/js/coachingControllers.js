@@ -48,7 +48,7 @@ coachingModule.controller('CoachController', ['$scope','$http','$log','wwCoachin
     //console.log('Getting coach info') ;
     $http({
         method: 'GET',
-        url: '/coach'
+        url: '/coachinfo'
     })
         .success(function (data, status, headers, config) {
             //console.log((data.FirstName)) ;

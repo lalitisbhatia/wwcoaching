@@ -69,7 +69,7 @@ app.get('/logout',admin.logout);
 
 app.get('/coaches',admin.checkAdmin,api.getAllCoaches);
 app.get('/coaches/:id',admin.checkAdmin,api.getCoachById);
-app.get('/coach',admin.checkCoach, api.getCoachInfo);
+app.get('/coachinfo',admin.checkCoach, api.getCoachInfo);
 app.post('/addCoach', admin.checkAdmin,api.addCoach);
 app.post('/updateCoach', admin.checkAdmin,api.updateCoach);
 app.post('/deleteCoach',admin.checkAdmin, api.deleteCoach);
