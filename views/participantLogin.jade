@@ -52,7 +52,7 @@ block content
                             .form-group(style="margin-top:15px;")
                                 .col-md-4
                                     button#singlebutton.btn.btn-primary( ng-click='getWWDetails()',style="margin-left:110px;") Login
-
+                            span(style="color:red;" ng-model="errMessage") {{errMessage}}
 
 
     script(src='/js/jquery.min.js')

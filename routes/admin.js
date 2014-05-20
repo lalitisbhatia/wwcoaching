@@ -34,6 +34,7 @@ exports.loginAdmin = function(req, res,next) {helper.getConnection(function(err,
                         req.session.userId=item._id;
                         req.session.user=item;
                         req.session.isAdmin=true;
+                        console.log(item);
                     }else{
 
                         console.log(item);
@@ -43,7 +44,7 @@ exports.loginAdmin = function(req, res,next) {helper.getConnection(function(err,
                 }else
                 {
                     console.log('admin user not found');
-                    res.send('adminLogin',{'message':'admin user not found. Please try again'});
+                    res.render('adminLogin',{'message':'Admin user not found. Please try again'});
 
                 }
 
@@ -78,7 +79,7 @@ exports.loginCoach = function(req, res,next) {helper.getConnection(function(err,
                         req.session.user=item;
                         req.session.isCoach = true;
                     }
-
+                    console.log(item);
                     res.redirect('/coach');
                 }else
                 {
@@ -124,11 +125,12 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
                     req.session.user=item;
                     req.session.isParticipant = true;
                     //if the checkbox was checked, save the ww credentials to pilot db
+                    console.log(item);
                     res.redirect('/participant/'+fn+'/'+ln);
                 }else
                 {
                     console.log('participant not found');
-                    res.render('participantLogin',{'message':'Coach credentials are not valid. Please try again'});
+                    res.render('participantLogin',{'message':'Coaching pilot credentials are not valid. Please try again'});
 
                 }
 

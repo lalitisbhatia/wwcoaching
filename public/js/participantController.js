@@ -1,13 +1,16 @@
 participantModule.controller('ParticipantController', ['$scope','$http','$routeParams','$log','participantService', function($scope,$http,$routeParams,$log,participantService) {
     $scope.initApp=function(){
-        $log.log('participantController initialized');
+        //$log.log('participantController initialized');
+        var ln = $('#lastname').val();
+        var fn = $('#firstname').val();
         $scope.username = '';
         $scope.password='';
         $scope.wwProfile='';
-        $scope.firstname='';
-        $scope.lastname='';
-        $('#fakeSave').click();
-        console.log($scope.firstname+' - ' +$scope.lastname);
+        $scope.firstname=fn;
+        $scope.lastname=ln;
+        $scope.errMessage='';
+        //$('#fakeSave').click();
+        //console.log($scope.firstname+' - ' +$scope.lastname);
 //        participantService.getUserProfile().then(function () {
 //            $scope.data = wwCoachingService.userProfile();
 //            $log.log($scope.data);
@@ -29,12 +32,11 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
     };
 
     $scope.getWWDetails = function(){
-        console.log($scope.username + ' - ' + $scope.password);
+        //console.log($scope.username + ' - ' + $scope.password);
         var loginInfo = { "U": $scope.username, "P": $scope.password, "R": "true" };
-        var ln = $('#lastname').val();
-        var fn = $('#firstname').val();
-        var pilotUser = {"firstname":fn,"lastname":ln};
 
+        var pilotUser = {"firstname":$scope.firstname,"lastname":$scope.lastname};
+        //console.log(pilotUser);
         $http({
             method:'POST',
             url: 'https://mobile.weightwatchers.com/authservice.svc/login',
@@ -43,26 +45,28 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
             .success(function (d, status, headers, config) {
                 //$log.log(d);
                 $scope.wwProfile = d.UserInformation;
-                $log.log($scope.wwProfile);
+                //$log.log($scope.wwProfile);
                 //if ww auth is successful, authenticate the pilot profile using the first and last name
-                $http({
-                    method: 'POST',
-                    url: '/participant',
-                    data: pilotUser
-                })
-                .success(function (d, status, headers, config) {
-                    //console.log(d);
-                        window.location.replace("/participant/"+fn+"/"+ln);
-                })
-                    .error(function(status, headers, config){
-                        $log.log('failed to get pilot profile:' + status);
+                if(d.LoginSuccessful) {
+                    $http({
+                        method: 'POST',
+                        url: '/participant',
+                        data: pilotUser
                     })
+                        .success(function (d, status, headers, config) {
+                            //console.log(d);
+                            window.location.replace("/participant/"+$scope.firstname+"/"+$scope.lastname);
+                        })
+                        .error(function (status, headers, config) {
+                            $log.log('failed to get pilot profile:' + status);
+
+                        })
+                }else{
+                    $scope.errMessage='WW credentials not recognised';
+                }
             })
             .error(function(status, headers, config){
                 $log.log('failed to get WW profile:' + status);
             })
     }
-
-
-
 }]);
