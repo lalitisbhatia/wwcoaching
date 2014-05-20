@@ -1,2 +1,82 @@
 extends layoutParticipant
 block content
+    .container( style="padding-top:50px;padding-left:200px;")
+        p(style='padding-bottom:10px;')
+        .row
+
+            p Hi
+                #scheduler.tab-pane.col-sm-9.col-md-10.main
+                    .ng-scope(ng-controller='UserSchedulingController' ng-init='initApp()' style='width:800px;')
+                        .container
+                            .row.well.col-md-12
+                                .col-lg-12
+                                    form.ng-pristine
+                                        fieldset
+                                            // Form Name
+                                            legend Search for a coach
+                                            p Select a date and time to search
+                                            // Text input
+                                            .form-group
+                                                .col-md-12
+                                                    input#datepicker.input-sm(type='text', name='datetime' )
+                                        legend
+
+                                        fieldset(style="padding:10px;")
+                                            // Form Name
+                                            legend {{SearchMessage}}
+                                            legend
+                                                table#searchResults.ng-scope
+                                                    thead.t-head
+                                                        tr
+                                                            th Coach
+                                                            th Date
+                                                            th Time
+                                                            th
+
+                                                    tbody
+
+                                                        tr(ng-repeat="availDate in availDates | orderBy:['Date','Time']")
+
+                                                            td(style="vertical-align:initial;")
+                                                                h3 {{availDate.Coach.coachName}}
+                                                                i coach details here
+                                                            td(style="vertical-align:initial;")  {{availDate.Date|date:'HH'}}
+                                                            td(style="vertical-align:initial;")  {{availDate.Time}}
+                                                            td
+                                                                input(type='button',  id="btnSelect"  value='Select', ng-click='saveUserAppt(availDate.Coach.coachId,availDate.DateUTC)').btn.btn-primary
+
+
+                                                //ul#coaches(style="list-style-type:none;padding-left:10px;")
+                                                //    li(ng-repeat="availDate in availDates| orderBy:'Date'")
+                                                        b {{availDate.Coach.coachName}}     {{availDate.Date|date:'HH'}}, {{availDate.Time}}
+
+                                                        //ul#dates(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
+                                                        //    li(ng-repeat="appt in availDate.appointments ")
+                                                                p
+
+                                                                //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
+                                                                //    li(ng-repeat="time in appt.Times")
+                                                                //        p {{availDate.Coach.coachName}} {{appt.Date}} {{time.time}}
+
+
+                                                //    p {{appt}}
+
+                                                //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
+                                                //    legend
+                                                //    li(ng-repeat="availdTime in availdDate.Times") b {{availDate.Date}}{{availTime.time}}
+                                                //
+                                                //            a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
+
+
+
+                                        input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+
+
+
+
+
+
+
+        hr
+        footer
+            p © Company 2014

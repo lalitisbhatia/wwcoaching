@@ -103,6 +103,9 @@ exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db)
 });
 };
 
+/*************************************
+    USER Search for available slots
+ *************************************/
 exports.searchAvails = function(req, res) {helper.getConnection(function(err,db){
     console.log(req.params.datetime.toString());
     var inputUTCDate =new Date(req.params.datetime);
@@ -192,18 +195,23 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
 
 exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db){
 
-    console.log('Retrieving availability of all coaches');
+    console.log('Saving Schedule');
+    var date = req.body.Date;
+    var userId = req.session.userId;
+    var user = req.session.user;
+    var coachId = req.body.CoachId;
+    console.log('date :' +date);
+    console.log('userId :' +userId);
+    console.log('coachId :' +coachId);
+
     db.collection(schCollName, function(err, collection) {
-        collection.find().toArray(function(err, items) {
+        collection.update({DateUTC:date,"Coach.coachId":coachId}, {$set:{User:user}}, {safe:true}, function(err, result) {
             if (err) {
-                res.send({'error':'error occurred while getting all availabilities'});
+                console.log('Error updating schedule: ' + err);
+                res.send({'error':'An error has occurred'});
             } else {
-                if(items) {
-                    console.log(items);
-                    res.send(items);
-                }else{
-                    console.log('no results found');
-                }
+                console.log('' + result + ' document(s) updated');
+                //res.send(result);
             }
         });
     });

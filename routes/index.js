@@ -62,6 +62,7 @@ exports.participant = function(req, res,next){
     var fn = req.params.firstname;
     var ln = req.params.lastname;
     console.log(fn + ' - '+ ln);
+    console.log(req.session.user);
     if(req.session.auth){
         if(req.session.isParticipant){
             res.render('participant');
@@ -71,7 +72,19 @@ exports.participant = function(req, res,next){
     }
 };
 
+exports.assessment = function(req, res,next){
+    var fn = req.params.firstname;
+    var ln = req.params.lastname;
+    console.log(fn + ' - '+ ln);
+    if(req.session.auth){
+        if(req.session.isParticipant){
+    res.render('assessment',{firstname:fn,lastname:ln});
+        }
+    }else{
+        res.redirect('/');
+    }
 
+};
 exports.partials = function (req, res) {
   var name = req.params.name;
   res.render('partials/' + name);

@@ -125,7 +125,7 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
                     req.session.user=item;
                     req.session.isParticipant = true;
                     //if the checkbox was checked, save the ww credentials to pilot db
-                    console.log(item);
+                    //console.log(item);
                     res.redirect('/participant/'+fn+'/'+ln);
                 }else
                 {

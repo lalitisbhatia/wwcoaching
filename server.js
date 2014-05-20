@@ -86,6 +86,7 @@ app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
 //****************************************************
 //*****This section is for the assessment data********
 //***************************************************
+app.get('/assessment',home.assessment);
 app.get('/assessment/:id',assmnt.getAssmById);
 app.post('/assessment', assmnt.saveAssm);
 
@@ -95,6 +96,7 @@ app.post('/assessment', assmnt.saveAssm);
 app.get('/getCoachAvails', schApi.getCoachAvails);
 app.post('/addCoachAvails', schApi.addCoachAvails);
 app.get('/searchAvails/:datetime', schApi.searchAvails);
+app.post('/saveAppt', schApi.saveUserAppt);
 /****************************************************
   This section is for the call Notes and action plans
 /****************************************************/
