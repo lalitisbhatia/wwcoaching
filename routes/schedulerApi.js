@@ -121,7 +121,7 @@ exports.searchAvails = function(req, res) {helper.getConnection(function(err,db)
 
     console.log('Retrieving availability of  coaches for '+ timeForward.toISOString() );
     db.collection(schCollName, function(err, collection) {
-        collection.find({DateUTC:{$gte:timeBack.toISOString(),$lte:timeForward.toISOString()}}).toArray(function(err, items) {
+        collection.find({DateUTC:{$gte:timeBack.toISOString(),$lte:timeForward.toISOString()},User:{$exists:false}}).toArray(function(err, items) {
             if (err) {
                 res.send({'error':'error occurred while getting all availabilities'});
             } else {

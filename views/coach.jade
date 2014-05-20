@@ -164,9 +164,12 @@ block content
                                                                 th(style="vertical-align:initial;padding:4px;") {{availDate.Date }}
                                                         tbody
                                                             tr(ng-repeat="availTime in availDate.Times | orderBy:'time' ")
-                                                                td(style="padding:4px;") {{availTime.time | date:'mm'}}
-                                                                    a(href='#' style='padding-left: 10px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}')
-                                                                        img(src="./img/delete_icon.png")
+                                                                td(style="padding:4px;")
+                                                                    div(ng-if="!availTime.User" style="display:inline;") {{availTime.time | date:'mm'}}
+                                                                        a(href='#' style='padding-left: 10px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}')
+                                                                            img(src="./img/delete_icon.png" style="display:inline;")
+                                                                    div(ng-if="availTime.User" style="display:inline;text-decoration: line-through") {{availTime.time | date:'mm'}}
+
                                     p
                                     input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
                                     p(style="color:green") {{ConfirmMessage}}

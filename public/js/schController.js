@@ -49,8 +49,8 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
         })
             .success(function (data, status, headers, config) {
                 $scope.coachAvailDates=data;
-                $scope.dispAvailDates = $scope.groupBy(data,'Date','Time');
-                //console.log($scope.coachAvailDates);
+                $scope.dispAvailDates = $scope.groupBy(data,'Date','Time','User');
+                console.log($scope.coachAvailDates);
                 console.log($scope.dispAvailDates);
             })
             .error(function(status, headers, config){
@@ -167,11 +167,12 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
     // -- Define Scope Methods. ----------------- //
 
     // I group the  list on the given attribute.
-    $scope.groupBy = function( collection,attribute,field ) {
+    $scope.groupBy = function( collection,attribute,field1,field2 ) {
         //this goes 2 levels deep
         // First, reset the groups.
         var retArray = [];
-        var fieldName = field;
+        var fieldName1 = field1;
+        var fieldName2 = field2;
         // Now, sort the collection  on the grouping-property.
         // This just makes it easier to split the collection.
         sortOn( collection, attribute );
@@ -204,7 +205,7 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
             // Add the 2nd element to the currently active
             // grouping.
 
-            group.Times.push( { time :row[field]} );
+            group.Times.push( { time :row[field1],User:row[field2]} );
 
         }
         //console.log(retArray);
@@ -282,110 +283,3 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
     }
 }]);
 
-/*##################################################
- ################ User View #######################
- ##################################################
- */
-
-//controller for coaches to choose their availability
-coachingModule.controller('UserSchedulingController',['$scope','$http','$log','$filter','wwCoachingService',function($scope,$http,$log,$filter,wwCoachingService){
-
-    $scope.initApp=function() {
-        //$log.log('initialized UserSchedulingController');
-        //$scope.availDates = [];
-
-        $scope.predicate = 'Date';
-        $('#datepicker').datetimepicker({
-            format:'d-M-y H:i',
-            //inline:true,
-            lang:'en',
-            hours12:true,
-            //minTime:'10:00',
-            //maxTime:'20:00',
-            allowTimes:[
-                '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30','13:00', '13:30', '14:00', '14:30',
-                '15:00', '15:30', '16:00', '16:30','17:00', '17:30', '17:00', '17:30','18:00', '18:30', '19:00',
-                '19:30','20:00', '20:30', '21:00', '21:30','22:00'
-            ],
-            step:30
-            ,
-            onSelectTime:function(dp,$input){
-                $log.log('date selected');
-                var dateString = $('#datepicker').val();
-                var date = new Date(dateString);
-                var dateUTC = new Date(dateString);
-                //console.log('date  = ' + date );
-                //console.log('date string = ' + dateString );
-                console.log('dateUTC from search = ' + dateUTC );
-
-                $scope.SelectedDate = date.dateFormat('d-M-y, h:i A');
-                $scope.SelectedDateUTC =dateUTC;
-                console.log('$scope.SelectedDateUTC = ' + $scope.SelectedDateUTC);
-                $scope.SearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
-                $('#fakeSave').click();
-
-                $http({
-                    method: 'GET',
-                    url: '/searchAvails/'+dateUTC
-                })
-                    .success(function(data) {
-                        $log.info("Successfully retrieved availability for all coaches.");
-                        //re-sort data
-
-                        $scope.availDates = data;
-                        $log.log($scope.availDates);
-                    })
-                    .error(function(status, headers, config){
-                        $log.log('failed to coach availabilities' + status);
-                    });
-
-
-            }
-        });
-    };
-
-    $scope.saveUserAppt = function(coachId) {
-        console.log('calling save Schedule');
-
-        var schedule = {};
-        var selDate = new Date($scope.SelectedDateUTC);
-        console.log(selDate.dateFormat('m/d/Y H:i'));
-        console.log(selDate);
-
-        var dateString = $('#datepicker').val();
-        var date = new Date(dateString);
-        var dateUTC = new Date(dateString);
-        console.log(coachId);
-//        coachSchedule = {TimeSlots:$scope.coachAvailDates,CoachId:$scope.Coach._id};
-//        console.log(coachSchedule);
-//        $http({
-//            method:'POST',
-//            url: '/addCoachAvails',
-//            data: coachSchedule
-//        })
-//            .success(function (d, status, headers, config) {
-//                console.log(d);
-//            })
-//            .error(function(status, headers, config){
-//                console.log('failed to save schedule:' + status);
-//            })
-//        $scope.ConfirmMessage="Thanks for updating your schedule";
-    };
-
-    // I sort the given collection on the given property.
-    function sortOn(collection, name) {
-
-        collection.sort(
-            function (a, b) {
-                var c = new Date(a[ name ]);
-                var d = new Date(b[ name ]);
-                if (c <=  d) {
-                    return( -1 );
-                }
-                return( 1 );
-            }
-        );
-
-    }
-
-}]);
