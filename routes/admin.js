@@ -214,10 +214,16 @@ exports.saveParticipantCreds = function(req, res,next) {helper.getConnection(fun
 
 exports.logout = function(req,res){
     //build the url to redirect to on logout
-
+    var referrer = req.headers['referer'];
     req.session.destroy(function(err){
         if(!err){
-            res.redirect('/');
+            if(referrer) {
+                res.redirect(referrer);
+            }
+            else{
+                res.redirect('/coach');
+            }
+
         }
     });
 }
