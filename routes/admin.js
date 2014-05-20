@@ -100,9 +100,10 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
     //console.log(req);
     var fn = req.body.firstname;
     var ln = req.body.lastname;
-    console.log(fn + ' - ' + ln);
-
-
+    var un = req.body.username;
+    var pw = req.body.password;
+    var saveWWCreds = req.body.SaveWWCreds;
+    console.log(fn + ' - ' + ln + '- '+ saveWWCreds);
 
 
     db.collection(participantsCollName, function(err, collection) {
@@ -125,6 +126,18 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
                     req.session.user=item;
                     req.session.isParticipant = true;
                     //if the checkbox was checked, save the ww credentials to pilot db
+                    if(saveWWCreds){
+                        console.log('saving WW credentials');
+                        collection.update({_id:item._id}, {$set:{Username:un,Password:pw}}, {safe:true}, function(err, result) {
+                            if (err) {
+                                console.log('Error updating ww credentials: ' + err);
+                                res.send({'error':'An error has occurred'});
+                            } else {
+                                console.log('' + result + ' document(s) updated');
+                                //res.send(result);
+                            }
+                        });
+                    }
                     //console.log(item);
                     res.redirect('/participant/'+fn+'/'+ln);
                 }else

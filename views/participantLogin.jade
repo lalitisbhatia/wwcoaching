@@ -42,9 +42,9 @@ block content
                                 .col-md-4
                                     input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='ww password' ng-model="password")
                                     br
-                                    div(style="display:inline")
-                                        input.input-medium(type='checkbox', value="checked" name='ack' style="padding-left:200px;margin-right:10px;")
-                                    span Allow the pilot team to save your weightwatchers credentials to help the coached
+                            .form-group(style="margin-left:15px;")
+                                input.input-medium(type='checkbox', id="chksave" style="padding-left:200px;margin-right:10px;" )
+                                span Check to allow the pilot team to save your weightwatchers credentials.This will help your coach
                                     input(type='button', id="fakeSave" , ng-click='' style="display:none;")
                                     input(type="hidden" value="#{firstname}" id="firstname" ng-model="firstname")
                                     input(type="hidden" value="#{lastname}" id="lastname" ng-model="lastname")
