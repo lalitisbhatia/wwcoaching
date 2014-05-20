@@ -22,7 +22,7 @@ block content
 
                 #users.tab-pane.active.col-sm-9.col-md-10.main
 
-                    .ng-scope(ng-controller='AllUsersController' data-ng-init='initApp()' style='width:800px;')
+                    .ng-scope(ng-controller='testAllUsersController' data-ng-init='initApp()' style='width:800px;')
                         form.form-horizontal.well.ng-pristine
                             fieldset
                                 // Form Name
@@ -79,7 +79,7 @@ block content
                                             | /
                                         a(href='#', ng-click='delete(user._id)') delete
                 #aCoaches.tab-pane.active.col-sm-9.col-md-10.main
-                        .ng-scope(ng-controller='AllCoachesController' data-ng-init='initApp()' style='width:900px;')
+                        .ng-scope(ng-controller='testAllUsersController' data-ng-init='initApp()' style='width:900px;')
                             form.form-horizontal.well.ng-pristine
                                 fieldset
                                     // Form Name
