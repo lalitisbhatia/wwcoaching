@@ -34,7 +34,7 @@ app.configure(function () {
 //**************Handle UI routes ******************
 //*************************************************
 
-
+//app.get('/',home.admin);
 app.get('/admin',home.admin);
 app.get('/coach',home.coach);
 app.get('/participant/:firstname/:lastname',home.participant);
