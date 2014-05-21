@@ -90,7 +90,7 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
      *********************************************/
 
     $scope.saveuser = function() {
-        //console.log($scope.newuser);
+        console.log($scope.newuser);
         if($scope.newuser._id == null) {
 
             console.log($scope.newuser) ;

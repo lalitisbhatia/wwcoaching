@@ -42,7 +42,7 @@ adminModule.factory('testAdminService',function($http,$log,$q,$rootScope){
         updateUser:function(user) {
             return $http({
                 method: 'POST',
-                url: '/addUser',
+                url: '/updateUser',
                 data: user
             })
                 .success(function (d, status, headers, config) {
@@ -114,7 +114,7 @@ adminModule.factory('testAdminService',function($http,$log,$q,$rootScope){
         updateCoach:function(coach) {
             return $http({
                 method: 'POST',
-                url: '/addCoach',
+                url: '/updateCoach',
                 data: coach
             })
                 .success(function (d, status, headers, config) {
