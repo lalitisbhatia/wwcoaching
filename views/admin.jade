@@ -18,11 +18,11 @@ block content
                     a(href='#aSchedules', data-toggle='tab') Schedules
         .col-sm-9
             // Tab panes
-            .tab-content
+            .tab-content(ng-controller='AdminController' data-ng-init='initApp()')
 
                 #users.tab-pane.active.col-sm-9.col-md-10.main
 
-                    .ng-scope(ng-controller='testAllUsersController' data-ng-init='initApp()' style='width:800px;')
+                    .ng-scope(style='width:800px;')
                         form.form-horizontal.well.ng-pristine
                             fieldset
                                 // Form Name
@@ -75,11 +75,11 @@ block content
                                     td.ng-binding {{ user.Phone }}
                                     td.ng-binding {{ user.CoachName }}
                                     td
-                                        a(href='#', ng-click='edit(user._id)') edit
+                                        a(href='#', ng-click='editUser(user._id)') edit
                                             | /
-                                        a(href='#', ng-click='delete(user._id)') delete
+                                        a(href='#', ng-click='deleteUser(user._id)') delete
                 #aCoaches.tab-pane.active.col-sm-9.col-md-10.main
-                        .ng-scope(ng-controller='testAllUsersController' data-ng-init='initApp()' style='width:900px;')
+                        .ng-scope(style='width:900px;')
                             form.form-horizontal.well.ng-pristine
                                 fieldset
                                     // Form Name
@@ -140,9 +140,9 @@ block content
                                         td.ng-binding {{ coach.Bio }}
                                         td.ng-binding {{ coach.FirstName}}
                                         td
-                                            a(href='#', ng-click='edit(coach._id)') edit
+                                            a(href='#', ng-click='editCoach(coach._id)') edit
                                                 | /
-                                            a(href='#', ng-click='delete(coach._id)') delete
+                                            a(href='#', ng-click='deleteCoach(coach._id)') delete
                 #aSchedules.tab-pane.col-sm-9.col-md-10.main
                     .container
                         ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")

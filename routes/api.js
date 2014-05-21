@@ -98,7 +98,7 @@ exports.deleteCoach = function(req, res) {helper.getConnection(function(err,db){
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('' + result + ' document(s) deleted');
-                res.send(coach);
+                res.send('success');
             }
         });
     });
