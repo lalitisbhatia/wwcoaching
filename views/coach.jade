@@ -135,16 +135,18 @@ block content
                                                     table
                                                         tr(ng-repeat="availTime in availDate.Times" ng-init="innerIndex = $index")
                                                             td
-                                                                div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff") Time
+                                                                div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;") Time
 
-                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff")
+                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;")
                                                                     b {{availDate.Date}}
-                                                                div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="padding-left:10px;padding-top:4px;padding-bottom:4px; background:#ddd;width:80px;")
+                                                                div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="text-align:center;padding-left:10px;padding-top:4px;padding-bottom:4px; background:#ddd;width:80px;height:20px;")
                                                                     b {{availTime.time}}
-                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" style="padding:4px;")
+                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" style="padding:4px;height:20px;")
                                                                     input#calCellEmpty(type="checkbox"  style="margin:0" ng-click="updateSelection($event,availTime.timeUTC)")
-                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="padding:4px;")
+                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="padding:4px;height:20px;")
                                                                     input#calCellEmpty(type="checkbox" style="margin:0" checked ng-click="updateSelection($event,availTime.timeUTC)")
+                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Taken
+
 
 
 

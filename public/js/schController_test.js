@@ -130,6 +130,7 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
             //console.log($scope.coachAvailDates[i].Date + '--' + $scope.coachAvailDates[i].Time);
             var availdate = $scope.coachAvailDates[i].Date;
             var availtime = $scope.coachAvailDates[i].Time;
+            var userappt = $scope.coachAvailDates[i].User;
             //loop thru the $scope.calendarArray array
             for(var j in $scope.calendarArray.Dates){
                 //console.log($scope.calendarArray.Dates[j].Date + ' - ' + availdate);
@@ -137,7 +138,12 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
                 for(var k in $scope.calendarArray.Dates[j].Times){
                     if(availdate== $scope.calendarArray.Dates[j].Date && availtime==$scope.calendarArray.Dates[j].Times[k].time){
                         console.log('found match');
-                        $scope.calendarArray.Dates[j].Times[k].DispFlag=1;
+                        if(userappt) {
+                            console.log(availtime + '-'+availdate);
+                            $scope.calendarArray.Dates[j].Times[k].DispFlag = 2;
+                        }else{
+                            $scope.calendarArray.Dates[j].Times[k].DispFlag = 1;
+                        }
                     }
                 }
             }
