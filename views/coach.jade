@@ -137,7 +137,7 @@ block content
                                                             td
                                                                 div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;") Time
 
-                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;")
+                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;vertical-align:center;")
                                                                     b {{availDate.Date}}
                                                                 div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="text-align:center;padding-left:10px;padding-top:4px;padding-bottom:4px; background:#ddd;width:80px;height:20px;")
                                                                     b {{availTime.time}}
@@ -146,12 +146,7 @@ block content
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="padding:4px;height:20px;")
                                                                     input#calCellEmpty(type="checkbox" style="margin:0" checked ng-click="updateSelection($event,availTime.timeUTC)")
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Taken
-
-
-
-
-
-
+                                                td Button here for next 10days
 
 
 
@@ -159,6 +154,7 @@ block content
                                     input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
                                     p(style="color:green") {{ConfirmMessage}}
                                     input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+                                    p Button here for next 10days
 
 
 

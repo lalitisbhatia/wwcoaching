@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/coach.jade" afterPath="$PROJECT_DIR$/views/coach.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/schController_test.js" afterPath="$PROJECT_DIR$/public/js/schController_test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -60,8 +59,8 @@
       <file leaf-file-name="coach.jade" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/coach.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64850616" vertical-offset="2551" max-vertical-offset="3560">
-              <caret line="146" column="165" selection-start-line="146" selection-start-column="165" selection-end-line="146" selection-end-column="165" />
+            <state vertical-scroll-proportion="0.61335677" vertical-offset="2611" max-vertical-offset="3480">
+              <caret line="148" column="78" selection-start-line="148" selection-start-column="78" selection-end-line="148" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -518,7 +517,11 @@
       <created>1400709848403</created>
       <updated>1400709848403</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Updated coach availability calendar - as a calendar display - still in the works">
+      <created>1400711260708</created>
+      <updated>1400711260708</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -982,8 +985,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/coach.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64850616" vertical-offset="2551" max-vertical-offset="3560">
-          <caret line="146" column="165" selection-start-line="146" selection-start-column="165" selection-end-line="146" selection-end-column="165" />
+        <state vertical-scroll-proportion="0.61335677" vertical-offset="2611" max-vertical-offset="3480">
+          <caret line="148" column="78" selection-start-line="148" selection-start-column="78" selection-end-line="148" selection-end-column="78" />
           <folding />
         </state>
       </provider>
