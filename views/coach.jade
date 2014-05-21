@@ -95,33 +95,35 @@ block content
                                                                 th(style="vertical-align:initial;padding:4px;") {{availDate.Date }}
                                                         tbody
                                                             tr(ng-repeat="availTime in availDate.Times | orderBy:'time' ")
-                                                                th(style="padding:4px;")
                                                                 td(style="padding:4px;")
                                                                     div(ng-if="!availTime.User" style="display:inline;") {{availTime.time | date:'mm'}}
                                                                         a(href='#' style='padding-left: 10px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}')
                                                                             img(src="./img/delete_icon.png" style="display:inline;")
                                                                     div(ng-if="availTime.User" style="display:inline;text-decoration: line-through") {{availTime.time | date:'mm'}}
-                                        .col-md-1
-                                            table(border='1px;')
-                                                thead
-                                                    tr
-                                                        th(style="vertical-align:initial;padding:4px;") &nbsp;
-                                                tbody
-                                                    tr#times.ng-scope(ng-repeat="allowTime in allowTimes")
-                                                        td(style="vertical-align:initialpadding:4px;") {{allowTime}}
+                                    table
+                                        tr
+                                            td
+                                                table(border='1px;')
+                                                    thead
+                                                        tr
+                                                            th &nbsp;
+                                                    tbody
+                                                        tr#times.ng-scope(ng-repeat="allowTime in allowTimes")
+                                                            td {{allowTime}}
 
-                                        .col-md-7
-                                            table(border='1px;')
-                                                tr#dates
-                                                    td(style="vertical-align:initial;").ng-scope(ng-repeat="availDate in dispAvailDates | orderBy:'Date'")
-                                                        table
-                                                            thead
-                                                                tr
-                                                                    th(style="vertical-align:initial;padding:4px;") {{availDate.Date }}
-                                                            tbody
-                                                                tr#times(style="vertical-align:initial;padding:4px;").ng-scope(ng-repeat="allowTime in allowTimes")
 
-                                                                    td(style="vertical-align:initialpadding:4px;") XX
+                                            td
+                                                table(border='1px;')
+                                                    tr#dates
+                                                        td.ng-scope(ng-repeat="availDate in dispAvailDates | orderBy:'Date'")
+                                                            table
+                                                                thead
+                                                                    tr
+                                                                        th {{availDate.Date }}
+                                                                tbody
+                                                                    tr#times.ng-scope(ng-repeat="allowTime in allowTimes")
+
+                                                                        td XX
 
                                     p
                                     input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary

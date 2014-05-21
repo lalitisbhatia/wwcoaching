@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/admin.js" afterPath="$PROJECT_DIR$/routes/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/adminController_.js" afterPath="$PROJECT_DIR$/public/js/adminController_.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/adminService.js" afterPath="$PROJECT_DIR$/public/js/adminService.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/coach.jade" afterPath="$PROJECT_DIR$/views/coach.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layoutParticipant.jade" afterPath="$PROJECT_DIR$/views/layoutParticipant.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/participant.jade" afterPath="$PROJECT_DIR$/views/participant.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/participantController.js" afterPath="$PROJECT_DIR$/public/js/participantController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/participantService.js" afterPath="$PROJECT_DIR$/public/js/participantService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/schController.js" afterPath="$PROJECT_DIR$/public/js/schController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -58,8 +50,8 @@
       <file leaf-file-name="coach.jade" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/coach.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77697843" vertical-offset="2472" max-vertical-offset="3528">
-              <caret line="121" column="115" selection-start-line="121" selection-start-column="115" selection-end-line="121" selection-end-column="115" />
+            <state vertical-scroll-proportion="0.64748204" vertical-offset="1968" max-vertical-offset="3576">
+              <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -481,7 +473,11 @@
       <created>1400639788823</created>
       <updated>1400639788823</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="added search field for coach name&#10;started cleanup of availability view to make it look calendarish">
+      <created>1400645481476</created>
+      <updated>1400645481476</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -547,7 +543,8 @@
     <MESSAGE value="search coach availability if some users have already booked - works&#10;added strikethru styling on the coaches view when they are already bookd for a time slot" />
     <MESSAGE value="started testing services to use them properly" />
     <MESSAGE value="Completed admin service cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed admin service cleanup" />
+    <MESSAGE value="added search field for coach name&#10;started cleanup of availability view to make it look calendarish" />
+    <option name="LAST_COMMIT_MESSAGE" value="added search field for coach name&#10;started cleanup of availability view to make it look calendarish" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -918,8 +915,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/coach.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77697843" vertical-offset="2472" max-vertical-offset="3528">
-          <caret line="121" column="115" selection-start-line="121" selection-start-column="115" selection-end-line="121" selection-end-column="115" />
+        <state vertical-scroll-proportion="0.64748204" vertical-offset="1968" max-vertical-offset="3576">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
           <folding />
         </state>
       </provider>
