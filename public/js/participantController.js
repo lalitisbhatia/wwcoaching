@@ -72,10 +72,16 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
  */
 
 //controller for coaches to choose their availability
-participantModule.controller('UserSchedulingController',['$scope','$http','$log','$filter',function($scope,$http,$log,$filter){
+participantModule.controller('UserSchedulingController',['$scope','$http','$log','$filter','participantService',function($scope,$http,$log,$filter,participantService){
 
     $scope.initApp=function() {
         $log.log('initialized UserSchedulingController');
+        $scope.coaches=[];
+        participantService.getAllCoaches().then(function(data){
+            $scope.coaches = data;
+            console.log($scope.coaches);
+        });
+
         //$scope.availDates = [];
 
         $scope.predicate = 'Date';

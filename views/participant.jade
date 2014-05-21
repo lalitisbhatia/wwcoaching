@@ -14,11 +14,16 @@ block content
                                         fieldset
                                             // Form Name
                                             legend Search for a coach
-                                            p Select a date and time to search
+                                            p Select a date/ time or Coach Name to search
                                             // Text input
                                             .form-group
-                                                .col-md-12
-                                                    input#datepicker.input-sm(type='text', name='datetime' )
+                                                .col-md-2
+                                                    b Date/Time
+                                                    input#datepicker.form-control.input-md(type='text', name='datetime' style="margin-bottom:15px;")
+                                                .col-md-2
+                                                    b Coach Name
+                                                    select.form-control.input-md(ng-model='newuser.CoachId' name="coach" style="margin-bottom:15px;")
+                                                        option(ng-repeat='coach in coaches' value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
                                         legend
 
                                         fieldset(style="padding:10px;")

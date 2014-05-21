@@ -1,15 +1,15 @@
 'use strict';
 
-adminModule.controller('AdminController',  function AdminController($scope,$http,$log,testAdminService) {
+adminModule.controller('AdminController',  function AdminController($scope,$http,$log,AdminService) {
     $scope.initApp=function() {
         $scope.coaches=[];
-        testAdminService.getAllCoaches().then(function(data){
+        AdminService.getAllCoaches().then(function(data){
             $scope.coaches = data;
             console.log($scope.coaches);
         });
 
         $scope.users=[];
-        testAdminService.getAllUsers().then(function(data){
+        AdminService.getAllUsers().then(function(data){
             $scope.users = data;
             console.log($scope.users);
         });
@@ -26,7 +26,7 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
             console.log($scope.newcoach) ;
 
 
-            testAdminService.addNewCoach($scope.newcoach).then(function(data){
+            AdminService.addNewCoach($scope.newcoach).then(function(data){
                 console.log('logging return from add coach');
                 console.log(data);
                 $scope.coaches.push(data);
@@ -43,7 +43,7 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
                 }
             }
             console.log($scope.newcoach);
-            testAdminService.updateCoach($scope.newcoach).then(function(data){
+            AdminService.updateCoach($scope.newcoach).then(function(data){
                 console.log('logging return from updating coach');
                 console.log(data);
             });
@@ -60,7 +60,7 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
             if($scope.coaches[i]._id == id) {
                 $scope.newcoach._id= id;
                 console.log($scope.newcoach);
-                testAdminService.deleteCoach($scope.newcoach,function(data){
+                AdminService.deleteCoach($scope.newcoach,function(data){
                     console.log(data);
 
                 });
@@ -96,7 +96,7 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
             console.log($scope.newuser) ;
 
 
-            testAdminService.addNewUser($scope.newuser).then(function(data){
+            AdminService.addNewUser($scope.newuser).then(function(data){
                 console.log('logging return from add user');
                 console.log(data);
                 $scope.users.push(data);
@@ -113,7 +113,7 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
                 }
             }
             console.log($scope.newuser);
-            testAdminService.updateUser($scope.newuser).then(function(data){
+            AdminService.updateUser($scope.newuser).then(function(data){
                 console.log('logging return from updating user');
                 console.log(data);
             });
@@ -130,7 +130,7 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
             if($scope.users[i]._id == id) {
                 $scope.newuser._id= id;
                 console.log($scope.newuser);
-                testAdminService.deleteUser($scope.newuser,function(data){
+                AdminService.deleteUser($scope.newuser,function(data){
                     console.log(data);
 
                 });

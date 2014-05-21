@@ -14,8 +14,6 @@ block content
                 li(style='margin-left:80px;')
                     a(href='#resources', data-toggle='tab') Resources
                 li(style='margin-left:80px;')
-                    a(href='#scheduler', data-toggle='tab') Schedules
-                li(style='margin-left:80px;')
                     a(href='#availability', data-toggle='tab') Availability
                         
             legend
@@ -57,73 +55,6 @@ block content
                     .container
                         p this is the Resources tab
                
-                #scheduler.tab-pane.col-sm-9.col-md-10.main
-                    .ng-scope(ng-controller='UserSchedulingController' ng-init='initApp()' style='width:800px;')
-                        .container
-                            .row.well.col-md-12
-                                .col-lg-12(style="border-right:ridge;")
-                                    form.ng-pristine
-                                        fieldset
-                                            // Form Name
-                                            legend Search for a coach
-                                            p Select a date and time to search
-                                            // Text input
-                                            .form-group
-                                                .col-md-12
-                                                    input#datepicker.input-sm(type='text', name='datetime' )
-                                        legend
-
-                                        fieldset(style="padding:10px;")
-                                            // Form Name
-                                            legend {{SearchMessage}}
-                                            legend
-                                                table#searchResults
-                                                    thead.t-head
-                                                        tr
-                                                            th Coach
-                                                            th Date
-                                                            th Time
-                                                            th
-
-                                                    tbody
-
-                                                            tr.ng-scope(ng-repeat="availDate in availDates | orderBy:['Date','Time']")
-
-                                                                td(style="vertical-align:initial;")
-                                                                    h3 {{availDate.Coach.coachName}}
-                                                                    i coach details here
-                                                                td(style="vertical-align:initial;")  {{availDate.Date|date:'HH'}}
-                                                                td(style="vertical-align:initial;")  {{availDate.Time}}
-                                                                td
-                                                                    input(type='button',  id="btnSelect"  value='Select', ng-click='saveUserAppt(availDate.Coach.coachId)').btn.btn-primary
-
-
-                                                //ul#coaches(style="list-style-type:none;padding-left:10px;")
-                                                //    li(ng-repeat="availDate in availDates| orderBy:'Date'")
-                                                        b {{availDate.Coach.coachName}}     {{availDate.Date|date:'HH'}}, {{availDate.Time}}
-
-                                                        //ul#dates(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                        //    li(ng-repeat="appt in availDate.appointments ")
-                                                                p
-
-                                                                //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                                //    li(ng-repeat="time in appt.Times")
-                                                                //        p {{availDate.Coach.coachName}} {{appt.Date}} {{time.time}}
-
-
-                                                    //    p {{appt}}
-
-                                                    //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                    //    legend
-                                                    //    li(ng-repeat="availdTime in availdDate.Times") b {{availDate.Date}}{{availTime.time}}
-                                                    //
-                                                    //            a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
-
-
-
-                                        input(type='button', id="fakeSave" , ng-click='' style="display:none;")
-
-
                 #availability.tab-pane.col-sm-10.col-md-10.main
                     .ng-scope(ng-controller='SchController' data-ng-init='initApp()')
                         .container
@@ -164,11 +95,33 @@ block content
                                                                 th(style="vertical-align:initial;padding:4px;") {{availDate.Date }}
                                                         tbody
                                                             tr(ng-repeat="availTime in availDate.Times | orderBy:'time' ")
+                                                                th(style="padding:4px;")
                                                                 td(style="padding:4px;")
                                                                     div(ng-if="!availTime.User" style="display:inline;") {{availTime.time | date:'mm'}}
                                                                         a(href='#' style='padding-left: 10px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}')
                                                                             img(src="./img/delete_icon.png" style="display:inline;")
                                                                     div(ng-if="availTime.User" style="display:inline;text-decoration: line-through") {{availTime.time | date:'mm'}}
+                                        .col-md-1
+                                            table(border='1px;')
+                                                thead
+                                                    tr
+                                                        th(style="vertical-align:initial;padding:4px;") &nbsp;
+                                                tbody
+                                                    tr#times.ng-scope(ng-repeat="allowTime in allowTimes")
+                                                        td(style="vertical-align:initialpadding:4px;") {{allowTime}}
+
+                                        .col-md-7
+                                            table(border='1px;')
+                                                tr#dates
+                                                    td(style="vertical-align:initial;").ng-scope(ng-repeat="availDate in dispAvailDates | orderBy:'Date'")
+                                                        table
+                                                            thead
+                                                                tr
+                                                                    th(style="vertical-align:initial;padding:4px;") {{availDate.Date }}
+                                                            tbody
+                                                                tr#times(style="vertical-align:initial;padding:4px;").ng-scope(ng-repeat="allowTime in allowTimes")
+
+                                                                    td(style="vertical-align:initialpadding:4px;") XX
 
                                     p
                                     input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary

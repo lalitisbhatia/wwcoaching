@@ -1,5 +1,5 @@
 'use strict';
-adminModule.factory('testAdminService',function($http,$log,$q,$rootScope){
+adminModule.factory('AdminService',function($http,$log,$q,$rootScope){
     var myService = {
         getAllUsers: function () {
             return $http({

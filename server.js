@@ -67,7 +67,7 @@ app.get('/logout',admin.logout);
 //*****This section is for the API routes to get data********
 //***********************************************************
 
-app.get('/coaches',admin.checkAdmin,api.getAllCoaches);
+app.get('/coaches',admin.checkAuth,api.getAllCoaches);
 app.get('/coaches/:id',admin.checkAdmin,api.getCoachById);
 app.get('/coachinfo',admin.checkCoach, api.getCoachInfo);
 app.post('/addCoach', admin.checkAdmin,api.addCoach);

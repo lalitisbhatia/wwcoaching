@@ -243,6 +243,14 @@ exports.logout = function(req,res){
     });
 }
 
+exports.checkAuth = function(req,res,next){
+    if(req.session && req.session.auth ){
+        next();
+    }else{
+        res.redirect('/admin');
+    }
+};
+
 exports.checkAdmin = function(req,res,next){
     if(req.session && req.session.auth && req.session.isAdmin){
         next();
@@ -260,7 +268,7 @@ exports.checkCoach = function(req,res,next){
 };
 
 exports.checkParticipant = function(req,res,next){
-    if(req.session && req.session.auth ){
+    if(req.session && req.session.auth && req.session.isParticipant){
         next();
     }else{
         res.redirect('/');
