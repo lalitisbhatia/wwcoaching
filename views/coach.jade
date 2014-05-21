@@ -15,6 +15,8 @@ block content
                     a(href='#resources', data-toggle='tab') Resources
                 li(style='margin-left:80px;')
                     a(href='#availability', data-toggle='tab') Availability
+                li(style='margin-left:80px;')
+                    a(href='#availability1', data-toggle='tab') Availability Test
                         
             legend
             // Tab panes
@@ -100,36 +102,61 @@ block content
                                                                         a(href='#' style='padding-left: 10px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}')
                                                                             img(src="./img/delete_icon.png" style="display:inline;")
                                                                     div(ng-if="availTime.User" style="display:inline;text-decoration: line-through") {{availTime.time | date:'mm'}}
-                                    table
-                                        tr
-                                            td
-                                                table(border='1px;')
-                                                    thead
-                                                        tr
-                                                            th &nbsp;
-                                                    tbody
-                                                        tr#times.ng-scope(ng-repeat="allowTime in allowTimes")
-                                                            td {{allowTime}}
 
-
-                                            td
-                                                table(border='1px;')
-                                                    tr#dates
-                                                        td.ng-scope(ng-repeat="availDate in dispAvailDates | orderBy:'Date'")
-                                                            table
-                                                                thead
-                                                                    tr
-                                                                        th {{availDate.Date }}
-                                                                tbody
-                                                                    tr#times.ng-scope(ng-repeat="allowTime in allowTimes")
-
-                                                                        td XX
 
                                     p
                                     input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
                                     p(style="color:green") {{ConfirmMessage}}
                                     input(type='button', id="fakeSave" , ng-click='' style="display:none;")
 
+
+                #availability1.tab-pane.col-sm-10.col-md-10.main
+                    .ng-scope(ng-controller='SchController_test' data-ng-init='initApp()')
+                        .container
+                            .row.well.col-md-12
+                                .col-md-7
+                                    .ng-pristine
+
+
+                                        //
+                                        //ul#dates(style="list-style-type: none;padding-left:10px;")
+                                        //    li(ng-repeat="availDate in coachAvailDates | orderBy:'Date' ")
+                                        //        b {{availDate.Date}} {{availDate.Time}}
+                                                    //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
+                                                    //    li(ng-repeat="availTime in availDate.Time | orderBy:'time'") {{availTime.time}}
+                                                            a(href='#' style='padding-left: 30px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}') X
+                                        //input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
+                                        //p(style="color:green") {{ConfirmMessage}}
+                                        //input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+
+                                        table#availSchedules(border='1px;')
+                                            tr
+                                                td(ng-repeat="availDate in calendarArray.Dates" ng-init="outerIndex = $index")
+                                                    table
+                                                        tr(ng-repeat="availTime in availDate.Times" ng-init="innerIndex = $index")
+                                                            td
+                                                                div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff") Time
+
+                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff")
+                                                                    b {{availDate.Date}}
+                                                                div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="padding-left:10px;padding-top:4px;padding-bottom:4px; background:#ddd;width:80px;")
+                                                                    b {{availTime.time}}
+                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" style="padding:4px;")
+                                                                    input#calCellEmpty(type="checkbox"  style="margin:0" ng-click="updateSelection($event,availTime.timeUTC)")
+                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="padding:4px;")
+                                                                    input#calCellEmpty(type="checkbox" style="margin:0" checked ng-click="updateSelection($event,availTime.timeUTC)")
+
+
+
+
+
+
+
+
+                                    p
+                                    input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
+                                    p(style="color:green") {{ConfirmMessage}}
+                                    input(type='button', id="fakeSave" , ng-click='' style="display:none;")
 
 
 
