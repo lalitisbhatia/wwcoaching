@@ -147,7 +147,6 @@ adminModule.factory('testAdminService',function($http,$log,$q,$rootScope){
         }
     };
 
-
-    return myService;
+ return myService;
 
 });
