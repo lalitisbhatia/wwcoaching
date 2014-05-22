@@ -2,11 +2,11 @@ extends layout
 
 block content
 
-    .container(ng-controller='CoachController' style="padding-top:50px;padding-left:200px;")
+    .container(ng-controller='CoachController' style="padding-top:20px;padding-left:20px;")
         h3(style='padding-left:0px;') Hi {{FirstName}}! Welcome to the Coaches' Dashboard.
         p  Click on the links below to see your coachees' information, select your available schedule or......
         legend
-        p(style='padding-bottom:10px;')
+        p(style='padding-bottom:5px;')
         .row
             ul.nav.nav-pills(style='font-size:20px;margin-left:10px;')
                 li.active
@@ -56,12 +56,11 @@ block content
                         p this is the Resources tab
                
 
-                #availability.tab-pane.col-sm-10.col-md-10.main
-                    .ng-scope(ng-controller='SchController_test' data-ng-init='initApp()')
+                #availability.tab-pane.col-sm-12.col-md-12.main
+                    .ng-scope(ng-controller='SchController' data-ng-init='initApp()')
                         .container
-                            .row.well.col-md-12
-                                .col-md-7
-                                    .ng-pristine
+                            .row
+                                .col-md-12
                                          p Please choose your availability for coaching call by checking the date/time slots.
                                             | As users schedule calls with you, it'll appear on this calendar
 
@@ -71,7 +70,7 @@ block content
 
                                             a(style="display:inline-block;border:thin;padding:4px;" href ng-click="updateWeek('prev')")
                                              b <
-                                            | {{WeekRange}}
+                                            b  {{WeekRange}}
                                             a(style="display:inline-block;border:thin;padding:4px;" href ng-click="updateWeek('next')")
                                              b >
                                         table#availSchedules(border='1px;')
@@ -91,7 +90,7 @@ block content
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="padding:4px;height:20px;")
                                                                     input#calCellEmpty(type="checkbox" style="margin:0" checked ng-click="updateSelection($event,availTime.timeUTC)")
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Appt with {{availTime.Appt.FirstName}}
-                                                td Button here for next 10days
+
 
 
 
@@ -99,7 +98,6 @@ block content
                                     input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
                                     p(style="color:green") {{ConfirmMessage}}
                                     input(type='button', id="fakeSave" , ng-click='' style="display:none;")
-                                    p Button here for next 10days
 
 
 
