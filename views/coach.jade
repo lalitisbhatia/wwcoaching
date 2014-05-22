@@ -15,8 +15,6 @@ block content
                     a(href='#resources', data-toggle='tab') Resources
                 li(style='margin-left:80px;')
                     a(href='#availability', data-toggle='tab') Availability
-                li(style='margin-left:80px;')
-                    a(href='#availability1', data-toggle='tab') Availability Test
                         
             legend
             // Tab panes
@@ -57,60 +55,8 @@ block content
                     .container
                         p this is the Resources tab
                
+
                 #availability.tab-pane.col-sm-10.col-md-10.main
-                    .ng-scope(ng-controller='SchController' data-ng-init='initApp()')
-                        .container
-                            .row.well.col-md-12
-                                .col-lg-4(style="border-right:ridge;")
-                                    form.ng-pristine
-                                        fieldset
-                                            // Form Name
-                                            legend Add available times
-                                            p Choose the dates and times that you're available for your caoching calls
-                                                | Once you've made your selections, your choices will display on right. Please
-                                                | review them and hit save
-                                            // Text input
-                                            .form-group
-                                                .col-md-12
-                                                    input#datetimepicker.form-control.input-md(type='text', name='datetime', ng-model='newDate' )
-                                .col-md-7
-                                    .ng-pristine
-
-
-                                            //
-                                            //ul#dates(style="list-style-type: none;padding-left:10px;")
-                                            //    li(ng-repeat="availDate in coachAvailDates | orderBy:'Date' ")
-                                            //        b {{availDate.Date}} {{availDate.Time}}
-                                                        //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                        //    li(ng-repeat="availTime in availDate.Time | orderBy:'time'") {{availTime.time}}
-                                                                a(href='#' style='padding-left: 30px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}') X
-                                            //input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
-                                            //p(style="color:green") {{ConfirmMessage}}
-                                            //input(type='button', id="fakeSave" , ng-click='' style="display:none;")
-
-                                        table(border='1px;')
-                                            tr#dates
-                                                td(style="vertical-align:initial;").ng-scope(ng-repeat="availDate in dispAvailDates | orderBy:'Date'")
-                                                    table
-                                                        thead
-                                                            tr
-                                                                th(style="vertical-align:initial;padding:4px;") {{availDate.Date }}
-                                                        tbody
-                                                            tr(ng-repeat="availTime in availDate.Times | orderBy:'time' ")
-                                                                td(style="padding:4px;")
-                                                                    div(ng-if="!availTime.User" style="display:inline;") {{availTime.time | date:'mm'}}
-                                                                        a(href='#' style='padding-left: 10px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}')
-                                                                            img(src="./img/delete_icon.png" style="display:inline;")
-                                                                    div(ng-if="availTime.User" style="display:inline;text-decoration: line-through") {{availTime.time | date:'mm'}}
-
-
-                                    p
-                                    input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
-                                    p(style="color:green") {{ConfirmMessage}}
-                                    input(type='button', id="fakeSave" , ng-click='' style="display:none;")
-
-
-                #availability1.tab-pane.col-sm-10.col-md-10.main
                     .ng-scope(ng-controller='SchController_test' data-ng-init='initApp()')
                         .container
                             .row.well.col-md-12
