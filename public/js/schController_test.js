@@ -73,6 +73,7 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
     //Handle broadcast of coach
     $scope.$on('handleCoachBroadcast', function() {
         $scope.Coach = wwCoachingService.Coach;
+        $scope.FirstNmae = $scope.Coach.FirstName;
         $scope.coachMin = {coachId:$scope.Coach._id,coachName:$scope.Coach.FirstName+' '+$scope.Coach.LastName,coachPhone:$scope.Coach.Phone,coachEmail:$scope.Coach.Email};
 
         //console.log($scope.coachMin);
