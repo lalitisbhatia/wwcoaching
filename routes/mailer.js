@@ -53,6 +53,7 @@ exports.sendMail = function(req,res){
             console.log(error);
         }else{
             console.log("Message sent to participant: " + response.message);
+            smtpTransport.close(); // shut down the connection pool, no more messages
             mailOptions.to = coachEmail;
             mailOptions.text = coachMessage;
             //now send to coach
@@ -61,8 +62,6 @@ exports.sendMail = function(req,res){
                 smtpTransport.close(); // shut down the connection pool, no more messages
             });
         }
-//
-//        // if you don't want to use this transport object anymore, uncomment following line
 
     });
 };
