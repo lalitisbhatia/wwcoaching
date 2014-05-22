@@ -139,8 +139,8 @@ block content
                                                             td
                                                                 div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;") Time
 
-                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;vertical-align:center;")
-                                                                    b {{availDate.Date}}
+                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; width:110px; height:50px;vertical-align:center;")
+                                                                    b {{availDate.DateDisp}}
                                                                 div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="text-align:center;padding-left:10px;padding-top:4px;padding-bottom:4px; background:#ddd;width:80px;height:20px;")
                                                                     b {{availTime.time}}
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" style="padding:4px;height:20px;")

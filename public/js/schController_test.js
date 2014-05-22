@@ -45,7 +45,7 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
             var dt = new Date(startdate.getFullYear(), startdate.getMonth(),startdate.getDate()+i,startdate.getHours() ,startdate.getMinutes());
 
             //console.log(dt);
-            $scope.calendarArray.Dates.push({Date:dt.dateFormat('m/d/Y'),Times:[]});
+            $scope.calendarArray.Dates.push({Date:dt.dateFormat('m/d/Y'),DateDisp:dt.dateFormat('D, M-d'),Times:[]});
             for(var j =0;j<26;j++){
 //                if(i==0 && j==0) {
 //                    dispTime = 1;
