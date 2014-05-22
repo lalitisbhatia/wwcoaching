@@ -53,7 +53,7 @@ exports.sendMail = function(req,res){
             console.log(error);
         }else{
             console.log("Message sent to participant: " + response.message);
-            smtpTransport.close(); // shut down the connection pool, no more messages
+            //smtpTransport.close(); // shut down the connection pool, no more messages
             mailOptions.to = coachEmail;
             mailOptions.text = coachMessage;
             //now send to coach

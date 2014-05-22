@@ -35,6 +35,10 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
         var startdate = new Date(today.getFullYear(), today.getMonth(),today.getDate(), 8,30);
         //console.log('todayStart = ' + todayStart.dateFormat('m/d/Y h:iA'));
         //console.log('todayStartUTC = ' + Date.parse(todayStart));
+        var weekEndDate = new Date(today.getFullYear(), today.getMonth(),today.getDate()+7);
+
+        console.log( weekEndDate.dateFormat('d Y'));
+        $scope.WeekRange=startdate.dateFormat('M ') + startdate.dateFormat('d - ') + weekEndDate.dateFormat('d, Y');
 
         startdate.setDate(today.getDate()-1);
         console.log(startdate);
@@ -45,7 +49,7 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
             var dt = new Date(startdate.getFullYear(), startdate.getMonth(),startdate.getDate()+i,startdate.getHours() ,startdate.getMinutes());
 
             //console.log(dt);
-            $scope.calendarArray.Dates.push({Date:dt.dateFormat('m/d/Y'),DateDisp:dt.dateFormat('D, M-d'),Times:[]});
+            $scope.calendarArray.Dates.push({Date:dt.dateFormat('m/d/Y'),DateDisp:dt.dateFormat('D, m/d'),Times:[]});
             for(var j =0;j<26;j++){
 //                if(i==0 && j==0) {
 //                    dispTime = 1;
@@ -64,7 +68,7 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
                 var dtTime = new Date(dt.getFullYear(), dt.getMonth(),dt.getDate(),dt.getHours() ,startdate.getMinutes()+j*30);
 
                 //console.log('Time = ' + dtTime);
-                $scope.calendarArray.Dates[i].Times.push({time:dtTime.dateFormat('H:i'),timeUTC:dtTime,DispFlag:0});
+                $scope.calendarArray.Dates[i].Times.push({time:dtTime.dateFormat('h:iA'),timeUTC:dtTime,DispFlag:0});
             }
         }
 
@@ -112,6 +116,9 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
                         if(userappt) {
                             //console.log(availtime + '-'+availdate);
                             $scope.calendarArray.Dates[j].Times[k].DispFlag = 2;
+                            $scope.calendarArray.Dates[j].Times[k].Appt=userappt;
+                            console.log('Appt');
+                            console.log(userappt);
                         }else{
                             $scope.calendarArray.Dates[j].Times[k].DispFlag = 1;
                         }
@@ -148,7 +155,7 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
         //remove is based on the data-date and data-time attributes of the link
         //by finding the date and time in teh coachAvailDates array and splicing it
         var inputDate = d.dateFormat('m/d/Y');
-        var inputTime = d.dateFormat('H:i');
+        var inputTime = d.dateFormat('h:iA');
         //console.log(d);
         //console.log(inputDate + ' - ' + inputTime);
         console.log($scope.coachAvailDates);
@@ -171,7 +178,7 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
     $scope.addDate = function(d) {
         $log.log(d);
         var inputDate = d.dateFormat('m/d/Y');
-        var inputTime = d.dateFormat('H:i');
+        var inputTime = d.dateFormat('h:iA');
         var timeSlotExists = false;
         var timeExists = false;
 

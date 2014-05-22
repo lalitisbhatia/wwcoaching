@@ -116,38 +116,35 @@ block content
                             .row.well.col-md-12
                                 .col-md-7
                                     .ng-pristine
-                                        legend Please choose your availability for
-                                            | coaching call by checking the date/time slots.
-                                            | As users schedule calls with you, it'll be shown on this calendar
+                                         p Please choose your availability for coaching call by checking the date/time slots.
+                                            | As users schedule calls with you, it'll appear on this calendar
 
-                                        //
-                                        //ul#dates(style="list-style-type: none;padding-left:10px;")
-                                        //    li(ng-repeat="availDate in coachAvailDates | orderBy:'Date' ")
-                                        //        b {{availDate.Date}} {{availDate.Time}}
-                                                    //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                    //    li(ng-repeat="availTime in availDate.Time | orderBy:'time'") {{availTime.time}}
-                                                            a(href='#' style='padding-left: 30px;' data-date='{{availDate.Date}}' data-time='{{availTime.time}}') X
-                                        //input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
-                                        //p(style="color:green") {{ConfirmMessage}}
-                                        //input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+                                        legend
+                                            p
+                                        p
 
+                                            a(href="#" style="display:inline-block;border:thin;padding:4px;")
+                                             b <
+                                            | {{WeekRange}}
+                                            a(href="#" style="display:inline-block;border:thin;padding:4px;")
+                                             b >
                                         table#availSchedules(border='1px;')
                                             tr
-                                                td(ng-repeat="availDate in calendarArray.Dates" ng-init="outerIndex = $index")
+                                                td(ng-repeat="availDate in calendarArray.Dates" ng-init="outerIndex = $index" style="background-color:#fff;")
                                                     table
                                                         tr(ng-repeat="availTime in availDate.Times" ng-init="innerIndex = $index")
                                                             td
-                                                                div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;") Time
+                                                                div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;50px;padding-top:15px;") Time
 
-                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; width:110px; height:50px;vertical-align:center;")
-                                                                    b {{availDate.DateDisp}}
-                                                                div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="text-align:center;padding-left:10px;padding-top:4px;padding-bottom:4px; background:#ddd;width:80px;height:20px;")
-                                                                    b {{availTime.time}}
+                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; width:90px; height:50px;padding-top:15px;")
+                                                                    p {{availDate.DateDisp}}
+                                                                div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="text-align:center;vertical-align:middle;padding-left:10px;padding-right:10px;padding-bottom:4px; background:#ddd;width:80px;height:20px;border-bottom:ridge")
+                                                                    p {{availTime.time}}
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" style="padding:4px;height:20px;")
                                                                     input#calCellEmpty(type="checkbox"  style="margin:0" ng-click="updateSelection($event,availTime.timeUTC)")
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="padding:4px;height:20px;")
                                                                     input#calCellEmpty(type="checkbox" style="margin:0" checked ng-click="updateSelection($event,availTime.timeUTC)")
-                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Taken
+                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Appt with {{availTime.Appt.FirstName}}
                                                 td Button here for next 10days
 
 
