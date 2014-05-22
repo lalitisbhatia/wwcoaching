@@ -110,8 +110,8 @@
       <file leaf-file-name="schController.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/schController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6762226" vertical-offset="631" max-vertical-offset="6120">
-              <caret line="43" column="127" selection-start-line="43" selection-start-column="127" selection-end-line="43" selection-end-column="127" />
+            <state vertical-scroll-proportion="0.55480605" vertical-offset="3487" max-vertical-offset="6072">
+              <caret line="159" column="14" selection-start-line="159" selection-start-column="14" selection-end-line="159" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -524,7 +524,11 @@
       <created>1400783149741</created>
       <updated>1400783149741</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Scheduler next/prev 2 weeks WORKING">
+      <created>1400784704627</created>
+      <updated>1400784704627</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -569,7 +573,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="fixed sorting in display of dates and times&#10;still need to resolve AM/PM issue" />
     <MESSAGE value="moved scheduling BE code to its own module" />
     <MESSAGE value="1. updated data model for schedules- flattened out instead of deep arrays&#10;2. updated scheduling controller - there are some hacks to render the display grouped by date&#10; 3. updated view for user search result. right now it lives on the coach dashboard - need to move it to user&#10;" />
     <MESSAGE value="1. search for schedules - date is working . need to resolve time search" />
@@ -594,7 +597,8 @@
     <MESSAGE value="removed old scheduling controller&#10;" />
     <MESSAGE value="Search for coach name is working&#10;Cleaned up the SchedulerAPI search method to be dynamic&#10;" />
     <MESSAGE value="Scheduler next/prev 2 weeks almost working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Scheduler next/prev 2 weeks almost working" />
+    <MESSAGE value="Scheduler next/prev 2 weeks WORKING" />
+    <option name="LAST_COMMIT_MESSAGE" value="Scheduler next/prev 2 weeks WORKING" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -994,8 +998,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/schController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6762226" vertical-offset="631" max-vertical-offset="6120">
-          <caret line="43" column="127" selection-start-line="43" selection-start-column="127" selection-end-line="43" selection-end-column="127" />
+        <state vertical-scroll-proportion="0.55480605" vertical-offset="3487" max-vertical-offset="6072">
+          <caret line="159" column="14" selection-start-line="159" selection-start-column="14" selection-end-line="159" selection-end-column="14" />
           <folding />
         </state>
       </provider>
