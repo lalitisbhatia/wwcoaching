@@ -134,7 +134,7 @@ participantModule.controller('UserSchedulingController',['$scope','$http','$log'
         });
     };
 
-    $scope.saveUserAppt = function(coachId,selDate) {
+    $scope.saveUserAppt = function(coach,selDate) {
         console.log('calling save Schedule');
 
 //        var selDate = $scope.SelectedDateUTC;
@@ -142,8 +142,8 @@ participantModule.controller('UserSchedulingController',['$scope','$http','$log'
         //console.log($scope.SelectedDateUTC.dateFormat('m/d/Y H:i'));
         console.log(selDate);
 
-        console.log(coachId);
-        var appt = {Date:selDate,CoachId:coachId};
+        console.log(coach);
+        var appt = {Date:selDate,CoachId:coach.coachId};
         console.log(appt);
         $http({
             method:'POST',
@@ -154,6 +154,17 @@ participantModule.controller('UserSchedulingController',['$scope','$http','$log'
                 console.log('success');
                 console.log(d);
                 //trigger emails/text
+                $http({
+                    method:'POST',
+                    url: '/email',
+                    data: {Date:selDate,Coach:coach}
+                })
+                    .success(function(d,status,headers,config){
+                        console.log('success');
+                    })
+                    .error(function(status, headers, config){
+                        console.log('failed to send email:' + status + ' - ' + headers );
+                    });
             })
             .error(function(status, headers, config){
                 console.log('failed to save schedule:' + status + ' - ' + headers );

@@ -9,6 +9,7 @@ var express = require('express'),
     admin = require("./routes/admin"),
     assmnt = require("./routes/assessments"),
     schedule = require("./routes/schedule");
+    mailer = require("./routes/mailer");
 
 var app = express();
 
@@ -104,6 +105,13 @@ app.get('/getCallNotes/:userid',admin.checkCoach, api.getCallNotes);
 app.post('/addCallNote',admin.checkCoach, api.addCallNote);
 app.post('/updateCallNote',admin.checkCoach, api.updateCallNote);
 app.post('/deleteCallNote',admin.checkCoach, api.deleteCallNote);
+
+app.post('/email',mailer.sendMail);
+
+/****************************************************
+ This section is for the emailing
+ /****************************************************/
+
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));

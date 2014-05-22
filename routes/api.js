@@ -408,16 +408,10 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
         });
     });
 
-//    db.collection(usersCollName, function(err, collection) {
-//        collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
-//            if (err) {
-//                res.send({'error':'error occurred while saving the call note'});
-//            } else {
-//                console.log('Success: ' + JSON.stringify(result[0]));
-//                res.send(result[0]);
-//            }
-//        });
-//    });
 });
 };
 
+//################################################
+//##### Emailing API  methods ###########
+//################################################
+exports.sendMail
