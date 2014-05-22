@@ -41,9 +41,9 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
 
         console.log('Starting calendar setup with start date - ' +$scope.startdate);
 
-        $scope.weekEndDate = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+15);
+        $scope.weekEndDate = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+13);
         console.log( $scope.weekEndDate.dateFormat('d Y'));
-        $scope.WeekRange=$scope.startdate.dateFormat('M ') + $scope.startdate.dateFormat('d - ') + $scope.weekEndDate.dateFormat('d, Y');
+        $scope.WeekRange=$scope.startdate.dateFormat('M d - ') +  $scope.weekEndDate.dateFormat('M d, Y');
 
         $scope.startdate.setDate($scope.startdate.getDate()-1);
         console.log($scope.startdate);
@@ -160,12 +160,12 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
         console.log('inside update week');
         if(action=='next'){
             console.log('select next week');
-            $scope.startdate.setDate($scope.startdate.getDate()+14);
+            $scope.startdate.setDate($scope.startdate.getDate()+15);
             console.log($scope.startdate);
         }
         if(action=='prev'){
             console.log('select prev week');
-            $scope.startdate.setDate($scope.startdate.getDate()-14);
+            $scope.startdate.setDate($scope.startdate.getDate()-13);
             console.log($scope.startdate);
         }
 
