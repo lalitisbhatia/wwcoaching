@@ -23,45 +23,65 @@ var mailOptions = {
 
 // send mail with defined transport object
 exports.sendMail = function(req,res){
-    console.log('inside mailing program');
-    var user = req.session.user;
+    sendCoachMail(req,res);
+    sendParticipantMail(req,res);
+};
+
+
+var sendCoachMail = function(req,res){
+    console.log('inside coach mailing program');
     var coach = req.body.Coach;
     var date = new Date(req.body.Date);
     var display_date = date.getDay()+', '+date.getMonth()+' '+date.getDate();
 
     var coachEmail = coach.coachEmail;
     var coachName = coach.coachName;
+    var participantName = req.session.user.FirstName + ' '+ req.session.user.LastName;
+
+    var coachMessage="Hi "+coachName +',\n ' + participantName + ' has booked a call with you  for '+date;
+
+    console.log(coach);
+    console.log(coachMessage);
+
+    mailOptions.to = coachEmail;
+    mailOptions.text = coachMessage;
+
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            console.log(error);
+        }else{
+            console.log("Message sent to coach: " + response.message);
+            smtpTransport.close(); // shut down the connection pool, no more messages
+        }
+
+    });
+};
+
+var sendParticipantMail = function(req,res){
+
+
+    console.log('inside participant mailing program');
+    var coach = req.body.Coach;
+    var coachName = coach.coachName;
+    var user = req.session.user;
+    var date = new Date(req.body.Date);
+    var display_date = date.getDay()+', '+date.getMonth()+' '+date.getDate();
 
     var participantEmail = user.Email;
     var participantName = user.FirstName;
 
-    var coachMessage="Hi "+coachName +',\n ' + participantName + ' has booked a call with you  for '+date;
     var participantMessage = "Hi "+ participantName +",\n You have booked a call with "+coachName + ' for '+date;
 
-    console.log(coach);
-    console.log(coachMessage);
     console.log(participantMessage);
 
     mailOptions.to = participantEmail;
     mailOptions.text = participantMessage;
-//    mailOptions.from = req.body.from;
-//    console.log(mailOptions);
-    //res.send({message:'Done'});
     smtpTransport.sendMail(mailOptions, function(error, response){
-
         if(error){
             console.log(error);
-        }else{
+        }else {
             console.log("Message sent to participant: " + response.message);
-            //smtpTransport.close(); // shut down the connection pool, no more messages
-            mailOptions.to = coachEmail;
-            mailOptions.text = coachMessage;
-            //now send to coach
-            smtpTransport.sendMail(mailOptions, function(error, response){
-                console.log("Message sent to coach: " + response.message);
-                smtpTransport.close(); // shut down the connection pool, no more messages
-            });
+            smtpTransport.close(); // shut down the connection pool, no more messages
         }
-
     });
 };
