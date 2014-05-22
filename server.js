@@ -96,7 +96,7 @@ app.post('/assessment', assmnt.saveAssm);
 //****************************************************
 app.get('/getCoachAvails', schApi.getCoachAvails);
 app.post('/addCoachAvails', schApi.addCoachAvails);
-app.get('/searchAvails/:datetime', schApi.searchAvails);
+app.get('/searchAvails/:type/:value', schApi.searchAvails);
 app.post('/saveAppt', schApi.saveUserAppt);
 /****************************************************
   This section is for the call Notes and action plans

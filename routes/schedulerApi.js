@@ -107,21 +107,31 @@ exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db)
     USER Search for available slots
  *************************************/
 exports.searchAvails = function(req, res) {helper.getConnection(function(err,db){
-    console.log(req.params.datetime.toString());
-    var inputUTCDate =new Date(req.params.datetime);
+    var type =req.params.type;
+    console.log(type);
+    var query={};
+    if(type=='date'){
 
-    var timeForward = new Date(inputUTCDate);
-    var timeBack = new Date(inputUTCDate);
-    timeForward.setHours(timeForward.getHours()+10);
-    timeBack.setHours(timeBack.getHours()-2);
+        var inputUTCDate =new Date(req.params.value);
+        var timeForward = new Date(inputUTCDate);
+        var timeBack = new Date(inputUTCDate);
+        timeForward.setHours(timeForward.getHours()+10);
+        timeBack.setHours(timeBack.getHours()-2);
 
-    console.log(timeForward.toISOString());
-    console.log(timeBack.toISOString());
+        console.log(timeForward.toISOString());
+        console.log(timeBack.toISOString());
 
+        query={DateUTC:{$gte:timeBack.toISOString(),$lte:timeForward.toISOString()},User:{$exists:false}};
 
-    console.log('Retrieving availability of  coaches for '+ timeForward.toISOString() );
+    }else if(type=='coach'){
+        var coachId = req.params.value;
+        console.log('coach id = ' + coachId);
+        query={"Coach.coachId":coachId,User:{$exists:false}};
+    }
+
+//    console.log('Retrieving availability of  coaches for '+ timeForward.toISOString() );
     db.collection(schCollName, function(err, collection) {
-        collection.find({DateUTC:{$gte:timeBack.toISOString(),$lte:timeForward.toISOString()},User:{$exists:false}}).toArray(function(err, items) {
+        collection.find(query).toArray(function(err, items) {
             if (err) {
                 res.send({'error':'error occurred while getting all availabilities'});
             } else {

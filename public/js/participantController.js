@@ -11,11 +11,6 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
         $scope.lastname=ln;
         $scope.errMessage='';
         $scope.participantId="";
-        //$('#fakeSave').click();
-        //console.log($scope.firstname+' - ' +$scope.lastname);
-//        participantService.getUserProfile().then(function () {
-//        });
-
 
     };
 
@@ -72,17 +67,15 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
  */
 
 //controller for coaches to choose their availability
-participantModule.controller('UserSchedulingController',['$scope','$http','$log','$filter','participantService',function($scope,$http,$log,$filter,participantService){
+participantModule.controller('UserSchedulingController',['$scope','$http','$log','$filter','searchService','participantService',function($scope,$http,$log,$filter,searchService,participantService){
 
     $scope.initApp=function() {
         $log.log('initialized UserSchedulingController');
         $scope.coaches=[];
         participantService.getAllCoaches().then(function(data){
             $scope.coaches = data;
-            console.log($scope.coaches);
+//            console.log($scope.coaches);
         });
-
-        //$scope.availDates = [];
 
         $scope.predicate = 'Date';
         $('#datepicker').datetimepicker({
@@ -111,27 +104,43 @@ participantModule.controller('UserSchedulingController',['$scope','$http','$log'
                 $scope.SelectedDate = date.dateFormat('d-M-y, h:i A');
                 $scope.SelectedDateUTC =dateUTC;
                 console.log('$scope.SelectedDateUTC = ' + $scope.SelectedDateUTC);
-                $scope.SearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
+
                 $('#fakeSave').click();
 
-                $http({
-                    method: 'GET',
-                    url: '/searchAvails/'+dateUTC
-                })
-                    .success(function(data) {
-                        $log.info("Successfully retrieved availability for all coaches.");
-                        //re-sort data
-
-                        $scope.availDates = data;
-                        $log.log($scope.availDates);
-                    })
-                    .error(function(status, headers, config){
-                        $log.log('failed to coach availabilities' + status);
-                    });
+                //Call the service to return results
+                searchService.getCoachesByDate(dateUTC).then(function(data){
+                    $scope.setSearchResults(data);
+                });
 
 
             }
         });
+    };
+
+    $('#coachselect').change(function(){
+        var coachId = $(this).children("option:selected").val();
+        console.log($(this).children("option:selected").text()  + ' selected');
+        //search for coaches using coachId
+        searchService.getCoachesById(coachId).then(function(data){
+            $scope.setSearchResults(data);
+        });
+    });
+
+    $scope.getCoachesById= function(coachId){
+        console.log('inside function - coach id = '+coachId);
+        searchService.getCoachesById(coachId).then(function(data){
+            $scope.setSearchResults(data);
+        });
+    };
+
+    $scope.setSearchResults = function(data){
+        $scope.availDates = data;
+        if($scope.availDates.length>0){
+            $scope.SearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
+        }else{
+            $scope.SearchMessage = "No coaches are available on or around " + $scope.SelectedDate +".\n Please search using a different date or search by coach name.";
+        }
+        $log.log($scope.availDates);
     };
 
     $scope.saveUserAppt = function(coach,selDate) {
@@ -175,3 +184,4 @@ participantModule.controller('UserSchedulingController',['$scope','$http','$log'
     // I sort the given collection on the given property.
 
 }]);
+

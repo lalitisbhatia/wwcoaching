@@ -13,6 +13,14 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
         //initialize the calendar array
         $scope.calendarArray=[];
         $scope.calendarArray.Dates=[];
+
+        //Get the start date and time dynamically
+        $scope.today= new Date();
+        $scope.startdate = new Date($scope.today.getFullYear(), $scope.today.getMonth(),$scope.today.getDate(), 8,30);
+        //console.log('todayStart = ' + todayStart.dateFormat('m/d/Y h:iA'));
+        //console.log('todayStartUTC = ' + Date.parse(todayStart));
+        $scope.weekEndDate = new Date($scope.today.getFullYear(), $scope.today.getMonth(),$scope.today.getDate()+7);
+
         //populate the calendar
         $scope.setupCalendar();
         //console.log('$scope.calendarArray');
@@ -30,23 +38,17 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
         // Define display params - based on these values, we'll setup the calendar display
         // 0 empty, 1 - Coach Available,, 2 - appt booked
 
-        //Get the start date and time dynamically
-        var today= new Date();
-        var startdate = new Date(today.getFullYear(), today.getMonth(),today.getDate(), 8,30);
-        //console.log('todayStart = ' + todayStart.dateFormat('m/d/Y h:iA'));
-        //console.log('todayStartUTC = ' + Date.parse(todayStart));
-        var weekEndDate = new Date(today.getFullYear(), today.getMonth(),today.getDate()+7);
 
-        console.log( weekEndDate.dateFormat('d Y'));
-        $scope.WeekRange=startdate.dateFormat('M ') + startdate.dateFormat('d - ') + weekEndDate.dateFormat('d, Y');
+        console.log( $scope.weekEndDate.dateFormat('d Y'));
+        $scope.WeekRange=$scope.startdate.dateFormat('M ') + $scope.startdate.dateFormat('d - ') + $scope.weekEndDate.dateFormat('d, Y');
 
-        startdate.setDate(today.getDate()-1);
-        console.log(startdate);
+        $scope.startdate.setDate($scope.today.getDate()-1);
+        console.log($scope.startdate);
 
         var dispTime = 0;
         var dispDate = 0;
         for(var i =0;i<=10;i++ ){
-            var dt = new Date(startdate.getFullYear(), startdate.getMonth(),startdate.getDate()+i,startdate.getHours() ,startdate.getMinutes());
+            var dt = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+i,$scope.startdate.getHours() ,$scope.startdate.getMinutes());
 
             //console.log(dt);
             $scope.calendarArray.Dates.push({Date:dt.dateFormat('m/d/Y'),DateDisp:dt.dateFormat('D, m/d'),Times:[]});
@@ -65,7 +67,7 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
 //                    dispDate = 1;
 //                }
                 //increase time by 30 minute increments
-                var dtTime = new Date(dt.getFullYear(), dt.getMonth(),dt.getDate(),dt.getHours() ,startdate.getMinutes()+j*30);
+                var dtTime = new Date(dt.getFullYear(), dt.getMonth(),dt.getDate(),dt.getHours() ,$scope.startdate.getMinutes()+j*30);
 
                 //console.log('Time = ' + dtTime);
                 $scope.calendarArray.Dates[i].Times.push({time:dtTime.dateFormat('h:iA'),timeUTC:dtTime,DispFlag:0});
@@ -150,6 +152,19 @@ coachingModule.controller('SchController_test',['$scope','$http','$log','$filter
     };
     /****************************************************************/
 
+    $scope.updateWeek= function(action){
+        console.log('inside update week');
+        if(action=='next'){
+            console.log('select next week');
+            $scope.startdate.setDate($scope.startdate.getDate()+7);
+            console.log($scope.startdate);
+        }
+        if(action=='prev'){
+            console.log('select prev week');
+            console.log($scope.startdate);
+            $scope.startdate.setDate($scope.startdate.getDate()-7);
+        }
+    };
 
     $scope.removeDate = function(d) {
         //remove is based on the data-date and data-time attributes of the link
