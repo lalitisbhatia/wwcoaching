@@ -2,7 +2,7 @@ extends layout
 
 block content
     
-    .container(ng-controller='UserDetailsController' data-ng-init='initApp()' style="padding-top:50px;padding-left:200px;")
+    .container(ng-controller='userDetailsController' data-ng-init='initApp()' style="padding-top:50px;padding-left:200px;")
         .sub-head NAME: {{FirstName}} {{LastName}}
 
         legend
@@ -45,7 +45,7 @@ block content
                     #tracker.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h1.page-header Tracker Info Here
                     #calls.tab-pane
-                        .ng-scope(ng-controller='NotesController' data-ng-init='initCtrlr()')
+                        .ng-scope
                              form.well.ng-pristine.ng-valid
                                 div
                                     label Date/Time

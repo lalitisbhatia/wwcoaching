@@ -1,22 +1,48 @@
-//controller for coaches to choose their availability
-coachingModule.controller('SchController',['$scope','$http','$log','$filter','wwCoachingService',function($scope,$http,$log,$filter,wwCoachingService){
+coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$log','coachDashboardServices', function($scope,$http,$log,coachDashboardServices) {
 
+    /*********************************************************************/
     $scope.initApp=function() {
+        $log.log('coachDashBoardController initialized');
+
+        /*********************************************************************
+         *** on init, get coach info, users for the coach and coach schedule
+         *********************************************************************/
+
+        coachDashboardServices.getCoachInfo().then(function(data){
+            $scope.Coach=data;
+            $scope.coachMin = {coachId:data._id,coachName:data.FirstName+' '+data.LastName,coachPhone:data.Phone,coachEmail:data.Email};
+            $scope.FirstName = data.FirstName;
+            console.log($scope.Coach);
+        });
+
+        coachDashboardServices.getCoachUsers().then(function(data){
+            $scope.users=data;
+        });
 
         //initialize the calendar array
         $scope.calendarArray=[];
         $scope.calendarArray.Dates=[];
 
-        //populate the calendar
-        $scope.setupCalendar();
-
         //initialize the array to hold data of availability from db
         $scope.coachAvailDates = [];
-    };
+
+        // To setup the calendar with availabilities,
+        // 1. get the availabilties into $scope.coachAvailDates
+        // 2. create an empty calendar
+        // 3. update the calendar with availabilities
+        coachDashboardServices.getCoachSchedule().then(function(data){
+            $scope.coachAvailDates=data;
+            console.log($scope.coachAvailDates);
+            //populate the calendar
+            $scope.setupCalendar();
+            $scope.updateCalendar();
+        })
+
+    }; //END of initApp
 
     /****************************************************************
-        This method will setup tha calendar with a start date and time.
-        The date is based on the current date and time starts with 9:00am
+     This method will setup tha calendar with a start date and time.
+     The date is based on the current date and time starts with 9:00am
      *****************************************************************/
     $scope.setupCalendar = function(){
         // Define display params - based on these values, we'll setup the calendar display
@@ -31,7 +57,7 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
             $scope.calendarArray.Dates.pop();
         }
 
-        //Get the start date and time dynamically
+        //Get the start date and time dynamically. If it doesn't exists already, use the current date
         if(!$scope.startdate){
             $scope.today= new Date();
             $scope.startdate = new Date($scope.today.getFullYear(), $scope.today.getMonth(),$scope.today.getDate(), 8,30);
@@ -75,36 +101,9 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
             }
         }
 
-    };
+    };/*******END SETUP CALENDAR*******/
 
-    //Handle broadcast of coach
-    $scope.$on('handleCoachBroadcast', function() {
-        $scope.Coach = wwCoachingService.Coach;
-        $scope.FirstNmae = $scope.Coach.FirstName;
-        $scope.coachMin = {coachId:$scope.Coach._id,coachName:$scope.Coach.FirstName+' '+$scope.Coach.LastName,coachPhone:$scope.Coach.Phone,coachEmail:$scope.Coach.Email};
-
-        //console.log($scope.coachMin);
-        //$scope.coachAvailDates = [];
-        // now that the coach info is loaded, get the coach schedules
-        $http({
-            method: 'GET',
-            url: '/getCoachAvails'
-        })
-            .success(function (data, status, headers, config) {
-                $scope.coachAvailDates=data;
-                console.log($scope.coachAvailDates);
-                //once coach availabilities are received, update the calendar
-                $scope.updateCalendar();
-                console.log('after getting coach avails');
-                //console.log($scope.calendarArray.Dates);
-
-            })
-            .error(function(status, headers, config){
-                console.log('failed to get schedules:' + status);
-            })
-    });
-
-
+    // Updates the calendar with availability and appointments
     $scope.updateCalendar = function(){
         for(var i in $scope.coachAvailDates){
             //console.log($scope.coachAvailDates[i].Date + '--' + $scope.coachAvailDates[i].Time);
@@ -129,10 +128,11 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
                 }
             }
         }
-    };
+    }; /*******END UPDATE CALENDAR*******/
+
 
     /* ****************************************************************
-        these 2 functions handle clicks on the calendar checkboxes
+     these 2 functions handle clicks on the calendar checkboxes
      *****************************************************************/
     $scope.updateSelection = function($event, d) {
         var checkbox = $event.target;
@@ -153,7 +153,7 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
     };
     /****************************************************************
      *  Handle Next/Prev calendar buttons
-    /****************************************************************/
+     /****************************************************************/
     $scope.updateWeek= function(action){
         console.log('inside update week');
         if(action=='next'){
@@ -173,22 +173,19 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
     };
     /****************************************************************/
 
+    //this removed the date-time from the coachAvailDates array that maps to the DB
+    //Removing from the display table is handled by checkbox handler methods
     $scope.removeDate = function(d) {
-        //remove is based on the data-date and data-time attributes of the link
-        //by finding the date and time in teh coachAvailDates array and splicing it
         var inputDate = d.dateFormat('m/d/Y');
         var inputTime = d.dateFormat('h:iA');
         //console.log(d);
-        //console.log(inputDate + ' - ' + inputTime);
-        console.log($scope.coachAvailDates);
+        //console.log($scope.coachAvailDates);
 
         for(var i in $scope.coachAvailDates) {
             if($scope.coachAvailDates[i].Date == inputDate && $scope.coachAvailDates[i].Time == inputTime) {
-
                 //console.log('Date exists');
                 //console.log('Date and time found - ready to splice the array');
                 $scope.coachAvailDates.splice(i,1);
-                //$('#fakeSave').click();
                 //console.log('coachAvailDates after delete');
                 //console.log($scope.coachAvailDates);
                 break;
@@ -219,30 +216,130 @@ coachingModule.controller('SchController',['$scope','$http','$log','$filter','ww
             //console.log('dateUTC from add= ' + dateUTC);
             $scope.coachAvailDates.push( {Date:inputDate,Time:inputTime,DateUTC:d,Coach:$scope.coachMin});
         }
-
+        console.log('after adding a date');
         console.log($scope.coachAvailDates);
     };
 
+    // Save schedule
     $scope.saveSchedule = function() {
         console.log('calling save Schedule');
 
         var coachSchedule = {};
         coachSchedule = {TimeSlots:$scope.coachAvailDates,CoachId:$scope.Coach._id};
         console.log($scope.coachAvailDates);
-        $http({
-            method:'POST',
-            url: '/addCoachAvails',
-            data: coachSchedule
-        })
-            .success(function (d, status, headers, config) {
-                console.log(d);
-                $scope.ConfirmMessage="Thanks for updating your schedule";
-            })
-            .error(function(status, headers, config){
-                console.log('failed to save schedule:' + status);
-            });
+        coachDashboardServices.saveCoachSchedule(coachSchedule).then(function(data){
+            $scope.ConfirmMessage="Thanks for updating your schedule";
+        });/**********END Save Schedule***********/
 
     };
 
 }]);
 
+/*******************************************************************************************************************
+ * *****************************************************************************************************************
+ * ***************  SEPARATE CONTROLLER FOR USER DETAILS ON THE DASHBOARD
+ * *****************************************************************************************************************
+ ********************************************************************************************************************/
+
+coachDashboardModule.controller('userDetailsController',['$scope','$http','$log','coachDashboardServices', function($scope,$http,$log,coachDashboardServices) {
+    $scope.initApp=function() {
+        $log.log('userDetailsController initialized');
+
+        // get the user details first
+        coachDashboardServices.getUserProfile().then(function (data) {
+            //$scope.data = wwCoachingService.userProfile();
+            $log.log('inside controller');
+            //$log.log(data);
+            $scope.FirstName = data.pilotProfile.FirstName;
+            $scope.LastName = data.pilotProfile.LastName;
+            $scope._id = data.pilotProfile._id;
+            $scope.Age = data.wwProfile.Age;
+            $scope.Gender = data.wwProfile.Gender;
+            $scope.Height = data.wwProfile.Height;
+            $scope.Weight = data.wwProfile.Weight;
+            $scope.MinSafeWeight = data.wwProfile.MinSafeWeight;
+            $scope.MaxSafeWeight = data.wwProfile.MaxSafeWeight;
+            $scope.User= data.pilotProfile;
+            $scope.WWUser = data.wwProfile;
+            $scope.notes = data.pilotProfile.CallNotes;
+        });
+
+        coachDashboardServices.getCoachInfo().then(function(data){
+            $scope.Coach=data;
+            console.log($scope.Coach);
+            $scope.FirstName = data.FirstName;
+        });
+    };
+
+
+
+
+    $scope.savenote = function() {
+        console.log($scope.User);
+        if($scope.newnote.callid == null) {
+
+            $scope.newnote.date=$('#pickdatetime').val(); //hack because the ng-model does not bind with datepicker
+            $scope.newnote.userid=$scope.User._id;
+            $scope.newnote.callid = $scope.notes.length+1;
+            console.log($scope.newnote) ;
+            $scope.notes.push($scope.newnote);
+
+            coachDashboardServices.saveCallNotes($scope.newnote);
+
+            console.log($scope.notes);
+        } else {
+            $scope.newnote.userid=$scope.User._id;
+            //for existing contact, find this contact using id
+            //and update it.
+            for(var i in $scope.notes) {
+                if($scope.notes[i].callid == $scope.newnote.callid) {
+                    //console.log('date = '+ $scope.newnote.date);
+                    $scope.notes[i] = $scope.newnote;
+                }
+            }
+            coachDashboardServices.updateCallNotes($scope.newnote);
+            //console.log($scope.newnote);
+
+        }
+
+
+        //clear the add contact form
+        $scope.newnote = {};
+
+    };
+
+    $scope.delete = function(id) {
+
+        //search note with given id and delete it
+        for(var i in $scope.notes) {
+            if($scope.notes[i].callid == id) {
+                $scope.newnote.userid=$scope.User._id
+                $scope.newnote.callid= id;
+
+                //console.log($scope.newnote);
+                coachDashboardServices.deleteCallNotes($scope.newnote);
+                $scope.notes.splice(i,1);
+            }
+            $scope.newnote = {};
+        }
+
+    };
+    //clear the add contact form
+    $scope.newnote = {};
+
+    $scope.edit = function(id) {
+        console.log('note id = '+id);
+        //search contact with given id and update it
+        for(var i in $scope.notes) {
+            if($scope.notes[i].callid == id) {
+                //we use angular.copy() method to create
+                //copy of original object
+                console.log('id = '+ $scope.notes[i].callid + '  date = '+ $scope.notes[i].date);
+                $scope.newnote = angular.copy($scope.notes[i]);
+                console.log($scope.newnote.date);
+                $('#pickdatetime').val(($scope.notes[i].date));
+            }
+        }
+    };
+
+}]);
