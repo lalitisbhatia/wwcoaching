@@ -1,4 +1,4 @@
-participantModule.controller('ParticipantController', ['$scope','$http','$routeParams','$log','participantService', function($scope,$http,$routeParams,$log,participantService) {
+participantModule.controller('ParticipantLoginController', ['$scope','$http','$routeParams','$log','participantService', function($scope,$http,$routeParams,$log,participantService) {
     $scope.initApp=function(){
         $log.log('participantController initialized');
         var ln = $('#lastname').val();
@@ -15,7 +15,7 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
     };
 
     $scope.getWWDetails = function(){
-        //console.log($scope.username + ' - ' + $scope.password);
+        console.log($scope.username + ' - ' + $scope.password);
         var loginInfo = { "U": $scope.username, "P": $scope.password, "R": "true" };
         var saveWWCreds = $('#chksave').is(":checked");
 
@@ -25,12 +25,16 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
         }else{
             pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: saveWWCreds};
         }
-        //console.log(pilotUser);
+        console.log(pilotUser);
 
         $http({
             method:'POST',
             url: 'https://mobile.weightwatchers.com/authservice.svc/login',
-            data: loginInfo
+            data: loginInfo,
+            xhrFields: {
+                withCredentials: true
+            },
+            processData: false
         })
             .success(function (d, status, headers, config) {
                 //$log.log(d);
@@ -67,7 +71,7 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
  */
 
 //controller for coaches to choose their availability
-participantModule.controller('UserSchedulingController',['$scope','$http','$log','$filter','searchService','participantService',function($scope,$http,$log,$filter,searchService,participantService){
+participantModule.controller('ParticipantController',['$scope','$http','$log','$filter','searchService','participantService',function($scope,$http,$log,$filter,searchService,participantService){
 
     $scope.initApp=function() {
         $log.log('initialized UserSchedulingController');

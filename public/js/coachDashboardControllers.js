@@ -308,7 +308,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
 
     };
 
-    $scope.delete = function(id) {
+    $scope.deleteNote = function(id) {
 
         //search note with given id and delete it
         for(var i in $scope.notes) {

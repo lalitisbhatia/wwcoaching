@@ -15,7 +15,7 @@ client.sms.messages.create({
     // The HTTP request to Twilio will run asynchronously. This callback
     // function will be called when a response is received from Twilio
     // The "error" variable will contain error information, if any.
-    // If the request was successful, this value will be "falsy"
+    // If the request was successful, this value will be "false"
     if (!error) {
         // The second argument to the callback will contain the information
         // sent back by Twilio for the request. In this case, it is the

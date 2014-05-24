@@ -88,6 +88,7 @@ app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
 //*****This section is for the assessment data********
 //***************************************************
 app.get('/assessment',home.assessment);
+
 app.get('/assessment/:id',assmnt.getAssmById);
 app.post('/assessment', assmnt.saveAssm);
 

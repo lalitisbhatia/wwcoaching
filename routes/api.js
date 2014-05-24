@@ -414,4 +414,3 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
 //################################################
 //##### Emailing API  methods ###########
 //################################################
-exports.sendMail
