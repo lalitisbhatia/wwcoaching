@@ -2,62 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/1fav.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/2fav.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/3fav.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/4fav.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/5fav.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/afternoon@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/caret.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/checkmarks.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/checkmarks_sm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/chips@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/clock.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/cookies_candy_icecream@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/diet_0cal@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/evening@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/fresh_fruit@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/fresh_veg@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/fried_food@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/home_alone@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/home_kids@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/late_night@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/morning@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/mostlysittingworkout.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/other@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/physical.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/retired@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/school@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/sittingdown.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/sittingstanding.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/standing.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/sweet_drinks@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/work@2x.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/ww_logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/Assessment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/assessmentController.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/caret.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/checkmarks.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/jquery-1.11.0.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/page.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/ww_logo.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api.js" afterPath="$PROJECT_DIR$/routes/api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/assessment.jade" afterPath="$PROJECT_DIR$/views/assessment.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/assessments.js" afterPath="$PROJECT_DIR$/routes/assessments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/coach.jade" afterPath="$PROJECT_DIR$/views/coach.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/coachDashboardControllers.js" afterPath="$PROJECT_DIR$/public/js/coachDashboardControllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/jquery.min.js" afterPath="$PROJECT_DIR$/public/js/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/messages.js" afterPath="$PROJECT_DIR$/routes/messages.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/participant.jade" afterPath="$PROJECT_DIR$/views/participant.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/participantController.js" afterPath="$PROJECT_DIR$/public/js/participantController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/participantLogin.jade" afterPath="$PROJECT_DIR$/views/participantLogin.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/participantService.js" afterPath="$PROJECT_DIR$/public/js/participantService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/user.html" afterPath="$PROJECT_DIR$/views/user.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/user.jade" afterPath="$PROJECT_DIR$/views/user.jade" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/asm.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -124,7 +69,7 @@
       <file leaf-file-name="asm.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/asm.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.7251908" vertical-offset="1240" max-vertical-offset="22160">
+            <state vertical-scroll-proportion="-0.7692308" vertical-offset="1240" max-vertical-offset="22160">
               <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
               <folding />
             </state>
@@ -255,7 +200,7 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1296" />
-    <option name="height" value="1040" />
+    <option name="height" value="1010" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -299,6 +244,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="wwcoaching" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wwcoaching" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wwcoaching" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -614,28 +573,32 @@
       <created>1400818647180</created>
       <updated>1400818647180</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="  start of Assessment">
+      <created>1400940251779</created>
+      <updated>1400940251779</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1040" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1296" height="1010" extended-state="6" />
+    <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32815966" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34227467" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35365853" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32990867" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -659,7 +622,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Date / Time issue resolved for saving and searching" />
     <MESSAGE value="reorganizing admin/coach/participant routes&#10;started creating new module and controller for participant&#10;" />
     <MESSAGE value="sorted the routes for admin, participant and coach. But participant handling is poor. Tried to user angular service but finally settled for calling the WW auth service from within the controller - BAD. but need to better understand services, callbacks, promises etc.&#10;Also, need to figure out how to binf hidden fields" />
     <MESSAGE value="need to save pilot user's ww credentials - stubbed out" />
@@ -684,7 +646,8 @@
     <MESSAGE value="cleaned up email functions" />
     <MESSAGE value="MASSIVE cleanup of services and controllers:&#10;created coachDashboardService and coachDashboardController. Move all the data get and post to the service" />
     <MESSAGE value="  vvv" />
-    <option name="LAST_COMMIT_MESSAGE" value="  vvv" />
+    <MESSAGE value="  start of Assessment" />
+    <option name="LAST_COMMIT_MESSAGE" value="  start of Assessment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1101,7 +1064,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/asm.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7251908" vertical-offset="1240" max-vertical-offset="22160">
+        <state vertical-scroll-proportion="-0.7692308" vertical-offset="1240" max-vertical-offset="22160">
           <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
           <folding />
         </state>
