@@ -9,1148 +9,1148 @@ head
 
 
 body
-    form(role='form',action='/admin' method='POST')
+    form(role='form',action='/assessment' method='POST')
         .aq-ww-banner
             h1
                 span.offscreen Weight Watchers
-        .btwn-msg
-            p
-                | Thanks!
-                span.ww-break
-                | Let’s get started.
-            img(src='img/loading.gif')
-        .aq-wrap
-            .sec.active
-                header.aq-intro
-                    h2.wwdisplay-bold My Personal Assessment
-                    p Woo-hoo! This is an amazing step you've taken toward better health.
-                #q00.qstn-wrap.name
-                    fieldset
-                        legend
-                            span.qstn To get started, please enter your name:
-                        label#q00a01
-                            span.offscreen First Name
-                            input(type='text', name='First Name', placeholder='First Name', required='required')
-                        label#q00a02
-                            span.offscreen Last Name
-                            input(type='text', name='Last Name', placeholder='Last Name', required='required')
-                    p.error-txt Something's missing. Fill in your first and last name to get started!
-                button#next.aq-btn(type='button') Next
-            .sec
-                h3.sec-title Your Food & Activity
-                #q01.qstn-wrap
-                    span.qstn
-                        span 1.
-                        | How many days a week do you eat...
-                    fieldset#q01a01.select
-                        label
-                            span.qstn-sub Breakfast
-                            select(name='meals_num1')
-                                option(value='0') 0
-                                option(value='1') 1
-                                option(value='2') 2
-                                option(value='3') 3
-                                option(value='4') 4
-                                option(value='5') 5
-                                option(value='6') 6
-                                option(value='7') 7
-                    fieldset#q01a02.select
-                        label
-                            span.qstn-sub Lunch
-                            select(name='meals_num2')
-                                option(value='0') 0
-                                option(value='1') 1
-                                option(value='2') 2
-                                option(value='3') 3
-                                option(value='4') 4
-                                option(value='5') 5
-                                option(value='6') 6
-                                option(value='7') 7
-                    fieldset#q01a03.select
-                        label
-                            span.qstn-sub Dinner
-                            select(name='meals_num3')
-                                option(value='0') 0
-                                option(value='1') 1
-                                option(value='2') 2
-                                option(value='3') 3
-                                option(value='4') 4
-                                option(value='5') 5
-                                option(value='6') 6
-                                option(value='7') 7
-                    fieldset#q01a01.likert
-                        legend
-                            span.qstn-sub Breakfast
-                        label
-                            input(type='radio', name='meals_num1', value='0')
-                            .ans-box
-                                div
-                                    span 0
-                        label
-                            input(type='radio', name='meals_num1', value='1')
-                            .ans-box
-                                div
-                                    span 1
-                        label
-                            input(type='radio', name='meals_num1', value='2')
-                            .ans-box
-                                div
-                                    span 2
-                        label
-                            input(type='radio', name='meals_num1', value='3')
-                            .ans-box
-                                div
-                                    span 3
-                        label
-                            input(type='radio', name='meals_num1', value='4')
-                            .ans-box
-                                div
-                                    span 4
-                        label
-                            input(type='radio', name='meals_num1', value='5')
-                            .ans-box
-                                div
-                                    span 5
-                        label
-                            input(type='radio', name='meals_num1', value='6')
-                            .ans-box
-                                div
-                                    span 6
-                        label
-                            input(type='radio', name='meals_num1', value='7')
-                            .ans-box
-                                div
-                                    span 7
-                    fieldset#q01a02.likert
-                        legend
-                            span.qstn-sub Lunch
-                        label
-                            input(type='radio', name='meals_num2', value='0')
-                            .ans-box
-                                div
-                                    span 0
-                        label
-                            input(type='radio', name='meals_num2', value='1')
-                            .ans-box
-                                div
-                                    span 1
-                        label
-                            input(type='radio', name='meals_num2', value='2')
-                            .ans-box
-                                div
-                                    span 2
-                        label
-                            input(type='radio', name='meals_num2', value='3')
-                            .ans-box
-                                div
-                                    span 3
-                        label
-                            input(type='radio', name='meals_num2', value='4')
-                            .ans-box
-                                div
-                                    span 4
-                        label
-                            input(type='radio', name='meals_num2', value='5')
-                            .ans-box
-                                div
-                                    span 5
-                        label
-                            input(type='radio', name='meals_num2', value='6')
-                            .ans-box
-                                div
-                                    span 6
-                        label
-                            input(type='radio', name='meals_num2', value='7')
-                            .ans-box
-                                div
-                                    span 7
-                    fieldset#q01a03.likert
-                        legend
-                            span.qstn-sub Dinner
-                        label
-                            input(type='radio', name='meals_num3', value='0')
-                            .ans-box
-                                div
-                                    span 0
-                        label
-                            input(type='radio', name='meals_num3', value='1')
-                            .ans-box
-                                div
-                                    span 1
-                        label
-                            input(type='radio', name='meals_num3', value='2')
-                            .ans-box
-                                div
-                                    span 2
-                        label
-                            input(type='radio', name='meals_num3', value='3')
-                            .ans-box
-                                div
-                                    span 3
-                        label
-                            input(type='radio', name='meals_num3', value='4')
-                            .ans-box
-                                div
-                                    span 4
-                        label
-                            input(type='radio', name='meals_num3', value='5')
-                            .ans-box
-                                div
-                                    span 5
-                        label
-                            input(type='radio', name='meals_num3', value='6')
-                            .ans-box
-                                div
-                                    span 6
-                        label
-                            input(type='radio', name='meals_num3', value='7')
-                            .ans-box
-                                div
-                                    span 7
-                .qstn-divider
-                #q02.qstn-wrap.ans-boxes
-                    fieldset
-                        legend
-                            span.qstn
-                                span 2.
-                                | When do you eat your meals?
-                        label#q02a01
-                            input(type='radio', name='eating_patterns')
-                            .ans-box
-                                span I eat more or less at the same times every day.
-                        label#q02a02
-                            input(type='radio', name='eating_patterns')
-                            .ans-box
-                                span My life is crazy. I grab at bite whenever I can!
-                .qstn-divider
-                #q03.qstn-wrap.others
-                    span.qstn
-                        span 3.
-                        | How many times a
-                        b week
-                        | do you go out to eat? (Fast food counts.)
-                    fieldset#q03a01.select
-                        label
-                            span.qstn-sub Breakfast
-                            select(name='meals_out1')
-                                option(value='0') 0
-                                option(value='1') 1
-                                option(value='2') 2
-                                option(value='3') 3
-                                option(value='4') 4
-                                option(value='5') 5
-                                option(value='6') 6
-                                option(value='7') 7
-                    fieldset#q03a02.select
-                        label
-                            span.qstn-sub Lunch
-                            select(name='meals_out2')
-                                option(value='0') 0
-                                option(value='1') 1
-                                option(value='2') 2
-                                option(value='3') 3
-                                option(value='4') 4
-                                option(value='5') 5
-                                option(value='6') 6
-                                option(value='7') 7
-                    fieldset#q03a03.select
-                        label
-                            span.qstn-sub Dinner
-                            select(name='meals_out3')
-                                option(value='0') 0
-                                option(value='1') 1
-                                option(value='2') 2
-                                option(value='3') 3
-                                option(value='4') 4
-                                option(value='5') 5
-                                option(value='6') 6
-                                option(value='7') 7
-                    fieldset#q03a04.select
-                        label
-                            span.qstn-sub Snacks
-                            select(name='meals_out4')
-                                option(value='0') 0
-                                option(value='1') 1
-                                option(value='2') 2
-                                option(value='3') 3
-                                option(value='4') 4
-                                option(value='5') 5
-                                option(value='6') 6
-                                option(value='7') 7
-                    fieldset#q03a01.likert
-                        legend
-                            span.qstn-sub Breakfast
-                        label
-                            input(type='radio', name='meals_out1', value='0')
-                            .ans-box
-                                div
-                                    span 0
-                        label
-                            input(type='radio', name='meals_out1', value='1')
-                            .ans-box
-                                div
-                                    span 1
-                        label
-                            input(type='radio', name='meals_out1', value='2')
-                            .ans-box
-                                div
-                                    span 2
-                        label
-                            input(type='radio', name='meals_out1', value='3')
-                            .ans-box
-                                div
-                                    span 3
-                        label
-                            input(type='radio', name='meals_out1', value='4')
-                            .ans-box
-                                div
-                                    span 4
-                        label
-                            input(type='radio', name='meals_out1', value='5')
-                            .ans-box
-                                div
-                                    span 5
-                        label
-                            input(type='radio', name='meals_out1', value='6')
-                            .ans-box
-                                div
-                                    span 6
-                        label
-                            input(type='radio', name='meals_out1', value='7')
-                            .ans-box
-                                div
-                                    span 7
-                    fieldset#q03a02.likert
-                        legend
-                            span.qstn-sub Lunch
-                        label
-                            input(type='radio', name='meals_out2', value='0')
-                            .ans-box
-                                div
-                                    span 0
-                        label
-                            input(type='radio', name='meals_out2', value='1')
-                            .ans-box
-                                div
-                                    span 1
-                        label
-                            input(type='radio', name='meals_out2', value='2')
-                            .ans-box
-                                div
-                                    span 2
-                        label
-                            input(type='radio', name='meals_out2', value='3')
-                            .ans-box
-                                div
-                                    span 3
-                        label
-                            input(type='radio', name='meals_out2', value='4')
-                            .ans-box
-                                div
-                                    span 4
-                        label
-                            input(type='radio', name='meals_out2', value='5')
-                            .ans-box
-                                div
-                                    span 5
-                        label
-                            input(type='radio', name='meals_out2', value='6')
-                            .ans-box
-                                div
-                                    span 6
-                        label
-                            input(type='radio', name='meals_out2', value='7')
-                            .ans-box
-                                div
-                                    span 7
-                    fieldset#q03a03.likert
-                        legend
-                            span.qstn-sub Dinner
-                        label
-                            input(type='radio', name='meals_out3', value='0')
-                            .ans-box
-                                div
-                                    span 0
-                        label
-                            input(type='radio', name='meals_out3', value='1')
-                            .ans-box
-                                div
-                                    span 1
-                        label
-                            input(type='radio', name='meals_out3', value='2')
-                            .ans-box
-                                div
-                                    span 2
-                        label
-                            input(type='radio', name='meals_out3', value='3')
-                            .ans-box
-                                div
-                                    span 3
-                        label
-                            input(type='radio', name='meals_out3', value='4')
-                            .ans-box
-                                div
-                                    span 4
-                        label
-                            input(type='radio', name='meals_out3', value='5')
-                            .ans-box
-                                div
-                                    span 5
-                        label
-                            input(type='radio', name='meals_out3', value='6')
-                            .ans-box
-                                div
-                                    span 6
-                        label
-                            input(type='radio', name='meals_out3', value='7')
-                            .ans-box
-                                div
-                                    span 7
-                    fieldset#q03a04.likert
-                        legend
-                            span.qstn-sub Snacks
-                        label
-                            input(type='radio', name='meals_out4', value='0')
-                            .ans-box
-                                div
-                                    span 0
-                        label
-                            input(type='radio', name='meals_out4', value='1')
-                            .ans-box
-                                div
-                                    span 1
-                        label
-                            input(type='radio', name='meals_out4', value='2')
-                            .ans-box
-                                div
-                                    span 2
-                        label
-                            input(type='radio', name='meals_out4', value='3')
-                            .ans-box
-                                div
-                                    span 3
-                        label
-                            input(type='radio', name='meals_out4', value='4')
-                            .ans-box
-                                div
-                                    span 4
-                        label
-                            input(type='radio', name='meals_out4', value='5')
-                            .ans-box
-                                div
-                                    span 5
-                        label
-                            input(type='radio', name='meals_out4', value='6')
-                            .ans-box
-                                div
-                                    span 6
-                        label
-                            input(type='radio', name='meals_out4', value='7')
-                            .ans-box
-                                div
-                                    span 7
-                .qstn-divider
-                #q04.qstn-wrap.ans-boxes.four-boxes
-                    fieldset
-                        legend
-                            span.qstn
-                                span 4.
-                                | Who does the cooking?
-                        label#q04a01
-                            input(type='radio', name='who_cooks')
-                            .ans-box
-                                span I do
-                        label#q04a02
-                            input(type='radio', name='who_cooks')
-                            .ans-box
-                                span Someone else does
-                        label#q04a03
-                            input(type='radio', name='who_cooks')
-                            .ans-box
-                                span I split it with someone else
-                        label#q04a04
-                            input(type='radio', name='who_cooks')
-                            .ans-box
-                                span The restaurant / grocery store does!
-                .qstn-divider
-                #q05.qstn-wrap.img-boxes.foods
-                    fieldset
-                        legend
-                            span.qstn
-                                span 5.
-                                | Each
-                                b day
-                                | , how often do you eat:
-                        label#q05a01
-                            img.img-box(src='img/fresh_fruit@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Fresh fruit
-                            .q-input-wrap
-                                input(type='text', name='food_type', pattern='[0-9]*')
-                        label#q05a02
-                            img.img-box(src='img/fresh_veg@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Vegetables
-                            .q-input-wrap
-                                input(type='text', name='food_type', pattern='[0-9]*')
-                        label#q05a03
-                            img.img-box(src='img/fried_food@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Fried Foods
-                            .q-input-wrap
-                                input(type='text', name='food_type', pattern='[0-9]*')
-                        label#q05a04
-                            img.img-box(src='img/chips@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Chips, crackers
-                            .q-input-wrap
-                                input(type='text', name='food_type', pattern='[0-9]*')
-                        label#q05a05
-                            img.img-box(src='img/cookies_candy_icecream@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span
-                                    | Cookies, candy,
-                                    br
-                                    | ice-cream
-                            .q-input-wrap
-                                input(type='text', name='food_type', pattern='[0-9]*')
-                        label#q05a06
-                            img.img-box(src='img/sweet_drinks@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Sweet drinks
-                            .q-input-wrap
-                                input(type='text', name='food_type', pattern='[0-9]*')
-                        label#q05a07
-                            img.img-box(src='img/diet_0cal@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span 0-calorie drinks (including water)
-                            .q-input-wrap
-                                input(type='text', name='food_type', pattern='[0-9]*', maxlength='99')
-                .qstn-divider
-                #q06.qstn-wrap.img-boxes.ills
-                    fieldset
-                        legend
-                            span.qstn
-                                span 6.
-                                | How do you normally spend your day?
-                        label#q06a01
-                            input(type='radio', name='daily_act')
-                            .aq-radio
-                            img.img-box(src='img/sittingdown.jpg', alt='')
-                            .q-txt-wrap
-                                span Sitting down
-                        label#q06a02
-                            input(type='radio', name='daily_act')
-                            .aq-radio
-                            img.img-box(src='img/mostlysittingworkout.jpg', alt='')
-                            .q-txt-wrap
-                                span Sitting, but I also work out
-                        label#q06a03
-                            input(type='radio', name='daily_act')
-                            .aq-radio
-                            img.img-box(src='img/sittingstanding.jpg', alt='')
-                            .q-txt-wrap
-                                span A mix of sitting and standing
-                        label#q06a04
-                            input(type='radio', name='daily_act')
-                            .aq-radio
-                            img.img-box(src='img/standing.jpg', alt='')
-                            .q-txt-wrap
-                                span Mainly standing and walking
-                        label#q06a05
-                            input(type='radio', name='daily_act')
-                            .aq-radio
-                            img.img-box(src='img/physical.jpg', alt='')
-                            .q-txt-wrap
-                                span I'm very active
-                .qstn-divider
-                #q07.qstn-wrap.img-boxes.ills
-                    fieldset
-                        legend
-                            span.qstn
-                                span 7.
-                                | How much activity do you do each
-                                b week
-                                | ?
-                        label#q07a02
-                            input(type='radio', name='physical_act')
-                            .aq-radio
-                            img.img-box(src='img/clock.jpg', alt='')
-                            .q-txt-wrap
-                                span 30 mins or less
-                        label#q07a02
-                            input(type='radio', name='physical_act')
-                            .aq-radio
-                            img.img-box(src='img/clock.jpg', alt='')
-                            .q-txt-wrap
-                                span Around 60 mins
-                        label#q07a01
-                            input(type='radio', name='physical_act')
-                            .aq-radio
-                            img.img-box(src='img/clock.jpg', alt='')
-                            .q-txt-wrap
-                                span 100 mins or more
-                .qstn-divider
-                #q08.qstn-wrap
-                    fieldset.ans-boxes.inline-btns
-                        legend
-                            span.qstn
-                                span 8.
-                                | Do you use an activity monitor or fitness app?
-                        label#q08a01
-                            input#yesDevices(type='radio', name='act_track', value='yes')
-                            .ans-box
-                                span Yes
-                        label#q08a02
-                            input(type='radio', name='act_track', value='no')
-                            .ans-box
-                                span No
-                    fieldset.devices.checks
-                        legend
-                            span.qstn-sub
-                                span
-                                | What device or apps do you use? (Select all that apply)
-                        label#q08a01-01
-                            input(type='checkbox', name='act_devices')
-                            .aq-check
-                            span FitBit
-                        label#q08a01-02
-                            input(type='checkbox', name='act_devices')
-                            .aq-check
-                            span Jawbone Up
-                        label#q08a01-03
-                            input(type='checkbox', name='act_devices')
-                            .aq-check
-                            span Nike+ FuelBand
-                        label#q08a01-04
-                            input(type='checkbox', name='act_devices')
-                            .aq-check
-                            span ActiveLink
-                        label#q08a01-05
-                            input.other(type='checkbox', name='act_devices')
-                            .aq-check
-                            span Other
-                        input.other-input(type='text', name='act_devices', placeholder='What\'s the name of your device?')
-                        .qstn-divider
-                        h3.sec-title Your Weight History
-                        #q09.qstn-wrap
-                        label
+            .btwn-msg
+                p
+                    | Thanks!
+                    span.ww-break
+                    | Let’s get started.
+                img(src='img/loading.gif')
+            .aq-wrap
+                .sec.active
+                    header.aq-intro
+                        h2.wwdisplay-bold My Personal Assessment
+                        p Woo-hoo! This is an amazing step you've taken toward better health.
+                    #q00.qstn-wrap.name
+                        fieldset
+                            legend
+                                span.qstn To get started, please enter your name:
+                            label#q00a01
+                                span.offscreen First Name
+                                input(type='text', name='First Name', placeholder='First Name', required='required')
+                            label#q00a02
+                                span.offscreen Last Name
+                                input(type='text', name='Last Name', placeholder='Last Name', required='required')
+                        p.error-txt Something's missing. Fill in your first and last name to get started!
+                    button#next.aq-btn(type='button') Next
+                .sec
+                    h3.sec-title Your Food & Activity
+                    #q01.qstn-wrap
                         span.qstn
-                        span 9.
-                        | What's your current weight?
-                        .input-tag.unit.lbs
-                        input(type='text', name='current-weight', pattern='[0-9]*')
-
-                .qstn-divider
-                #q10.qstn-wrap
-                    label
+                            span 1.
+                            | How many days a week do you eat...
+                        fieldset#q01a01.select
+                            label
+                                span.qstn-sub Breakfast
+                                select(name='meals_num1')
+                                    option(value='0') 0
+                                    option(value='1') 1
+                                    option(value='2') 2
+                                    option(value='3') 3
+                                    option(value='4') 4
+                                    option(value='5') 5
+                                    option(value='6') 6
+                                    option(value='7') 7
+                        fieldset#q01a02.select
+                            label
+                                span.qstn-sub Lunch
+                                select(name='meals_num2')
+                                    option(value='0') 0
+                                    option(value='1') 1
+                                    option(value='2') 2
+                                    option(value='3') 3
+                                    option(value='4') 4
+                                    option(value='5') 5
+                                    option(value='6') 6
+                                    option(value='7') 7
+                        fieldset#q01a03.select
+                            label
+                                span.qstn-sub Dinner
+                                select(name='meals_num3')
+                                    option(value='0') 0
+                                    option(value='1') 1
+                                    option(value='2') 2
+                                    option(value='3') 3
+                                    option(value='4') 4
+                                    option(value='5') 5
+                                    option(value='6') 6
+                                    option(value='7') 7
+                        fieldset#q01a01.likert
+                            legend
+                                span.qstn-sub Breakfast
+                            label
+                                input(type='radio', name='meals_num1', value='0')
+                                .ans-box
+                                    div
+                                        span 0
+                            label
+                                input(type='radio', name='meals_num1', value='1')
+                                .ans-box
+                                    div
+                                        span 1
+                            label
+                                input(type='radio', name='meals_num1', value='2')
+                                .ans-box
+                                    div
+                                        span 2
+                            label
+                                input(type='radio', name='meals_num1', value='3')
+                                .ans-box
+                                    div
+                                        span 3
+                            label
+                                input(type='radio', name='meals_num1', value='4')
+                                .ans-box
+                                    div
+                                        span 4
+                            label
+                                input(type='radio', name='meals_num1', value='5')
+                                .ans-box
+                                    div
+                                        span 5
+                            label
+                                input(type='radio', name='meals_num1', value='6')
+                                .ans-box
+                                    div
+                                        span 6
+                            label
+                                input(type='radio', name='meals_num1', value='7')
+                                .ans-box
+                                    div
+                                        span 7
+                        fieldset#q01a02.likert
+                            legend
+                                span.qstn-sub Lunch
+                            label
+                                input(type='radio', name='meals_num2', value='0')
+                                .ans-box
+                                    div
+                                        span 0
+                            label
+                                input(type='radio', name='meals_num2', value='1')
+                                .ans-box
+                                    div
+                                        span 1
+                            label
+                                input(type='radio', name='meals_num2', value='2')
+                                .ans-box
+                                    div
+                                        span 2
+                            label
+                                input(type='radio', name='meals_num2', value='3')
+                                .ans-box
+                                    div
+                                        span 3
+                            label
+                                input(type='radio', name='meals_num2', value='4')
+                                .ans-box
+                                    div
+                                        span 4
+                            label
+                                input(type='radio', name='meals_num2', value='5')
+                                .ans-box
+                                    div
+                                        span 5
+                            label
+                                input(type='radio', name='meals_num2', value='6')
+                                .ans-box
+                                    div
+                                        span 6
+                            label
+                                input(type='radio', name='meals_num2', value='7')
+                                .ans-box
+                                    div
+                                        span 7
+                        fieldset#q01a03.likert
+                            legend
+                                span.qstn-sub Dinner
+                            label
+                                input(type='radio', name='meals_num3', value='0')
+                                .ans-box
+                                    div
+                                        span 0
+                            label
+                                input(type='radio', name='meals_num3', value='1')
+                                .ans-box
+                                    div
+                                        span 1
+                            label
+                                input(type='radio', name='meals_num3', value='2')
+                                .ans-box
+                                    div
+                                        span 2
+                            label
+                                input(type='radio', name='meals_num3', value='3')
+                                .ans-box
+                                    div
+                                        span 3
+                            label
+                                input(type='radio', name='meals_num3', value='4')
+                                .ans-box
+                                    div
+                                        span 4
+                            label
+                                input(type='radio', name='meals_num3', value='5')
+                                .ans-box
+                                    div
+                                        span 5
+                            label
+                                input(type='radio', name='meals_num3', value='6')
+                                .ans-box
+                                    div
+                                        span 6
+                            label
+                                input(type='radio', name='meals_num3', value='7')
+                                .ans-box
+                                    div
+                                        span 7
+                    .qstn-divider
+                    #q02.qstn-wrap.ans-boxes
+                        fieldset
+                            legend
+                                span.qstn
+                                    span 2.
+                                    | When do you eat your meals?
+                            label#q02a01
+                                input(type='radio', name='eating_patterns')
+                                .ans-box
+                                    span I eat more or less at the same times every day.
+                            label#q02a02
+                                input(type='radio', name='eating_patterns')
+                                .ans-box
+                                    span My life is crazy. I grab at bite whenever I can!
+                    .qstn-divider
+                    #q03.qstn-wrap.others
                         span.qstn
-                            span 10.
-                            | What's the lowest weight you've been as an adult?
-                        .input-tag.unit.lbs
-                            input(type='text', name='lowest_weight', pattern='[0-9]*')
-                            span lbs.
-                .qstn-divider
-                #q11.qstn-wrap
-                    label
-                        span.qstn.dbl-digit
-                            span 11.
-                            | How many times have you lost 10 lbs. or more?
-                        .input-tag.unit.times
-                            input(type='text', name='diet_loss', pattern='[0-9]*')
-                            span times
-                .qstn-divider
-                #q12.qstn-wrap.others
-                    fieldset.radios
-                        legend
-                            span.qstn.dbl-digit
-                                span 12.
-                                | What weight-loss approach has worked
-                                b best
-                                | for you?
-                        label#q12a01
-                            input(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Keeping track of food / activity
-                        label#q12a02
-                            input(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Pre-packaged meals
-                        label#q12a03
-                            input(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Online weight-loss group
-                        label#q12a04
-                            input(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Group that meets in person
-                        label#q12a05
-                            input(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Working with a nutritionist
-                        label#q12a06
-                            input(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Online tools / apps
-                        label#q12a07
-                            input(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Surgery / medically supervised fast
-                        label#q12a08
-                            input(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Changing my eating / exercise habits
-                        label#q12a09
-                            input.other(type='radio', name='loss_approach')
-                            .aq-radio
-                            span Other
-                        input.other-input(type='text', name='loss_approach', placeholder='Please describe...')
-                .qstn-divider
-                #q13.qstn-wrap.ans-boxes.true-false.inline-btns
-                    span.qstn.dbl-digit
-                        span 13.
-                        | Please answer true or false:
-                    fieldset#q13a01
-                        legend
-                            span.qstn-sub If I don't lose weight every week, I'll give up quickly.
-                        label
-                            input(type='radio', name='statement1', value='true')
-                            .ans-box
-                                span True
-                        label
-                            input(type='radio', name='statement1', value='false')
-                            .ans-box
-                                span False
-                    fieldset#q13a02
-                        legend
-                            span.qstn-sub If I slip, I focus on that and forget all my successes over the week.
-                        label
-                            input(type='radio', name='statement2', value='true')
-                            .ans-box
-                                span True
-                        label
-                            input(type='radio', name='statement2', value='false')
-                            .ans-box
-                                span False
-                    fieldset#q13a03
-                        legend
-                            span.qstn-sub If I ate carefully and the scale still doesn't move, I'll probably overeat.
-                        label
-                            input(type='radio', name='statement3', value='true')
-                            .ans-box
-                                span True
-                        label
-                            input(type='radio', name='statement3', value='false')
-                            .ans-box
-                                span False
-                    fieldset#q13a04
-                        legend
-                            span.qstn-sub
-                                | If I go off track, I think I've blown it -- and
-                                i really
-                                | go off track.
-                        label
-                            input(type='radio', name='statement4', value='true')
-                            .ans-box
-                                span True
-                        label
-                            input(type='radio', name='statement4', value='false')
-                            .ans-box
-                                span False
-                .qstn-divider
-                h3.sec-title Your Goals
-                #q14.qstn-wrap.inline-btns
-                    fieldset.radios
-                        legend
-                            span.qstn.dbl-digit
-                                span 14.
-                                | How much weight would you like to lose?
-                        label#q14a01
-                            input(type='radio', name='wt_to_lose')
-                            .aq-radio
-                            span 5-15 lbs.
-                        label#q14a02
-                            input(type='radio', name='wt_to_lose')
-                            .aq-radio
-                            span 16-25 lbs.
-                        label#q14a03
-                            input(type='radio', name='wt_to_lose')
-                            .aq-radio
-                            span 26-50 lbs.
-                        label#q14a04
-                            input(type='radio', name='wt_to_lose')
-                            .aq-radio
-                            span 50+ lbs.
-                .qstn-divider
-                #q15.qstn-wrap
-                    label
-                        span.qstn.dbl-digit
-                            span 15.
-                            | Why do you want to lose weight
-                            i right now
-                            | ?
-                        textarea(name='coach_benefit', placeholder='write here...')
-                .qstn-divider
-                #q16.qstn-wrap
-                    label
-                        span.qstn.dbl-digit
-                            span 16.
-                            | What's the biggest thing that you want to work on with your coach?
-                        textarea(name='loss_benefit', placeholder='write here...')
-                .qstn-divider
-                h3.sec-title Your Lifestyle
-                #q17.qstn-wrap.img-boxes.radios.others
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 17.
-                                | How do you spend your day?
-                        label#q17a01
-                            input(type='radio', name='spend_your_day')
-                            .aq-radio
-                            img.img-box(src='img/work@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span At work
-                        label#q17a02
-                            input(type='radio', name='spend_your_day')
-                            .aq-radio
-                            img.img-box(src='img/school@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span At school
-                        label#q17a03
-                            input(type='radio', name='spend_your_day')
-                            .aq-radio
-                            img.img-box(src='img/home_kids@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span
-                                    | At home
-                                    br
-                                    | with kids
-                        label#q17a04
-                            input(type='radio', name='spend_your_day')
-                            .aq-radio
-                            img.img-box(src='img/home_alone@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span
-                                    | At home
-                                    br
-                                    | on my own
-                        label#q17a05
-                            input(type='radio', name='spend_your_day')
-                            .aq-radio
-                            img.img-box(src='img/retired@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Retired
-                        label#q17a06
-                            input.other(type='radio', name='spend_your_day')
-                            .aq-radio
-                            img.img-box(src='img/other@2x.jpg', alt='')
-                            .q-txt-wrap
+                            span 3.
+                            | How many times a
+                            b week
+                            | do you go out to eat? (Fast food counts.)
+                        fieldset#q03a01.select
+                            label
+                                span.qstn-sub Breakfast
+                                select(name='meals_out1')
+                                    option(value='0') 0
+                                    option(value='1') 1
+                                    option(value='2') 2
+                                    option(value='3') 3
+                                    option(value='4') 4
+                                    option(value='5') 5
+                                    option(value='6') 6
+                                    option(value='7') 7
+                        fieldset#q03a02.select
+                            label
+                                span.qstn-sub Lunch
+                                select(name='meals_out2')
+                                    option(value='0') 0
+                                    option(value='1') 1
+                                    option(value='2') 2
+                                    option(value='3') 3
+                                    option(value='4') 4
+                                    option(value='5') 5
+                                    option(value='6') 6
+                                    option(value='7') 7
+                        fieldset#q03a03.select
+                            label
+                                span.qstn-sub Dinner
+                                select(name='meals_out3')
+                                    option(value='0') 0
+                                    option(value='1') 1
+                                    option(value='2') 2
+                                    option(value='3') 3
+                                    option(value='4') 4
+                                    option(value='5') 5
+                                    option(value='6') 6
+                                    option(value='7') 7
+                        fieldset#q03a04.select
+                            label
+                                span.qstn-sub Snacks
+                                select(name='meals_out4')
+                                    option(value='0') 0
+                                    option(value='1') 1
+                                    option(value='2') 2
+                                    option(value='3') 3
+                                    option(value='4') 4
+                                    option(value='5') 5
+                                    option(value='6') 6
+                                    option(value='7') 7
+                        fieldset#q03a01.likert
+                            legend
+                                span.qstn-sub Breakfast
+                            label
+                                input(type='radio', name='meals_out1', value='0')
+                                .ans-box
+                                    div
+                                        span 0
+                            label
+                                input(type='radio', name='meals_out1', value='1')
+                                .ans-box
+                                    div
+                                        span 1
+                            label
+                                input(type='radio', name='meals_out1', value='2')
+                                .ans-box
+                                    div
+                                        span 2
+                            label
+                                input(type='radio', name='meals_out1', value='3')
+                                .ans-box
+                                    div
+                                        span 3
+                            label
+                                input(type='radio', name='meals_out1', value='4')
+                                .ans-box
+                                    div
+                                        span 4
+                            label
+                                input(type='radio', name='meals_out1', value='5')
+                                .ans-box
+                                    div
+                                        span 5
+                            label
+                                input(type='radio', name='meals_out1', value='6')
+                                .ans-box
+                                    div
+                                        span 6
+                            label
+                                input(type='radio', name='meals_out1', value='7')
+                                .ans-box
+                                    div
+                                        span 7
+                        fieldset#q03a02.likert
+                            legend
+                                span.qstn-sub Lunch
+                            label
+                                input(type='radio', name='meals_out2', value='0')
+                                .ans-box
+                                    div
+                                        span 0
+                            label
+                                input(type='radio', name='meals_out2', value='1')
+                                .ans-box
+                                    div
+                                        span 1
+                            label
+                                input(type='radio', name='meals_out2', value='2')
+                                .ans-box
+                                    div
+                                        span 2
+                            label
+                                input(type='radio', name='meals_out2', value='3')
+                                .ans-box
+                                    div
+                                        span 3
+                            label
+                                input(type='radio', name='meals_out2', value='4')
+                                .ans-box
+                                    div
+                                        span 4
+                            label
+                                input(type='radio', name='meals_out2', value='5')
+                                .ans-box
+                                    div
+                                        span 5
+                            label
+                                input(type='radio', name='meals_out2', value='6')
+                                .ans-box
+                                    div
+                                        span 6
+                            label
+                                input(type='radio', name='meals_out2', value='7')
+                                .ans-box
+                                    div
+                                        span 7
+                        fieldset#q03a03.likert
+                            legend
+                                span.qstn-sub Dinner
+                            label
+                                input(type='radio', name='meals_out3', value='0')
+                                .ans-box
+                                    div
+                                        span 0
+                            label
+                                input(type='radio', name='meals_out3', value='1')
+                                .ans-box
+                                    div
+                                        span 1
+                            label
+                                input(type='radio', name='meals_out3', value='2')
+                                .ans-box
+                                    div
+                                        span 2
+                            label
+                                input(type='radio', name='meals_out3', value='3')
+                                .ans-box
+                                    div
+                                        span 3
+                            label
+                                input(type='radio', name='meals_out3', value='4')
+                                .ans-box
+                                    div
+                                        span 4
+                            label
+                                input(type='radio', name='meals_out3', value='5')
+                                .ans-box
+                                    div
+                                        span 5
+                            label
+                                input(type='radio', name='meals_out3', value='6')
+                                .ans-box
+                                    div
+                                        span 6
+                            label
+                                input(type='radio', name='meals_out3', value='7')
+                                .ans-box
+                                    div
+                                        span 7
+                        fieldset#q03a04.likert
+                            legend
+                                span.qstn-sub Snacks
+                            label
+                                input(type='radio', name='meals_out4', value='0')
+                                .ans-box
+                                    div
+                                        span 0
+                            label
+                                input(type='radio', name='meals_out4', value='1')
+                                .ans-box
+                                    div
+                                        span 1
+                            label
+                                input(type='radio', name='meals_out4', value='2')
+                                .ans-box
+                                    div
+                                        span 2
+                            label
+                                input(type='radio', name='meals_out4', value='3')
+                                .ans-box
+                                    div
+                                        span 3
+                            label
+                                input(type='radio', name='meals_out4', value='4')
+                                .ans-box
+                                    div
+                                        span 4
+                            label
+                                input(type='radio', name='meals_out4', value='5')
+                                .ans-box
+                                    div
+                                        span 5
+                            label
+                                input(type='radio', name='meals_out4', value='6')
+                                .ans-box
+                                    div
+                                        span 6
+                            label
+                                input(type='radio', name='meals_out4', value='7')
+                                .ans-box
+                                    div
+                                        span 7
+                    .qstn-divider
+                    #q04.qstn-wrap.ans-boxes.four-boxes
+                        fieldset
+                            legend
+                                span.qstn
+                                    span 4.
+                                    | Who does the cooking?
+                            label#q04a01
+                                input(type='radio', name='who_cooks')
+                                .ans-box
+                                    span I do
+                            label#q04a02
+                                input(type='radio', name='who_cooks')
+                                .ans-box
+                                    span Someone else does
+                            label#q04a03
+                                input(type='radio', name='who_cooks')
+                                .ans-box
+                                    span I split it with someone else
+                            label#q04a04
+                                input(type='radio', name='who_cooks')
+                                .ans-box
+                                    span The restaurant / grocery store does!
+                    .qstn-divider
+                    #q05.qstn-wrap.img-boxes.foods
+                        fieldset
+                            legend
+                                span.qstn
+                                    span 5.
+                                    | Each
+                                    b day
+                                    | , how often do you eat:
+                            label#q05a01
+                                img.img-box(src='img/fresh_fruit@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Fresh fruit
+                                .q-input-wrap
+                                    input(type='text', name='food_type', pattern='[0-9]*')
+                            label#q05a02
+                                img.img-box(src='img/fresh_veg@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Vegetables
+                                .q-input-wrap
+                                    input(type='text', name='food_type', pattern='[0-9]*')
+                            label#q05a03
+                                img.img-box(src='img/fried_food@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Fried Foods
+                                .q-input-wrap
+                                    input(type='text', name='food_type', pattern='[0-9]*')
+                            label#q05a04
+                                img.img-box(src='img/chips@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Chips, crackers
+                                .q-input-wrap
+                                    input(type='text', name='food_type', pattern='[0-9]*')
+                            label#q05a05
+                                img.img-box(src='img/cookies_candy_icecream@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span
+                                        | Cookies, candy,
+                                        br
+                                        | ice-cream
+                                .q-input-wrap
+                                    input(type='text', name='food_type', pattern='[0-9]*')
+                            label#q05a06
+                                img.img-box(src='img/sweet_drinks@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Sweet drinks
+                                .q-input-wrap
+                                    input(type='text', name='food_type', pattern='[0-9]*')
+                            label#q05a07
+                                img.img-box(src='img/diet_0cal@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span 0-calorie drinks (including water)
+                                .q-input-wrap
+                                    input(type='text', name='food_type', pattern='[0-9]*', maxlength='99')
+                    .qstn-divider
+                    #q06.qstn-wrap.img-boxes.ills
+                        fieldset
+                            legend
+                                span.qstn
+                                    span 6.
+                                    | How do you normally spend your day?
+                            label#q06a01
+                                input(type='radio', name='daily_act')
+                                .aq-radio
+                                img.img-box(src='img/sittingdown.jpg', alt='')
+                                .q-txt-wrap
+                                    span Sitting down
+                            label#q06a02
+                                input(type='radio', name='daily_act')
+                                .aq-radio
+                                img.img-box(src='img/mostlysittingworkout.jpg', alt='')
+                                .q-txt-wrap
+                                    span Sitting, but I also work out
+                            label#q06a03
+                                input(type='radio', name='daily_act')
+                                .aq-radio
+                                img.img-box(src='img/sittingstanding.jpg', alt='')
+                                .q-txt-wrap
+                                    span A mix of sitting and standing
+                            label#q06a04
+                                input(type='radio', name='daily_act')
+                                .aq-radio
+                                img.img-box(src='img/standing.jpg', alt='')
+                                .q-txt-wrap
+                                    span Mainly standing and walking
+                            label#q06a05
+                                input(type='radio', name='daily_act')
+                                .aq-radio
+                                img.img-box(src='img/physical.jpg', alt='')
+                                .q-txt-wrap
+                                    span I'm very active
+                    .qstn-divider
+                    #q07.qstn-wrap.img-boxes.ills
+                        fieldset
+                            legend
+                                span.qstn
+                                    span 7.
+                                    | How much activity do you do each
+                                    b week
+                                    | ?
+                            label#q07a02
+                                input(type='radio', name='physical_act')
+                                .aq-radio
+                                img.img-box(src='img/clock.jpg', alt='')
+                                .q-txt-wrap
+                                    span 30 mins or less
+                            label#q07a02
+                                input(type='radio', name='physical_act')
+                                .aq-radio
+                                img.img-box(src='img/clock.jpg', alt='')
+                                .q-txt-wrap
+                                    span Around 60 mins
+                            label#q07a01
+                                input(type='radio', name='physical_act')
+                                .aq-radio
+                                img.img-box(src='img/clock.jpg', alt='')
+                                .q-txt-wrap
+                                    span 100 mins or more
+                    .qstn-divider
+                    #q08.qstn-wrap
+                        fieldset.ans-boxes.inline-btns
+                            legend
+                                span.qstn
+                                    span 8.
+                                    | Do you use an activity monitor or fitness app?
+                            label#q08a01
+                                input#yesDevices(type='radio', name='act_track', value='yes')
+                                .ans-box
+                                    span Yes
+                            label#q08a02
+                                input(type='radio', name='act_track', value='no')
+                                .ans-box
+                                    span No
+                        fieldset.devices.checks
+                            legend
+                                span.qstn-sub
+                                    span
+                                    | What device or apps do you use? (Select all that apply)
+                            label#q08a01-01
+                                input(type='checkbox', name='act_devices')
+                                .aq-check
+                                span FitBit
+                            label#q08a01-02
+                                input(type='checkbox', name='act_devices')
+                                .aq-check
+                                span Jawbone Up
+                            label#q08a01-03
+                                input(type='checkbox', name='act_devices')
+                                .aq-check
+                                span Nike+ FuelBand
+                            label#q08a01-04
+                                input(type='checkbox', name='act_devices')
+                                .aq-check
+                                span ActiveLink
+                            label#q08a01-05
+                                input.other(type='checkbox', name='act_devices')
+                                .aq-check
                                 span Other
-                        input.other-input(type='text', name='spend_your_day', placeholder='Please describe...')
-                .qstn-divider
-                #q18.qstn-wrap.radios
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 18.
-                                | Which best describes your household?
-                        label#q18a01
-                            input(type='radio', name='household')
-                            .aq-radio
-                            span Just me
-                        label#q18a02
-                            input(type='radio', name='household')
-                            .aq-radio
-                            span Couple
-                        label#q18a03
-                            input(type='radio', name='household')
-                            .aq-radio
-                            span Roommates
-                        label#q18a04
-                            input(type='radio', name='household')
-                            .aq-radio
-                            span Family with children
-                        label#q18a05
-                            input(type='radio', name='household')
-                            .aq-radio
-                            span Live with parent(s)
-                .qstn-divider
-                #q19.qstn-wrap.radios
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 19.
-                                | When it comes to your weight loss, are the people you care about:
-                        label#q19a01
-                            input(type='radio', name='support')
-                            .aq-radio
-                            span Very supportive
-                        label#q19a02
-                            input(type='radio', name='support')
-                            .aq-radio
-                            span Sort of supportive
-                        label#q19a03
-                            input(type='radio', name='support')
-                            .aq-radio
-                            span Not supportive
-                .qstn-divider
-                #q20.qstn-wrap.radios
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 20.
-                                | How stressful is your life?
-                        label#q20a01
-                            input(type='radio', name='stress')
-                            .aq-radio
-                            span Easy breezy!
-                        label#q20a02
-                            input(type='radio', name='stress')
-                            .aq-radio
-                            span Kinda stressful
-                        label#q20a03
-                            input(type='radio', name='stress')
-                            .aq-radio
-                            span I'm freaking out.
-                .qstn-divider
-                h3.sec-title Eating Habits
-                #q21.qstn-wrap.img-boxes.checks
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 21.
-                                | When do you find it hardest to stay on track? (Select all that apply)
-                        label#q21a01
-                            input(type='checkbox', name='stay_on_track')
-                            .aq-radio
-                            img.img-box(src='img/morning@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Morning
-                        label#q21a02
-                            input(type='checkbox', name='stay_on_track')
-                            .aq-radio
-                            img.img-box(src='img/afternoon@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Afternoon
-                        label#q21a03
-                            input(type='checkbox', name='stay_on_track')
-                            .aq-radio
-                            img.img-box(src='img/evening@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Evening
-                        label#q21a04
-                            input(type='checkbox', name='stay_on_track')
-                            .aq-radio
-                            img.img-box(src='img/late_night@2x.jpg', alt='')
-                            .q-txt-wrap
-                                span Late at night
-                .qstn-divider
-                #q22.qstn-wrap.img-boxes.top-five
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 22.
-                                | What are the 5 foods you can't live without?
-                        label#q22a01
-                            span.offscreen 1
-                            img.img-box(src='img/1fav.jpg', alt='')
-                            input(type='text', name='five_foods1', pattern='[0-9]*')
-                        label#q22a02
-                            span.offscreen 2
-                            img.img-box(src='img/2fav.jpg', alt='')
-                            input(type='text', name='five_foods2', pattern='[0-9]*')
-                        label#q22a03
-                            span.offscreen 3
-                            img.img-box(src='img/3fav.jpg', alt='')
-                            input(type='text', name='five_foods3', pattern='[0-9]*')
-                        label#q22a04
-                            span.offscreen 4
-                            img.img-box(src='img/4fav.jpg', alt='')
-                            input(type='text', name='five_foods4', pattern='[0-9]*')
-                        label#q22a05
-                            span.offscreen 5
-                            img.img-box(src='img/5fav.jpg', alt='')
-                            input(type='text', name='five_foods5', pattern='[0-9]*')
-                .qstn-divider
-                #q23.qstn-wrap.checks.others
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 23.
-                                | Any food allergies or dietary preferences? (Select all that apply)
-                        label#q23a01
-                            input(type='checkbox', name='allergies')
-                            .aq-check
-                            span Vegetarian
-                        label#q23a02
-                            input(type='checkbox', name='allergies')
-                            .aq-check
-                            span Vegan
-                        label#q23a03
-                            input(type='checkbox', name='allergies')
-                            .aq-check
-                            span Kosher
-                        label#q23a04
-                            input(type='checkbox', name='allergies')
-                            .aq-check
-                            span Diabetic
-                        label#q23a05
-                            input(type='checkbox', name='allergies')
-                            .aq-check
-                            span Gluten-free
-                        label#q23a06
-                            input(type='checkbox', name='allergies')
-                            .aq-check
-                            span Low sodium
-                        label#q23a07
-                            input#chkAllergies.other(type='checkbox', name='allergies')
-                            .aq-check
-                            span Food allergies
-                        input.other-input(type='text', name='allergies', placeholder='Please describe...')
-                        label#q23a08
-                            input.other(type='checkbox', name='allergies')
-                            .aq-check
-                            span Other
-                        input.other-input(type='text', name='allergies', placeholder='Please describe...')
-                        label#q23a09
-                            input(type='checkbox', name='allergies')
-                            .aq-check
-                            span None
-                .qstn-divider
-                #q24.qstn-wrap.checks.others
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 24.
-                                | Which 3 things make it hard to lose weight?
-                        label#q24a01
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Eating too much at meals
-                        label#q24a02
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Snacking
-                        label#q24a03
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Weekends!
-                        label#q24a04
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Unhealthy food in my house
-                        label#q24a05
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Comforting myself with food
-                        label#q24a06
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Guilt. (I overeat, feel guilty, overeat some more...)
-                        label#q24a07
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span I never feel full
-                        label#q24a08
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span I reward myself with food
-                        label#q24a09
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Eating at work
-                        label#q24a10
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Eating with family & friends
-                        label#q24a11
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Eating out
-                        label#q24a12
-                            input(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span Food tastes so darn good!
-                        label#q24a13
-                            input.other(type='checkbox', name='hard_to_lose', data-limit='3')
-                            .aq-check
-                            span.other Other
-                        input.other-input(type='text', name='hard_to_lose', placeholder='Please describe...')
-                .qstn-divider
-                #q25.qstn-wrap.radios.others
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 25.
-                                | Having a mantra can really help you stick with it. Pick one below, or write your own!
-                        label#q25a01
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span Losing weight is hard. Being overweight is hard. Choose your hard.
-                        label#q25a02
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span If you kinda do it, it kinda works. If you really do it, it really works.
-                        label#q25a03
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span The scale is a weight loss tool - not a judge, jury and executioner.
-                        label#q25a04
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span Don't give up what you want the most for what you want in the moment.
-                        label#q25a05
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span If we want a change, we have to make a change.
-                        label#q25a06
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span Whether you believe you can, or cannot, you're right.
-                        label#q25a07
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span I've come too far to take orders from a cookie.
-                        label#q25a08
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span I've got this.
-                        label#q25a09
-                            input(type='radio', name='mantra')
-                            .aq-radio
-                            span It's choice, not chance, that will determine my destiny.
-                        label#q25a10
-                            input.other(name='mantra', type='radio')
-                            .aq-radio
-                            span Add your own mantra!
-                        textarea.other-input(name='mantra', placeholder='My mantra is...')
-                .qstn-divider
-                #q26.qstn-wrap.tel
-                    fieldset
-                        legend
-                            span.qstn.dbl-digit
-                                span 26.
-                                | Please enter your phone number(s):
+                            input.other-input(type='text', name='act_devices', placeholder='What\'s the name of your device?')
+                            .qstn-divider
+                            h3.sec-title Your Weight History
+                            #q09.qstn-wrap
+                            label
+                            span.qstn
+                            span 9.
+                            | What's your current weight?
+                            .input-tag.unit.lbs
+                            input(type='text', name='current-weight', pattern='[0-9]*')
+                                span lbs.
+                    .qstn-divider
+                    #q10.qstn-wrap
                         label
-                            .qstn-sub Home
-                            input(type='text', name='tel-number', pattern='[0-9]*', placeholder='555-555-5555')
-                            .qstn-tag (Your coach will use it to call you.)
+                            span.qstn
+                                span 10.
+                                | What's the lowest weight you've been as an adult?
+                            .input-tag.unit.lbs
+                                input(type='text', name='lowest_weight', pattern='[0-9]*')
+                                span lbs.
+                    .qstn-divider
+                    #q11.qstn-wrap
                         label
-                            .qstn-sub Mobile
-                            input(type='text', name='tel-number', pattern='[0-9]*', placeholder='555-555-5555')
-                            .qstn-tag (Reminders will be sent by text.)
-                .qstn-divider
-                #qstn_assess.qstn-wrap.coach-msg
-                    label
-                        p
-                            | Is there anything else you’d like your coach to know about you? If so, tell us below. If not, just hit „I’m done!„
-                        .note-paper
-                            .dear.wwdisplay-bold Dear Coach,
-                            .note-divider
-                            textarea(name='coach_msg', placeholder='write your message here...')
-                            .users-name Sean Vinci
-                button.aq-btn(type='button', onclick='SaveAssessment()') I’m done!
+                            span.qstn.dbl-digit
+                                span 11.
+                                | How many times have you lost 10 lbs. or more?
+                            .input-tag.unit.times
+                                input(type='text', name='diet_loss', pattern='[0-9]*')
+                                span times
+                    .qstn-divider
+                    #q12.qstn-wrap.others
+                        fieldset.radios
+                            legend
+                                span.qstn.dbl-digit
+                                    span 12.
+                                    | What weight-loss approach has worked
+                                    b best
+                                    | for you?
+                            label#q12a01
+                                input(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Keeping track of food / activity
+                            label#q12a02
+                                input(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Pre-packaged meals
+                            label#q12a03
+                                input(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Online weight-loss group
+                            label#q12a04
+                                input(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Group that meets in person
+                            label#q12a05
+                                input(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Working with a nutritionist
+                            label#q12a06
+                                input(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Online tools / apps
+                            label#q12a07
+                                input(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Surgery / medically supervised fast
+                            label#q12a08
+                                input(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Changing my eating / exercise habits
+                            label#q12a09
+                                input.other(type='radio', name='loss_approach')
+                                .aq-radio
+                                span Other
+                            input.other-input(type='text', name='loss_approach', placeholder='Please describe...')
+                    .qstn-divider
+                    #q13.qstn-wrap.ans-boxes.true-false.inline-btns
+                        span.qstn.dbl-digit
+                            span 13.
+                            | Please answer true or false:
+                        fieldset#q13a01
+                            legend
+                                span.qstn-sub If I don't lose weight every week, I'll give up quickly.
+                            label
+                                input(type='radio', name='statement1', value='true')
+                                .ans-box
+                                    span True
+                            label
+                                input(type='radio', name='statement1', value='false')
+                                .ans-box
+                                    span False
+                        fieldset#q13a02
+                            legend
+                                span.qstn-sub If I slip, I focus on that and forget all my successes over the week.
+                            label
+                                input(type='radio', name='statement2', value='true')
+                                .ans-box
+                                    span True
+                            label
+                                input(type='radio', name='statement2', value='false')
+                                .ans-box
+                                    span False
+                        fieldset#q13a03
+                            legend
+                                span.qstn-sub If I ate carefully and the scale still doesn't move, I'll probably overeat.
+                            label
+                                input(type='radio', name='statement3', value='true')
+                                .ans-box
+                                    span True
+                            label
+                                input(type='radio', name='statement3', value='false')
+                                .ans-box
+                                    span False
+                        fieldset#q13a04
+                            legend
+                                span.qstn-sub
+                                    | If I go off track, I think I've blown it -- and
+                                    i really
+                                    | go off track.
+                            label
+                                input(type='radio', name='statement4', value='true')
+                                .ans-box
+                                    span True
+                            label
+                                input(type='radio', name='statement4', value='false')
+                                .ans-box
+                                    span False
+                    .qstn-divider
+                    h3.sec-title Your Goals
+                    #q14.qstn-wrap.inline-btns
+                        fieldset.radios
+                            legend
+                                span.qstn.dbl-digit
+                                    span 14.
+                                    | How much weight would you like to lose?
+                            label#q14a01
+                                input(type='radio', name='wt_to_lose')
+                                .aq-radio
+                                span 5-15 lbs.
+                            label#q14a02
+                                input(type='radio', name='wt_to_lose')
+                                .aq-radio
+                                span 16-25 lbs.
+                            label#q14a03
+                                input(type='radio', name='wt_to_lose')
+                                .aq-radio
+                                span 26-50 lbs.
+                            label#q14a04
+                                input(type='radio', name='wt_to_lose')
+                                .aq-radio
+                                span 50+ lbs.
+                    .qstn-divider
+                    #q15.qstn-wrap
+                        label
+                            span.qstn.dbl-digit
+                                span 15.
+                                | Why do you want to lose weight
+                                i right now
+                                | ?
+                            textarea(name='coach_benefit', placeholder='write here...')
+                    .qstn-divider
+                    #q16.qstn-wrap
+                        label
+                            span.qstn.dbl-digit
+                                span 16.
+                                | What's the biggest thing that you want to work on with your coach?
+                            textarea(name='loss_benefit', placeholder='write here...')
+                    .qstn-divider
+                    h3.sec-title Your Lifestyle
+                    #q17.qstn-wrap.img-boxes.radios.others
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 17.
+                                    | How do you spend your day?
+                            label#q17a01
+                                input(type='radio', name='spend_your_day')
+                                .aq-radio
+                                img.img-box(src='img/work@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span At work
+                            label#q17a02
+                                input(type='radio', name='spend_your_day')
+                                .aq-radio
+                                img.img-box(src='img/school@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span At school
+                            label#q17a03
+                                input(type='radio', name='spend_your_day')
+                                .aq-radio
+                                img.img-box(src='img/home_kids@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span
+                                        | At home
+                                        br
+                                        | with kids
+                            label#q17a04
+                                input(type='radio', name='spend_your_day')
+                                .aq-radio
+                                img.img-box(src='img/home_alone@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span
+                                        | At home
+                                        br
+                                        | on my own
+                            label#q17a05
+                                input(type='radio', name='spend_your_day')
+                                .aq-radio
+                                img.img-box(src='img/retired@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Retired
+                            label#q17a06
+                                input.other(type='radio', name='spend_your_day')
+                                .aq-radio
+                                img.img-box(src='img/other@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Other
+                            input.other-input(type='text', name='spend_your_day', placeholder='Please describe...')
+                    .qstn-divider
+                    #q18.qstn-wrap.radios
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 18.
+                                    | Which best describes your household?
+                            label#q18a01
+                                input(type='radio', name='household')
+                                .aq-radio
+                                span Just me
+                            label#q18a02
+                                input(type='radio', name='household')
+                                .aq-radio
+                                span Couple
+                            label#q18a03
+                                input(type='radio', name='household')
+                                .aq-radio
+                                span Roommates
+                            label#q18a04
+                                input(type='radio', name='household')
+                                .aq-radio
+                                span Family with children
+                            label#q18a05
+                                input(type='radio', name='household')
+                                .aq-radio
+                                span Live with parent(s)
+                    .qstn-divider
+                    #q19.qstn-wrap.radios
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 19.
+                                    | When it comes to your weight loss, are the people you care about:
+                            label#q19a01
+                                input(type='radio', name='support')
+                                .aq-radio
+                                span Very supportive
+                            label#q19a02
+                                input(type='radio', name='support')
+                                .aq-radio
+                                span Sort of supportive
+                            label#q19a03
+                                input(type='radio', name='support')
+                                .aq-radio
+                                span Not supportive
+                    .qstn-divider
+                    #q20.qstn-wrap.radios
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 20.
+                                    | How stressful is your life?
+                            label#q20a01
+                                input(type='radio', name='stress')
+                                .aq-radio
+                                span Easy breezy!
+                            label#q20a02
+                                input(type='radio', name='stress')
+                                .aq-radio
+                                span Kinda stressful
+                            label#q20a03
+                                input(type='radio', name='stress')
+                                .aq-radio
+                                span I'm freaking out.
+                    .qstn-divider
+                    h3.sec-title Eating Habits
+                    #q21.qstn-wrap.img-boxes.checks
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 21.
+                                    | When do you find it hardest to stay on track? (Select all that apply)
+                            label#q21a01
+                                input(type='checkbox', name='stay_on_track')
+                                .aq-radio
+                                img.img-box(src='img/morning@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Morning
+                            label#q21a02
+                                input(type='checkbox', name='stay_on_track')
+                                .aq-radio
+                                img.img-box(src='img/afternoon@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Afternoon
+                            label#q21a03
+                                input(type='checkbox', name='stay_on_track')
+                                .aq-radio
+                                img.img-box(src='img/evening@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Evening
+                            label#q21a04
+                                input(type='checkbox', name='stay_on_track')
+                                .aq-radio
+                                img.img-box(src='img/late_night@2x.jpg', alt='')
+                                .q-txt-wrap
+                                    span Late at night
+                    .qstn-divider
+                    #q22.qstn-wrap.img-boxes.top-five
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 22.
+                                    | What are the 5 foods you can't live without?
+                            label#q22a01
+                                span.offscreen 1
+                                img.img-box(src='img/1fav.jpg', alt='')
+                                input(type='text', name='five_foods1', pattern='[0-9]*')
+                            label#q22a02
+                                span.offscreen 2
+                                img.img-box(src='img/2fav.jpg', alt='')
+                                input(type='text', name='five_foods2', pattern='[0-9]*')
+                            label#q22a03
+                                span.offscreen 3
+                                img.img-box(src='img/3fav.jpg', alt='')
+                                input(type='text', name='five_foods3', pattern='[0-9]*')
+                            label#q22a04
+                                span.offscreen 4
+                                img.img-box(src='img/4fav.jpg', alt='')
+                                input(type='text', name='five_foods4', pattern='[0-9]*')
+                            label#q22a05
+                                span.offscreen 5
+                                img.img-box(src='img/5fav.jpg', alt='')
+                                input(type='text', name='five_foods5', pattern='[0-9]*')
+                    .qstn-divider
+                    #q23.qstn-wrap.checks.others
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 23.
+                                    | Any food allergies or dietary preferences? (Select all that apply)
+                            label#q23a01
+                                input(type='checkbox', name='allergies')
+                                .aq-check
+                                span Vegetarian
+                            label#q23a02
+                                input(type='checkbox', name='allergies')
+                                .aq-check
+                                span Vegan
+                            label#q23a03
+                                input(type='checkbox', name='allergies')
+                                .aq-check
+                                span Kosher
+                            label#q23a04
+                                input(type='checkbox', name='allergies')
+                                .aq-check
+                                span Diabetic
+                            label#q23a05
+                                input(type='checkbox', name='allergies')
+                                .aq-check
+                                span Gluten-free
+                            label#q23a06
+                                input(type='checkbox', name='allergies')
+                                .aq-check
+                                span Low sodium
+                            label#q23a07
+                                input#chkAllergies.other(type='checkbox', name='allergies')
+                                .aq-check
+                                span Food allergies
+                            input.other-input(type='text', name='allergies', placeholder='Please describe...')
+                            label#q23a08
+                                input.other(type='checkbox', name='allergies')
+                                .aq-check
+                                span Other
+                            input.other-input(type='text', name='allergies', placeholder='Please describe...')
+                            label#q23a09
+                                input(type='checkbox', name='allergies')
+                                .aq-check
+                                span None
+                    .qstn-divider
+                    #q24.qstn-wrap.checks.others
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 24.
+                                    | Which 3 things make it hard to lose weight?
+                            label#q24a01
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Eating too much at meals
+                            label#q24a02
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Snacking
+                            label#q24a03
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Weekends!
+                            label#q24a04
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Unhealthy food in my house
+                            label#q24a05
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Comforting myself with food
+                            label#q24a06
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Guilt. (I overeat, feel guilty, overeat some more...)
+                            label#q24a07
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span I never feel full
+                            label#q24a08
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span I reward myself with food
+                            label#q24a09
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Eating at work
+                            label#q24a10
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Eating with family & friends
+                            label#q24a11
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Eating out
+                            label#q24a12
+                                input(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span Food tastes so darn good!
+                            label#q24a13
+                                input.other(type='checkbox', name='hard_to_lose', data-limit='3')
+                                .aq-check
+                                span.other Other
+                            input.other-input(type='text', name='hard_to_lose', placeholder='Please describe...')
+                    .qstn-divider
+                    #q25.qstn-wrap.radios.others
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 25.
+                                    | Having a mantra can really help you stick with it. Pick one below, or write your own!
+                            label#q25a01
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span Losing weight is hard. Being overweight is hard. Choose your hard.
+                            label#q25a02
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span If you kinda do it, it kinda works. If you really do it, it really works.
+                            label#q25a03
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span The scale is a weight loss tool - not a judge, jury and executioner.
+                            label#q25a04
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span Don't give up what you want the most for what you want in the moment.
+                            label#q25a05
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span If we want a change, we have to make a change.
+                            label#q25a06
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span Whether you believe you can, or cannot, you're right.
+                            label#q25a07
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span I've come too far to take orders from a cookie.
+                            label#q25a08
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span I've got this.
+                            label#q25a09
+                                input(type='radio', name='mantra')
+                                .aq-radio
+                                span It's choice, not chance, that will determine my destiny.
+                            label#q25a10
+                                input.other(name='mantra', type='radio')
+                                .aq-radio
+                                span Add your own mantra!
+                            textarea.other-input(name='mantra', placeholder='My mantra is...')
+                    .qstn-divider
+                    #q26.qstn-wrap.tel
+                        fieldset
+                            legend
+                                span.qstn.dbl-digit
+                                    span 26.
+                                    | Please enter your phone number(s):
+                            label
+                                .qstn-sub Home
+                                input(type='text', name='tel-number', pattern='[0-9]*', placeholder='555-555-5555')
+                                .qstn-tag (Your coach will use it to call you.)
+                            label
+                                .qstn-sub Mobile
+                                input(type='text', name='tel-number', pattern='[0-9]*', placeholder='555-555-5555')
+                                .qstn-tag (Reminders will be sent by text.)
+                    .qstn-divider
+                    #qstn_assess.qstn-wrap.coach-msg
+                        label
+                            p
+                                | Is there anything else you’d like your coach to know about you? If so, tell us below. If not, just hit „I’m done!„
+                            .note-paper
+                                .dear.wwdisplay-bold Dear Coach,
+                                .note-divider
+                                textarea(name='coach_msg', placeholder='write your message here...')
+                                .users-name Sean Vinci
+
         script(src='js/jquery-1.11.0.min.js', type='text/javascript')
         script(src='js/assessment.js', type='text/javascript')
         script(src='js/page.js', type='text/javascript')

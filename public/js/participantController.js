@@ -1,4 +1,4 @@
-participantModule.controller('ParticipantLoginController', ['$scope','$http','$routeParams','$log','participantService', function($scope,$http,$routeParams,$log,participantService) {
+participantModule.controller('ParticipantController', ['$scope','$http','$routeParams','$log','participantService','searchService', function($scope,$http,$routeParams,$log,participantService,searchService) {
     $scope.initApp=function(){
         $log.log('participantController initialized');
         var ln = $('#lastname').val();
@@ -49,6 +49,7 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
                     })
                         .success(function (d, status, headers, config) {
                             //console.log(d);
+                            $scope.pilotUser= data.pilotProfile;
                             window.location.replace("/participant/"+$scope.firstname+"/"+$scope.lastname);
                         })
                         .error(function (status, headers, config) {
@@ -80,6 +81,8 @@ participantModule.controller('ParticipantController',['$scope','$http','$log','$
             $scope.coaches = data;
 //            console.log($scope.coaches);
         });
+
+        //get user information
 
         $scope.predicate = 'Date';
         $('#datepicker').datetimepicker({
@@ -185,7 +188,6 @@ participantModule.controller('ParticipantController',['$scope','$http','$log','$
         $scope.ConfirmMessage="Thanks for updating your schedule";
     };
 
-    // I sort the given collection on the given property.
 
 }]);
 

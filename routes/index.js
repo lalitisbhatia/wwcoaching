@@ -76,10 +76,12 @@ exports.assessment = function(req, res,next){
     //var fn = req.params.firstname;
     //var ln = req.params.lastname;
     console.log('inside router');
+    console.log(req.body);
+    console.log('finished logging req.body');
 //    if(req.session.auth){
 //        if(req.session.isParticipant){
     //res.render('assessment',{firstname:fn,lastname:ln});
-    res.redirect('asm.html');
+    res.redirect('assessment.html');
 //        }
 //    }else{
 //        res.redirect('/');
