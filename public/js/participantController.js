@@ -13,7 +13,6 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
         $scope.participantId="";
 
     };
-
     $scope.getWWDetails = function(){
         console.log($scope.username + ' - ' + $scope.password);
         var loginInfo = { "U": $scope.username, "P": $scope.password, "R": "true" };
@@ -30,8 +29,6 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
             $scope.wwProfile = data.wwProfile;
             $scope.pilotUser= data.pilotUser;
 
-            //If assessment taken
-            //go to scheduler page
             window.location.replace("/participant/"+$scope.firstname+"/"+$scope.lastname);
         });
 

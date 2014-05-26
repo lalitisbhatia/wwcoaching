@@ -28,6 +28,8 @@ exports.getAssmById = function(req, res) {helper.getConnection(function(err,db){
 exports.saveAssm = function(req, res) {helper.getConnection(function(err,db){
     var assm = req.body;
     console.log(req.body);
+    var assmDate = new Date();
+    assm.AssmDate = assmDate.toISOString();
 
     db.collection(assmCollName, function(err, collection) {
         collection.insert(assm, {safe:true}, function(err, result) {

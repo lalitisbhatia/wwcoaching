@@ -90,7 +90,7 @@ app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
 //app.get('/assessment*',admin.checkParticipant,home.participant);
 
 app.get('/assessment/:id',assmnt.getAssmById);
-app.post('/assessment',admin.checkParticipant, assmnt.saveAssm);
+app.post('/participant/:firstname/:lastname',admin.checkParticipant, assmnt.saveAssm);
 
 //****************************************************
 //*****This section is for the schedule data********
