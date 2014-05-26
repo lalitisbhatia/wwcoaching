@@ -5,7 +5,7 @@ block content
         .row
 
                 #scheduler.tab-pane.col-sm-9.col-md-10.main
-                    .ng-scope(ng-controller='ParticipantController' ng-init='initApp()' style='width:800px;')
+                    .ng-scope(ng-controller='ParticipantController' ng-init='initSchPage()' style='width:800px;')
                         .container
                             .row.well.col-md-12
                                 .col-lg-12
@@ -51,6 +51,7 @@ block content
                                                             td
                                                                 input(type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
 
+                                            input(type="hidden" value="#{user._id}" id="userID" )
 
 
         //ul#coaches(style="list-style-type:none;padding-left:10px;")

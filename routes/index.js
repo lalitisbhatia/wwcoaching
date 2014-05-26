@@ -65,29 +65,36 @@ exports.participant = function(req, res,next){
     console.log(req.session.user);
     if(req.session.auth){
         if(req.session.isParticipant){
-            res.render('participant');
+            if (req.session.assessment){
+                res.render('participantSch',{user:req.session.user});
+            }else{
+                res.render('assessment',{firstname:fn,lastname:ln});
+            }
+            // render scheduling
+            //else render assessment
+
         }
     }else{
         res.render('participantLogin',{firstname:fn,lastname:ln});
     }
 };
 
-exports.assessment = function(req, res,next){
-    //var fn = req.params.firstname;
-    //var ln = req.params.lastname;
-    console.log('inside router');
-    console.log(req.body);
-    console.log('finished logging req.body');
+//exports.assessment = function(req, res,next){
+//    //var fn = req.params.firstname;
+//    //var ln = req.params.lastname;
+//    console.log('inside router');
+//    console.log(req.body);
+//    console.log('finished logging req.body');
 //    if(req.session.auth){
 //        if(req.session.isParticipant){
-    //res.render('assessment',{firstname:fn,lastname:ln});
-    res.redirect('assessment.html');
+//    //res.render('assessment',{firstname:fn,lastname:ln});
+//    res.redirect('assessment.html');
 //        }
-//    }else{
+////    }else{
 //        res.redirect('/');
-//    }
-
-};
+////    }
+//
+//};
 exports.partials = function (req, res) {
   var name = req.params.name;
   res.render('partials/' + name);

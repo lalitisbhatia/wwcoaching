@@ -1,4 +1,4 @@
-participantModule.controller('ParticipantController', ['$scope','$http','$routeParams','$log','participantService','searchService', function($scope,$http,$routeParams,$log,participantService,searchService) {
+participantModule.controller('ParticipantLoginController', ['$scope','$http','$routeParams','$log','participantService','searchService', function($scope,$http,$routeParams,$log,participantService,searchService) {
     $scope.initApp=function(){
         $log.log('participantController initialized');
         var ln = $('#lastname').val();
@@ -26,56 +26,21 @@ participantModule.controller('ParticipantController', ['$scope','$http','$routeP
             pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: saveWWCreds};
         }
         console.log(pilotUser);
+        participantService.getUserProfile(loginInfo,pilotUser).then(function(data){
+            $scope.wwProfile = data.wwProfile;
+            $scope.pilotUser= data.pilotUser;
 
-        $http({
-            method:'POST',
-            url: 'https://mobile.weightwatchers.com/authservice.svc/login',
-            data: loginInfo,
-            xhrFields: {
-                withCredentials: true
-            },
-            processData: false
-        })
-            .success(function (d, status, headers, config) {
-                //$log.log(d);
-                $scope.wwProfile = d.UserInformation;
-                //$log.log($scope.wwProfile);
-                //if ww auth is successful, authenticate the pilot profile using the first and last name
-                if(d.LoginSuccessful) {
-                    $http({
-                        method: 'POST',
-                        url: '/participant',
-                        data: pilotUser
-                    })
-                        .success(function (d, status, headers, config) {
-                            //console.log(d);
-                            $scope.pilotUser= data.pilotProfile;
-                            window.location.replace("/participant/"+$scope.firstname+"/"+$scope.lastname);
-                        })
-                        .error(function (status, headers, config) {
-                            $log.log('failed to get pilot profile:' + status);
+            //If assessment taken
+            //go to scheduler page
+            window.location.replace("/participant/"+$scope.firstname+"/"+$scope.lastname);
+        });
 
-                        })
-                }else{
-                    $scope.errMessage='WW credentials not recognised';
-                }
-            })
-            .error(function(status, headers, config){
-                $log.log('failed to get WW profile:' + status);
-            })
-    }
+    };
 }]);
 
-/*##################################################
- ################ User View #######################
- ##################################################
- */
-
-//controller for coaches to choose their availability
-participantModule.controller('ParticipantController',['$scope','$http','$log','$filter','searchService','participantService',function($scope,$http,$log,$filter,searchService,participantService){
-
-    $scope.initApp=function() {
-        $log.log('initialized UserSchedulingController');
+participantModule.controller('ParticipantController', ['$scope','$http','$routeParams','$log','participantService','searchService', function($scope,$http,$routeParams,$log,participantService,searchService) {
+    $scope.initSchPage=function() {
+        $log.log('initialized initSchPage');
         $scope.coaches=[];
         participantService.getAllCoaches().then(function(data){
             $scope.coaches = data;
@@ -124,10 +89,12 @@ participantModule.controller('ParticipantController',['$scope','$http','$log','$
         });
     };
 
+
     $('#coachselect').change(function(){
         var coachId = $(this).children("option:selected").val();
         console.log($(this).children("option:selected").text()  + ' selected');
         //search for coaches using coachId
+        console.log($('#userID').val());
         searchService.getCoachesById(coachId).then(function(data){
             $scope.setSearchResults(data);
         });
@@ -187,7 +154,6 @@ participantModule.controller('ParticipantController',['$scope','$http','$log','$
             });
         $scope.ConfirmMessage="Thanks for updating your schedule";
     };
-
 
 }]);
 
