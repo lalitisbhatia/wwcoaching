@@ -38,10 +38,11 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
     };
 }]);
 
-participantModule.controller('ParticipantController', ['$scope','$http','$routeParams','$log','participantService','searchService', function($scope,$http,$routeParams,$log,participantService,searchService) {
+participantModule.controller('ParticipantSchController', ['$scope','$http','$routeParams','$log','participantService','searchService', function($scope,$http,$routeParams,$log,participantService,searchService) {
     $scope.initSchPage=function() {
         $log.log('initialized initSchPage');
         $scope.coaches=[];
+        console.log($('#userID').val());
         participantService.getAllCoaches().then(function(data){
             $scope.coaches = data;
 //            console.log($scope.coaches);

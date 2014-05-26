@@ -62,17 +62,26 @@ exports.participant = function(req, res,next){
     var fn = req.params.firstname;
     var ln = req.params.lastname;
     console.log(fn + ' - '+ ln);
+    console.log('inside index.js router');
     console.log(req.session.user);
+
+    /****************************************
+      Participant routing:
+        if not auth,
+            login page
+        Else
+            if not assessment taken
+                go to assm page
+            else
+                go to scheduling page
+     ***************************************/
     if(req.session.auth){
         if(req.session.isParticipant){
-            if (req.session.assessment){
+            if (req.session.user.assessment){
                 res.render('participantSch',{user:req.session.user});
             }else{
-                res.render('assessment',{firstname:fn,lastname:ln});
+                res.render('assessment',{user:req.session.user});
             }
-            // render scheduling
-            //else render assessment
-
         }
     }else{
         res.render('participantLogin',{firstname:fn,lastname:ln});
