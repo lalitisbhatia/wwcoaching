@@ -42,7 +42,6 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
     $scope.initSchPage=function() {
         $log.log('initialized initSchPage');
         $scope.coaches=[];
-        console.log($('#userID').val());
         participantService.getAllCoaches().then(function(data){
             $scope.coaches = data;
 //            console.log($scope.coaches);
@@ -95,7 +94,6 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         var coachId = $(this).children("option:selected").val();
         console.log($(this).children("option:selected").text()  + ' selected');
         //search for coaches using coachId
-        console.log($('#userID').val());
         searchService.getCoachesById(coachId).then(function(data){
             $scope.setSearchResults(data);
         });
