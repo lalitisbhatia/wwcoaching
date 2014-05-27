@@ -30,16 +30,29 @@ exports.saveAssm = function(req, res) {helper.getConnection(function(err,db){
     console.log(req.body);
     var assmDate = new Date();
     assm.AssmDate = assmDate.toISOString();
+    console.log(req.session.user.assessment);
 
     db.collection(assmCollName, function(err, collection) {
-        collection.insert(assm, {safe:true}, function(err, result) {
-            if (err) {
-                res.send({'error':'An error has occurred'});
-            } else {
-                console.log('Success: ');
-                res.render('thanks');
-            }
-        });
+        if(req.session.user.assessment){
+            collection.update({'Assessment.UserId':req.session.user._id},{$set:{Assessment:assm}},{safe: true}, function (err, result) {
+                if (err) {
+                    res.send({'error': 'An error has occurred: '+ err});
+                } else {
+                    console.log('Success: ');
+
+                }
+            });
+        }else {
+            collection.insert({Assessment:assm}, {safe: true}, function (err, result) {
+                if (err) {
+                    res.send({'error': 'An error has occurred inserting the assessment: '+ err});
+                } else {
+                    console.log('Success: ');
+                }
+            });
+        }
+        req.session.user.assessment=true;
+        res.render('thanks');
     });
 });
 };
