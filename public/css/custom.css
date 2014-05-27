@@ -132,3 +132,62 @@ th{
 /* Ease Display */
 
 .pad { padding: 25px; }
+
+label {
+    display: inline;
+}
+
+.regular-checkbox {
+    display: none;
+}
+
+.regular-checkbox + label {
+    background-color: #fafafa;
+    border: 0px solid #cacece;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+}
+
+.regular-checkbox + label:active, .regular-checkbox:checked + label:active {
+    box-shadow: 0 0px 0px rgba(0,0,0,0.05), inset 0px 1px 0px rgba(0,0,0,0.1);
+}
+
+.regular-checkbox:checked + label {
+    background-color: #e9ecee;
+    border: 1px solid #adb8c0;
+    color: #99a1a7;
+}
+
+.regular-checkbox:checked + label:after {
+    content: '\2714';
+    font-size: 1px;
+    position: absolute;
+    background-color: greenyellow;
+    border: thin;
+    width: 90px;
+    height: 20px;
+    top: 0px;
+    color: #99a1a7;
+}
+
+
+.big-checkbox + label {
+    padding: 0px;
+}
+
+.big-checkbox:checked + label:after {
+    font-size: 10px;
+    left: 0px;
+}
+
+.tag {
+    font-family: Arial, sans-serif;
+    width: 20px;
+    position: relative;
+
+    font-weight: bold;
+    text-transform: uppercase;
+    display: block;
+    float: left;
+}

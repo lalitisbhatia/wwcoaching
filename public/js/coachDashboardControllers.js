@@ -137,7 +137,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
     $scope.updateSelection = function($event, d) {
         var checkbox = $event.target;
         var action = (checkbox.checked ? 'add' : 'remove');
-        //console.log(action + '-' + d );
+        console.log(action + '-' + d );
 
         updateSelected(action, d);
     };
