@@ -132,6 +132,9 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             .success(function (d, status, headers, config) {
                 console.log('success');
                 console.log(d);
+                $scope.availDates={};
+                $scope.SearchMessage ="";
+                $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
                 //trigger emails/text
                 $http({
                     method:'POST',

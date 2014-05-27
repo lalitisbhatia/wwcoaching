@@ -27,6 +27,7 @@ block content
                                                     select#coachselect.form-control.input-md(ng-model='newuser' name="coach" style="margin-bottom:15px;")
                                                         option(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']"  value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
                                         p {{SearchMessage}}
+                                        b(style="color:green;") {{confirmMessage}}
                                         fieldset(style="padding:10px;")
                                             // Form Name
 
@@ -50,6 +51,7 @@ block content
                                                             td(style="vertical-align:initial;")  {{availDate.Time}}
                                                             td
                                                                 input(type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
+
 
                                             input(type="hidden" value="#{user._id}" id="userID" )
 
