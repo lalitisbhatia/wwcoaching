@@ -141,7 +141,7 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
                     //check if the user took assessment and set that property in the session object
                     db.collection(assessmentCollName, function(err, collection) {
                         console.log(item);
-                        collection.findOne({'UserId':item._id}, function(err, assm) {
+                        collection.findOne({'Assessment.UserId':item._id}, function(err, assm) {
                             if(err){
                                 console.log(err);
                                 res.send('error while looking for assessment: '+ err);

@@ -124,7 +124,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.confirmCoach='Coach: '+coach.coachName;
             $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
             //trigger emails/text
-            schedulingService.sendSchEmails({Date:selDate,Coach:coach}).then(function(data){
+            schedulingService.sendSchEmails({Date:selDate,CoachId:coach.coachId}).then(function(data){
                 console.log('success');
             });
         });
