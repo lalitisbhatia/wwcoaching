@@ -2,7 +2,6 @@
  * GET home page.
  */
 
-var coaches = require('../routes/coaches');
 
 exports.home = function(req, res,next){
     console.log('arriving at admin user');
@@ -89,11 +88,3 @@ exports.participant = function(req, res,next){
 };
 
 
-// exports.adminhome = function(req,res){
-//     console.log('rendering coach home');
-//     res.render('admin'); 
-// };
-
-// exports.coachhome = function(req,res){
-//     res.render('coach'); 
-// };
