@@ -1,5 +1,5 @@
 'use strict';
-participantModule.factory('searchService',function($http,$log,$q,$rootScope){
+participantModule.factory('schedulingService',function($http,$log,$q,$rootScope){
     var myService = {
         getCoachesByDate: function (date) {
             return $http({
@@ -42,6 +42,26 @@ participantModule.factory('searchService',function($http,$log,$q,$rootScope){
                     return results;
                 });
 
+        },
+        saveAppt:function(appt){
+            return $http({
+                method:'POST',
+                url: '/saveAppt',
+                data: appt
+            })
+            .then(function(response){
+                return(response.data);
+            });
+        },
+        sendSchEmails:function(emailData){
+            return $http({
+                method:'POST',
+                url: '/email',
+                data: emailData
+            })
+                .then(function(response){
+                    return(response.data);
+                });
         }
     };
 

@@ -35,7 +35,7 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
     };
 }]);
 
-participantModule.controller('ParticipantSchController', ['$scope','$http','$routeParams','$log','participantService','searchService', function($scope,$http,$routeParams,$log,participantService,searchService) {
+participantModule.controller('ParticipantSchController', ['$scope','$http','$routeParams','$log','participantService','schedulingService', function($scope,$http,$routeParams,$log,participantService,schedulingService) {
     $scope.initSchPage=function() {
         $log.log('initialized initSchPage');
         $scope.coaches=[];
@@ -45,8 +45,6 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         });
 
         //get user information
-
-        $scope.predicate = 'Date';
         $('#datepicker').datetimepicker({
             format:'d-M-y H:i',
             //inline:true,
@@ -77,7 +75,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
                 $('#fakeSave').click();
 
                 //Call the service to return results
-                searchService.getCoachesByDate(dateUTC).then(function(data){
+                schedulingService.getCoachesByDate(dateUTC).then(function(data){
                     $scope.setSearchResults(data);
                 });
 
@@ -91,17 +89,12 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         var coachId = $(this).children("option:selected").val();
         console.log($(this).children("option:selected").text()  + ' selected');
         //search for coaches using coachId
-        searchService.getCoachesById(coachId).then(function(data){
+        schedulingService.getCoachesById(coachId).then(function(data){
             $scope.setSearchResults(data);
         });
     });
 
-    $scope.getCoachesById= function(coachId){
-        console.log('inside function - coach id = '+coachId);
-        searchService.getCoachesById(coachId).then(function(data){
-            $scope.setSearchResults(data);
-        });
-    };
+
 
     $scope.setSearchResults = function(data){
         $scope.availDates = data;
@@ -110,48 +103,31 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         }else{
             $scope.SearchMessage = "No coaches are available on or around " + $scope.SelectedDate +".\n Please search using a different date or search by coach name.";
         }
-        $log.log($scope.availDates);
+     //$log.log($scope.availDates);
     };
 
     $scope.saveUserAppt = function(coach,selDate) {
         console.log('calling save Schedule');
-
+        var selectedDate = new Date(selDate);
 //        var selDate = $scope.SelectedDateUTC;
         //var selDate = new Date($scope.SelectedDateUTC);
         //console.log($scope.SelectedDateUTC.dateFormat('m/d/Y H:i'));
-        console.log(selDate);
+        console.log(selectedDate);
 
         console.log(coach);
         var appt = {Date:selDate,CoachId:coach.coachId};
         console.log(appt);
-        $http({
-            method:'POST',
-            url: '/saveAppt',
-            data: appt
-        })
-            .success(function (d, status, headers, config) {
+        schedulingService.saveAppt(appt).then(function(data){
+            $scope.availDates={};
+            $scope.SearchMessage ="";
+            $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
+            $scope.confirmCoach='Coach: '+coach.coachName;
+            $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
+            //trigger emails/text
+            schedulingService.sendSchEmails({Date:selDate,Coach:coach}).then(function(data){
                 console.log('success');
-                console.log(d);
-                $scope.availDates={};
-                $scope.SearchMessage ="";
-                $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
-                //trigger emails/text
-                $http({
-                    method:'POST',
-                    url: '/email',
-                    data: {Date:selDate,Coach:coach}
-                })
-                    .success(function(d,status,headers,config){
-                        console.log('success');
-                    })
-                    .error(function(status, headers, config){
-                        console.log('failed to send email:' + status + ' - ' + headers );
-                    });
-            })
-            .error(function(status, headers, config){
-                console.log('failed to save schedule:' + status + ' - ' + headers );
             });
-        $scope.ConfirmMessage="Thanks for updating your schedule";
+        });
     };
 
 }]);

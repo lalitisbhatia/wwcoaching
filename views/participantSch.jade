@@ -27,7 +27,12 @@ block content
                                                     select#coachselect.form-control.input-md(ng-model='newuser' name="coach" style="margin-bottom:15px;")
                                                         option(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']"  value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
                                         p {{SearchMessage}}
+
                                         b(style="color:green;") {{confirmMessage}}
+                                        p
+                                            b {{confirmCoach}}
+                                        p
+                                            b {{confirmDate}}
                                         fieldset(style="padding:10px;")
                                             // Form Name
 
