@@ -9,6 +9,7 @@ var BSON = mongo.BSONPure;
 
 var coachesCollName = 'coaches';
 var participantsCollName = 'users';
+var assessmentCollName = 'assessments';
 
 exports.loginAdmin = function(req, res,next) {helper.getConnection(function(err,db){
     console.log('calling login function for ADMIN');
@@ -122,7 +123,6 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
                 {
                     //console.log(item);
                     req.session.auth=true;
-                    req.session.userId=item._id;
                     req.session.user=item;
                     req.session.isParticipant = true;
                     //if the checkbox was checked, save the ww credentials to pilot db
@@ -138,8 +138,25 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
                             }
                         });
                     }
+                    //check if the user took assessment and set that property in the session object
+                    db.collection(assessmentCollName, function(err, collection) {
+                        console.log(item);
+                        collection.findOne({'UserId':item._id}, function(err, assm) {
+                            if(err){
+                                console.log(err);
+                                res.send('error while looking for assessment: '+ err);
+                                return(next(err));
+                            }
+
+                            if(assm){
+                                console.log('found assessment');
+                                req.session.user.assessment=true;
+                            }
+                            res.send(item);
+                        });
+                    });
                     //console.log(item);
-                    res.redirect('/participant/'+fn+'/'+ln);
+
                 }else
                 {
                     console.log('participant not found');

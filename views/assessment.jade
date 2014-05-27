@@ -1,15 +1,16 @@
 doctype html
-
+<!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
+<!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
 head
     title My Personal Assessment
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1, minimum-scale=1')
-    link(rel='stylesheet', type='text/css', href='css/normalize.css')
-    link(rel='stylesheet', type='text/css', href='css/style.css')
-
+    link(rel='stylesheet', type='text/css', href='/css/normalize.css')
+    link(rel='stylesheet', type='text/css', href='/css/style.css')
 
 body
-    form(role='form',action='/admin' method='POST')
+    form(action='#thanks' method='POST')
         .aq-ww-banner
             h1
                 span.offscreen Weight Watchers
@@ -18,7 +19,7 @@ body
                 | Thanks!
                 span.ww-break
                 | Let’s get started.
-            img(src='img/loading.gif')
+            img(src='/img/loading.gif')
         .aq-wrap
             .sec.active
                 header.aq-intro
@@ -30,10 +31,10 @@ body
                             span.qstn To get started, please enter your name:
                         label#q00a01
                             span.offscreen First Name
-                            input(type='text', name='First Name', placeholder='First Name', required='required')
+                            input(type='text', name='First Name', placeholder='First Name', required='')
                         label#q00a02
                             span.offscreen Last Name
-                            input(type='text', name='Last Name', placeholder='Last Name', required='required')
+                            input(type='text', name='Last Name', placeholder='Last Name', required='')
                     p.error-txt Something's missing. Fill in your first and last name to get started!
                 button#next.aq-btn(type='button') Next
             .sec
@@ -482,31 +483,31 @@ body
                                 b day
                                 | , how often do you eat:
                         label#q05a01
-                            img.img-box(src='img/fresh_fruit@2x.jpg', alt='')
+                            img.img-box(src='/img/fresh_fruit@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Fresh fruit
                             .q-input-wrap
                                 input(type='text', name='food_type', pattern='[0-9]*')
                         label#q05a02
-                            img.img-box(src='img/fresh_veg@2x.jpg', alt='')
+                            img.img-box(src='/img/fresh_veg@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Vegetables
                             .q-input-wrap
                                 input(type='text', name='food_type', pattern='[0-9]*')
                         label#q05a03
-                            img.img-box(src='img/fried_food@2x.jpg', alt='')
+                            img.img-box(src='/img/fried_food@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Fried Foods
                             .q-input-wrap
                                 input(type='text', name='food_type', pattern='[0-9]*')
                         label#q05a04
-                            img.img-box(src='img/chips@2x.jpg', alt='')
+                            img.img-box(src='/img/chips@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Chips, crackers
                             .q-input-wrap
                                 input(type='text', name='food_type', pattern='[0-9]*')
                         label#q05a05
-                            img.img-box(src='img/cookies_candy_icecream@2x.jpg', alt='')
+                            img.img-box(src='/img/cookies_candy_icecream@2x.jpg', alt='')
                             .q-txt-wrap
                                 span
                                     | Cookies, candy,
@@ -515,13 +516,13 @@ body
                             .q-input-wrap
                                 input(type='text', name='food_type', pattern='[0-9]*')
                         label#q05a06
-                            img.img-box(src='img/sweet_drinks@2x.jpg', alt='')
+                            img.img-box(src='/img/sweet_drinks@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Sweet drinks
                             .q-input-wrap
                                 input(type='text', name='food_type', pattern='[0-9]*')
                         label#q05a07
-                            img.img-box(src='img/diet_0cal@2x.jpg', alt='')
+                            img.img-box(src='/img/diet_0cal@2x.jpg', alt='')
                             .q-txt-wrap
                                 span 0-calorie drinks (including water)
                             .q-input-wrap
@@ -536,31 +537,31 @@ body
                         label#q06a01
                             input(type='radio', name='daily_act')
                             .aq-radio
-                            img.img-box(src='img/sittingdown.jpg', alt='')
+                            img.img-box(src='/img/sittingdown.jpg', alt='')
                             .q-txt-wrap
                                 span Sitting down
                         label#q06a02
                             input(type='radio', name='daily_act')
                             .aq-radio
-                            img.img-box(src='img/mostlysittingworkout.jpg', alt='')
+                            img.img-box(src='/img/mostlysittingworkout.jpg', alt='')
                             .q-txt-wrap
                                 span Sitting, but I also work out
                         label#q06a03
                             input(type='radio', name='daily_act')
                             .aq-radio
-                            img.img-box(src='img/sittingstanding.jpg', alt='')
+                            img.img-box(src='/img/sittingstanding.jpg', alt='')
                             .q-txt-wrap
                                 span A mix of sitting and standing
                         label#q06a04
                             input(type='radio', name='daily_act')
                             .aq-radio
-                            img.img-box(src='img/standing.jpg', alt='')
+                            img.img-box(src='/img/standing.jpg', alt='')
                             .q-txt-wrap
                                 span Mainly standing and walking
                         label#q06a05
                             input(type='radio', name='daily_act')
                             .aq-radio
-                            img.img-box(src='img/physical.jpg', alt='')
+                            img.img-box(src='/img/physical.jpg', alt='')
                             .q-txt-wrap
                                 span I'm very active
                 .qstn-divider
@@ -575,19 +576,19 @@ body
                         label#q07a02
                             input(type='radio', name='physical_act')
                             .aq-radio
-                            img.img-box(src='img/clock.jpg', alt='')
+                            img.img-box(src='/img/clock.jpg', alt='')
                             .q-txt-wrap
                                 span 30 mins or less
                         label#q07a02
                             input(type='radio', name='physical_act')
                             .aq-radio
-                            img.img-box(src='img/clock.jpg', alt='')
+                            img.img-box(src='/img/clock.jpg', alt='')
                             .q-txt-wrap
                                 span Around 60 mins
                         label#q07a01
                             input(type='radio', name='physical_act')
                             .aq-radio
-                            img.img-box(src='img/clock.jpg', alt='')
+                            img.img-box(src='/img/clock.jpg', alt='')
                             .q-txt-wrap
                                 span 100 mins or more
                 .qstn-divider
@@ -630,17 +631,17 @@ body
                             input.other(type='checkbox', name='act_devices')
                             .aq-check
                             span Other
-                        input.other-input(type='text', name='act_devices', placeholder='What\'s the name of your device?')
-                        .qstn-divider
-                        h3.sec-title Your Weight History
-                        #q09.qstn-wrap
-                        label
+                        input.other-input(type='text', name='act_devices', placeholder='What"s the name of your device?')
+                .qstn-divider
+                h3.sec-title Your Weight History
+                #q09.qstn-wrap
+                    label
                         span.qstn
-                        span 9.
-                        | What's your current weight?
+                            span 9.
+                            | What's your current weight?
                         .input-tag.unit.lbs
-                        input(type='text', name='current-weight', pattern='[0-9]*')
-
+                            input(type='text', name='current-weight', pattern='[0-9]*')
+                            span lbs.
                 .qstn-divider
                 #q10.qstn-wrap
                     label
@@ -808,19 +809,19 @@ body
                         label#q17a01
                             input(type='radio', name='spend_your_day')
                             .aq-radio
-                            img.img-box(src='img/work@2x.jpg', alt='')
+                            img.img-box(src='/img/work@2x.jpg', alt='')
                             .q-txt-wrap
                                 span At work
                         label#q17a02
                             input(type='radio', name='spend_your_day')
                             .aq-radio
-                            img.img-box(src='img/school@2x.jpg', alt='')
+                            img.img-box(src='/img/school@2x.jpg', alt='')
                             .q-txt-wrap
                                 span At school
                         label#q17a03
                             input(type='radio', name='spend_your_day')
                             .aq-radio
-                            img.img-box(src='img/home_kids@2x.jpg', alt='')
+                            img.img-box(src='/img/home_kids@2x.jpg', alt='')
                             .q-txt-wrap
                                 span
                                     | At home
@@ -829,7 +830,7 @@ body
                         label#q17a04
                             input(type='radio', name='spend_your_day')
                             .aq-radio
-                            img.img-box(src='img/home_alone@2x.jpg', alt='')
+                            img.img-box(src='/img/home_alone@2x.jpg', alt='')
                             .q-txt-wrap
                                 span
                                     | At home
@@ -838,13 +839,13 @@ body
                         label#q17a05
                             input(type='radio', name='spend_your_day')
                             .aq-radio
-                            img.img-box(src='img/retired@2x.jpg', alt='')
+                            img.img-box(src='/img/retired@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Retired
                         label#q17a06
                             input.other(type='radio', name='spend_your_day')
                             .aq-radio
-                            img.img-box(src='img/other@2x.jpg', alt='')
+                            img.img-box(src='/img/other@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Other
                         input.other-input(type='text', name='spend_your_day', placeholder='Please describe...')
@@ -924,25 +925,25 @@ body
                         label#q21a01
                             input(type='checkbox', name='stay_on_track')
                             .aq-radio
-                            img.img-box(src='img/morning@2x.jpg', alt='')
+                            img.img-box(src='/img/morning@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Morning
                         label#q21a02
                             input(type='checkbox', name='stay_on_track')
                             .aq-radio
-                            img.img-box(src='img/afternoon@2x.jpg', alt='')
+                            img.img-box(src='/img/afternoon@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Afternoon
                         label#q21a03
                             input(type='checkbox', name='stay_on_track')
                             .aq-radio
-                            img.img-box(src='img/evening@2x.jpg', alt='')
+                            img.img-box(src='/img/evening@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Evening
                         label#q21a04
                             input(type='checkbox', name='stay_on_track')
                             .aq-radio
-                            img.img-box(src='img/late_night@2x.jpg', alt='')
+                            img.img-box(src='/img/late_night@2x.jpg', alt='')
                             .q-txt-wrap
                                 span Late at night
                 .qstn-divider
@@ -954,23 +955,23 @@ body
                                 | What are the 5 foods you can't live without?
                         label#q22a01
                             span.offscreen 1
-                            img.img-box(src='img/1fav.jpg', alt='')
+                            img.img-box(src='/img/1fav.jpg', alt='')
                             input(type='text', name='five_foods1', pattern='[0-9]*')
                         label#q22a02
                             span.offscreen 2
-                            img.img-box(src='img/2fav.jpg', alt='')
+                            img.img-box(src='/img/2fav.jpg', alt='')
                             input(type='text', name='five_foods2', pattern='[0-9]*')
                         label#q22a03
                             span.offscreen 3
-                            img.img-box(src='img/3fav.jpg', alt='')
+                            img.img-box(src='/img/3fav.jpg', alt='')
                             input(type='text', name='five_foods3', pattern='[0-9]*')
                         label#q22a04
                             span.offscreen 4
-                            img.img-box(src='img/4fav.jpg', alt='')
+                            img.img-box(src='/img/4fav.jpg', alt='')
                             input(type='text', name='five_foods4', pattern='[0-9]*')
                         label#q22a05
                             span.offscreen 5
-                            img.img-box(src='img/5fav.jpg', alt='')
+                            img.img-box(src='/img/5fav.jpg', alt='')
                             input(type='text', name='five_foods5', pattern='[0-9]*')
                 .qstn-divider
                 #q23.qstn-wrap.checks.others
@@ -1144,13 +1145,14 @@ body
                 #qstn_assess.qstn-wrap.coach-msg
                     label
                         p
-                            | Is there anything else you’d like your coach to know about you? If so, tell us below. If not, just hit „I’m done!„
+                            | Is there anything else you’d like your coach to know about you? If so, tell us below. If not, just hit “I’m done!“
                         .note-paper
                             .dear.wwdisplay-bold Dear Coach,
                             .note-divider
                             textarea(name='coach_msg', placeholder='write your message here...')
                             .users-name Sean Vinci
-                button.aq-btn(type='button', onclick='SaveAssessment()') I’m done!
-        script(src='js/jquery-1.11.0.min.js', type='text/javascript')
-        script(src='js/assessment.js', type='text/javascript')
-        script(src='js/page.js', type='text/javascript')
+                button.aq-btn(type='submit') I’m done!
+                input(type='hidden' value="#{user._id}" name="UserId" )
+
+        script(src='/js/jquery-1.11.0.min.js', type='text/javascript')
+        script(src='/js/page.js', type='text/javascript')

@@ -19,50 +19,51 @@ html(lang="en" ng-app="participantModule")
                 .navbar-collapse.collapse(style='border:none;')
 
 
-block content
-        .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
-            h3(style='padding-left:0px;') Hi Welcome to the WeightWatchers Coaching Pilot
-            p Please login using your WeightWatchers credentials.
-            legend
-            p(style='padding-bottom:10px;')
+        block content
+            .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
+                h3(style='padding-left:0px;') Hi Welcome to the WeightWatchers Coaching Pilot
+                p Please login using your WeightWatchers credentials.
+                legend
+                p(style='padding-bottom:10px;')
 
-            .row(ng-controller="ParticipantLoginController" ng-init="initApp()")
-                .col-lg-4.well
-                    h2(style="text-align:center;") Participant Login
-                    legend
-                    form.form-horizontal.ng-pristine
-                        fieldset
-                            // Text input
-                            .form-group(style="margin-top:5px;")
-                                label.col-md-4.control-label(for='username') Username
-                                .col-md-4
-                                    input#textinput.form-control(style="width:160px;" type='text', name='username' placeholder='ww username' ng-model="username")
-                            .form-group(style="margin-top:15px;")
-                                label.col-md-4.control-label(for='password') Password
-                                .col-md-4
-                                    input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='ww password' ng-model="password")
-                                    br
-                            .form-group(style="margin-left:15px;")
-                                input.input-medium(type='checkbox', id="chksave" style="padding-left:200px;margin-right:10px;" )
-                                span Check to allow the pilot team to save your weightwatchers credentials.This will help your coach
-                                    input(type='button', id="fakeSave" , ng-click='' style="display:none;")
-                                    input(type="hidden" value="#{firstname}" id="firstname" ng-model="firstname")
-                                    input(type="hidden" value="#{lastname}" id="lastname" ng-model="lastname")
+                .row(ng-controller="ParticipantLoginController" ng-init="initApp()")
+                    .col-lg-4.well
+                        h2(style="text-align:center;") Participant Login
+                        legend
+                        form.form-horizontal.ng-pristine
+                            fieldset
+                                // Text input
+                                .form-group(style="margin-top:5px;")
+                                    label.col-md-4.control-label(for='username') Username
+                                    .col-md-4
+                                        input#textinput.form-control(style="width:160px;" type='text', name='username' placeholder='ww username' ng-model="username")
+                                .form-group(style="margin-top:15px;")
+                                    label.col-md-4.control-label(for='password') Password
+                                    .col-md-4
+                                        input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='ww password' ng-model="password")
+                                        br
+                                .form-group(style="margin-left:15px;")
+                                    input.input-medium(type='checkbox', id="chksave" style="padding-left:200px;margin-right:10px;" )
+                                    span Check to allow the pilot team to save your weightwatchers credentials.This will help your coach
+                                        input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+                                        input(type="hidden" value="#{firstname}" id="firstname" ng-model="firstname")
+                                        input(type="hidden" value="#{lastname}" id="lastname" ng-model="lastname")
 
-                            .form-group(style="margin-top:15px;")
-                                .col-md-4
-                                    button#singlebutton.btn.btn-primary( ng-click='getWWDetails()',style="margin-left:110px;") Login
-                            span(style="color:red;" ng-model="errMessage") {{errMessage}}
+                                .form-group(style="margin-top:15px;")
+                                    .col-md-4
+                                        button#singlebutton.btn.btn-primary( ng-click='getWWDetails()',style="margin-left:110px;") Login
+                                span(style="color:red;" ng-model="errMessage") {{errMessage}}
 
 
-    script(src='/js/jquery.min.js')
-    script(src='/js/bootstrap.min.js')
-    script(src='/js/angular.min.js')
-    script(src='/js/angular-route.min.js')
-    script(src='/js/jquery.datetimepicker.js')
-    script(src='/js/app.js')
-    script(src='/js/adminService.js')
-    script(src='/js/custom.js')
-    script(src='/js/app.js')
-    script(src='/js/participantService.js')
-    script(src='/js/participantController.js')
+        script(src='/js/jquery.min.js')
+        script(src='/js/bootstrap.min.js')
+        script(src='/js/angular.min.js')
+        script(src='/js/angular-route.min.js')
+        script(src='/js/jquery.datetimepicker.js')
+        script(src='/js/app.js')
+        script(src='/js/adminService.js')
+        script(src='/js/custom.js')
+        script(src='/js/app.js')
+        script(src='/js/participantService.js')
+        script(src='/js/schService.js')
+        script(src='/js/participantController.js')

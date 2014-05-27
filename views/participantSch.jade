@@ -5,7 +5,7 @@ block content
         .row
 
                 #scheduler.tab-pane.col-sm-9.col-md-10.main
-                    .ng-scope(ng-controller='ParticipantController' ng-init='initApp()' style='width:800px;')
+                    .ng-scope(ng-controller='ParticipantSchController' ng-init='initSchPage()' style='width:800px;')
                         .container
                             .row.well.col-md-12
                                 .col-lg-12
@@ -27,6 +27,12 @@ block content
                                                     select#coachselect.form-control.input-md(ng-model='newuser' name="coach" style="margin-bottom:15px;")
                                                         option(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']"  value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
                                         p {{SearchMessage}}
+
+                                        b(style="color:green;") {{confirmMessage}}
+                                        p
+                                            b {{confirmCoach}}
+                                        p
+                                            b {{confirmDate}}
                                         fieldset(style="padding:10px;")
                                             // Form Name
 
@@ -51,6 +57,8 @@ block content
                                                             td
                                                                 input(type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
 
+
+                                            input(type="hidden" value="#{user._id}" id="userID" )
 
 
         //ul#coaches(style="list-style-type:none;padding-left:10px;")

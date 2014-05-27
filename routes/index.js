@@ -2,7 +2,6 @@
  * GET home page.
  */
 
-var coaches = require('../routes/coaches');
 
 exports.home = function(req, res,next){
     console.log('arriving at admin user');
@@ -62,40 +61,30 @@ exports.participant = function(req, res,next){
     var fn = req.params.firstname;
     var ln = req.params.lastname;
     console.log(fn + ' - '+ ln);
+    console.log('inside index.js router');
     console.log(req.session.user);
+
+    /****************************************
+      Participant routing:
+        if not auth,
+            login page
+        Else
+            if not assessment taken
+                go to assm page
+            else
+                go to scheduling page
+     ***************************************/
     if(req.session.auth){
         if(req.session.isParticipant){
-            res.render('participant');
+            if (req.session.user.assessment){
+                res.render('participantSch',{user:req.session.user});
+            }else{
+                res.render('assessment',{user:req.session.user});
+            }
         }
     }else{
         res.render('participantLogin',{firstname:fn,lastname:ln});
     }
 };
 
-exports.assessment = function(req, res,next){
-    //var fn = req.params.firstname;
-    //var ln = req.params.lastname;
-    console.log('inside router');
-//    if(req.session.auth){
-//        if(req.session.isParticipant){
-    //res.render('assessment',{firstname:fn,lastname:ln});
-    res.redirect('asm.html');
-//        }
-//    }else{
-//        res.redirect('/');
-//    }
 
-};
-exports.partials = function (req, res) {
-  var name = req.params.name;
-  res.render('partials/' + name);
-};
-
-// exports.adminhome = function(req,res){
-//     console.log('rendering coach home');
-//     res.render('admin'); 
-// };
-
-// exports.coachhome = function(req,res){
-//     res.render('coach'); 
-// };

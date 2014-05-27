@@ -51,7 +51,7 @@ var sendCoachMail = function(req,res){
             console.log(error);
         }else{
             console.log("Message sent to coach: " + response.message);
-            smtpTransport.close(); // shut down the connection pool, no more messages
+            //smtpTransport.close(); // shut down the connection pool, no more messages
         }
 
     });
@@ -81,7 +81,7 @@ var sendParticipantMail = function(req,res){
             console.log(error);
         }else {
             console.log("Message sent to participant: " + response.message);
-            smtpTransport.close(); // shut down the connection pool, no more messages
+            //smtpTransport.close(); // shut down the connection pool, no more messages
         }
     });
 };
