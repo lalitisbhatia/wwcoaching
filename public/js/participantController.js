@@ -1,4 +1,4 @@
-participantModule.controller('ParticipantLoginController', ['$scope','$http','$routeParams','$log','participantService','searchService', function($scope,$http,$routeParams,$log,participantService,searchService) {
+participantModule.controller('ParticipantLoginController', ['$scope','$http','$routeParams','$log','participantService', function($scope,$http,$routeParams,$log,participantService) {
     $scope.initApp=function(){
         $log.log('participantController initialized');
         var ln = $('#lastname').val();
