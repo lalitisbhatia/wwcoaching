@@ -9,10 +9,11 @@ block content
                         .row.well.col-md-9
                             .col-lg-4(style="margin-top:-20px;margin-bottom:-20px;")
                                 h3 Welcome #{user.FirstName}.
-                                p Your Coach is #{user.CoachName}
-                            .col-lg-5(style="border-left:ridge;margin-top:-20px;margin-bottom:-20px;")
+                                p Your Coach is
+                                    b #{user.CoachName}
+                            .col-lg-6(style="border-left:ridge;margin-top:-20px;margin-bottom:-20px;")
                                 h3 Your upcoming appointments
-                                fieldset(style="padding:10px;")
+                                fieldset
                                     // Form Name
                                     legend
                                         table.searchResults.ng-scope(style="margin-left:20px;" ng-if="coachAvailDates.length>0")
@@ -26,8 +27,9 @@ block content
                                                         a(href ng-click='cancelUserAppt(appt.Coach,appt.DateUTC)') Cancel
                                                         //input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(coachAvailDate.Coach,coachAvailDate.DateUTC)').btn.btn-primary
 
-                        legend
-                            p Schedlule more appointments
+                        .row.col-md-9
+                            b Schedlule more appointments
+                                br
                         .row.well.col-md-9
                             .col-lg-4(style="border-right:ridge;")
                                 legend
@@ -53,7 +55,7 @@ block content
                                                     td
                                                         input(style="padding:1px 4px 1px 4px;" type='button',  id="btnSelect"  value='Book', ng-click='saveUserAppt(coachAvailDate.Coach,coachAvailDate.DateUTC)').btn.btn-primary
 
-                            .col-lg-6
+                            .col-lg-7
                                 form.ng-pristineu
                                     fieldset(style="margin-left:1px;")
                                         // Form Name
@@ -61,15 +63,15 @@ block content
                                             | or find other available coaches
                                         // Text input
                                         .form-group
-                                            .col-md-4(style="margin-left:10px;")
+                                            .col-md-5(style="margin-left:10px;")
                                                 p Search by Date/Time
-                                                input#datepicker.form-control.input-md(type='text', name='datetime' style="margin-bottom:15px;")
+                                                input#datepicker.form-control.input-sm(type='text', name='datetime' style="margin-bottom:10px;")
                                             .col-md-1
                                                 b OR
-                                            .col-md-4
+                                            .col-md-5
                                                 p Search by Coach Name
                                                 //select(ng-options="name as coach.FirstName + ' ' +coach.LastName for coach in coaches | orderBy:['FirstName','LastName']" ng-model="coach" ng-change="getCoachesById(coach._id)")
-                                                select#coachselect.form-control.input-md(ng-model='newuser' name="coach" style="margin-bottom:15px;")
+                                                select#coachselect.form-control.input-sm(ng-model='newuser' name="coach" style="margin-bottom:10px;")
                                                     option(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']"  value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
                                     fieldset(style="padding:10px;")
                                         // Form Name

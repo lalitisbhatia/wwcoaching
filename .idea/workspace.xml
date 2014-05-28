@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/coach.jade" afterPath="$PROJECT_DIR$/views/coach.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/custom.css" afterPath="$PROJECT_DIR$/public/css/custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/mailer.js" afterPath="$PROJECT_DIR$/routes/mailer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/participantController.js" afterPath="$PROJECT_DIR$/public/js/participantController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/participantSubs.jade" afterPath="$PROJECT_DIR$/views/participantSubs.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/schService.js" afterPath="$PROJECT_DIR$/public/js/schService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/schedulerApi.js" afterPath="$PROJECT_DIR$/routes/schedulerApi.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -127,8 +119,8 @@
       <file leaf-file-name="participantSubs.jade" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/participantSubs.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7003891" vertical-offset="1620" max-vertical-offset="2340">
-              <caret line="99" column="127" selection-start-line="99" selection-start-column="127" selection-end-line="99" selection-end-column="127" />
+            <state vertical-scroll-proportion="0.58365756" vertical-offset="1200" max-vertical-offset="2380">
+              <caret line="75" column="67" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -646,7 +638,11 @@
       <created>1401292221058</created>
       <updated>1401292221058</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="Updates to the scheduling flows:&#10;- Added cancellation by user&#10;- cleaned up emailing program to be generic&#10;- display upcoming appointments">
+      <created>1401315302621</created>
+      <updated>1401315302621</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1118,8 +1114,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/participantSubs.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7003891" vertical-offset="1620" max-vertical-offset="2340">
-          <caret line="99" column="127" selection-start-line="99" selection-start-column="127" selection-end-line="99" selection-end-column="127" />
+        <state vertical-scroll-proportion="0.58365756" vertical-offset="1200" max-vertical-offset="2380">
+          <caret line="75" column="67" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
           <folding />
         </state>
       </provider>
