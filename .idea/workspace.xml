@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/AdminService.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/participantSubs.jade" />
-      <change type="MOVED" beforePath="C:\Users\lalit\WebstormProjects\wwcoaching\views\participantSch.jade" afterPath="$PROJECT_DIR$/views/participantFirst.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/custom.css" afterPath="$PROJECT_DIR$/public/css/custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/participantController.js" afterPath="$PROJECT_DIR$/public/js/participantController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/schedulerApi.js" afterPath="$PROJECT_DIR$/routes/schedulerApi.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -62,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="schedulerApi.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="schedulerApi.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/schedulerApi.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4858" max-vertical-offset="6024">
-              <caret line="212" column="41" selection-start-line="212" selection-start-column="41" selection-end-line="212" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.9120879" vertical-offset="3702" max-vertical-offset="4344">
+              <caret line="177" column="2" selection-start-line="177" selection-start-column="2" selection-end-line="177" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -82,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="participantController.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="participantController.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/participantController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6043956" vertical-offset="3174" max-vertical-offset="3840">
-              <caret line="146" column="66" selection-start-line="146" selection-start-column="66" selection-end-line="146" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3174" max-vertical-offset="3840">
+              <caret line="141" column="37" selection-start-line="141" selection-start-column="37" selection-end-line="141" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -95,8 +90,8 @@
       <file leaf-file-name="schService.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/schService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1800">
-              <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
+              <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -190,12 +185,12 @@
         <option value="$PROJECT_DIR$/views/coach.jade" />
         <option value="$PROJECT_DIR$/public/js/schController.js" />
         <option value="$PROJECT_DIR$/routes/admin.js" />
-        <option value="$PROJECT_DIR$/routes/schedulerApi.js" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/public/css/custom.css" />
         <option value="$PROJECT_DIR$/views/participantSubs.jade" />
         <option value="$PROJECT_DIR$/public/js/participantController.js" />
+        <option value="$PROJECT_DIR$/routes/schedulerApi.js" />
       </list>
     </option>
   </component>
@@ -630,7 +625,11 @@
       <created>1401243553405</created>
       <updated>1401243553405</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="updated participant scheduler views:&#10;2 views now - ParticipantFirst (not associated with a coach), ParticipantSubs(subsequent) with a default view of upcoming availabilities&#10;">
+      <created>1401247728178</created>
+      <updated>1401247728178</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -695,7 +694,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Cleaned up schController_Test. Need refactor the jade file and decommission the old controller" />
     <MESSAGE value="minor updates" />
     <MESSAGE value="updates to display dates on scheduler" />
     <MESSAGE value="updates to display dates on scheduler&#10;and smtp close connection fix on mailer.js. It was closing after the first send" />
@@ -720,7 +718,8 @@
     <MESSAGE value="update to emailing - sender and recipient is now dynamic&#10;" />
     <MESSAGE value="Updated Save Appt-&#10;check if the user has a coach associated. If not, associate the coach&#10;- updated participant controller.saveAppt to send coach object instead of just ID so the name can also be used for coach-user association" />
     <MESSAGE value="removed username and password of participant from session information so its not saved on the schedule&#10;removed User.CoachId, User.CoachName from schedule - duplicated info" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed username and password of participant from session information so its not saved on the schedule&#10;removed User.CoachId, User.CoachName from schedule - duplicated info" />
+    <MESSAGE value="updated participant scheduler views:&#10;2 views now - ParticipantFirst (not associated with a coach), ParticipantSubs(subsequent) with a default view of upcoming availabilities&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated participant scheduler views:&#10;2 views now - ParticipantFirst (not associated with a coach), ParticipantSubs(subsequent) with a default view of upcoming availabilities&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1073,22 +1072,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/schService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1800">
-          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/schedulerApi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4858" max-vertical-offset="6024">
-          <caret line="212" column="41" selection-start-line="212" selection-start-column="41" selection-end-line="212" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/participantSubs.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="81" max-vertical-offset="2280">
@@ -1107,8 +1090,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/participantController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6043956" vertical-offset="3174" max-vertical-offset="3840">
-          <caret line="146" column="66" selection-start-line="146" selection-start-column="66" selection-end-line="146" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3174" max-vertical-offset="3840">
+          <caret line="141" column="37" selection-start-line="141" selection-start-column="37" selection-end-line="141" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/schService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
+          <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/schedulerApi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9120879" vertical-offset="3702" max-vertical-offset="4344">
+          <caret line="177" column="2" selection-start-line="177" selection-start-column="2" selection-end-line="177" selection-end-column="2" />
           <folding />
         </state>
       </provider>
