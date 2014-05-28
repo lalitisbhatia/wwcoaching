@@ -77,7 +77,13 @@ exports.participant = function(req, res,next){
     if(req.session.auth){
         if(req.session.isParticipant){
             if (req.session.user.assessment){
-                res.render('participantSch',{user:req.session.user});
+                if(req.session.user.CoachId) {//if a user has a coach associated, then the view is different than the first time scheduling
+                    console.log('user has coach associate');
+                    res.render('participantSubs', {user: req.session.user});
+                }else{
+                    console.log('user does not have coach associated yet');
+                    res.render('participantFirst', {user: req.session.user});
+                }
             }else{
                 res.render('assessment',{user:req.session.user});
             }

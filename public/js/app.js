@@ -17,12 +17,12 @@ var participantModule = angular.module('participantModule', ['ngRoute']);
 //    function($routeProvider) {
 //        $routeProvider.
 //            when('/participant/scheduler', {
-//                templateUrl: 'participantSch.jade',
+//                templateUrl: 'participantFirst.jade',
 //                controller: 'ParticipantController'
 //            }).
 //            when('/participant/assessment', {
 //                templateUrl: '/assessment.html',
-//                controller: 'participantSch.jade'
+//                controller: 'participantFirst.jade'
 //            }).
 //            otherwise({
 //                redirectTo: '/'

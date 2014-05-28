@@ -36,7 +36,7 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
 }]);
 
 participantModule.controller('ParticipantSchController', ['$scope','$http','$routeParams','$log','participantService','schedulingService', function($scope,$http,$routeParams,$log,participantService,schedulingService) {
-    $scope.initSchPage=function() {
+    $scope.initSchPage=function(coachId) {
         $log.log('initialized initSchPage');
         $scope.coaches=[];
         participantService.getAllCoaches().then(function(data){
@@ -45,6 +45,17 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         });
 
         //get user information
+        $scope.user={};
+        $scope.user.coachId=coachId;
+        // get availability for the user's coach by default on page load
+        if($scope.user.coachId){
+            console.log('getting availabilities for coach '+$scope.user.coachId);
+            schedulingService.getCoachesById($scope.user.coachId).then(function(data){
+                $scope.setSearchResultsCoach(data);
+            });
+        }
+
+
         $('#datepicker').datetimepicker({
             format:'d-M-y H:i',
             //inline:true,
@@ -105,6 +116,17 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         }
      //$log.log($scope.availDates);
     };
+    $scope.setSearchResultsCoach = function(data){
+        console.log('inside setSearchResultsCoach ');
+        $scope.coachAvailDates = data;
+        //console.log(data);
+//        if($scope.coachAvailDates.length>0){
+//            $scope.CoachSearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
+//        }else{
+//            $scope.CoachSearchMessage = "No coaches are available on or around " + $scope.SelectedDate +".\n Please search using a different date or search by coach name.";
+//        }
+        //$log.log($scope.availDates);
+    };
 
     $scope.saveUserAppt = function(coach,selDate) {
         console.log('calling save Schedule');
@@ -116,6 +138,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         console.log(appt);
         schedulingService.saveAppt(appt).then(function(data){
             $scope.availDates={};
+            $scope.coachAvailDates={};
             $scope.SearchMessage ="";
             $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
             $scope.confirmCoach='Coach: '+coach.coachName;
