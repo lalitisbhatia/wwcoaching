@@ -71,6 +71,7 @@ exports.sendMail = function(req,res){
                                 console.log('error sending email to participant:' + error);
                             }else{
                                 console.log("Message sent to participant: " + response);
+                                res.send('success');
                             }
                         });
                         //smtpTransport.close(); // shut down the connection pool, no more messages
