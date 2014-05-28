@@ -87,10 +87,10 @@ block content
                                                                 div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="text-align:center;vertical-align:middle;padding-left:10px;padding-right:10px;padding-bottom:4px; background:#ddd;width:80px;height:20px;border-bottom:ridge")
                                                                     p {{availTime.time}}
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" style="height:20px;")
-                                                                    input.regular-checkbox.big-checkbox(id="chk{{availTime.timeUTC}}" type="checkbox"   ng-click="updateSelection($event,availTime.timeUTC)")
+                                                                    input(id="chk{{availTime.timeUTC}}" style="margin-top:0px;" type="checkbox"   ng-click="updateSelection($event,availTime.timeUTC)")
                                                                     label(for="chk{{availTime.timeUTC}}")
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="height:20px;")
-                                                                    input.regular-checkbox.big-checkbox(id="chk{{availTime.timeUTC}}" type="checkbox"  checked ng-click="updateSelection($event,availTime.timeUTC)")
+                                                                    input(id="chk{{availTime.timeUTC}}" style="margin-top:0px;" type="checkbox"  checked ng-click="updateSelection($event,availTime.timeUTC)")
                                                                     label(for="chk{{availTime.timeUTC}}")
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Appt with {{availTime.Appt.FirstName}}
 

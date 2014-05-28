@@ -6,6 +6,7 @@ var helper = require('../public/lib/dbhelper');
 
 
 var schCollName = 'schedule';
+var usersCollName = 'users';
 
 //################################################
 //##### scheduler APIs ###########
@@ -207,12 +208,14 @@ exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db)
 
     console.log('Saving Schedule');
     var date = req.body.Date;
-    var userId = req.session.userId;
+    var userId = req.session.user._id;
     var user = req.session.user;
-    var coachId = req.body.CoachId;
-    console.log('date :' +date);
-    console.log('userId :' +userId);
-    console.log('coachId :' +coachId);
+    var coachId = req.body.Coach.coachId;
+    var coachName = req.body.Coach.coachName;
+
+    console.log('date :' + date);
+    console.log('userId :' + userId);
+    console.log('coachId :' + coachId);
 
     db.collection(schCollName, function(err, collection) {
         collection.update({DateUTC:date,"Coach.coachId":coachId}, {$set:{User:user}}, {safe:true}, function(err, result) {
@@ -221,6 +224,21 @@ exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db)
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('' + result + ' document(s) updated');
+                //Now check if the user has a coach associated
+                if(req.session.user.CoachId){
+                    console.log('user has coach associated');
+                }else{
+                    db.collection(usersCollName, function(err, userColl) {
+                        userColl.update({_id:userId},{$set:{CoachName:coachName,CoachId:coachId}},{safe:true},function(err,res){
+                            if(err){
+                                console.log('error associating coach to user: '+ err);
+                            }else{
+                                console.log('associated coach'+coachName +' to userid '+ userId);
+                            }
+                        })
+                    });
+                }
+
                 res.send('success');
             }
         });

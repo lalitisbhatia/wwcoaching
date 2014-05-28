@@ -109,13 +109,10 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
     $scope.saveUserAppt = function(coach,selDate) {
         console.log('calling save Schedule');
         var selectedDate = new Date(selDate);
-//        var selDate = $scope.SelectedDateUTC;
-        //var selDate = new Date($scope.SelectedDateUTC);
-        //console.log($scope.SelectedDateUTC.dateFormat('m/d/Y H:i'));
         console.log(selectedDate);
-
         console.log(coach);
-        var appt = {Date:selDate,CoachId:coach.coachId};
+
+        var appt = {Date:selDate,Coach:coach};
         console.log(appt);
         schedulingService.saveAppt(appt).then(function(data){
             $scope.availDates={};
