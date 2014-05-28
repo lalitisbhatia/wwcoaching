@@ -92,7 +92,7 @@ block content
                                                                 div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="height:20px;")
                                                                     input(id="chk{{availTime.timeUTC}}" style="margin-top:0px;" type="checkbox"  checked ng-click="updateSelection($event,availTime.timeUTC)")
                                                                     label(for="chk{{availTime.timeUTC}}")
-                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Appt with {{availTime.Appt.FirstName}}
+                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Appt:{{availTime.Appt.FirstName}}
 
                                         legend
 

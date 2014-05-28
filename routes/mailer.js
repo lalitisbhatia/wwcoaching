@@ -5,14 +5,21 @@ var nodemailer = require("nodemailer");
 
 
 exports.sendMail = function(req,res){
-    console.log('inside coach mailing program');
-    var coachId = req.body.CoachId;
+    console.log('inside coach mailing program - printing req.body');
+    console.log(req.body);
+    var coachId = req.body.Coach;
     var date = new Date(req.body.Date);
     var user = req.session.user;
     var display_date = date.getDay()+', '+date.getMonth()+' '+date.getDate();
-
     var participantEmail = user.Email;
-    var participantName = user.FirstName;
+    var participantName = user.FirstName + ' ' + user.LastName;
+    var type = req.body.emailType;
+
+    //email options variables
+    var subj;
+    var msgCoach;
+    var msgParticipant;
+
 
 
     helper.getConnection(function(err,db){
@@ -23,10 +30,20 @@ exports.sendMail = function(req,res){
                 }else{ //now send email
                     var coachEmail = coach.Email;
                     var coachName = coach.FirstName + " "+coach.LastName;
-                    var coachMessage="Hi "+coachName +',\n ' + participantName + ' has booked a call with you  for '+date;
 
-                    //console.log(coach);
-                    //console.log(coachMessage);
+                    if(type=='new'){
+                        subj="Coaching session booked";
+                        msgCoach="Hi "+coachName +",\n "+ participantName +" has booked a call with you  for " +date;
+                        msgParticipant="Hi "+participantName + " ,\n You have booked a call with " +coachName+" for " +date;
+                    }else if(type=='cancel'){
+                        subj="Coaching session cancelled";
+                        msgCoach="Hi " + coachName+ " ,\n Your coaching session with "+participantName+ " for "+date+" has been cancelled.";
+                        msgParticipant="Hi "+ participantName +",\n Your coaching session with " + coachName + "for " + date +" has been cancelled.";
+                    }
+
+                    console.log("subj: "+subj);
+                    console.log("msgCoach: "+msgCoach);
+                    console.log("msgParticipant: "+msgParticipant);
 
 
                     var smtpTransport = nodemailer.createTransport("SMTP",{
@@ -41,78 +58,52 @@ exports.sendMail = function(req,res){
                             ciphers:'SSLv3'
                         }
                     });
-                    var mailOptions = {
-                        subject: "Coaching session is booked",
-                        to: coach.Email,
-                        text : coachMessage,
-                        from:coach.Email // sender address
-                    };
 
+                    var mailOptions = createMailOptions(subj,coachEmail,coachEmail,msgCoach);
 
-                    console.log(smtpTransport);
-                    console.log(mailOptions);
+                    //console.log(smtpTransport);
+                    //console.log(mailOptions);
 
                     smtpTransport.sendMail(mailOptions, function(error, response){
-                    if(error){
-                        console.log(error);
-                    }else{
-                        console.log("Message sent to coach: " + response);
-                        console.log('Sending message to participant');
-                        //now send email to participant
-                        var participantMessage = "Hi "+ participantName +",\n You have booked a call with "+coachName + ' for '+date;
-                        mailOptions = {
-                            subject: "Your Coaching session is booked",
-                            to: participantEmail,
-                            text : participantMessage,
-                            from:coach.Email // sender address
-                        };
-                        smtpTransport.sendMail(mailOptions, function(error, response){
-                            if(error){
-                                console.log('error sending email to participant:' + error);
-                            }else{
-                                console.log("Message sent to participant: " + response);
-                                res.send('success');
-                            }
-                        });
-                        //smtpTransport.close(); // shut down the connection pool, no more messages
-                    }
+                        if(error){
+                            console.log(error);
+                        }else{
+                            console.log("Message sent to coach: " + response);
+                            console.log('Sending message to participant');
+                            //now send email to participant
 
-                });
+                            mailOptions = createMailOptions(subj,participantEmail,coachEmail,msgParticipant);
+                            //console.log(mailOptions);
+                            smtpTransport.sendMail(mailOptions, function(error, response){
+                                if(error){
+                                    console.log('error sending email to participant:' + error);
+                                }else{
+                                    console.log("Message sent to participant: " + response);
+                                    res.send('success');
+                                }
+                            });
+                            //smtpTransport.close(); // shut down the connection pool, no more messages
+                        }
+
+                    });
                 }
             });
         });
 
     });
 
-
-
 };
 
-var sendParticipantMail = function(req,res){
+function createMailOptions(subject,emailTo,emailFrom,message){
+    var mailOptions={};
+
+    mailOptions = {
+        subject: subject,
+        to: emailTo,
+        text : message,
+        from:emailFrom // sender address
+    };
+    return mailOptions;
+}
 
 
-    console.log('inside participant mailing program');
-    var coach = req.body.Coach;
-    var coachName = coach.coachName;
-    var user = req.session.user;
-    var date = new Date(req.body.Date);
-    var display_date = date.getDay()+', '+date.getMonth()+' '+date.getDate();
-
-    var participantEmail = user.Email;
-    var participantName = user.FirstName;
-
-    var participantMessage = "Hi "+ participantName +",\n You have booked a call with "+coachName + ' for '+date;
-
-    console.log(participantMessage);
-
-    mailOptions.to = participantEmail;
-    mailOptions.text = participantMessage;
-    smtpTransport.sendMail(mailOptions, function(error, response){
-        if(error){
-            console.log(error);
-        }else {
-            console.log("Message sent to participant: " + response.message);
-            //smtpTransport.close(); // shut down the connection pool, no more messages
-        }
-    });
-};

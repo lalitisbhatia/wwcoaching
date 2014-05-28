@@ -62,7 +62,7 @@ exports.participant = function(req, res,next){
     var ln = req.params.lastname;
     console.log(fn + ' - '+ ln);
     console.log('inside index.js router');
-    console.log(req.session.user);
+    //console.log(req.session.user);
 
     /****************************************
       Participant routing:
@@ -78,7 +78,7 @@ exports.participant = function(req, res,next){
         if(req.session.isParticipant){
             if (req.session.user.assessment){
                 if(req.session.user.CoachId) {//if a user has a coach associated, then the view is different than the first time scheduling
-                    console.log('user has coach associate');
+                    console.log('user has coach associated');
                     res.render('participantSubs', {user: req.session.user});
                 }else{
                     console.log('user does not have coach associated yet');

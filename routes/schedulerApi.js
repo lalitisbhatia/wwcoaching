@@ -79,10 +79,35 @@ exports.searchAvails = function(req, res) {helper.getConnection(function(err,db)
 });
 };
 
+exports.searchUserAppts = function(req, res) {helper.getConnection(function(err,db){
+    console.log('searching user appts' );
+    var userId =req.params.id;
+    var query={};
+    console.log('user id = ' + userId);
 
-/*
- ########################## Rewritten ########################
- */
+    var today =new Date();
+    console.log(today.toISOString());
+
+    query={"User._id":userId,DateUTC:{$gte:today.toISOString()}};
+
+    db.collection(schCollName, function(err, collection) {
+        collection.find(query).toArray(function(err, items) {
+            if (err) {
+                res.send({'error':'error occurred while getting all availabilities'});
+            } else {
+                if(items) {
+                    console.log(items);
+                    res.send(items);
+                }else{
+                    console.log('no results found');
+                }
+            }
+        });
+    });
+
+});
+};
+
 exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
     var id = req.session.userId.toString();//here the userId is the coach id
     console.log('Retrieving availability for coachId: ' + id);
@@ -154,30 +179,50 @@ exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db)
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('' + result + ' document(s) updated');
-                //Now check if the user has a coach associated
-                //if(req.session.user.CoachId){
-                 //   console.log('user has coach associated');
-                //}else{
 
                 // Always associate coach with user. This will take care of the situation where the coach is
                 // changed and also where its the first association
-                    db.collection(usersCollName, function(err, userColl) {
-                        userColl.update({_id:userId},{$set:{CoachName:coachName,CoachId:coachId}},{safe:true},function(err,result){
-                            if(err){
-                                console.log('error associating coach to user: '+ err);
-                            }else{
-                                console.log('associated coach'+coachName +' to userid '+ userId);
-                                req.session.user.CoachId=coachId;
-                                req.session.user.CoachName=coachName;
-                                console.log('rewriting session');
-                                console.log(req.session.user);
-                                res.send('success');
-                            }
-                        })
-                    });
-               // }
+                db.collection(usersCollName, function(err, userColl) {
+                    userColl.update({_id:userId},{$set:{CoachName:coachName,CoachId:coachId}},{safe:true},function(err,result){
+                        if(err){
+                            console.log('error associating coach to user: '+ err);
+                        }else{
+                            console.log('associated coach'+coachName +' to userid '+ userId);
+                            req.session.user.CoachId=coachId;
+                            req.session.user.CoachName=coachName;
+                            //console.log('rewriting session');
+                            //console.log(req.session.user);
+                            res.send('success');
+                        }
+                    })
+                });
+                // }
 
 
+            }
+        });
+    });
+
+});
+};
+
+exports.cancelUserAppt = function(req, res) {helper.getConnection(function(err,db) {
+    console.log('cancelling  Appt');
+    var date = req.body.Date;
+    var coachId = req.body.Coach.coachId;
+    var coachName = req.body.Coach.coachName;
+
+    console.log('date :' + date);
+    console.log('coachId :' + coachId);
+
+    db.collection(schCollName, function(err, collection) {
+        collection.update({DateUTC:date,"Coach.coachId":coachId}, {$unset:{User:""}}, {safe:true}, function(err, result) {
+            if (err) {
+                console.log('Error updating schedule: ' + err);
+                res.send({'error':'An error has occurred'});
+            } else {
+                console.log('' + result + ' document(s) updated');
+                res.send("appointment cancelled");
             }
         });
     });

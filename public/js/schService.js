@@ -43,6 +43,27 @@ participantModule.factory('schedulingService',function($http,$log,$q,$rootScope)
                 });
 
         },
+        getUserAppts: function (userId) {
+            return $http({
+                method: 'GET',
+                url: '/searchAppts/user/'+userId
+            })
+                .success(function(data) {
+                    $log.info("Successfully retrieved availability for all coaches.");
+
+                    $log.log(data);
+                })
+                .error(function(status, headers, config){
+                    $log.log('failed to coach availabilities' + status);
+                })
+                .then(function(response) {
+                    var results = [];
+                    results=response.data;
+                    //console.log(results);
+                    return results;
+                });
+
+        },
         saveAppt:function(appt){
             return $http({
                 method:'POST',
@@ -62,7 +83,17 @@ participantModule.factory('schedulingService',function($http,$log,$q,$rootScope)
                 .then(function(response){
                     return(response.data);
                 });
-        }
+        },
+        cancelAppt:function(appt){
+            return $http({
+                method:'POST',
+                url: '/cancelAppt',
+                data: appt
+            })
+                .then(function(response){
+                    return(response.data);
+                });
+        },
     };
 
     return myService;

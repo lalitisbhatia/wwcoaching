@@ -98,7 +98,9 @@ app.post('/participant/:firstname/:lastname',admin.checkParticipant, assmnt.save
 app.get('/getCoachAvails', schApi.getCoachAvails);
 app.post('/addCoachAvails', schApi.addCoachAvails);
 app.get('/searchAvails/:type/:value', schApi.searchAvails);
+app.get('/searchAppts/user/:id', schApi.searchUserAppts);
 app.post('/saveAppt', schApi.saveUserAppt);
+app.post('/cancelAppt', schApi.cancelUserAppt);
 /****************************************************
   This section is for the call Notes and action plans
 /****************************************************/

@@ -65,10 +65,10 @@ padding-right: 20px;
     color:dimgrey;
 }
 #users td{
-    padding-left:30px;
-    padding-right:30px;
-    padding-top:10px;
-    padding-bottom:10px;
+    padding-left:25px;
+    padding-right:25px;
+    padding-top:7px;
+    padding-bottom:7px;
 }
 #wwprofile td{
     padding-left:60px;
@@ -100,11 +100,11 @@ th{
     padding-bottom: 10px;
 }
 .searchResults td{
-    padding-left:30px;
-    padding-right:30px;
-    padding-top:10px;
-    padding-bottom:10px;
-    font-size: 13px;
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:2px;
+    padding-bottom:2px;
+    font-size: 12px;
 }
 .wwdisplay-bold {
     font-family: wwdisplay_boldregular;
@@ -162,7 +162,7 @@ label {
 
 .regular-checkbox:checked + label:after {
     content: '\2714';
-    font-size: 1px;
+    font-size: 10px;
     position: absolute;
     background-color: greenyellow;
     border: thin;

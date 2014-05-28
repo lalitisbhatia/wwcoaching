@@ -36,7 +36,7 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
 }]);
 
 participantModule.controller('ParticipantSchController', ['$scope','$http','$routeParams','$log','participantService','schedulingService', function($scope,$http,$routeParams,$log,participantService,schedulingService) {
-    $scope.initSchPage=function(coachId) {
+    $scope.initSchPage=function(coachId,userId) {
         $log.log('initialized initSchPage');
         $scope.coaches=[];
         participantService.getAllCoaches().then(function(data){
@@ -47,6 +47,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         //get user information
         $scope.user={};
         $scope.user.coachId=coachId;
+        $scope.user.userId=userId;
         // get availability for the user's coach by default on page load
         if($scope.user.coachId){
             console.log('getting availabilities for coach '+$scope.user.coachId);
@@ -54,6 +55,13 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
                 $scope.setSearchResultsCoach(data);
             });
         }
+
+        //get te user's upcoming appointments
+        schedulingService.getUserAppts($scope.user.userId).then(function(data){
+            console.log('getting user appts');
+            $scope.setUserAppts(data);
+            console.log(data);
+        });
 
 
         $('#datepicker').datetimepicker({
@@ -116,6 +124,8 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         }
      //$log.log($scope.availDates);
     };
+
+    //default availability of users's coach
     $scope.setSearchResultsCoach = function(data){
         console.log('inside setSearchResultsCoach ');
         $scope.coachAvailDates = data;
@@ -128,8 +138,14 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         //$log.log($scope.availDates);
     };
 
+    //set user's upcoming appointments
+    $scope.setUserAppts = function(data){
+        console.log('inside setSearchResultsCoach ');
+        $scope.userAppts = data;
+    };
+
     $scope.saveUserAppt = function(coach,selDate) {
-        console.log('calling save Schedule');
+        console.log('calling save Appt');
         var selectedDate = new Date(selDate);
         console.log(selectedDate);
         console.log(coach);
@@ -141,14 +157,37 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.coachAvailDates={};
             $scope.SearchMessage ="";
 
-
-
             $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
             $scope.confirmCoach='Coach: '+coach.coachName;
             $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
             alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);
             //trigger emails/text
-            schedulingService.sendSchEmails({Date:selDate,CoachId:coach.coachId}).then(function(data){
+            schedulingService.sendSchEmails({Date:selDate,Coach:coach.coachId,emailType:"new"}).then(function(data){
+                console.log('success');
+            });
+            window.location.reload(true);
+        });
+    };
+
+    $scope.cancelUserAppt = function(coach,selDate) {
+        console.log('calling cancel Appt');
+        var selectedDate = new Date(selDate);
+        //console.log(selectedDate);
+        //console.log(coach);
+
+        var appt = {Date:selDate,Coach:coach};
+        console.log(appt);
+        schedulingService.cancelAppt(appt).then(function(data){
+            $scope.availDates={};
+            $scope.coachAvailDates={};
+            $scope.SearchMessage ="";
+
+            $scope.confirmMessage="Your appointment has been cancelled. You will receive a confirmation email shortly. Here are your appointment details:";
+            $scope.confirmCoach='Coach: '+coach.coachName;
+            $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
+            alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);
+            //trigger emails/text
+            schedulingService.sendSchEmails({Date:selDate,Coach:coach.coachId,emailType:"cancel"}).then(function(data){
                 console.log('success');
             });
             window.location.reload(true);
