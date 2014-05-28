@@ -218,7 +218,7 @@ exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db)
     console.log('coachId :' + coachId);
 
     db.collection(schCollName, function(err, collection) {
-        collection.update({DateUTC:date,"Coach.coachId":coachId}, {$set:{User:user}}, {safe:true}, function(err, result) {
+        collection.update({DateUTC:date,"Coach.coachId":coachId}, {$set:{"User._id":user._id,"User.Email":user.Email,"User.FirstName":user.FirstName,"User.LastName":user.LastName,"User.Phone":user.Phone}}, {safe:true}, function(err, result) {
             if (err) {
                 console.log('Error updating schedule: ' + err);
                 res.send({'error':'An error has occurred'});

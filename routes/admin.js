@@ -60,11 +60,7 @@ exports.loginCoach = function(req, res,next) {helper.getConnection(function(err,
     console.log('user: ' + req.body.username);
     console.log('password: ' + req.body.password);
     db.collection(coachesCollName, function(err, collection) {
-        collection.findOne(
-            {
-                'Username':req.body.username,
-                'Password':req.body.password
-            }, function(err, item) {
+        collection.findOne({'Username':req.body.username,'Password':req.body.password},{Username:0,Password:0,EmailPassword:0}, function(err, item) {
                 if(err){
                     console.log(err);
                     res.send('error while looking for coach: '+ err);
@@ -108,11 +104,7 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
 
 
     db.collection(participantsCollName, function(err, collection) {
-        collection.findOne(
-            {
-                'FirstName':fn,
-                'LastName':ln
-            }, function(err, item) {
+        collection.findOne({'FirstName':fn,'LastName':ln},{Username:0,Password:0}, function(err, item) {
                 if(err){
                     console.log(err);
                     res.send('error while looking for participant: '+ err);
