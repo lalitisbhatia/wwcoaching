@@ -42,7 +42,7 @@ exports.sendMail = function(req,res){
                         }
                     });
                     var mailOptions = {
-                        subject: "Message from dashboard :)",
+                        subject: "Coaching session is booked",
                         to: coach.Email,
                         text : coachMessage,
                         from:coach.Email // sender address
