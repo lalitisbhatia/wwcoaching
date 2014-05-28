@@ -18,7 +18,7 @@ block content
                                 fieldset(style="padding:10px;")
                                     // Form Name
                                     legend
-                                        table#searchResults.ng-scope(style="margin-left:-30px;" ng-if="coachAvailDates.length>0")
+                                        table.searchResults.ng-scope(style="margin-left:-30px;" ng-if="coachAvailDates.length>0")
                                             thead.t-head
                                                 tr
                                                     th Date
@@ -26,10 +26,10 @@ block content
                                                     th
                                             tbody
                                                 tr(ng-repeat="coachAvailDate in coachAvailDates | orderBy:['DateUTC']")
-                                                    td(style="vertical-align:initial;")  {{coachAvailDate.Date|date:'HH'}}
-                                                    td(style="vertical-align:initial;")  {{coachAvailDate.Time}}
+                                                    td  {{coachAvailDate.Date|date:'HH'}}
+                                                    td  {{coachAvailDate.Time}}
                                                     td
-                                                        input(type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(coachAvailDate.Coach,coachAvailDate.DateUTC)').btn.btn-primary
+                                                        input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(coachAvailDate.Coach,coachAvailDate.DateUTC)').btn.btn-primary
 
                             .col-lg-7
                                 form.ng-pristineu
@@ -52,7 +52,7 @@ block content
                                     fieldset(style="padding:10px;")
                                         // Form Name
                                         legend
-                                            table#searchResults.ng-scope(ng-if="availDates.length>0")
+                                            table.searchResults.ng-scope(ng-if="availDates.length>0")
                                                 thead.t-head
                                                     tr
                                                         th Coach
@@ -61,13 +61,13 @@ block content
                                                         th
                                                 tbody
                                                     tr(ng-repeat="availDate in availDates | orderBy:['DateUTC']")
-                                                        td(style="vertical-align:initial;")
-                                                            h3 {{availDate.Coach.coachName}}
-                                                            //i coach details here
-                                                        td(style="vertical-align:initial;")  {{availDate.Date|date:'HH'}}
-                                                        td(style="vertical-align:initial;")  {{availDate.Time}}
                                                         td
-                                                            input(type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
+                                                         b {{availDate.Coach.coachName}}
+                                                            //i coach details here
+                                                        td  {{availDate.Date|date:'HH'}}
+                                                        td {{availDate.Time}}
+                                                        td
+                                                            input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
                                         input(type="hidden" value="#{user._id}" id="userID" )
         //ul#coaches(style="list-style-type:none;padding-left:10px;")
                                                 //    li(ng-repeat="availDate in availDates| orderBy:'Date'")

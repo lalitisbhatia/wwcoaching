@@ -99,11 +99,12 @@ th{
     text-align: center;
     padding-bottom: 10px;
 }
-#searchResults td{
+.searchResults td{
     padding-left:30px;
     padding-right:30px;
     padding-top:10px;
     padding-bottom:10px;
+    font-size: 13px;
 }
 .wwdisplay-bold {
     font-family: wwdisplay_boldregular;

@@ -140,13 +140,18 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.availDates={};
             $scope.coachAvailDates={};
             $scope.SearchMessage ="";
+
+
+
             $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
             $scope.confirmCoach='Coach: '+coach.coachName;
             $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
+            alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);
             //trigger emails/text
             schedulingService.sendSchEmails({Date:selDate,CoachId:coach.coachId}).then(function(data){
                 console.log('success');
             });
+            window.location.reload(true);
         });
     };
 

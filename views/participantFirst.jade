@@ -7,7 +7,7 @@ block content
                 #scheduler.tab-pane.col-sm-9.col-md-10.main
                     .ng-scope(ng-controller='ParticipantSchController' ng-init='initSchPage()' style='width:800px;')
                         .container
-                            .row.well.col-md-12
+                            .row.well.col-md-9
                                 .col-lg-12
                                     form.ng-pristine
                                         fieldset
@@ -37,7 +37,7 @@ block content
                                             // Form Name
 
                                             legend
-                                                table#searchResults.ng-scope(ng-if="availDates.length>0")
+                                                table.searchResults.ng-scope(ng-if="availDates.length>0")
                                                     thead.t-head
                                                         tr
                                                             th Coach
@@ -49,13 +49,13 @@ block content
 
                                                         tr(ng-repeat="availDate in availDates | orderBy:['DateUTC']")
 
-                                                            td(style="vertical-align:initial;")
-                                                                h3 {{availDate.Coach.coachName}}
-                                                                i coach details here
-                                                            td(style="vertical-align:initial;")  {{availDate.Date|date:'HH'}}
-                                                            td(style="vertical-align:initial;")  {{availDate.Time}}
                                                             td
-                                                                input(type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
+                                                                b {{availDate.Coach.coachName}}
+                                                                //i coach details here
+                                                            td  {{availDate.Date|date:'HH'}}
+                                                            td  {{availDate.Time}}
+                                                            td
+                                                                input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
 
 
                                             input(type="hidden" value="#{user._id}" id="userID" )

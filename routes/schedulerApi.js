@@ -22,7 +22,7 @@ exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db)
                 res.send({'error':'error occurred while getting all availabilities'});
             } else {
                 if(items) {
-                    console.log(items);
+                    //console.log(items);
                     res.send(items);
                 }else{
                     console.log('no results found');
@@ -67,7 +67,7 @@ exports.searchAvails = function(req, res) {helper.getConnection(function(err,db)
                 res.send({'error':'error occurred while getting all availabilities'});
             } else {
                 if(items) {
-                    console.log(items);
+                    //console.log(items);
                     res.send(items);
                 }else{
                     console.log('no results found');
@@ -92,7 +92,7 @@ exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,d
                 res.send({'error':'error occurred while getting coach availabilities'});
             } else {
                 if(item) {
-                    console.log(item);
+                    //console.log(item);
                     res.send(item);
                 }else{
                     console.log('no results found');
@@ -155,21 +155,29 @@ exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db)
             } else {
                 console.log('' + result + ' document(s) updated');
                 //Now check if the user has a coach associated
-                if(req.session.user.CoachId){
-                    console.log('user has coach associated');
-                }else{
+                //if(req.session.user.CoachId){
+                 //   console.log('user has coach associated');
+                //}else{
+
+                // Always associate coach with user. This will take care of the situation where the coach is
+                // changed and also where its the first association
                     db.collection(usersCollName, function(err, userColl) {
-                        userColl.update({_id:userId},{$set:{CoachName:coachName,CoachId:coachId}},{safe:true},function(err,res){
+                        userColl.update({_id:userId},{$set:{CoachName:coachName,CoachId:coachId}},{safe:true},function(err,result){
                             if(err){
                                 console.log('error associating coach to user: '+ err);
                             }else{
                                 console.log('associated coach'+coachName +' to userid '+ userId);
+                                req.session.user.CoachId=coachId;
+                                req.session.user.CoachName=coachName;
+                                console.log('rewriting session');
+                                console.log(req.session.user);
+                                res.send('success');
                             }
                         })
                     });
-                }
+               // }
 
-                res.send('success');
+
             }
         });
     });
