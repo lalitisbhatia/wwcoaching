@@ -1,6 +1,8 @@
 var express = require('express'),
     path = require('path'),
     http = require('http'),
+    https = require('https'),
+    fs = require('fs'),
     util = require('util'),
     bodyParser = require('body-parser'),
     api = require('./routes/api'),
@@ -13,6 +15,12 @@ var express = require('express'),
 
 var app = express();
 
+var privateKey = fs.readFileSync('privatekey.pem').toString();
+var certificate = fs.readFileSync('certificate.pem').toString();
+var options = {
+    key: privateKey,
+    cert: certificate
+};
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
