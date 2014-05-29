@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/participantSubs.jade" afterPath="$PROJECT_DIR$/views/participantSubs.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -119,8 +118,8 @@
       <file leaf-file-name="participantSubs.jade" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/participantSubs.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58365756" vertical-offset="1200" max-vertical-offset="2380">
-              <caret line="75" column="67" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
+            <state vertical-scroll-proportion="0.79766536" vertical-offset="1850" max-vertical-offset="2380">
+              <caret line="113" column="28" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -642,7 +641,11 @@
       <created>1401315302621</created>
       <updated>1401315302621</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="cleanup to user scheduling page">
+      <created>1401316215371</created>
+      <updated>1401316215371</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -707,7 +710,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Search for coach name is working&#10;Cleaned up the SchedulerAPI search method to be dynamic&#10;" />
     <MESSAGE value="Scheduler next/prev 2 weeks almost working" />
     <MESSAGE value="Scheduler next/prev 2 weeks WORKING" />
     <MESSAGE value="Scheduler next/prev 2 weeks WORKING&#10;-- added comments and removed console logging statements" />
@@ -732,7 +734,8 @@
     <MESSAGE value="resolved duplicate email issue- wasnt sending a response back to browser" />
     <MESSAGE value="Updates to the scheduling flows:&#10;- coach info for user is always saved on making an appt&#10;- if coach is changed, page gets refreshed to reflect the new coach &#10;- after first time selecting a coach, page is refreshed to a new view" />
     <MESSAGE value="Updates to the scheduling flows:&#10;- Added cancellation by user&#10;- cleaned up emailing program to be generic&#10;- display upcoming appointments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates to the scheduling flows:&#10;- Added cancellation by user&#10;- cleaned up emailing program to be generic&#10;- display upcoming appointments" />
+    <MESSAGE value="cleanup to user scheduling page" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup to user scheduling page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1114,8 +1117,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/participantSubs.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58365756" vertical-offset="1200" max-vertical-offset="2380">
-          <caret line="75" column="67" selection-start-line="75" selection-start-column="67" selection-end-line="75" selection-end-column="67" />
+        <state vertical-scroll-proportion="0.79766536" vertical-offset="1850" max-vertical-offset="2380">
+          <caret line="113" column="28" selection-start-line="113" selection-start-column="28" selection-end-line="113" selection-end-column="28" />
           <folding />
         </state>
       </provider>
