@@ -990,9 +990,11 @@ textarea.other-input {
 
 /**** Message to coach ****/
 
-.coach-msg p { font-size: 1.1em; }
-
-.coach-msg p span { font-weight: 300; }
+.aq-wrap .coach-msg legend p {
+    font-size: 1.1em;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
 
 /* Note Paper */
 
@@ -1285,9 +1287,10 @@ textarea.other-input {
         padding-bottom: 20px;
     }
 
-    .coach-msg p {
+    .aq-wrap .coach-msg legend p {
         font-size: 1.3em;
-        margin-bottom: 1.3em;
+        margin-bottom: 0;
+        padding-bottom: 1.3em;
     }
 
     .aq-btn {

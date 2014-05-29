@@ -4,10 +4,10 @@ $(".next").click(function() {
 
     var crnt_sec = $(this).parent(),
         next_sec = $(this).parent().next(),
-        firstName = $('[name="First Name"]').val(),
-        lastName = $('[name="Last Name"]').val();
+        firstName = $('[name="first_name"]').val(),
+        lastName = $('[name="last_name"]').val();
 
-    if ($('[name="First Name"]').val().length == 0 || $('[name="Last Name"]').val().length == 0) {
+    if ($('[name="first_name"]').val().length == 0 || $('[name="last_name"]').val().length == 0) {
 
         $('.name').addClass('error');
         $('.aq-ww-banner').addClass('totop');

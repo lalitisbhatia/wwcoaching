@@ -14,7 +14,7 @@ body
     h1
         span.offscreen Weight Watchers
     a#logout.aq-logout(href='/logout') Logout
-form(action='#thanks' method="POST" )
+form(action='#thanks' method="POST")
     // <form action="thanks.html" method="POST" role="form">
     .aq-wrap
         .sec.active
@@ -27,10 +27,10 @@ form(action='#thanks' method="POST" )
                         span.qstn To get started, please enter your name:
                     label#q00a01
                         span.offscreen First Name
-                        input(type='text', name='First Name', placeholder='First Name', required='')
+                        input(type='text', name='first_name', placeholder='First Name', required='')
                     label#q00a02
                         span.offscreen Last Name
-                        input(type='text', name='Last Name', placeholder='Last Name', required='')
+                        input(type='text', name='last_name', placeholder='Last Name', required='')
                 p.error-txt Something's missing. Fill in your first and last name to get started!
             button.aq-btn.next(type='button') Next
         .sec
@@ -616,26 +616,26 @@ form(action='#thanks' method="POST" )
                             span
                             | What device or apps do you use? (Select all that apply)
                     label#q08a01-01
-                        input(type='checkbox', name='act_devices')
+                        input(type='checkbox', name='act_devices', value='1')
                         .aq-check
                         span FitBit
                     label#q08a01-02
-                        input(type='checkbox', name='act_devices')
+                        input(type='checkbox', name='act_devices', value='2')
                         .aq-check
                         span Jawbone Up
                     label#q08a01-03
-                        input(type='checkbox', name='act_devices')
+                        input(type='checkbox', name='act_devices', value='3')
                         .aq-check
                         span Nike+ FuelBand
                     label#q08a01-04
-                        input(type='checkbox', name='act_devices')
+                        input(type='checkbox', name='act_devices', value='4')
                         .aq-check
                         span ActiveLink
                     label#q08a01-05
-                        input.other(type='checkbox', name='act_devices')
+                        input.other(type='checkbox', name='act_devices', value='5')
                         .aq-check
                         span Other
-                    input.other-input(type='text', name='act_devices', placeholder='What"s the name of your device?')
+                    input.other-input(type='text', name='act_devices_other', placeholder='What"s the name of your device?')
             .qstn-divider
             h3.sec-title Your Weight History
             #q09.qstn-wrap
@@ -644,7 +644,7 @@ form(action='#thanks' method="POST" )
                         span 9.
                         | What's your current weight?
                     .input-tag.unit.lbs
-                        input(type='text', name='current-weight')
+                        input(type='text', name='current_weight')
                         span lbs.
             .qstn-divider
             #q10.qstn-wrap
@@ -709,7 +709,7 @@ form(action='#thanks' method="POST" )
                         input.other(type='radio', name='loss_approach', value='9')
                         .aq-radio
                         span Other
-                    input.other-input(type='text', name='loss_approach', placeholder='Please describe...')
+                    input.other-input(type='text', name='loss_approach_other', placeholder='Please describe...')
             .qstn-divider
             #q13.qstn-wrap.ans-boxes.true-false.inline-btns
                 span.qstn.dbl-digit
@@ -849,7 +849,7 @@ form(action='#thanks' method="POST" )
                         img.img-box(src='/img/other@2x.jpg', alt='')
                         .q-txt-wrap
                             span Other
-                    input.other-input(type='text', name='spend_your_day', placeholder='Please describe...')
+                    input.other-input(type='text', name='spend_your_day_other', placeholder='Please describe...')
             .qstn-divider
             #q18.qstn-wrap.radios
                 fieldset
@@ -982,41 +982,41 @@ form(action='#thanks' method="POST" )
                             span 23.
                             | Any food allergies or dietary preferences? (Select all that apply)
                     label#q23a01
-                        input(type='checkbox', name='allergies')
+                        input(type='checkbox', name='allergies', value='1')
                         .aq-check
                         span Vegetarian
                     label#q23a02
-                        input(type='checkbox', name='allergies')
+                        input(type='checkbox', name='allergies', value='2')
                         .aq-check
                         span Vegan
                     label#q23a03
-                        input(type='checkbox', name='allergies')
+                        input(type='checkbox', name='allergies', value='3')
                         .aq-check
                         span Kosher
                     label#q23a04
-                        input(type='checkbox', name='allergies')
+                        input(type='checkbox', name='allergies', value='4')
                         .aq-check
                         span Diabetic
                     label#q23a05
-                        input(type='checkbox', name='allergies')
+                        input(type='checkbox', name='allergies', value='5')
                         .aq-check
                         span Gluten-free
                     label#q23a06
-                        input(type='checkbox', name='allergies')
+                        input(type='checkbox', name='allergies', value='6')
                         .aq-check
                         span Low sodium
                     label#q23a07
-                        input#chkAllergies.other(type='checkbox', name='allergies')
+                        input#chkAllergies.other(type='checkbox', name='allergies', value='7')
                         .aq-check
                         span Food allergies
-                    input.other-input(type='text', name='allergies', placeholder='Please describe...')
+                    input.other-input(type='text', name='allergies_food', placeholder='Please describe...')
                     label#q23a08
-                        input.other(type='checkbox', name='allergies')
+                        input.other(type='checkbox', name='allergies', value='8')
                         .aq-check
                         span Other
-                    input.other-input(type='text', name='allergies', placeholder='Please describe...')
+                    input.other-input(type='text', name='allergies_other', placeholder='Please describe...')
                     label#q23a09
-                        input.chk-none(type='checkbox', name='allergies')
+                        input.chk-none(type='checkbox', name='allergies', value='9')
                         .aq-check
                         span None
             .qstn-divider
@@ -1027,58 +1027,58 @@ form(action='#thanks' method="POST" )
                             span 24.
                             | What makes it hard to lose weight? (Pick three.)
                     label#q24a01
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='1')
                         .aq-check
                         span Eating too much at meals
                     label#q24a02
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='2')
                         .aq-check
                         span Snacking
                     label#q24a03
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='3')
                         .aq-check
                         span Weekends!
                     label#q24a04
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='4')
                         .aq-check
                         span Unhealthy food in my house
                     label#q24a05
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='5')
                         .aq-check
                         span Comforting myself with food
                     label#q24a06
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='6')
                         .aq-check
                         span Guilt. (I overeat, feel guilty, overeat some more...)
                     label#q24a07
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='7')
                         .aq-check
                         span I never feel full
                     label#q24a08
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='8')
                         .aq-check
                         span I reward myself with food
                     label#q24a09
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='9')
                         .aq-check
                         span Eating at work
                     label#q24a10
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='10')
                         .aq-check
                         span Eating with family & friends
                     label#q24a11
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='11')
                         .aq-check
                         span Eating out
                     label#q24a12
-                        input(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input(type='checkbox', name='hard_to_lose', data-limit='3', value='12')
                         .aq-check
                         span Food just tastes so good!
                     label#q24a13
-                        input.other(type='checkbox', name='hard_to_lose', data-limit='3')
+                        input.other(type='checkbox', name='hard_to_lose', data-limit='3', value='13')
                         .aq-check
                         span.other Other
-                    input.other-input(type='text', name='hard_to_lose', placeholder='Please describe...')
+                    input.other-input(type='text', name='hard_to_lose_other', placeholder='Please describe...')
             .qstn-divider
             #q25.qstn-wrap.radios.others
                 fieldset
@@ -1126,7 +1126,7 @@ form(action='#thanks' method="POST" )
                         input.other(name='mantra', type='radio', value='10')
                         .aq-radio
                         span Add your own mantra!
-                    textarea.other-input(name='mantra', placeholder='My mantra is...')
+                    textarea.other-input(name='mantra_other', placeholder='My mantra is...')
             .qstn-divider
             #q26.qstn-wrap.tel
                 fieldset
@@ -1136,24 +1136,26 @@ form(action='#thanks' method="POST" )
                             | Please enter your phone number(s):
                     label#q26a01
                         .qstn-sub What number do you want your coach to call for check-ins:
-                        input(type='text', name='tel-number', pattern='[0-9]*', placeholder='555 555 5555')
+                        input(type='text', name='home_num', pattern='[0-9]*', placeholder='555 555 5555')
                     label#q26a02
                         .qstn-sub
                             | We'll text you a reminder about your sessions. What's the best number to reach you?
-                        input(type='text', name='tel-number', pattern='[0-9]*', placeholder='555 555 5555')
+                        input(type='text', name='mobile_num', pattern='[0-9]*', placeholder='555 555 5555')
                     label#q26a03
-                        input(type='checkbox', name='tel-number')
+                        input(type='checkbox', name='no_text')
                         .aq-check
                         span.qstn-sub.no-txts No text messages, please.
             .qstn-divider
             #qstn_assess.qstn-wrap.coach-msg
-                label
-                    p
-                        | Is there anything else you’d like your coach to know about you? If so, tell us below. If not, just hit “I’m done!“
+                fieldset
+                    legend
+                        p
+                            | Is there anything else you’d like your coach to know about you? If so, tell us below. If not, just hit “I’m done!“
                     .note-paper
                         .dear.wwdisplay-bold Dear Coach,
                         .note-divider
-                        textarea(name='coach_msg', placeholder='write your message here...')
+                        label
+                            textarea(name='coach_msg', placeholder='write your message here...')
                         .user-name
                             span.user-firstname
                             span.user-lastname
