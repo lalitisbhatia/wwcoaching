@@ -13,12 +13,17 @@ var assmCollName = 'assessments';
 //################################################
 
 
-exports.getAssmById = function(req, res) {helper.getConnection(function(err,db){
-  var id = req.params.id.toString();
-    //console.log('Retrieving assmnt: ' + id);
+exports.getAssmByUserId = function(req, res) {helper.getConnection(function(err,db){
+  var userId = req.params.id;
+    console.log('Retrieving assmnt: ' + userId);
     db.collection(assmCollName, function(err, collection) {
-        collection.findOne({'_id':id}, function(err, item) {
-            res.send(item);
+        collection.findOne({'Assessment.UserId':userId}, function(err, item) {
+            if(err){
+                console.log('Error getting assessment for userid :' + userId)
+            }else {
+                console.log(item);
+                res.send(item);
+            }
         });
     });
      

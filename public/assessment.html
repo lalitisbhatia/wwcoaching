@@ -13,23 +13,22 @@
 
 </head>
 <body>
-<form  role="form" action='/assessment' method='POST' >
-<div class="aq-ww-banner"><h1><span class="offscreen">Weight Watchers</span></h1></div>
 
-<div class="btwn-msg">
-    <p>Thanks!<span class="ww-break"></span> Let&rsquo;s get started.</p>
-    <img src="img/loading.gif">
+<div class="aq-ww-banner">
+    <h1><span class="offscreen">Weight Watchers</span></h1>
+    <a class="aq-logout" id="logout" href="/logout">Logout</a>
 </div>
+
+<form action="thanks.html">
+<!-- <form action="thanks.html" method="POST" role="form"> -->
 
 <div class="aq-wrap">
 
 <div class="sec active">
-
     <header class="aq-intro">
         <h2 class="wwdisplay-bold">My Personal Assessment</h2>
         <p>Woo-hoo! This is an amazing step you've taken toward better health.</p>
     </header>
-
     <div class="qstn-wrap name" id="q00">
         <fieldset>
             <legend><span class="qstn">To get started, please enter your name:</span></legend>
@@ -44,8 +43,15 @@
         </fieldset>
         <p class="error-txt">Something's missing. Fill in your first and last name to get started!</p>
     </div>
-    <button class="aq-btn" id="next" type="button">Next</button>
+    <button class="aq-btn next" type="button">Next</button>
+</div>
 
+<div class="sec">
+    <div class="btwn-msg">
+        <h2 class="wwdisplay-bold">Glad you&rsquo;re here, <span class="user-firstname">Sean</span>!</h2>
+        <p>This assessment is your first step towards coaching. It&rsquo;ll help your coach get to know you, so you can get off to a really great start.</p>
+    </div>
+    <button class="aq-btn next" type="button">Let’s do this thing!</button>
 </div>
 
 <div class="sec">
@@ -212,21 +218,21 @@
 
 <div class="qstn-wrap ans-boxes" id="q02">
     <fieldset>
-        <legend><span class="qstn"><span>2. </span>When do you eat your meals?</span></legend>
+        <legend><span class="qstn"><span>2. </span>Do you eat around the same time every day?</span></legend>
         <label id="q02a01">
-            <input type="radio" name="eating_patterns"/>
-            <div class="ans-box"><span>I eat more or less at the same times every day.</span></div>
+            <input type="radio" name="eating_patterns" value="1" />
+            <div class="ans-box"><span>Yep. My meals are like clockwork.</span></div>
         </label>
         <label id="q02a02">
-            <input type="radio" name="eating_patterns"/>
-            <div class="ans-box"><span>My life is crazy. I grab at bite whenever I can!</span></div>
+            <input type="radio" name="eating_patterns" value="2" />
+            <div class="ans-box"><span>Are you kidding? I grab a bite whenever I can.</span></div>
         </label>
     </fieldset>
 </div>
 <div class="qstn-divider"></div>
 
 <div class="qstn-wrap others" id="q03">
-    <span class="qstn"><span>3. </span>How many times a <b>week</b> do you go out to eat? (Fast food counts.) </span>
+    <span class="qstn"><span>3. </span>How many times per <b>week</b> do you go out to eat? (Don’t forget fast food.)</span>
 
     <fieldset class="select" id="q03a01">
         <label>
@@ -340,21 +346,21 @@
 
 <div class="qstn-wrap ans-boxes four-boxes" id="q04">
     <fieldset>
-        <legend><span class="qstn"><span>4. </span>Who does the cooking?</span></legend>
+        <legend><span class="qstn"><span>4. </span>Who does the cooking at your house?</span></legend>
         <label id="q04a01">
-            <input type="radio" name="who_cooks"/>
+            <input type="radio" name="who_cooks" value="1" />
             <div class="ans-box"><span>I do</span></div>
         </label>
         <label id="q04a02">
-            <input type="radio" name="who_cooks"/>
+            <input type="radio" name="who_cooks" value="2" />
             <div class="ans-box"><span>Someone else does</span></div>
         </label>
         <label id="q04a03">
-            <input type="radio" name="who_cooks"/>
+            <input type="radio" name="who_cooks" value="3" />
             <div class="ans-box"><span>I split it with someone else</span></div>
         </label>
         <label id="q04a04">
-            <input type="radio" name="who_cooks"/>
+            <input type="radio" name="who_cooks" value="4" />
             <div class="ans-box"><span>The restaurant / grocery store does!</span></div>
         </label>
     </fieldset>
@@ -363,7 +369,7 @@
 
 <div class="qstn-wrap img-boxes foods" id="q05">
     <fieldset>
-        <legend><span class="qstn"><span>5. </span>Each <b>day</b>, how often do you eat: </span></legend>
+        <legend><span class="qstn"><span>5. </span><b>Each day</b>, how often do you eat:</span></legend>
         <label id="q05a01">
             <img class="img-box" src="img/fresh_fruit@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>Fresh fruit</span></div>
@@ -407,31 +413,31 @@
     <fieldset>
         <legend><span class="qstn"><span>6. </span>How do you normally spend your day?</span></legend>
         <label id="q06a01">
-            <input type="radio" name="daily_act"/>
+            <input type="radio" name="daily_act" value="1" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/sittingdown.jpg" alt="">
             <div class="q-txt-wrap"><span>Sitting down</span></div>
         </label>
         <label id="q06a02">
-            <input type="radio" name="daily_act"/>
+            <input type="radio" name="daily_act" value="2" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/mostlysittingworkout.jpg" alt="">
             <div class="q-txt-wrap"><span>Sitting, but I also work out</span></div>
         </label>
         <label id="q06a03">
-            <input type="radio" name="daily_act"/>
+            <input type="radio" name="daily_act" value="3" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/sittingstanding.jpg" alt="">
             <div class="q-txt-wrap"><span>A mix of sitting and standing</span></div>
         </label>
         <label id="q06a04">
-            <input type="radio" name="daily_act"/>
+            <input type="radio" name="daily_act" value="4" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/standing.jpg" alt="">
             <div class="q-txt-wrap"><span>Mainly standing and walking</span></div>
         </label>
         <label id="q06a05">
-            <input type="radio" name="daily_act"/>
+            <input type="radio" name="daily_act" value="5" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/physical.jpg" alt="">
             <div class="q-txt-wrap"><span>I'm very active</span></div>
@@ -442,24 +448,24 @@
 
 <div class="qstn-wrap img-boxes ills" id="q07">
     <fieldset>
-        <legend><span class="qstn"><span>7. </span>How much activity do you do each <b>week</b>?</span></legend>
+        <legend><span class="qstn"><span>7. </span>How much activity do you do <b>each week</b>?</span></legend>
         <label id="q07a02">
-            <input type="radio" name="physical_act">
+            <input type="radio" name="physical_act" value="1" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/clock.jpg" alt="">
-            <div class="q-txt-wrap"><span>30 mins or less</span></div>
+            <div class="q-txt-wrap"><span>30 mins. or less</span></div>
         </label>
         <label id="q07a02">
-            <input type="radio" name="physical_act">
+            <input type="radio" name="physical_act" value="2" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/clock.jpg" alt="">
-            <div class="q-txt-wrap"><span>Around 60 mins</span></div>
+            <div class="q-txt-wrap"><span>Around 60 mins.</span></div>
         </label>
         <label id="q07a01">
-            <input type="radio" name="physical_act">
+            <input type="radio" name="physical_act" value="3" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/clock.jpg" alt="">
-            <div class="q-txt-wrap"><span>100 mins or more</span></div>
+            <div class="q-txt-wrap"><span>100 mins. or more</span></div>
         </label>
     </fieldset>
 </div>
@@ -470,11 +476,11 @@
         <legend><span class="qstn"><span>8. </span>Do you use an activity monitor or fitness app?</span></legend>
         <label id="q08a01">
             <input type="radio" name="act_track" value="yes" id="yesDevices"/>
-            <div class="ans-box"><span>Yes</span></div>
+            <div class="ans-box"><span>I do!</span></div>
         </label>
         <label id="q08a02">
             <input type="radio" name="act_track" value="no"/>
-            <div class="ans-box"><span>No</span></div>
+            <div class="ans-box"><span>Nope!</span></div>
         </label>
     </fieldset>
 
@@ -515,7 +521,7 @@
 <div class="qstn-wrap" id="q09">
     <label>
         <span class="qstn"><span>9. </span>What's your current weight?</span>
-        <div class="input-tag unit lbs"><input type="text" name="current-weight" pattern="[0-9]*" /><span>lbs.</span></div>
+        <div class="input-tag unit lbs"><input type="text" name="current-weight" /><span>lbs.</span></div>
     </label>
 </div>
 <div class="qstn-divider"></div>
@@ -523,7 +529,7 @@
 <div class="qstn-wrap" id="q10">
     <label>
         <span class="qstn"><span>10. </span>What's the lowest weight you've been as an adult?</span>
-        <div class="input-tag unit lbs"><input type="text" name="lowest_weight" pattern="[0-9]*" /><span>lbs.</span></div>
+        <div class="input-tag unit lbs"><input type="text" name="lowest_weight" /><span>lbs.</span></div>
     </label>
 </div>
 <div class="qstn-divider"></div>
@@ -531,7 +537,7 @@
 <div class="qstn-wrap" id="q11">
     <label>
         <span class="qstn dbl-digit"><span>11. </span>How many times have you lost 10 lbs. or more?</span>
-        <div class="input-tag unit times"><input type="text" name="diet_loss" pattern="[0-9]*"/><span>times</span></div>
+        <div class="input-tag unit times"><input type="text" name="diet_loss" /><span>times</span></div>
     </label>
 </div>
 <div class="qstn-divider"></div>
@@ -540,47 +546,47 @@
     <fieldset class="radios">
         <legend><span class="qstn dbl-digit"><span>12. </span>What weight-loss approach has worked <b>best</b> for you?</span></legend>
         <label id="q12a01">
-            <input type="radio" name="loss_approach"/>
+            <input type="radio" name="loss_approach" value="1" />
             <div class="aq-radio"></div>
             <span>Keeping track of food / activity</span>
         </label>
         <label id="q12a02">
-            <input type="radio" name="loss_approach"/>
+            <input type="radio" name="loss_approach" value="2" />
             <div class="aq-radio"></div>
             <span>Pre-packaged meals</span>
         </label>
         <label id="q12a03">
-            <input type="radio" name="loss_approach"/>
+            <input type="radio" name="loss_approach" value="3" />
             <div class="aq-radio"></div>
             <span>Online weight-loss group</span>
         </label>
         <label id="q12a04">
-            <input type="radio" name="loss_approach"/>
+            <input type="radio" name="loss_approach" value="4" />
             <div class="aq-radio"></div>
             <span>Group that meets in person</span>
         </label>
         <label id="q12a05">
-            <input type="radio" name="loss_approach"/>
+            <input type="radio" name="loss_approach" value="5" />
             <div class="aq-radio"></div>
             <span>Working with a nutritionist</span>
         </label>
         <label id="q12a06">
-            <input type="radio" name="loss_approach"/>
+            <input type="radio" name="loss_approach" value="6" />
             <div class="aq-radio"></div>
             <span>Online tools / apps</span>
         </label>
         <label id="q12a07">
-            <input type="radio" name="loss_approach"/>
+            <input type="radio" name="loss_approach" value="7" />
             <div class="aq-radio"></div>
             <span>Surgery / medically supervised fast</span>
         </label>
         <label id="q12a08">
-            <input type="radio" name="loss_approach"/>
+            <input type="radio" name="loss_approach" value="8" />
             <div class="aq-radio"></div>
             <span>Changing my eating / exercise habits</span>
         </label>
         <label id="q12a09">
-            <input type="radio" name="loss_approach" class="other"/>
+            <input type="radio" name="loss_approach" class="other" value="9" />
             <div class="aq-radio"></div>
             <span>Other</span>
         </label>
@@ -592,7 +598,7 @@
 <div class="qstn-wrap ans-boxes true-false inline-btns" id="q13">
     <span class="qstn dbl-digit"><span>13. </span>Please answer true or false:</span>
     <fieldset id="q13a01">
-        <legend><span class="qstn-sub">If I don't lose weight every week, I'll give up quickly.</span></legend>
+        <legend><span class="qstn-sub">If I don’t lose weight every week, I’ll give up quickly.</span></legend>
         <label>
             <input type="radio" name="statement1" value="true"/>
             <div class="ans-box"><span>True</span></div>
@@ -603,7 +609,7 @@
         </label>
     </fieldset>
     <fieldset id="q13a02">
-        <legend><span class="qstn-sub">If I slip, I focus on that and forget all my successes over the week.</span></legend>
+        <legend><span class="qstn-sub">If I slip, I focus on that and forget my successes.</span></legend>
         <label>
             <input type="radio" name="statement2" value="true"/>
             <div class="ans-box"><span>True</span></div>
@@ -614,7 +620,7 @@
         </label>
     </fieldset>
     <fieldset id="q13a03">
-        <legend><span class="qstn-sub">If I ate carefully and the scale still doesn't move, I'll probably overeat.</span></legend>
+        <legend><span class="qstn-sub">If I eat healthy and don’t see results, I’ll stop bothering.</span></legend>
         <label>
             <input type="radio" name="statement3" value="true"/>
             <div class="ans-box"><span>True</span></div>
@@ -625,7 +631,7 @@
         </label>
     </fieldset>
     <fieldset id="q13a04">
-        <legend><span class="qstn-sub">If I go off track, I think I've blown it -- and <i>really</i> go off track.</span></legend>
+        <legend><span class="qstn-sub">If I go off track, I think I’ve blown it. And then I REALLY go off track.</span></legend>
         <label>
             <input type="radio" name="statement4" value="true"/>
             <div class="ans-box"><span>True</span></div>
@@ -644,22 +650,22 @@
     <fieldset class="radios">
         <legend><span class="qstn dbl-digit"><span>14. </span>How much weight would you like to lose?</span></legend>
         <label id="q14a01">
-            <input type="radio" name="wt_to_lose"/>
+            <input type="radio" name="wt_to_lose" value="1" />
             <div class="aq-radio"></div>
             <span>5-15 lbs.</span>
         </label>
         <label id="q14a02">
-            <input type="radio" name="wt_to_lose"/>
+            <input type="radio" name="wt_to_lose" value="2" />
             <div class="aq-radio"></div>
             <span>16-25 lbs.</span>
         </label>
         <label id="q14a03">
-            <input type="radio" name="wt_to_lose"/>
+            <input type="radio" name="wt_to_lose" value="3" />
             <div class="aq-radio"></div>
             <span>26-50 lbs.</span>
         </label>
         <label id="q14a04">
-            <input type="radio" name="wt_to_lose"/>
+            <input type="radio" name="wt_to_lose" value="4" />
             <div class="aq-radio"></div>
             <span>50+ lbs.</span>
         </label>
@@ -677,7 +683,7 @@
 
 <div class="qstn-wrap" id="q16">
     <label>
-        <span class="qstn dbl-digit"><span>16. </span>What's the biggest thing that you want to work on with your coach?</span>
+        <span class="qstn dbl-digit"><span>16. </span>What's the biggest thing you want to work on with your coach?</span>
         <textarea name="loss_benefit" placeholder="write here..."></textarea>
     </label>
 </div>
@@ -687,39 +693,39 @@
 
 <div class="qstn-wrap img-boxes radios others" id="q17">
     <fieldset>
-        <legend><span class="qstn dbl-digit"><span>17. </span>How do you spend your day?</span></legend>
+        <legend><span class="qstn dbl-digit"><span>17. </span>Where do you spend your day?</span></legend>
         <label id="q17a01">
-            <input type="radio" name="spend_your_day"/>
+            <input type="radio" name="spend_your_day" value="1" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/work@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>At work</span></div>
         </label>
         <label id="q17a02">
-            <input type="radio" name="spend_your_day"/>
+            <input type="radio" name="spend_your_day" value="2" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/school@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>At school</span></div>
         </label>
         <label id="q17a03">
-            <input type="radio" name="spend_your_day"/>
+            <input type="radio" name="spend_your_day" value="3" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/home_kids@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>At home<br>with kids</span></div>
         </label>
         <label id="q17a04">
-            <input type="radio" name="spend_your_day"/>
+            <input type="radio" name="spend_your_day" value="4" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/home_alone@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>At home<br>on my own</span></div>
         </label>
         <label id="q17a05">
-            <input type="radio" name="spend_your_day"/>
+            <input type="radio" name="spend_your_day" value="5" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/retired@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>Retired</span></div>
         </label>
         <label id="q17a06">
-            <input type="radio" name="spend_your_day" class="other" />
+            <input type="radio" name="spend_your_day" class="other" value="6" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/other@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>Other</span></div>
@@ -733,27 +739,27 @@
     <fieldset>
         <legend><span class="qstn dbl-digit"><span>18. </span>Which best describes your household?</span></legend>
         <label id="q18a01">
-            <input type="radio" name="household"/>
+            <input type="radio" name="household" value="1" />
             <div class="aq-radio"></div>
             <span>Just me</span>
         </label>
         <label id="q18a02">
-            <input type="radio" name="household"/>
+            <input type="radio" name="household" value="2" />
             <div class="aq-radio"></div>
             <span>Couple</span>
         </label>
         <label id="q18a03">
-            <input type="radio" name="household"/>
+            <input type="radio" name="household" value="3" />
             <div class="aq-radio"></div>
             <span>Roommates</span>
         </label>
         <label id="q18a04">
-            <input type="radio" name="household"/>
+            <input type="radio" name="household" value="4" />
             <div class="aq-radio"></div>
             <span>Family with children</span>
         </label>
         <label id="q18a05">
-            <input type="radio" name="household"/>
+            <input type="radio" name="household" value="5" />
             <div class="aq-radio"></div>
             <span>Live with parent(s)</span>
         </label>
@@ -763,21 +769,21 @@
 
 <div class="qstn-wrap radios" id="q19">
     <fieldset>
-        <legend><span class="qstn dbl-digit"><span>19. </span>When it comes to your weight loss, are the people you care about:</span></legend>
+        <legend><span class="qstn dbl-digit"><span>19. </span>When it comes to weight loss, how much support do you have?</span></legend>
         <label id="q19a01">
-            <input type="radio" name="support"/>
+            <input type="radio" name="support" value="1" />
             <div class="aq-radio"></div>
-            <span>Very supportive</span>
+            <span>A lot</span>
         </label>
         <label id="q19a02">
-            <input type="radio" name="support"/>
+            <input type="radio" name="support" value="2" />
             <div class="aq-radio"></div>
-            <span>Sort of supportive</span>
+            <span>A little</span>
         </label>
         <label id="q19a03">
-            <input type="radio" name="support"/>
+            <input type="radio" name="support" value="3" />
             <div class="aq-radio"></div>
-            <span>Not supportive</span>
+            <span>Almost none</span>
         </label>
     </fieldset>
 </div>
@@ -787,17 +793,17 @@
     <fieldset>
         <legend><span class="qstn dbl-digit"><span>20. </span>How stressful is your life?</span></legend>
         <label id="q20a01">
-            <input type="radio" name="stress"/>
+            <input type="radio" name="stress" value="1" />
             <div class="aq-radio"></div>
             <span>Easy breezy!</span>
         </label>
         <label id="q20a02">
-            <input type="radio" name="stress"/>
+            <input type="radio" name="stress" value="2" />
             <div class="aq-radio"></div>
             <span>Kinda stressful</span>
         </label>
         <label id="q20a03">
-            <input type="radio" name="stress"/>
+            <input type="radio" name="stress" value="3" />
             <div class="aq-radio"></div>
             <span>I'm freaking out.</span>
         </label>
@@ -809,27 +815,27 @@
 
 <div class="qstn-wrap img-boxes checks" id="q21">
     <fieldset>
-        <legend><span class="qstn dbl-digit"><span>21. </span>When do you find it hardest to stay on track? (Select all that apply)</span></legend>
+        <legend><span class="qstn dbl-digit"><span>21. </span>Which time of day is it hardest for you to stay on track?</span></legend>
         <label id="q21a01">
-            <input type="checkbox" name="stay_on_track"/>
+            <input type="radio" name="stay_on_track" value="1" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/morning@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>Morning</span></div>
         </label>
         <label id="q21a02">
-            <input type="checkbox" name="stay_on_track"/>
+            <input type="radio" name="stay_on_track" value="2" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/afternoon@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>Afternoon</span></div>
         </label>
         <label id="q21a03">
-            <input type="checkbox" name="stay_on_track"/>
+            <input type="radio" name="stay_on_track" value="3" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/evening@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>Evening</span></div>
         </label>
         <label id="q21a04">
-            <input type="checkbox" name="stay_on_track"/>
+            <input type="radio" name="stay_on_track" value="4" />
             <div class="aq-radio"></div>
             <img class="img-box" src="img/late_night@2x.jpg" alt="">
             <div class="q-txt-wrap"><span>Late at night</span></div>
@@ -840,31 +846,31 @@
 
 <div class="qstn-wrap img-boxes top-five" id="q22">
     <fieldset>
-        <legend><span class="qstn dbl-digit"><span>22. </span>What are the 5 foods you can't live without?</span></legend>
+        <legend><span class="qstn dbl-digit"><span>22. </span>What are the five foods you can’t live without?</span></legend>
         <label id="q22a01">
             <span class="offscreen">1</span>
             <img class="img-box" src="img/1fav.jpg" alt="">
-            <input type="text" name="five_foods1" pattern="[0-9]*" />
+            <input type="text" name="five_foods1" />
         </label>
         <label id="q22a02">
             <span class="offscreen">2</span>
             <img class="img-box" src="img/2fav.jpg" alt="">
-            <input type="text" name="five_foods2" pattern="[0-9]*" />
+            <input type="text" name="five_foods2" />
         </label>
         <label id="q22a03">
             <span class="offscreen">3</span>
             <img class="img-box" src="img/3fav.jpg" alt="">
-            <input type="text" name="five_foods3" pattern="[0-9]*" />
+            <input type="text" name="five_foods3" />
         </label>
         <label id="q22a04">
             <span class="offscreen">4</span>
             <img class="img-box" src="img/4fav.jpg" alt="">
-            <input type="text" name="five_foods4" pattern="[0-9]*" />
+            <input type="text" name="five_foods4" />
         </label>
         <label id="q22a05">
             <span class="offscreen">5</span>
             <img class="img-box" src="img/5fav.jpg" alt="">
-            <input type="text" name="five_foods5" pattern="[0-9]*" />
+            <input type="text" name="five_foods5" />
         </label>
     </fieldset>
 </div>
@@ -916,7 +922,7 @@
         </label>
         <input class="other-input" type="text" name="allergies" placeholder="Please describe..."/>
         <label id="q23a09">
-            <input type="checkbox" name="allergies" />
+            <input class="chk-none" type="checkbox" name="allergies" />
             <div class="aq-check"></div>
             <span>None</span>
         </label>
@@ -926,7 +932,7 @@
 
 <div class="qstn-wrap checks others" id="q24">
     <fieldset>
-        <legend><span class="qstn dbl-digit"><span>24. </span>Which 3 things make it hard to lose weight?</span></legend>
+        <legend><span class="qstn dbl-digit"><span>24. </span>What makes it hard to lose weight? (Pick three.)</span></legend>
         <label id="q24a01">
             <input type="checkbox" name="hard_to_lose" data-limit="3" />
             <div class="aq-check"></div>
@@ -985,10 +991,10 @@
         <label id="q24a12">
             <input type="checkbox" name="hard_to_lose" data-limit="3" />
             <div class="aq-check"></div>
-            <span>Food tastes so darn good!</span>
+            <span>Food just tastes so good!</span>
         </label>
         <label id="q24a13">
-            <input type="checkbox" name="hard_to_lose" class="other" data-limit="3" />
+            <input class="other" type="checkbox" name="hard_to_lose" data-limit="3" />
             <div class="aq-check"></div>
             <span class="other">Other</span>
         </label>
@@ -1001,52 +1007,52 @@
     <fieldset>
         <legend><span class="qstn dbl-digit"><span>25. </span>Having a mantra can really help you stick with it. Pick one below, or write your own!</span></legend>
         <label id="q25a01">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="1" />
             <div class="aq-radio"></div>
             <span>Losing weight is hard. Being overweight is hard. Choose your hard.</span>
         </label>
         <label id="q25a02">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="2" />
             <div class="aq-radio"></div>
             <span>If you kinda do it, it kinda works. If you really do it, it really works.</span>
         </label>
         <label id="q25a03">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="3" />
             <div class="aq-radio"></div>
             <span>The scale is a weight loss tool - not a judge, jury and executioner.</span>
         </label>
         <label id="q25a04">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="4" />
             <div class="aq-radio"></div>
             <span>Don't give up what you want the most for what you want in the moment.</span>
         </label>
         <label id="q25a05">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="5" />
             <div class="aq-radio"></div>
             <span>If we want a change, we have to make a change.</span>
         </label>
         <label id="q25a06">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="6" />
             <div class="aq-radio"></div>
             <span>Whether you believe you can, or cannot, you're right.</span>
         </label>
         <label id="q25a07">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="7" />
             <div class="aq-radio"></div>
             <span>I've come too far to take orders from a cookie.</span>
         </label>
         <label id="q25a08">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="8" />
             <div class="aq-radio"></div>
             <span>I've got this.</span>
         </label>
         <label id="q25a09">
-            <input type="radio" name="mantra"/>
+            <input type="radio" name="mantra" value="9" />
             <div class="aq-radio"></div>
             <span>It's choice, not chance, that will determine my destiny.</span>
         </label>
         <label id="q25a10">
-            <input class="other" name="mantra" type="radio" />
+            <input class="other" name="mantra" type="radio" value="10" />
             <div class="aq-radio"></div>
             <span>Add your own mantra!</span>
         </label>
@@ -1058,15 +1064,18 @@
 <div class="qstn-wrap tel" id="q26">
     <fieldset>
         <legend><span class="qstn dbl-digit"><span>26. </span>Please enter your phone number(s):</span></legend>
-        <label>
-            <div class="qstn-sub">Home</div>
-            <input type="text" name="tel-number" pattern="[0-9]*" placeholder="555-555-5555" />
-            <div class="qstn-tag">(Your coach will use it to call you.)</div>
+        <label id="q26a01">
+            <div class="qstn-sub">What number do you want your coach to call for check-ins:</div>
+            <input type="text" name="tel-number" pattern="[0-9]*" placeholder="555 555 5555" />
         </label>
-        <label>
-            <div class="qstn-sub">Mobile</div>
-            <input type="text" name="tel-number" pattern="[0-9]*" placeholder="555-555-5555" />
-            <div class="qstn-tag">(Reminders will be sent by text.)</div>
+        <label id="q26a02">
+            <div class="qstn-sub">We'll text you a reminder about your sessions. What's the best number to reach you?</div>
+            <input type="text" name="tel-number" pattern="[0-9]*" placeholder="555 555 5555" />
+        </label>
+        <label id="q26a03">
+            <input type="checkbox" name="tel-number" />
+            <div class="aq-check"></div>
+            <span class="qstn-sub no-txts">No text messages, please.</span>
         </label>
     </fieldset>
 </div>
@@ -1079,17 +1088,24 @@
             <div class="dear wwdisplay-bold">Dear Coach,</div>
             <div class="note-divider"></div>
             <textarea name="coach_msg" placeholder="write your message here..."></textarea>
-            <div class="users-name">Sean Vinci</div>
+            <div class="user-name">
+                <span class="user-firstname"></span>
+                <span class="user-lastname"></span>
+            </div>
         </div>
     </label>
 </div>
 
-<button class="aq-btn" type="submit" >I&rsquo;m done!</button>
+<button class="aq-btn" type="submit">I&rsquo;m done!</button>
 
 </div>
 
 </div>
+
+<input type='hidden' value="#{user._id}" name="UserId" />
+
 </form>
+
 <script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
 <script src="js/assessment.js" type="text/javascript"></script>
 <script src="js/page.js" type="text/javascript"></script>

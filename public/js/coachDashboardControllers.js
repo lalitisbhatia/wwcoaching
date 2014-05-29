@@ -262,6 +262,10 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             $scope.User= data.pilotProfile;
             $scope.WWUser = data.wwProfile;
             $scope.notes = data.pilotProfile.CallNotes;
+
+            coachDashboardServices.getUserAssessment($scope._id).then(function(data){
+                $scope.Assessment=data.Assessment;
+            })
         });
 
         coachDashboardServices.getCoachInfo().then(function(data){
