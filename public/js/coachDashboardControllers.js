@@ -12,7 +12,13 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
             $scope.Coach=data;
             $scope.coachMin = {coachId:data._id,coachName:data.FirstName+' '+data.LastName,coachPhone:data.Phone,coachEmail:data.Email};
             $scope.FirstName = data.FirstName;
-            console.log($scope.Coach);
+            console.log($scope.FirstName);
+
+            //now get the coach's upcoming schedule
+            coachDashboardServices.getCoachAppts($scope.coachMin.coachId).then(function(appts){
+                $scope.upcomingAppts=appts;
+                console.log($scope.upcomingAppts)
+            })
         });
 
         coachDashboardServices.getCoachUsers().then(function(data){
@@ -249,7 +255,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
         coachDashboardServices.getUserProfile().then(function (data) {
             //$scope.data = wwCoachingService.userProfile();
             $log.log('inside controller');
-            //$log.log(data);
+            $log.log(data);
             $scope.FirstName = data.pilotProfile.FirstName;
             $scope.LastName = data.pilotProfile.LastName;
             $scope._id = data.pilotProfile._id;
@@ -262,7 +268,10 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             $scope.User= data.pilotProfile;
             $scope.WWUser = data.wwProfile;
             $scope.notes = data.pilotProfile.CallNotes;
-
+            if(!$scope.notes){
+                $scope.notes=[];
+            }
+            $log.log($scope.notes);
             coachDashboardServices.getUserAssessment($scope._id).then(function(data){
                 $scope.Assessment=data.Assessment;
             })
@@ -276,15 +285,16 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
     };
 
 
-
-
     $scope.savenote = function() {
         console.log($scope.User);
+        var callDate = new Date();
+
         if($scope.newnote.callid == null) {
 
-            $scope.newnote.date=$('#pickdatetime').val(); //hack because the ng-model does not bind with datepicker
+            //$scope.newnote.date=$('#pickdatetime').val(); //hack because the ng-model does not bind with datepicker
             $scope.newnote.userid=$scope.User._id;
-            $scope.newnote.callid = $scope.notes.length+1;
+            $scope.newnote.callid = $scope.notes.length +1;
+            $scope.newnote.date=callDate.dateFormat('M-d-Y, H:i');
             console.log($scope.newnote) ;
             $scope.notes.push($scope.newnote);
 
@@ -305,8 +315,6 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             //console.log($scope.newnote);
 
         }
-
-
         //clear the add contact form
         $scope.newnote = {};
 

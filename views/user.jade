@@ -1,45 +1,117 @@
-extends layout
+extends layoutUser
 
 block content
-    
-    .container(ng-controller='userDetailsController' data-ng-init='initApp()' style="padding-top:50px;padding-left:200px;")
-        .sub-head NAME: {{FirstName}} {{LastName}}
 
-        legend
-        p(style='padding-bottom:10px;')
+    .container(ng-controller='userDetailsController' data-ng-init='initApp()' style="padding-top:30px;padding-left:150px;")
+        p(style='padding-bottom:5px;')
+        .row(ng-controller='coachDashBoardController' )
+                a(id="aMyUsers" href='/coach' )
+                    b Back To Dashboard
+                legend
         .row
-            ul.nav.nav-pills(style='font-size:20px;margin-left:10px;')
-                li.active
-                    a(href="#wwprofile" data-toggle="tab") WW Profile
-                li(style='margin-left:80px;')
-                    a(href="#assessment" data-toggle="tab") Assessment
-                li(style='margin-left:80px;')
-                    a(href="#tracker" data-toggle="tab") Tracker
-                li(style='margin-left:80px;')
-                    a(href="#calls" data-toggle="tab") Calls
-                li(style='margin-left:80px;')
-                    a(href="#eamils" data-toggle="tab") Email Communications
+            span
+                b Session with: {{FirstName}} {{LastName}}
+        .row
+
+            .tab-pane.col-sm-9.col-md-10.main
+                .ng-scope
+                    .container
+                        .row.well.col-md-10
+                            .col-lg-8.well
+                                form.ng-pristine.ng-valid
+
+                                    legend
+                                        span Action Plan Data Capture
+
+                                    div
+                                        label Email Opening
+                                    div
+                                        textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='emailopening' , ng-model='newnote.emailopening')
+                                    div
+                                        br
+                                        label Action Plan:
+                                    div
+                                        textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action1' , ng-model='newnote.action1')
+                                        br
+                                        textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action2' , ng-model='newnote.action2')
+                                        br
+                                        textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action3' , ng-model='newnote.action3')
+                                    div
+                                        br
+                                        label Email Closing
+                                        div
+                                            textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='emailclosing' , ng-model='newnote.emailclosing')
+                                    div
+                                        br
+                                        label Additional Notes
+                                        div
+                                            textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='addlnotes' , ng-model='newnote.addlnotes')
+
+
+                                    input(type='hidden' ng-model='newnote.id')
+                                    input#userid(type='hidden' ng-model='newnote._id' value='{{_id}}')
+                                    br
+                                    legend
+                                        input(type='button', value='Save', ng-click='savenote()').btn.btn-primary
+                                        p
+
+                            .col-lg-3.well
+                                span
+                                    b Name:
+                                    | &nbsp;{{FirstName}} {{LastName}}
+                                br
+                                span
+                                    b Age:
+                                    | &nbsp;{{Age}}
+                                br
+                                span
+                                    b Gender:
+                                    | &nbsp;{{Gender}}
+                                br
+                                span
+                                    b Height/Weight:
+                                    | &nbsp;{{Height}}/{{Weight}}
+                                br
+                                span
+                                    b Min Safe Weight:
+                                    | &nbsp;{{MinSafeWeight}}
+                                br
+                                span
+                                    b Max Safe Weight:
+                                    | &nbsp;{{MaxSafeWeight}}
+                                br
+                                span
+                                    ul.nav(style='font-size:20px;')
+
+                                        li
+                                            a(href="#assessment" data-toggle="tab") Assessment
+                            .col-lg-12.well
+                                form.ng-pristine.ng-valid
+                                    b Previous Sessions
+
+                                    table.table.table-striped.table-bordered
+                                        thead
+                                            tr
+                                                th Date/Time
+                                                th Duration
+                                                th Notes
+                                                th Action Plan
+                                                th Email
+                                        tbody
+                                            tr.ng-scope(ng-repeat='callNote in notes')
+                                                td.ng-binding {{ callNote.date }}
+                                                td.ng-binding {{ callNote.duration }}
+                                                td.ng-binding {{ callNote.addlnotes }}
+                                                td.ng-binding action plan link here
+                                                td.ng-binding Email link here
+
+
+
+        .row
+
             legend
             // Tab panes
             .tab-content
-                    #wwprofile.tab-pane.active
-                        .container
-                            table
-                                thead.t-head
-                                    tr
-                                        th AGE
-                                        th GENDER
-                                        th HEIGHT/WEIGHT
-                                        th MIN SAFE WEIGHT
-                                        th MAX SAFE WEIGHT
-                                tbody
-                                    tr.ng-scope
-                                        td {{Age}}
-                                        td {{Gender}}
-                                        td {{Height}}
-                                        td {{MinSafeWeight}}
-                                        td {{MaxSafeWeight}}
-
                     #assessment.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
                         h3.page-header  Assessment Results for {{FirstName}} {{LastName}}
                             //ul
@@ -276,7 +348,7 @@ block content
                                                     span(ng-if="Assessment.wt_to_lose=='1'") 5-15 lbs.
                                                     span(ng-if="Assessment.wt_to_lose=='2'") 16-25 lbs.
                                                     span(ng-if="Assessment.wt_to_lose=='3'") 26-50 lbs.
-                                                    span(ng-if="Assessment.wt_to_lose=='4") 50+ lbs.
+                                                    span(ng-if="Assessment.wt_to_lose=='4'") 50+ lbs.
                                     .qstn-divider
                                     #q15.qstn-wrap
                                         label
@@ -457,43 +529,3 @@ block content
                                             span {{Assessment.coach_msg}}
 
 
-                    #tracker.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                        h1.page-header Tracker Info Here
-                    #calls.tab-pane
-                        .ng-scope
-                             form.well.ng-pristine.ng-valid
-                                div
-                                    label Date/Time
-                                div(ng-model='newnote.date')
-                                    input#pickdatetime.ng-pristine.ng-valid(type='text', name='date')
-                                div
-                                    label Duration
-                                div
-                                    input.ng-pristine.ng-valid(type='text', name='duration', ng-model='newnote.duration')
-                                div
-                                    label Note
-                                div
-                                    textarea.ng-pristine.ng-valid(rows='4' cols='50' name='note', ng-model='newnote.note')
-                                br
-                                input(type='hidden' ng-model='newnote.id')
-                                input#userid(type='hidden' ng-model='newnote._id' value='{{_id}}')
-                                input(type='button', value='Save', ng-click='savenote()').btn.btn-primary
-                              table.table.table-striped.table-bordered
-                                thead
-                                  tr
-                                    th Date/Time
-                                    th Duration
-                                    th Note
-                                    th Action
-                                tbody
-                                  tr.ng-scope(ng-repeat='callNote in notes')
-                                    td.ng-binding {{ callNote.date }}
-                                    td.ng-binding {{ callNote.duration }}
-                                    td.ng-binding {{ callNote.note }}
-                                    td
-                                      a(href='#', ng-click='edit(callNote.callid)') edit
-                                      | |
-                                      a(href='#', ng-click='deleteNote(callNote.callid)') delete
-
-                    #eamils.tab-pane.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-                        h1.page-header Emails communication Here

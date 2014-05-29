@@ -107,6 +107,7 @@ app.get('/getCoachAvails', schApi.getCoachAvails);
 app.post('/addCoachAvails', schApi.addCoachAvails);
 app.get('/searchAvails/:type/:value', schApi.searchAvails);
 app.get('/searchAppts/user/:id', schApi.searchUserAppts);
+app.get('/searchCoachAppts/coach/:id', schApi.searchCoachAppts);
 app.post('/saveAppt', schApi.saveUserAppt);
 app.post('/cancelAppt', schApi.cancelUserAppt);
 /****************************************************

@@ -8,31 +8,12 @@ var helper = require('../public/lib/dbhelper');
 var schCollName = 'schedule';
 var usersCollName = 'users';
 
+
 //################################################
 //##### scheduler APIs ###########
 //################################################
 
 
-exports.getAllAvails = function(req, res) {helper.getConnection(function(err,db){
-
-    console.log('Retrieving availability of all coaches');
-    db.collection(schCollName, function(err, collection) {
-        collection.find().toArray(function(err, items) {
-            if (err) {
-                res.send({'error':'error occurred while getting all availabilities'});
-            } else {
-                if(items) {
-                    //console.log(items);
-                    res.send(items);
-                }else{
-                    console.log('no results found');
-                }
-            }
-        });
-    });
-
-});
-};
 
 /*************************************
     USER Search for available slots
@@ -79,6 +60,7 @@ exports.searchAvails = function(req, res) {helper.getConnection(function(err,db)
 });
 };
 
+//User's upcoming appts
 exports.searchUserAppts = function(req, res) {helper.getConnection(function(err,db){
     console.log('searching user appts' );
     var userId =req.params.id;
@@ -107,7 +89,39 @@ exports.searchUserAppts = function(req, res) {helper.getConnection(function(err,
 
 });
 };
+/********************************
+ ***** Coach's upcoming appts ***
+********************************/
+exports.searchCoachAppts = function(req, res) {helper.getConnection(function(err,db){
+    console.log('searching coach\'s appts' );
+    var coachId =req.params.id;
+    var query={};
+    console.log('coach id = ' + coachId);
 
+    var today =new Date();
+    console.log(today.toISOString());
+
+    query={"Coach.coachId":coachId,User:{$exists:true},DateUTC:{$gte:today.toISOString()}};
+
+    db.collection(schCollName, function(err, collection) {
+        collection.find(query).toArray(function(err, items) {
+            if (err) {
+                res.send({'error':'error occurred while getting coach\'s upcoming appointments'});
+            } else {
+                if(items) {
+                    console.log(items);
+                    res.send(items);
+                }else{
+                    console.log('no results found');
+                }
+            }
+        });
+    });
+
+});
+};
+
+//this is to build the calendar
 exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
     var id = req.session.userId.toString();//here the userId is the coach id
     console.log('Retrieving availability for coachId: ' + id);

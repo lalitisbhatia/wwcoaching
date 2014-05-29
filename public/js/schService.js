@@ -93,7 +93,7 @@ participantModule.factory('schedulingService',function($http,$log,$q,$rootScope)
                 .then(function(response){
                     return(response.data);
                 });
-        },
+        }
     };
 
     return myService;

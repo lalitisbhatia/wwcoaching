@@ -119,6 +119,22 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                     return response.data;
                 });
        },
+        getCoachAppts: function (coachId) {
+            return $http({
+                method: 'GET',
+                url: '/searchCoachAppts/coach/'+coachId
+            })
+                .success(function(data) {
+                    $log.info("Successfully retrieved appts for all coach.");
+                })
+                .error(function(status, headers, config){
+                    $log.log('failed to coach appts' + status);
+                })
+                .then(function(response) {
+                    return response.data;
+                });
+
+        },
        saveCoachSchedule:function(schedule){
             return $http({
                 method:'POST',
