@@ -13,9 +13,8 @@ block content
                                     b #{user.CoachName}
                             .col-lg-6(style="border-left:ridge;margin-top:-20px;margin-bottom:-20px;")
                                 h3 Your upcoming appointments
-                                fieldset
-                                    // Form Name
                                     legend
+                                    fieldset
                                         table.searchResults.ng-scope(style="margin-left:20px;" ng-if="coachAvailDates.length>0")
                                             tbody
                                                 tr(ng-repeat="appt in userAppts | orderBy:['DateUTC']")
@@ -24,7 +23,8 @@ block content
                                                     td  {{appt.Date|date:'HH'}}
                                                     td  {{appt.Time}}
                                                     td
-                                                        a(href ng-click='cancelUserAppt(appt.Coach,appt.DateUTC)') Cancel
+                                                        a(href ng-click='cancelUserAppt(appt.Coach,appt.DateUTC)')
+                                                            b Cancel
                                                         //input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(coachAvailDate.Coach,coachAvailDate.DateUTC)').btn.btn-primary
 
                         .row.col-md-9

@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/AdminService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/coach.jade" afterPath="$PROJECT_DIR$/views/coach.jade" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/custom.css" afterPath="$PROJECT_DIR$/public/css/custom.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/participantSubs.jade" afterPath="$PROJECT_DIR$/views/participantSubs.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/schedulerApi.js" afterPath="$PROJECT_DIR$/routes/schedulerApi.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -60,6 +61,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="custom.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/custom.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3983" max-vertical-offset="4920">
+              <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="participantLogin.jade" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/participantLogin.jade">
           <provider selected="true" editor-type-id="text-editor">
@@ -103,9 +114,21 @@
       <file leaf-file-name="participantSubs.jade" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/participantSubs.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.60583943" vertical-offset="508" max-vertical-offset="2856">
-              <caret line="35" column="48" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.085612364" vertical-offset="0" max-vertical-offset="2856">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="coach.jade" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/coach.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1529" max-vertical-offset="3816">
+              <caret line="82" column="92" selection-start-line="82" selection-start-column="92" selection-end-line="82" selection-end-column="92" />
+              <folding>
+                <marker date="1401420264250" expanded="true" signature="7765:8268" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -150,7 +173,6 @@
         <option value="$PROJECT_DIR$/routes/admin.js" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/views/participantFirst.jade" />
-        <option value="$PROJECT_DIR$/public/css/custom.css" />
         <option value="$PROJECT_DIR$/routes/mailer.js" />
         <option value="$PROJECT_DIR$/routes/assessments.js" />
         <option value="$PROJECT_DIR$/public/js/page.js" />
@@ -160,7 +182,6 @@
         <option value="$PROJECT_DIR$/views/layout.jade" />
         <option value="$PROJECT_DIR$/public/js/schService.js" />
         <option value="$PROJECT_DIR$/public/js/coachDashboardServices.js" />
-        <option value="$PROJECT_DIR$/views/coach.jade" />
         <option value="$PROJECT_DIR$/views/user_old.jade" />
         <option value="$PROJECT_DIR$/views/user.jade" />
         <option value="$PROJECT_DIR$/public/js/coachDashboardControllers.js" />
@@ -174,6 +195,8 @@
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/routes/schedulerApi.js" />
         <option value="$PROJECT_DIR$/views/participantSubs.jade" />
+        <option value="$PROJECT_DIR$/public/css/custom.css" />
+        <option value="$PROJECT_DIR$/views/coach.jade" />
       </list>
     </option>
   </component>
@@ -271,6 +294,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wwcoaching" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wwcoaching" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -663,7 +704,11 @@
       <created>1401415114037</created>
       <updated>1401415114037</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="fixed bug with search results for available schedules to not show past availability">
+      <created>1401415670130</created>
+      <updated>1401415670130</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -699,7 +744,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295711" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35081968" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35081968" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295711" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -896,14 +941,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/custom.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1726" max-vertical-offset="3980">
-          <caret line="105" column="20" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/mailer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1386" max-vertical-offset="2300">
@@ -978,14 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="10193" max-vertical-offset="10800">
           <caret line="534" column="59" selection-start-line="534" selection-start-column="59" selection-end-line="534" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/coach.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2340">
-          <caret line="14" column="74" selection-start-line="4" selection-start-column="4" selection-end-line="14" selection-end-column="74" />
           <folding />
         </state>
       </provider>
@@ -1146,10 +1175,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3983" max-vertical-offset="4920">
+          <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/coach.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1529" max-vertical-offset="3816">
+          <caret line="82" column="92" selection-start-line="82" selection-start-column="92" selection-end-line="82" selection-end-column="92" />
+          <folding>
+            <marker date="1401420264250" expanded="true" signature="7765:8268" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/participantSubs.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60583943" vertical-offset="508" max-vertical-offset="2856">
-          <caret line="35" column="48" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.085612364" vertical-offset="0" max-vertical-offset="2856">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>

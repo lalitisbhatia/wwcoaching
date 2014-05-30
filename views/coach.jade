@@ -98,12 +98,54 @@ block content
                                     input(type='button', style="float: right;" id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
                                     p(style="color:green") {{ConfirmMessage}}
                                     input(type='button', id="fakeSave" , ng-click='' style="display:none;")
-
-
-
-
-
-
+                //#availability.tab-pane.col-sm-12.col-md-12.main
+                //    .ng-scope
+                //        .container
+                //            .row
+                //                .col-md-12
+                //                    p Please choose your availability for coaching call by checking the date/time slots.
+                //                        | As users schedule calls with you, it'll appear on this calendar
+                //
+                //                    legend
+                //                        p
+                //                    p(style="margin-left:200px;margin-bottom:10px;")
+                //                        |  Week of
+                //                        a(style="display:inline-block;border:thin;padding:4px;" href="" ng-click="updateWeek('prev')")
+                //                            b <
+                //                        b  {{WeekRange}}
+                //                        a(style="display:inline-block;border:thin;padding:4px;" href="" ng-click="updateWeek('next')")
+                //                            b >
+                //
+                //                    ul#ulDates
+                //                        li(ng-repeat="availDate in calendarArray.Dates" ng-init="outerIndex = $index")
+                //                            ul
+                //                                li(ng-repeat="availTime in availDate.Times" ng-init="innerIndex = $index" )
+                //                                    div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;padding-top:15px;") Time
+                //                                    div(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; width:90px; height:50px;padding-top:15px;")
+                //                                        span {{availDate.DateDisp}}
+                //                                    div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="text-align:center;vertical-align:middle;padding-left:10px;padding-right:10px;padding-bottom:4px; background:#ddd;width:80px;height:20px;border-bottom:ridge")
+                //                                        span {{availTime.time}}
+                //                                    div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" style="height:20px;")
+                //                                        input(id="chk{{availTime.timeUTC}}" style="margin-top:0px;" type="checkbox"   ng-click="updateSelection($event,availTime.timeUTC)")
+                //                                        label(for="chk{{availTime.timeUTC}}")
+                //                                    //div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="height:20px;")
+                //                                    //    input(id="chk{{availTime.timeUTC}}" style="margin-top:0px;" type="checkbox"  checked ng-click="updateSelection($event,availTime.timeUTC)")
+                //                                    //    label(for="chk{{availTime.timeUTC}}")
+                //                                    //div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Appt:{{availTime.Appt.FirstName}}
+                //
+                //                    legend
+                //
+                //
+                //
+                //                    input(type='button', style="float: right;" id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
+                //                    p(style="color:green") {{ConfirmMessage}}
+                //                    input(type='button', id="fakeSave" , ng-click='' style="display:none;")
+                //
+                //
+                //
+                //
+                //
+                //
 
         hr
         footer

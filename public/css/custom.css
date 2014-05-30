@@ -192,3 +192,8 @@ label {
     display: block;
     float: left;
 }
+#ulDates li{
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
