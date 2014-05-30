@@ -57,7 +57,7 @@ exports.saveAssm = function(req, res) {helper.getConnection(function(err,db){
             });
         }
         req.session.user.assessment=true;
-        res.render('thanks');
+        res.render('confirmation');
     });
 });
 };
