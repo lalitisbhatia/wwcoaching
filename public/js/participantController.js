@@ -76,14 +76,12 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
     $scope.initSchPage=function(coachId,userId) {
         $log.log('initialized initSchPage');
         $scope.coaches=[];
-
         participantService.getAllCoaches().then(function(data){
             $scope.coaches = data;
 //            console.log($scope.coaches);
         });
 
         //get user information
-
         $scope.user={};
         $scope.user.coachId=coachId;
         $scope.user.userId=userId;
@@ -199,7 +197,6 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
             $scope.confirmCoach='Coach: '+coach.coachName;
             $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
-            $scope.emailData={Date:selDate,Coach:coach.coachId,emailType:"new"};
             alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);
             //trigger emails/text
             schedulingService.sendSchEmails({Date:selDate,Coach:coach.coachId,emailType:"new"}).then(function(data){

@@ -10,7 +10,6 @@ participantModule.factory('participantService',function($http,$log,$q,$rootScope
 
         //this is the method that sets the value of the PilotUser property and calls the method to do the broadcasting
         prepForBroadcast:function(pilotUser) {
-            console.log('prepping for broadcast');
             this.PilotUser = pilotUser;
             this.broadcastUser();
         },
