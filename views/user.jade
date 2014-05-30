@@ -17,7 +17,7 @@ block content
                 .ng-scope
                     .container
                         .row.well.col-md-10
-                            .col-lg-8.well
+                            .col-lg-7.well
                                 form.ng-pristine.ng-valid
 
                                     legend
@@ -26,30 +26,25 @@ block content
                                     div
                                         label Email Opening
                                     div
-                                        textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='emailopening' , ng-model='newnote.emailOpening')
+                                        textarea.ng-pristine.ng-valid(rows='3' cols='60' type='text', name='emailopening' , ng-model='newnote.emailOpening')
                                     div
                                         br
                                         label Action Plan:
-                                    div(ng-repeat="item in ActionPlan.planItems")
-                                        textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text' ng-model="item.planItem")
+                                    ol
+                                        li(ng-repeat="item in ActionPlan.planItems" ng-init="itemIndex = $index")
+                                            textarea.ng-pristine.ng-valid(rows='2' cols='60' type='text' ng-model="item.planItem")
                                     button(type="button" ng-click="addItem()") Add Row
 
-                                    //div
-                                    //    textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action1' , ng-model='newnote.actions')
-                                    //    br
-                                    //    textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action2' , ng-model='newnote.actions2')
-                                    //    br
-                                    //    textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action3' , ng-model='newnote.actions3')
                                     div
                                         br
                                         label Email Closing
                                         div
-                                            textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='emailclosing' , ng-model='newnote.emailClosing')
+                                            textarea.ng-pristine.ng-valid(rows='3' cols='60' type='text', name='emailclosing' , ng-model='newnote.emailClosing')
                                     div
                                         br
                                         label Additional Notes
                                         div
-                                            textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='addlnotes' , ng-model='newnote.addlNotes')
+                                            textarea.ng-pristine.ng-valid(rows='3' cols='60' type='text', name='addlnotes' , ng-model='newnote.addlNotes')
 
 
                                     input(type='hidden' ng-model='newnote.id')
@@ -60,7 +55,7 @@ block content
                                         input(type='button', value='Preview', ng-click='previewEmail()', style="margin-left:200px;;").btn.btn-primary
                                         p
 
-                            .col-lg-3.well
+                            .col-lg-5.well
                                 span
                                     b Name:
                                     | &nbsp;{{FirstName}} {{LastName}}
@@ -86,10 +81,30 @@ block content
                                     | &nbsp;{{MaxSafeWeight}}
                                 br
                                 span
-                                    ul.nav(style='font-size:20px;')
+                                    ul.nav(style='font-size:15px;')
 
                                         li
                                             a(href="#assessment" data-toggle="tab") Assessment
+                            .col-lg-5.well
+                                legend
+                                    b Preview Action Plan Email
+                                br
+                                div
+                                    div From :{{Coach.FirstName}} {{Coach.LastName}}
+                                    div Subject:
+                                    br
+                                    label
+                                    div(style="white-space: pre; word-wrap:break-word") {{newnote.emailOpening}}
+                                    ol
+                                        li(ng-repeat="item in ActionPlan.planItems" style="list-style:number;" )
+                                            div(style="white-space: pre; word-wrap:break-word") {{item.planItem}}
+                                    br
+                                    div(style="white-space: pre; word-wrap:break-word") {{newnote.emailClosing}}
+
+                                    br
+                                    legend
+                                        input(type='button', value='Send', ng-click='savenote()').btn.btn-primary
+
                             .col-lg-12.well
                                 form.ng-pristine.ng-valid
                                     b Previous Sessions
