@@ -295,6 +295,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             $scope.newnote.userid=$scope.User._id;
             $scope.newnote.callid = $scope.notes.length +1;
             $scope.newnote.date=callDate.dateFormat('M-d-Y, H:i');
+            $scope.newnote.ActionPlan = $scope.ActionPlan;
             console.log($scope.newnote) ;
             $scope.notes.push($scope.newnote);
 
@@ -311,7 +312,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
                     $scope.notes[i] = $scope.newnote;
                 }
             }
-            coachDashboardServices.updateCallNotes($scope.newnote);
+            //coachDashboardServices.updateCallNotes($scope.newnote);
             //console.log($scope.newnote);
 
         }
@@ -354,4 +355,20 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
         }
     };
 
+    $scope.ActionPlan = {
+        planItems: [
+            {planItem: ''},
+            {planItem: ''},
+            {planItem: ''}
+        ],
+        option_new: { planItem: '' }
+    };
+
+    $scope.addItem = function() {
+        // add the new option to the model
+        $scope.ActionPlan.planItems.push($scope.ActionPlan.option_new);
+        console.log($scope.ActionPlan.planItems.length);
+        // clear the option.
+        $scope.ActionPlan.option_new = { planItem: '' };
+    }
 }]);

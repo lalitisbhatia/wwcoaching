@@ -26,26 +26,30 @@ block content
                                     div
                                         label Email Opening
                                     div
-                                        textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='emailopening' , ng-model='newnote.emailopening')
+                                        textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='emailopening' , ng-model='newnote.emailOpening')
                                     div
                                         br
                                         label Action Plan:
-                                    div
-                                        textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action1' , ng-model='newnote.action1')
-                                        br
-                                        textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action2' , ng-model='newnote.action2')
-                                        br
-                                        textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action3' , ng-model='newnote.action3')
+                                    div(ng-repeat="item in ActionPlan.planItems")
+                                        textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text' ng-model="item.planItem")
+                                    button(type="button" ng-click="addItem()") Add Row
+
+                                    //div
+                                    //    textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action1' , ng-model='newnote.actions')
+                                    //    br
+                                    //    textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action2' , ng-model='newnote.actions2')
+                                    //    br
+                                    //    textarea.ng-pristine.ng-valid(rows='2' cols='50' type='text', name='action3' , ng-model='newnote.actions3')
                                     div
                                         br
                                         label Email Closing
                                         div
-                                            textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='emailclosing' , ng-model='newnote.emailclosing')
+                                            textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='emailclosing' , ng-model='newnote.emailClosing')
                                     div
                                         br
                                         label Additional Notes
                                         div
-                                            textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='addlnotes' , ng-model='newnote.addlnotes')
+                                            textarea.ng-pristine.ng-valid(rows='3' cols='50' type='text', name='addlnotes' , ng-model='newnote.addlNotes')
 
 
                                     input(type='hidden' ng-model='newnote.id')
@@ -53,6 +57,7 @@ block content
                                     br
                                     legend
                                         input(type='button', value='Save', ng-click='savenote()').btn.btn-primary
+                                        input(type='button', value='Preview', ng-click='previewEmail()', style="margin-left:200px;;").btn.btn-primary
                                         p
 
                             .col-lg-3.well

@@ -234,7 +234,7 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
                 console.log('successfully removed note');
 
                 //now add the note with updated values
-                collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
+                collection.update({'_id':note.userid},{"$push":{"CallNotes":note}}, { upsert: true }, function(err, result) {
                 if (err) {
                     res.send({'error':'error occurred while saving the call note'});
                     } else {
@@ -275,11 +275,11 @@ exports.addCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
     console.log(note);
     db.collection(usersCollName, function(err, collection) {
-        collection.update({'_id':note.userid},{"$push":{"CallNotes":{"callid":note.callid,"date":note.date,"duration":note.duration,"note":note.note}}}, { upsert: true }, function(err, result) {
+        collection.update({'_id':note.userid},{"$push":{"CallNotes":note}}, { upsert: true }, function(err, result) {
             if (err) {
                 res.send({'error':'error occurred while saving the call note'});
             } else {
-                console.log('Success: ' + JSON.stringify(result[0]));
+                console.log('Success: ' + JSON.stringify(result));
                 res.send(result[0]);
             }
         });
