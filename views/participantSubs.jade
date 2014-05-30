@@ -9,7 +9,7 @@ block content
                         .row.well.col-md-9
                             .col-lg-4(style="margin-top:-20px;margin-bottom:-20px;")
                                 h3 Welcome #{user.FirstName}.
-                                p Your Coach is
+                                p Your Coach is &nbsp;
                                     b #{user.CoachName}
                             .col-lg-6(style="border-left:ridge;margin-top:-20px;margin-bottom:-20px;")
                                 h3 Your upcoming appointments
@@ -33,7 +33,7 @@ block content
                         .row.well.col-md-9
                             .col-lg-4(style="border-right:ridge;")
                                 legend
-                                    p #{user.CoachName}'s upcoming availability
+                                    p Your coach's upcoming availability
                                 b(style="color:green;") {{confirmMessage}}
                                     p
                                         b {{confirmCoach}}

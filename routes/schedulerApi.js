@@ -22,6 +22,7 @@ exports.searchAvails = function(req, res) {helper.getConnection(function(err,db)
     var type =req.params.type;
     console.log(type);
     var query={};
+    var today =new Date();
     if(type=='date'){
 
         var inputUTCDate =new Date(req.params.value);
@@ -33,12 +34,12 @@ exports.searchAvails = function(req, res) {helper.getConnection(function(err,db)
         console.log(timeForward.toISOString());
         console.log(timeBack.toISOString());
 
-        query={DateUTC:{$gte:timeBack.toISOString(),$lte:timeForward.toISOString()},User:{$exists:false}};
+        query={DateUTC:{$gte:timeBack.toISOString(),$lte:timeForward.toISOString(),$gte:today.toISOString()},User:{$exists:false}};
 
     }else if(type=='coach'){
         var coachId = req.params.value;
         console.log('coach id = ' + coachId);
-        query={"Coach.coachId":coachId,User:{$exists:false}};
+        query={"Coach.coachId":coachId,User:{$exists:false},DateUTC:{$gte:today.toISOString()}};
     }
 
 //    console.log('Retrieving availability of  coaches for '+ timeForward.toISOString() );
