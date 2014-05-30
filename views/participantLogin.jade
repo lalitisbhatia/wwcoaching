@@ -1,28 +1,10 @@
-doctype html
-html(lang="en" ng-app="participantModule")
-    head
-        link(rel='stylesheet', href='/css/bootstrap.min.css')
-        link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
-        link(rel='stylesheet', href='/css/custom.css')
-        link(rel='stylesheet', href='/css/dashboard.css')
-        link(rel='stylesheet', href='/css/jquery.datetimepicker.css')
-    body
-        .navbar.navbar-inverse.aq-ww-banner.navbar-fixed-top(role='navigation' style='border:none;')
-            .container
-                .navbar-header
-                    button.navbar-toggle.collapsed(type='button', style='border:none;' data-toggle='collapse', data-target='.navbar-collapse')
-                        span.sr-only Toggle navigation
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-                    img(src='/img/ww_logo_white_sm.png' style='padding-top:15px; padding-left:0')
-                .navbar-collapse.collapse(style='border:none;')
+extends layoutVis
 
-
-        block content
-            .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
-                h3(style='padding-left:0px;') Hi Welcome to the WeightWatchers Coaching Pilot
+block content
+    .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
+                h3(style='padding-left:0px;') Hi! Welcome to the WeightWatchers Coaching Pilot
                 p Please login using your WeightWatchers credentials.
+
                 legend
                 p(style='padding-bottom:10px;')
 
@@ -53,17 +35,3 @@ html(lang="en" ng-app="participantModule")
                                     .col-md-4
                                         button#singlebutton.btn.btn-primary( ng-click='getWWDetails()',style="margin-left:110px;") Login
                                 span(style="color:red;" ng-model="errMessage") {{errMessage}}
-
-
-        script(src='/js/jquery.min.js')
-        script(src='/js/bootstrap.min.js')
-        script(src='/js/angular.min.js')
-        script(src='/js/angular-route.min.js')
-        script(src='/js/jquery.datetimepicker.js')
-        script(src='/js/app.js')
-        script(src='/js/adminService.js')
-        script(src='/js/custom.js')
-        script(src='/js/app.js')
-        script(src='/js/participantService.js')
-        script(src='/js/schService.js')
-        script(src='/js/participantController.js')

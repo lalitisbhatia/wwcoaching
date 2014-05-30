@@ -65,6 +65,7 @@ app.get('/getschedule/',function(req,res){
 app.post('/admin',admin.loginAdmin);
 app.post('/coach',admin.loginCoach);
 app.post('/participant',admin.loginParticipant);
+app.post('/registerParticipant',api.addUser); //adding user by admin and self registration by users is handled by api.addUser
 app.get('/logout',admin.logout);
 
 

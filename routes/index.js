@@ -2,6 +2,9 @@
  * GET home page.
  */
 
+var mongo = require("mongodb");
+var helper = require('../public/lib/dbhelper');
+var participantsCollName = 'users';
 
 exports.home = function(req, res,next){
     console.log('arriving at admin user');
@@ -65,15 +68,22 @@ exports.participant = function(req, res,next){
     //console.log(req.session.user);
 
     /****************************************
+     *
       Participant routing:
-        if not auth,
-            login page
-        Else
-            if not assessment taken
-                go to assm page
-            else
-                go to scheduling page
+
+
+            if not auth
+                If not registered,
+                    show registration view
+                else
+                    login view
+            Else
+                if not assessment taken
+                    go to view page
+                else
+                    go to scheduling view
      ***************************************/
+
     if(req.session.auth){
         if(req.session.isParticipant){
             if (req.session.user.assessment){
@@ -88,9 +98,27 @@ exports.participant = function(req, res,next){
                 res.render('assessment',{user:req.session.user});
             }
         }
-    }else{
-        res.render('participantLogin',{firstname:fn,lastname:ln});
+    }else {
+        //If not registered, show registration view
+        helper.getConnection(function (err, db) {
+            db.collection(participantsCollName, function (err, collection) {
+                collection.findOne({'FirstName': fn, 'LastName': ln}, {Username: 0, Password: 0}, function (err, item) {
+                    if (err) {
+                        console.log(err);
+                        res.send('error while looking for participant: ' + err);
+                        return(next(err));
+                    }
+                    console.log(item);
+                    if (!item) {
+                        console.log('rendering registration');
+                        res.render('participantRegister', {firstname: fn, lastname: ln});
+                    } else {
+                        console.log('rendering login');
+                        res.render('participantLogin', {firstname: fn, lastname: ln});
+                    }
+                })
+            })
+        })
     }
+
 };
-
-

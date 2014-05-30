@@ -162,7 +162,7 @@ exports.addUser = function(req, res) {helper.getConnection(function(err,db){
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('Success: ' + JSON.stringify(result[0]));
-                res.send(result[0]);
+                res.send('success');
             }
         });
     });

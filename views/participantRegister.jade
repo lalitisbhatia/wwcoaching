@@ -1,0 +1,34 @@
+extends layoutVis
+block content
+    .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
+        h3(style='padding-left:0px;') Hi Welcome to the WeightWatchers Coaching Pilot
+        p Please register with the coaching portal.
+        legend
+        p(style='padding-bottom:10px;')
+        .row(ng-controller="ParticipantRegisterController" ng-init="initApp()")
+            .col-lg-4.well
+                h2(style="text-align:center;") Register
+                legend
+                form.form-horizontal.ng-pristine
+                    fieldset
+                        // Form Name
+                        .form-group(style="margin-bottom:5px;")
+                            label.col-md-4.control-label(for='firstname') First Name
+                            .col-md-4
+                                input#textinput.form-control(style="width:160px;" type='text', name='firstname', ng-model='newuser.FirstName')
+                        .form-group(style="margin-bottom:5px;")
+                            label.col-md-4.control-label(for='lastname') Last Name
+                            .col-md-4
+                                input#textinput.form-control(style="width:160px;" type='text', name='lastname', ng-model='newuser.LastName')
+                        .form-group(style="margin-bottom:5px;")
+                            label.col-md-4.control-label(for='email') Email
+                            .col-md-4
+                                input#textinput.form-control(style="width:160px;" type='text', name='email', ng-model='newuser.Email')
+                        .form-group(style="margin-bottom:5px;")
+                            label.col-md-4.control-label(for='phone') Phone
+                            .col-md-4
+                                input#textinput.form-control(style="width:160px;" type='text', name='phone', ng-model='newuser.Phone')
+                        .form-group
+                            label.col-md-4.control-label(for='save')
+                            .col-md-4
+                                button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='saveuser()') Save

@@ -36,6 +36,25 @@ participantModule.factory('participantService',function($http,$log,$q,$rootScope
                 });
 
         },
+        addNewUser:function(user){
+            return $http({
+                method:'POST',
+                url: '/registerParticipant',
+                data: user
+            })
+                .success(function (d, status, headers, config) {
+                    //console.log(d);
+                })
+                .error(function(status, headers, config){
+                    console.log('failed to save user:' + status);
+                })
+                .then(function(response){
+                    var results = [];
+                    results=response.data;
+                    //console.log(results);
+                    return results;
+                })
+        },
         //method to get a specific user's profile
         getUserProfile:function(wwLoginInfo,pilotLoginInfo){
             var deferred = $q.defer();

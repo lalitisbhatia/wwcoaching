@@ -35,6 +35,43 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
     };
 }]);
 
+participantModule.controller('ParticipantRegisterController', ['$scope','$http','$routeParams','$log','participantService', function($scope,$http,$routeParams,$log,participantService) {
+    $scope.initApp=function(){
+        $log.log('participantController initialized');
+    };
+
+    $scope.saveuser = function() {
+        console.log($scope.newuser);
+        if($scope.newuser._id == null) {
+            participantService.addNewUser($scope.newuser).then(function(data){
+                console.log('logging return from add user');
+                console.log(data);
+            });
+            //console.log($scope.users);
+        } else {
+            console.log('updating user');
+
+            //for existing contact, find this user using id
+            //and update it.
+            for(var i in $scope.users) {
+                if($scope.users[i]._id == $scope.newuser._id) {
+                    $scope.users[i] = $scope.newuser;
+                }
+            }
+            console.log($scope.newuser);
+            AdminService.updateUser($scope.newuser).then(function(data){
+                console.log('logging return from updating user');
+                console.log(data);
+            });
+        }
+        //  clear the add contact form
+        $scope.newuser = {};
+
+    };
+
+
+}]);
+
 participantModule.controller('ParticipantSchController', ['$scope','$http','$routeParams','$log','participantService','schedulingService', function($scope,$http,$routeParams,$log,participantService,schedulingService) {
     $scope.initSchPage=function(coachId,userId) {
         $log.log('initialized initSchPage');
