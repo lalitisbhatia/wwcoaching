@@ -299,7 +299,12 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             console.log($scope.newnote) ;
             $scope.notes.push($scope.newnote);
 
-            coachDashboardServices.saveCallNotes($scope.newnote);
+            coachDashboardServices.saveCallNotes($scope.newnote).then(function(data){
+                console.log('return from save note');
+                console.log(data);
+                //now send action plan email
+            });
+
 
             console.log($scope.notes);
         } else {
