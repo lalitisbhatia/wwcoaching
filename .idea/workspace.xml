@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\coachingControllers.js" afterPath="$PROJECT_DIR$/public/js/old/coachingControllers.js" />
-      <change type="MOVED" beforePath="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\coachingService.js" afterPath="$PROJECT_DIR$/public/js/old/coachingService.js" />
+      <change type="MOVED" beforePath="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\ui.bootstrap.js" afterPath="$PROJECT_DIR$/public/js/old/ui.bootstrap.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -114,8 +113,8 @@
       <file leaf-file-name="schController.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/schController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.03858521" vertical-offset="4176" max-vertical-offset="6096">
-              <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6559486" vertical-offset="4176" max-vertical-offset="6096">
+              <caret line="191" column="42" selection-start-line="191" selection-start-column="42" selection-end-line="191" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -744,7 +743,11 @@
       <created>1401651514248</created>
       <updated>1401651514248</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="    cleanup controller and services files and organize into folders">
+      <created>1401651555099</created>
+      <updated>1401651555099</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -854,7 +857,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/ui.bootstrap.js">
+    <entry file="file://$PROJECT_DIR$/public/js/old/ui.bootstrap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21749137" vertical-offset="13827" max-vertical-offset="91176">
           <caret line="590" column="13" selection-start-line="590" selection-start-column="13" selection-end-line="590" selection-end-column="13" />
@@ -1210,8 +1213,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/schController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03858521" vertical-offset="4176" max-vertical-offset="6096">
-          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6559486" vertical-offset="4176" max-vertical-offset="6096">
+          <caret line="191" column="42" selection-start-line="191" selection-start-column="42" selection-end-line="191" selection-end-column="42" />
           <folding />
         </state>
       </provider>
