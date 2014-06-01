@@ -68,8 +68,13 @@ participantModule.factory('participantService',function($http,$log,$q,$rootScope
                 },
                 processData: false
             })
+                .error(function(status, headers, config){
+                    return ('failed validate WW credentials:' + status);
+
+                })
                 .then(function(response){
                     userProfile.wwProfile =response.data.UserInformation;
+                    userProfile.LoginSuccessful =response.data.LoginSuccessful;
                     //console.log('logging user profile with wwProfile');
                     //console.log(userProfile.wwProfile );
                     if(response.data.LoginSuccessful) {
@@ -91,7 +96,7 @@ participantModule.factory('participantService',function($http,$log,$q,$rootScope
                         return deferred.promise;
                     }else
                     {
-                        return "Pilot user not found";
+                        return response.data;
                     }
                 })
 

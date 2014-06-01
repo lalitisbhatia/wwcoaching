@@ -26,10 +26,14 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
         }
         console.log(pilotUser);
         participantService.getUserProfile(loginInfo,pilotUser).then(function(data){
-            $scope.wwProfile = data.wwProfile;
-            $scope.pilotUser= data.pilotUser;
+            if(data.LoginSuccessful){
+                $scope.wwProfile = data.wwProfile;
+                $scope.pilotUser= data.pilotUser;
+                window.location.replace("/participant/"+$scope.firstname+"/"+$scope.lastname);
+            }else{
+                $scope.errMessage="Failed to validate WW credentials. Please try again"
+            }
 
-            window.location.replace("/participant/"+$scope.firstname+"/"+$scope.lastname);
         });
 
     };
