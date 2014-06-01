@@ -95,7 +95,7 @@ coachingModule.factory('wwCoachingService',function($http,$log,$q,$rootScope){
     };
 
 //##############################################################
-//############## COACH Related Services  ####################
+//############## COACH Related services  ####################
 //##############################################################    
     var coachDetails={};
     myService.getCoachDetails = function(){

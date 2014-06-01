@@ -41,7 +41,7 @@ coachingModule.controller('UserDetailsController', ['$scope','$http','$routePara
 
 
 //##############################################################
-//############## COACH Related Controllers  ####################
+//############## COACH Related controllers  ####################
 //##############################################################
 
 coachingModule.controller('CoachController', ['$scope','$http','$log','wwCoachingService', function($scope,$http,$log,wwCoachingService) {
@@ -74,7 +74,7 @@ coachingModule.controller('UsersController',['$scope','$http','$log','wwCoaching
 
 
 //##############################################################
-//############## USER Related Controllers  ####################
+//############## USER Related controllers  ####################
 //##############################################################
 
 /***************************************************************

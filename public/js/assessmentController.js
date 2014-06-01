@@ -1,8 +1,9 @@
 participantModule.controller('assessmentController', ['$scope','$http','$routeParams','$log', function($scope,$http,$routeParams,$log) {
     $scope.initApp=function(){
         console.log('assessment initialized');
-        //Define scope variables
         $scope.formInfo = {};
+        console.log('test');
+
     };
 
     $scope.saveAssessment= function(req){
