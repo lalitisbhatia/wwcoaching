@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\ui.bootstrap.js" afterPath="$PROJECT_DIR$/public/js/old/ui.bootstrap.js" />
+      <change type="MOVED" beforePath="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\jquery.min.js" afterPath="$PROJECT_DIR$/public/js/old/jquery.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -747,7 +747,11 @@
       <created>1401651555099</created>
       <updated>1401651555099</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="    cleanup controller and services files and organize into folders">
+      <created>1401651634772</created>
+      <updated>1401651634772</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1091,7 +1095,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/jquery.min.js">
+    <entry file="file://$PROJECT_DIR$/public/js/old/jquery.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
