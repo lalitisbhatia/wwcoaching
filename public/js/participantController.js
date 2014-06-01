@@ -46,6 +46,7 @@ participantModule.controller('ParticipantRegisterController', ['$scope','$http',
             participantService.addNewUser($scope.newuser).then(function(data){
                 console.log('logging return from add user');
                 console.log(data);
+                window.location.reload(true);
             });
             //console.log($scope.users);
         } else {
