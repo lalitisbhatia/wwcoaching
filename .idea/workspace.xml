@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c0245e70-bc8b-4e98-a000-0f7bac21c3af" name="Default" comment="">
+      <change type="MOVED" beforePath="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\adminService_Old.js" afterPath="$PROJECT_DIR$/public/js/old/adminService_Old.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/coachingControllers.js" afterPath="$PROJECT_DIR$/public/js/coachingControllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/layoutVis.jade" afterPath="$PROJECT_DIR$/views/layoutVis.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/participantController.js" afterPath="$PROJECT_DIR$/public/js/participantController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/participantFirst.jade" afterPath="$PROJECT_DIR$/views/participantFirst.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/participantLogin.jade" afterPath="$PROJECT_DIR$/views/participantLogin.jade" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="wwcoaching.iws" />
@@ -285,6 +281,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wwcoaching" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wwcoaching" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="old" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -309,9 +327,9 @@
       <recent name="C:\Users\lalit\WebstormProjects\wwcoaching\views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\old" />
       <recent name="C:\Users\lalit\WebstormProjects\wwcoaching\public\js" />
       <recent name="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\SERVICES" />
-      <recent name="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\old" />
       <recent name="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\services" />
       <recent name="C:\Users\lalit\WebstormProjects\wwcoaching\public\js\controllers" />
     </key>
@@ -718,7 +736,11 @@
       <created>1401649637901</created>
       <updated>1401649637901</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="    cleanup controller and services files and organize into folders">
+      <created>1401651496255</created>
+      <updated>1401651496255</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
