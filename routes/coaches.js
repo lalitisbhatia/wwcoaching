@@ -1,5 +1,5 @@
 //################################################
-//##### services related to coach info ###########
+//##### SERVICES related to coach info ###########
 //################################################
 var mongo = require("mongodb");
 var helper = require('../public/lib/dbhelper');
@@ -10,7 +10,7 @@ var coachesCollName = 'coaches';
 
 
 //################################################
-//##### services methods ###########
+//##### SERVICES methods ###########
 //################################################
 exports.getAllCoaches = function(req, res) {helper.getConnection(function(err,db){
     db.collection(coachesCollName, function(err, collection) {

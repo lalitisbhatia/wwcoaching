@@ -70,9 +70,9 @@ participantModule.factory('schedulingService',function($http,$log,$q,$rootScope)
                 url: '/saveAppt',
                 data: appt
             })
-            .then(function(response){
-                return(response.data);
-            });
+                .then(function(response){
+                    return(response.data);
+                });
         },
         sendSchEmails:function(emailData){
             return $http({

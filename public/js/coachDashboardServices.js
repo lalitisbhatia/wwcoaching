@@ -2,45 +2,45 @@
 coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$rootScope){
 
     var myService ={
-       //method for coach details - this will also  have the associated users
+        //method for coach details - this will also  have the associated users
 
-       //method to get a specific user's profile
-       getUserProfile:function(){
-           var deferred = $q.defer();
-           var userProfile={};
-           var path = '';
-           path=window.location.pathname;
-           path =path.replace('getuser','users');
-           return $http({
-               method: 'GET',
-               url: path
-           })
-               .then(function(response){
-                   userProfile.pilotProfile =response.data;
-                   //console.log('logging user profile with pilot profile');
-                   //console.log(userProfile.pilotProfile );
-                   var loginInfo = { "U": response.data.Username, "P": response.data.Password, "R": "true" };
+        //method to get a specific user's profile
+        getUserProfile:function(){
+            var deferred = $q.defer();
+            var userProfile={};
+            var path = '';
+            path=window.location.pathname;
+            path =path.replace('getuser','users');
+            return $http({
+                method: 'GET',
+                url: path
+            })
+                .then(function(response){
+                    userProfile.pilotProfile =response.data;
+                    //console.log('logging user profile with pilot profile');
+                    //console.log(userProfile.pilotProfile );
+                    var loginInfo = { "U": response.data.Username, "P": response.data.Password, "R": "true" };
 
-                   //console.log(response.data);
-                   $http({
-                       method:'POST',
-                       url: 'https://mobile.weightwatchers.com/authservice.svc/login',
-                       data: loginInfo
-                   })
-                       .success(function(data) {
-                           //$log.info("Successfully retrieved user  WW info.");
-                           //$log.info(data);
-                       })
-                       .then(function(response){
-                           userProfile.wwProfile = response.data.UserInformation;
-                           //console.log('logging user profile with ww profile');
-                           //console.log(userProfile);
-                           deferred.resolve(userProfile);
-                       });
-                   return deferred.promise;
-               });
+                    //console.log(response.data);
+                    $http({
+                        method:'POST',
+                        url: 'https://mobile.weightwatchers.com/authservice.svc/login',
+                        data: loginInfo
+                    })
+                        .success(function(data) {
+                            //$log.info("Successfully retrieved user  WW info.");
+                            //$log.info(data);
+                        })
+                        .then(function(response){
+                            userProfile.wwProfile = response.data.UserInformation;
+                            //console.log('logging user profile with ww profile');
+                            //console.log(userProfile);
+                            deferred.resolve(userProfile);
+                        });
+                    return deferred.promise;
+                });
 
-       },
+        },
         getNestedDataBetter: function (){
             //create your deferred promise.
             var deferred = $q.defer();
@@ -71,23 +71,23 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
             //return your promise to the user.
             return deferred.promise;
         },
-       getCoachInfo:function(){
-           return $http({
-               method: 'GET',
-               url: '/coachinfo'
-           })
-               .success(function(data) {
-                   $log.info("Successfully retrieved coach info.");
-               })
-               .error(function(status, headers, config){
-                   $log.log('failed to get coach info :' + status);
-               })
-               .then(function(response) {
-                   //console.log(response.data);
-                   return response.data;
-               });
+        getCoachInfo:function(){
+            return $http({
+                method: 'GET',
+                url: '/coachinfo'
+            })
+                .success(function(data) {
+                    $log.info("Successfully retrieved coach info.");
+                })
+                .error(function(status, headers, config){
+                    $log.log('failed to get coach info :' + status);
+                })
+                .then(function(response) {
+                    //console.log(response.data);
+                    return response.data;
+                });
         },
-       getCoachUsers:function(){
+        getCoachUsers:function(){
             return $http({
                 method: 'GET',
                 url: '/cusers'
@@ -102,8 +102,8 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                     //console.log(response.data);
                     return response.data;
                 });
-       },
-       getCoachSchedule:function(){
+        },
+        getCoachSchedule:function(){
             return $http({
                 method: 'GET',
                 url: '/getCoachAvails'
@@ -118,7 +118,7 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                     //console.log(response.data);
                     return response.data;
                 });
-       },
+        },
         getCoachAppts: function (coachId) {
             return $http({
                 method: 'GET',
@@ -135,7 +135,7 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                 });
 
         },
-       saveCoachSchedule:function(schedule){
+        saveCoachSchedule:function(schedule){
             return $http({
                 method:'POST',
                 url: '/addCoachAvails',
@@ -151,7 +151,7 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                     //console.log(response.data);
                     return response.data;
                 });
-       },
+        },
         saveCallNotes:function(newnote){
             return $http({
                 method:'POST',

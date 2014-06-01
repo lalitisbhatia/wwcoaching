@@ -9,7 +9,7 @@ var usersCollName = 'users';
 
 
 //################################################
-//##### services methods ###########
+//##### SERVICES methods ###########
 //################################################
 exports.getAllUsers = function(req, res) {helper.getConnection(function(err,db){
     db.collection(usersCollName, function(err, collection) {

@@ -1,5 +1,5 @@
 //###############################################################################
-//##### services related to dasboard admin and coach and participant auth #######
+//##### SERVICES related to dasboard admin and coach and participant auth #######
 //###############################################################################
 
 var mongo = require("mongodb");
