@@ -179,9 +179,9 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         var selectedDate = new Date(selDate);
 
 
-        var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has booked a call with you  for " +selectedDate.dateFormat('D,M-d, H:iA');
-        var msgUser="Hi "+$scope.userName + " ,\n You have booked a call with " +$scope.coachName+" for " +selectedDate.dateFormat('D,M-d, H:iA');
-        var subj='Coaching session booked';
+        var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has booked a call with you for " +selectedDate.dateFormat('D,M-d, H:iA T');
+        var msgUser="Hi "+$scope.user.FirstName + " ,\n Your coaching call with " +$scope.coachName+" is scheduled for " +selectedDate.dateFormat('D,M d, H:iA T')+'. Have a great session';
+        var subj='Your Coaching session is booked';
 
         console.log(selectedDate);
         console.log(coach);
@@ -196,7 +196,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
 
             $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
             $scope.confirmCoach='Coach: '+coach.coachName;
-            $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
+            $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA T');
 
             $scope.setEmailOptions(subj,msgUser,msgCoach);
             console.log($scope.EmailOptions);
