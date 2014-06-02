@@ -125,7 +125,7 @@ exports.getUserById = function(req, res) {helper.getConnection(function(err,db){
     var id = req.params.id.toString();
     console.log('Retrieving user: ' + id);
     db.collection(usersCollName, function(err, collection) {
-        collection.findOne({'_id':id},{Password:0}, function(err, item) {
+        collection.findOne({'_id':id}, function(err, item) {
             console.log(item);
             res.send(item);
         });

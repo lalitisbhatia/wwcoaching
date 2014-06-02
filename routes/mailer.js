@@ -76,6 +76,11 @@ exports.sendMail = function(req,res){
 
 };
 
+exports.sendActionPlan = function(req,res){
+    console.log('inside sendActionPlan');
+    console.log(req.body);
+};
+
 function createMailOptions(subject,emailTo,emailFrom,message){
     var mailOptions={};
 

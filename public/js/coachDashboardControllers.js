@@ -288,7 +288,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
     $scope.savenote = function() {
         console.log($scope.User);
         var callDate = new Date();
-
+        $scope.ActPlanEmail={};
         if($scope.newnote.callid == null) {
 
             //$scope.newnote.date=$('#pickdatetime').val(); //hack because the ng-model does not bind with datepicker
@@ -298,11 +298,16 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             $scope.newnote.ActionPlan = $scope.ActionPlan;
             console.log($scope.newnote) ;
             $scope.notes.push($scope.newnote);
-
+            $scope.ActPlanEmail= {EmailOpening:$scope.newnote.emailOpening,ActionPlan:$scope.newnote.ActionPlan,EmailClosing:$scope.newnote.emailClosing};
+            console.log($scope.ActPlanEmail);
             coachDashboardServices.saveCallNotes($scope.newnote).then(function(data){
                 console.log('return from save note');
                 console.log(data);
                 //now send action plan email
+
+                coachDashboardServices.emailActionPlan($scope.ActPlanEmail).then(function(data){
+                    console.log('sending action plan email');
+                });
 
             });
 

@@ -174,10 +174,12 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         $scope.userAppts = data;
     };
 
+    /***************************************
+    ** method to save user appts
+    ****************************************/
     $scope.saveUserAppt = function(coach,selDate) {
         console.log('calling save Appt');
         var selectedDate = new Date(selDate);
-
 
         var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has booked a call with you  for " +selectedDate.dateFormat('D,M-d, H:iA');
         var msgUser="Hi "+$scope.userName + " ,\n You have booked a call with " +$scope.coachName+" for " +selectedDate.dateFormat('D,M-d, H:iA');
@@ -210,11 +212,13 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         });
     };
 
+    /***************************************
+     ** method to save cancel appts
+     ****************************************/
     $scope.cancelUserAppt = function(coach,selDate) {
         console.log('calling cancel Appt');
         var selectedDate = new Date(selDate);
         //console.log(selectedDate);
-        //console.log(coach);
 
         var appt = {Date:selDate,Coach:coach};
         console.log(appt);

@@ -120,6 +120,7 @@ app.post('/updateCallNote',admin.checkCoach, api.updateCallNote);
 app.post('/deleteCallNote',admin.checkCoach, api.deleteCallNote);
 
 app.post('/email',mailer.sendMail);
+app.post('/emailActionPlan',mailer.sendActionPlan);
 
 /****************************************************
  This section is for the emailing
