@@ -6,7 +6,7 @@ var nodemailer = require("nodemailer");
 
 exports.sendMail = function(req,res){
     console.log('inside coach mailing program - printing req.body');
-    //console.log(req.body);
+    console.log(req.body);
     //var coachId = req.body.EmailOptions;
     var date = new Date(req.body.Date);
 

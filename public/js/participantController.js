@@ -61,6 +61,9 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
     $scope.initSchPage=function(coachId,userId) {
         $log.log('initialized initSchPage');
 
+        console.log('coachId: '+coachId);
+        console.log('userId: '+ userId);
+
         $scope.EmailOptions={};
         $scope.coaches=[];
            participantService.getAllCoaches().then(function(data){
@@ -70,20 +73,21 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
 
         //get user's coach information
         $scope.coach={};
-        participantService.getCoachInfo(coachId).then(function(data){
-            $scope.coach = data;
-            $scope.coachName= $scope.coach.FirstName + ' '+$scope.coach.LastName;
-        });
+        //if this is the first time, the user does not have a coach so coachId is undefined
+        if(coachId) {
+            participantService.getCoachInfo(coachId).then(function (data) {
+                $scope.coach = data;
+                $scope.coachName = $scope.coach.FirstName + ' ' + $scope.coach.LastName;
+            });
+        }
 
         //get user information
         $scope.user={};
         participantService.getUserInfo(userId).then(function(data){
             $scope.user= data;
             $scope.userName= $scope.user.FirstName + ' '+$scope.user.LastName;
-
-
+            console.log($scope.user);
         });
-
 
         // get availability for the user's coach by default on page load
         if(coachId){
@@ -177,15 +181,16 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
     $scope.saveUserAppt = function(coach,selDate) {
         console.log('calling save Appt');
         var selectedDate = new Date(selDate);
-
-
-        var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has booked a call with you for " +selectedDate.dateFormat('D,M-d, H:iA T');
-        var msgUser="Hi "+$scope.user.FirstName + " ,\n Your coaching call with " +$scope.coachName+" is scheduled for " +selectedDate.dateFormat('D,M d, H:iA T')+'. Have a great session';
+        var msgCoach="Hi "+coach.coachName +",\n "+ $scope.userName +" has booked a call with you for " +selectedDate.dateFormat('D,M-d, H:iA T');
+        var msgUser="Hi "+$scope.user.FirstName + " ,\n Your coaching call with " +coach.coachName+" is scheduled for " +selectedDate.dateFormat('D,M d, H:iA T')+'. Have a great session';
         var subj='Your Coaching session is booked';
+        $scope.setEmailOptions(coach.coachId,coach.coachEmail,subj,msgUser,msgCoach);
+        console.log($scope.EmailOptions);
 
         console.log(selectedDate);
-        console.log(coach);
 
+        console.log(coach);
+//        console.log($scope.coach);
         var appt = {Date:selDate,Coach:coach};
         console.log(appt);
 
@@ -198,8 +203,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.confirmCoach='Coach: '+coach.coachName;
             $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA T');
 
-            $scope.setEmailOptions(subj,msgUser,msgCoach);
-            console.log($scope.EmailOptions);
+
             alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);
 
             //trigger emails/text
@@ -242,10 +246,10 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         });
     };
 
-    $scope.setEmailOptions = function(subj,userMsg,coachMsg) {
+    $scope.setEmailOptions = function(coachId,coachEmail,subj,userMsg,coachMsg) {
         $scope.EmailOptions.userEmail = $scope.user.Email;
-        $scope.EmailOptions.coachEmail = $scope.coach.Email;
-        $scope.EmailOptions.coachId=$scope.coach._id;
+        $scope.EmailOptions.coachEmail = coachEmail;
+        $scope.EmailOptions.coachId=coachId;
         $scope.EmailOptions.subject = subj;
         $scope.EmailOptions.userMsg = userMsg;
         $scope.EmailOptions.coachMsg = coachMsg;
