@@ -3,7 +3,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
     /*********************************************************************/
     $scope.initApp=function() {
         $log.log('coachDashBoardController initialized');
-
+        $scope.DISPLAY_DAYS = 7;
         /*********************************************************************
          *** on init, get coach info, users for the coach and coach schedule
          *********************************************************************/
@@ -51,6 +51,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
      The date is based on the current date and time starts with 9:00am
      *****************************************************************/
     $scope.setupCalendar = function(){
+
         // Define display params - based on these values, we'll setup the calendar display
         // 0 empty, 1 - Coach Available,, 2 - appt booked
 
@@ -71,7 +72,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
 
         //console.log('Starting calendar setup with start date - ' +$scope.startdate);
 
-        $scope.weekEndDate = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+13);
+        $scope.weekEndDate = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+$scope.DISPLAY_DAYS-1);
         //console.log( $scope.weekEndDate.dateFormat('d Y'));
         $scope.WeekRange=$scope.startdate.dateFormat('M d - ') +  $scope.weekEndDate.dateFormat('M d, Y');
 
@@ -80,7 +81,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
 
         var dispTime = 0;
         var dispDate = 0;
-        for(var i =0;i<=14;i++ ){
+        for(var i =0;i<=$scope.DISPLAY_DAYS;i++ ){
             var dt = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+i,$scope.startdate.getHours() ,$scope.startdate.getMinutes());
 
             //console.log(dt);
@@ -164,12 +165,12 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
         console.log('inside update week');
         if(action=='next'){
             //console.log('select next week');
-            $scope.startdate.setDate($scope.startdate.getDate()+15);
+            $scope.startdate.setDate($scope.startdate.getDate()+$scope.DISPLAY_DAYS+1);
             //console.log($scope.startdate);
         }
         if(action=='prev'){
             //console.log('select prev week');
-            $scope.startdate.setDate($scope.startdate.getDate()-13);
+            $scope.startdate.setDate($scope.startdate.getDate()-$scope.DISPLAY_DAYS +1);
             //console.log($scope.startdate);
         }
 

@@ -77,25 +77,25 @@ block content
                                                     table
                                                         tr(ng-repeat="availTime in availDate.Times" ng-init="innerIndex = $index")
                                                             td
-                                                                div(ng-if= "outerIndex==0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; height:50px;50px;padding-top:15px;") Time
+                                                                div#calCornerTop(ng-if= "outerIndex==0 && innerIndex==0" ) Time
 
-                                                                div#rowHead(ng-if= "outerIndex>0 && innerIndex==0" style="padding:0.5em;background:#333;color:#fff; width:90px; height:50px;padding-top:15px;")
+                                                                div#calRowHead(ng-if= "outerIndex>0 && innerIndex==0" )
                                                                     p {{availDate.DateDisp}}
-                                                                div#colHead(ng-if= "outerIndex==0 && innerIndex>0" style="text-align:center;vertical-align:middle;padding-left:10px;padding-right:10px;padding-bottom:4px; background:#ddd;width:80px;height:20px;border-bottom:ridge")
+                                                                div#calColHead(ng-if= "outerIndex==0 && innerIndex>0")
                                                                     p {{availTime.time}}
-                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" style="height:20px;")
-                                                                    input(id="chk{{availTime.timeUTC}}" style="margin-top:0px;" type="checkbox"   ng-click="updateSelection($event,availTime.timeUTC)")
+                                                                div#calCell(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" )
+                                                                    input(id="chk{{availTime.timeUTC}}"  style="margin-left:30px;" type="checkbox"   ng-click="updateSelection($event,availTime.timeUTC)")
                                                                     label(for="chk{{availTime.timeUTC}}")
-                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" style="height:20px;")
-                                                                    input(id="chk{{availTime.timeUTC}}" style="margin-top:0px;" type="checkbox"  checked ng-click="updateSelection($event,availTime.timeUTC)")
+                                                                div#calCell(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" )
+                                                                    input(id="chk{{availTime.timeUTC}}" style="margin-left:30px;" type="checkbox"  checked ng-click="updateSelection($event,availTime.timeUTC)")
                                                                     label(for="chk{{availTime.timeUTC}}")
-                                                                div(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" style="padding:4px;height:20px;") Appt:{{availTime.Appt.FirstName}}
+                                                                div#calCell(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" ) Appt:{{availTime.Appt.FirstName}}
 
                                         legend
 
+                                    br
 
-
-                                    input(type='button', style="float: right;" id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
+                                    input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
                                     p(style="color:green") {{ConfirmMessage}}
                                     input(type='button', id="fakeSave" , ng-click='' style="display:none;")
                 //#availability.tab-pane.col-sm-12.col-md-12.main
