@@ -251,7 +251,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
 coachDashboardModule.controller('userDetailsController',['$scope','$http','$log','coachDashboardServices', function($scope,$http,$log,coachDashboardServices) {
     $scope.initApp=function() {
         $log.log('userDetailsController initialized');
-
+        $scope.htmlMsg="";
         // get the user details first
         coachDashboardServices.getUserProfile().then(function (data) {
             //$scope.data = wwCoachingService.userProfile();
@@ -289,6 +289,14 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
     $scope.savenote = function() {
         console.log($scope.User);
         var callDate = new Date();
+        $scope.htmlMsg = $('#emailHtml').html();
+        $scope.ActionPlanEmail={};
+        $scope.ActionPlanEmail.Subj="Your Action Plan for the coming week";
+        $scope.ActionPlanEmail.Message=$scope.htmlMsg;
+        //console.log($scope.htmlMsg);
+        $scope.ActionPlanEmail.userEmail = $scope.User.Email;
+        $scope.ActionPlanEmail.coachEmail = $scope.Coach.Email;
+        $scope.ActionPlanEmail.coachId=$scope.Coach._id;
 
         if($scope.newnote.callid == null) {
 
@@ -304,6 +312,11 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
                 console.log('return from save note');
                 console.log(data);
                 //now send action plan email
+
+
+                coachDashboardServices.emailActionPlan($scope.ActionPlanEmail).then(function(data){
+
+                });
 
             });
 

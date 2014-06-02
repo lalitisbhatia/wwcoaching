@@ -92,19 +92,19 @@ block content
                                     div From :{{Coach.FirstName}} {{Coach.LastName}}
                                     div Subject: Your Action Plan
                                     br
-                                    label
-                                    div(style="white-space: pre; word-wrap:break-word") {{newnote.emailOpening}}
-                                    ol
-                                        li(ng-repeat="item in ActionPlan.planItems" style="list-style:number;" )
-                                            div(style="white-space: pre; word-wrap:break-word") {{item.planItem}}
-                                    br
-                                    div(style="white-space: pre; word-wrap:break-word") {{newnote.emailClosing}}
-                                    br
-                                    div Warmly,
+                                    div#emailHtml
+                                        p(style="white-space: pre; word-wrap:break-word") {{newnote.emailOpening}}
+                                        ol
+                                            li(ng-repeat="item in ActionPlan.planItems" style="list-style:number;" )
+                                                div(style="white-space: pre; word-wrap:break-word") {{item.planItem}}
                                         br
-                                        span {{Coach.FirstName}}
+                                        p(style="white-space: pre; word-wrap:break-word") {{newnote.emailClosing}}
+                                        br
+                                        div Warmly,
+                                            br
+                                            span {{Coach.FirstName}}
 
-                                    br
+                                        br
                                     input(type='button', value='Send', ng-click='savenote()').btn.btn-primary
 
                             .col-lg-12.well

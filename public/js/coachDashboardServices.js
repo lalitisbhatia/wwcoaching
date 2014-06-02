@@ -218,6 +218,16 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                     //console.log(response.data);
                     return response.data;
                 });
+        },
+        emailActionPlan:function(emailData){
+            return $http({
+                method:'POST',
+                url: '/emailActionPlan',
+                data: emailData
+            })
+                .then(function(response){
+                    return(response.data);
+                });
         }
 
 
