@@ -114,7 +114,7 @@ exports.participant = function(req, res,next){
                         res.render('participantRegister', {firstname: fn, lastname: ln});
                     } else {
                         console.log('rendering login');
-                        res.render('participantLogin', {firstname: fn, lastname: ln,loginMsg:true});
+                        res.render('participantLogin', {firstname: fn, lastname: ln});
                     }
                 })
             })

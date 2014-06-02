@@ -100,6 +100,38 @@ participantModule.factory('participantService',function($http,$log,$q,$rootScope
                     }
                 })
 
+        },
+        getCoachInfo:function(id){
+            return $http({
+                method: 'GET',
+                url: '/coaches/'+id
+            })
+                .success(function(data) {
+                    $log.info("Successfully retrieved coach info.");
+                })
+                .error(function(status, headers, config){
+                    $log.log('failed to get coach info :' + status);
+                })
+                .then(function(response) {
+                    //console.log(response);
+                    return response.data;
+                });
+        },
+        getUserInfo:function(id){
+            return $http({
+                method: 'GET',
+                url: '/users/'+id
+            })
+                .success(function(data) {
+                    $log.info("Successfully retrieved user info.");
+                })
+                .error(function(status, headers, config){
+                    $log.log('failed to get user info :' + status);
+                })
+                .then(function(response) {
+                    //console.log(response);
+                    return response.data;
+                });
         }
     };
 

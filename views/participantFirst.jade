@@ -13,7 +13,7 @@ block content
                                         fieldset
                                             // Form Name
                                             legend Search for a coach
-                                            i (need copy from Alisha)
+                                            i (need copy from Alisha
                                             p Select a date/ time or Coach Name to search
                                             // Text input
                                             .form-group
@@ -29,11 +29,11 @@ block content
                                                         option(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']"  value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
                                         p {{SearchMessage}}
 
-                                        b(style="color:green;") {{confirmMessage}}
+                                        //b(style="color:green;") {{confirmMessage}}
                                         p
-                                            b {{confirmCoach}}
+                                          //  b {{confirmCoach}}
                                         p
-                                            b {{confirmDate}}
+                                            //b {{confirmDate}}
                                         fieldset(style="padding:10px;")
                                             // Form Name
 

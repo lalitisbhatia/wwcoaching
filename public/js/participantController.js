@@ -1,6 +1,7 @@
-participantModule.controller('ParticipantLoginController', ['$scope','$http','$routeParams','$log','participantService', function($scope,$http,$routeParams,$log,participantService) {
+participantModule.controller('ParticipantLoginController', ['$scope','$http','$routeParams','$log','participantService','schedulingService', function($scope,$http,$routeParams,$log,participantService,schedulingService) {
     $scope.initApp=function(){
         $log.log('participantController initialized');
+
         var ln = $('#lastname').val();
         var fn = $('#firstname').val();
 
@@ -11,18 +12,33 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
         $scope.lastname=ln;
         $scope.errMessage='';
         $scope.participantId="";
+        $scope.saveWWCreds=true;
+        console.log($scope.firstname + ' ' + $scope.lastname);
+    };
+
+    /*****************************************************
+    *** Method to register user to the pilot portal
+     ******************************************************/
+    $scope.saveuser = function() {
+        console.log($scope.newuser);
+        participantService.addNewUser($scope.newuser).then(function(data){
+            console.log('logging return from add user');
+            console.log(data);
+            window.location.reload(true);
+        });
 
     };
+
     $scope.getWWDetails = function(){
         console.log($scope.username + ' - ' + $scope.password);
         var loginInfo = { "U": $scope.username, "P": $scope.password, "R": "true" };
-        var saveWWCreds = $('#chksave').is(":checked");
+        //var saveWWCreds = $('#chksave').is(":checked");
 
         var pilotUser = {};
-        if(saveWWCreds) {
-            pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: saveWWCreds,username:$scope.username,password:$scope.password};
+        if($scope.saveWWCreds) {
+            pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: $scope.saveWWCreds,username:$scope.username,password:$scope.password};
         }else{
-            pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: saveWWCreds};
+            pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: $scope.saveWWCreds};
         }
         console.log(pilotUser);
         participantService.getUserProfile(loginInfo,pilotUser).then(function(data){
@@ -37,69 +53,47 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
         });
 
     };
-}]);
-
-participantModule.controller('ParticipantRegisterController', ['$scope','$http','$routeParams','$log','participantService', function($scope,$http,$routeParams,$log,participantService) {
-    $scope.initApp=function(){
-        $log.log('participantController initialized');
-    };
-
-    $scope.saveuser = function() {
-        console.log($scope.newuser);
-        if($scope.newuser._id == null) {
-            participantService.addNewUser($scope.newuser).then(function(data){
-                console.log('logging return from add user');
-                console.log(data);
-                window.location.reload(true);
-            });
-            //console.log($scope.users);
-        } else {
-            console.log('updating user');
-
-            //for existing contact, find this user using id
-            //and update it.
-            for(var i in $scope.users) {
-                if($scope.users[i]._id == $scope.newuser._id) {
-                    $scope.users[i] = $scope.newuser;
-                }
-            }
-            console.log($scope.newuser);
-            AdminService.updateUser($scope.newuser).then(function(data){
-                console.log('logging return from updating user');
-                console.log(data);
-            });
-        }
-        //  clear the add contact form
-        $scope.newuser = {};
-
-    };
-
 
 }]);
+
 
 participantModule.controller('ParticipantSchController', ['$scope','$http','$routeParams','$log','participantService','schedulingService', function($scope,$http,$routeParams,$log,participantService,schedulingService) {
     $scope.initSchPage=function(coachId,userId) {
         $log.log('initialized initSchPage');
+
+        $scope.EmailOptions={};
         $scope.coaches=[];
-        participantService.getAllCoaches().then(function(data){
+           participantService.getAllCoaches().then(function(data){
             $scope.coaches = data;
 //            console.log($scope.coaches);
         });
 
+        //get user's coach information
+        $scope.coach={};
+        participantService.getCoachInfo(coachId).then(function(data){
+            $scope.coach = data;
+            $scope.coachName= $scope.coach.FirstName + ' '+$scope.coach.LastName;
+        });
+
         //get user information
         $scope.user={};
-        $scope.user.coachId=coachId;
-        $scope.user.userId=userId;
+        participantService.getUserInfo(userId).then(function(data){
+            $scope.user= data;
+            $scope.userName= $scope.user.FirstName + ' '+$scope.user.LastName;
+
+
+        });
+
+
         // get availability for the user's coach by default on page load
-        if($scope.user.coachId){
-            console.log('getting availabilities for coach '+$scope.user.coachId);
-            schedulingService.getCoachesById($scope.user.coachId).then(function(data){
+        if(coachId){
+            console.log('getting availabilities for coach '+coachId);
+            schedulingService.getCoachesById(coachId).then(function(data){
                 $scope.setSearchResultsCoach(data);
             });
         }
-
         //get te user's upcoming appointments
-        schedulingService.getUserAppts($scope.user.userId).then(function(data){
+        schedulingService.getUserAppts(userId).then(function(data){
             console.log('getting user appts');
             $scope.setUserAppts(data);
             console.log(data);
@@ -157,6 +151,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
 
 
 
+    //this is for the participantFirst viiew
     $scope.setSearchResults = function(data){
         $scope.availDates = data;
         if($scope.availDates.length>0){
@@ -164,20 +159,13 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         }else{
             $scope.SearchMessage = "No coaches are available on or around " + $scope.SelectedDate +".\n Please search using a different date or search by coach name.";
         }
-     //$log.log($scope.availDates);
+
     };
 
     //default availability of users's coach
     $scope.setSearchResultsCoach = function(data){
         console.log('inside setSearchResultsCoach ');
         $scope.coachAvailDates = data;
-        //console.log(data);
-//        if($scope.coachAvailDates.length>0){
-//            $scope.CoachSearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
-//        }else{
-//            $scope.CoachSearchMessage = "No coaches are available on or around " + $scope.SelectedDate +".\n Please search using a different date or search by coach name.";
-//        }
-        //$log.log($scope.availDates);
     };
 
     //set user's upcoming appointments
@@ -189,11 +177,18 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
     $scope.saveUserAppt = function(coach,selDate) {
         console.log('calling save Appt');
         var selectedDate = new Date(selDate);
+
+
+        var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has booked a call with you  for " +selectedDate.dateFormat('D,M-d, H:iA');
+        var msgUser="Hi "+$scope.userName + " ,\n You have booked a call with " +$scope.coachName+" for " +selectedDate.dateFormat('D,M-d, H:iA');
+        var subj='Coaching session booked';
+
         console.log(selectedDate);
         console.log(coach);
 
         var appt = {Date:selDate,Coach:coach};
         console.log(appt);
+
         schedulingService.saveAppt(appt).then(function(data){
             $scope.availDates={};
             $scope.coachAvailDates={};
@@ -202,9 +197,13 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
             $scope.confirmCoach='Coach: '+coach.coachName;
             $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
+
+            $scope.setEmailOptions(subj,msgUser,msgCoach);
+            console.log($scope.EmailOptions);
             alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);
+
             //trigger emails/text
-            schedulingService.sendSchEmails({Date:selDate,Coach:coach.coachId,emailType:"new"}).then(function(data){
+            schedulingService.sendSchEmails({Date:selectedDate,EmailOptions:$scope.EmailOptions}).then(function(data){
                 console.log('success');
             });
             window.location.reload(true);
@@ -224,17 +223,32 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.coachAvailDates={};
             $scope.SearchMessage ="";
 
+            var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has cancelled a call with you  for " +selectedDate.dateFormat('D,M-d, H:iA');
+            var msgUser="Hi "+$scope.userName + " ,\n You have cancelled a call with " +$scope.coachName+" for " +selectedDate.dateFormat('D,M-d, H:iA');
+            var subj='Coaching session cancelled';
+
             $scope.confirmMessage="Your appointment has been cancelled. You will receive a confirmation email shortly. Here are your appointment details:";
             $scope.confirmCoach='Coach: '+coach.coachName;
             $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
+
+            $scope.setEmailOptions(subj,msgUser,msgCoach);
+
             alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);
             //trigger emails/text
-            schedulingService.sendSchEmails({Date:selDate,Coach:coach.coachId,emailType:"cancel"}).then(function(data){
+            schedulingService.sendSchEmails({Date:selDate,EmailOptions:$scope.EmailOptions}).then(function(data){
                 console.log('success');
             });
             window.location.reload(true);
         });
     };
 
+    $scope.setEmailOptions = function(subj,userMsg,coachMsg) {
+        $scope.EmailOptions.userEmail = $scope.user.Email;
+        $scope.EmailOptions.coachEmail = $scope.coach.Email;
+        $scope.EmailOptions.coachId=$scope.coach._id;
+        $scope.EmailOptions.subject = subj;
+        $scope.EmailOptions.userMsg = userMsg;
+        $scope.EmailOptions.coachMsg = coachMsg;
+    }
 }]);
 

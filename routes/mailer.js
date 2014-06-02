@@ -6,20 +6,17 @@ var nodemailer = require("nodemailer");
 
 exports.sendMail = function(req,res){
     console.log('inside coach mailing program - printing req.body');
-    console.log(req.body);
-    var coachId = req.body.Coach;
+    //console.log(req.body);
+    //var coachId = req.body.EmailOptions;
     var date = new Date(req.body.Date);
-    var user = req.session.user;
+
     var display_date = date.getDay()+', '+date.getMonth()+' '+date.getDate();
-    var participantEmail = user.Email;
-    var participantName = user.FirstName + ' ' + user.LastName;
-    var type = req.body.emailType;
-
-    //email options variables
-    var subj;
-    var msgCoach;
-    var msgParticipant;
-
+    var participantEmail = req.body.EmailOptions.userEmail;
+    var coachEmail = req.body.EmailOptions.coachEmail;
+    var subj= req.body.EmailOptions.subject;
+    var participantMsg = req.body.EmailOptions.userMsg;
+    var coachMsg = req.body.EmailOptions.coachMsg;
+    var coachId = req.body.EmailOptions.coachId;
 
 
     helper.getConnection(function(err,db){
@@ -28,22 +25,10 @@ exports.sendMail = function(req,res){
                 if(err){
                     console.log('error retreiving coach info before sending email: '+ err);
                 }else{ //now send email
-                    var coachEmail = coach.Email;
-                    var coachName = coach.FirstName + " "+coach.LastName;
 
-                    if(type=='new'){
-                        subj="Coaching session booked";
-                        msgCoach="Hi "+coachName +",\n "+ participantName +" has booked a call with you  for " +date;
-                        msgParticipant="Hi "+participantName + " ,\n You have booked a call with " +coachName+" for " +date;
-                    }else if(type=='cancel'){
-                        subj="Coaching session cancelled";
-                        msgCoach="Hi " + coachName+ " ,\n Your coaching session with "+participantName+ " for "+date+" has been cancelled.";
-                        msgParticipant="Hi "+ participantName +",\n Your coaching session with " + coachName + "for " + date +" has been cancelled.";
-                    }
-
-                    console.log("subj: "+subj);
-                    console.log("msgCoach: "+msgCoach);
-                    console.log("msgParticipant: "+msgParticipant);
+                    //console.log("subj: "+subj);
+                    //console.log("msgCoach: "+coachMsg);
+                    //console.log("msgParticipant: "+participantMsg);
 
 
                     var smtpTransport = nodemailer.createTransport("SMTP",{
@@ -51,7 +36,7 @@ exports.sendMail = function(req,res){
                         secureConnection: false, // TLS requires secureConnection to be false
                         port: 587, // port for secure SMTP,
                         auth: {
-                            user: coach.Email,
+                            user: coachEmail,
                             pass: coach.EmailPassword
                         },
                         tls: {
@@ -59,10 +44,7 @@ exports.sendMail = function(req,res){
                         }
                     });
 
-                    var mailOptions = createMailOptions(subj,coachEmail,coachEmail,msgCoach);
-
-                    //console.log(smtpTransport);
-                    //console.log(mailOptions);
+                    var mailOptions = createMailOptions(subj,coachEmail,coachEmail,coachMsg);
 
                     smtpTransport.sendMail(mailOptions, function(error, response){
                         if(error){
@@ -72,7 +54,7 @@ exports.sendMail = function(req,res){
                             console.log('Sending message to participant');
                             //now send email to participant
 
-                            mailOptions = createMailOptions(subj,participantEmail,coachEmail,msgParticipant);
+                            mailOptions = createMailOptions(subj,participantEmail,coachEmail,participantMsg);
                             //console.log(mailOptions);
                             smtpTransport.sendMail(mailOptions, function(error, response){
                                 if(error){

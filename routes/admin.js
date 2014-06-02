@@ -93,8 +93,8 @@ exports.loginCoach = function(req, res,next) {helper.getConnection(function(err,
 
 exports.loginParticipant = function(req, res,next) {helper.getConnection(function(err,db){
     console.log('calling login function for Participant');
-    console.log('logging request object');
-    //console.log(req);
+    //console.log('logging request object');
+    //console.log(req.body);
     var fn = req.body.firstname;
     var ln = req.body.lastname;
     var un = req.body.username;

@@ -78,7 +78,7 @@ app.get('/logout',admin.logout);
 //***********************************************************
 
 app.get('/coaches',admin.checkAuth,api.getAllCoaches);
-app.get('/coaches/:id',admin.checkAdmin,api.getCoachById);
+app.get('/coaches/:id',admin.checkAuth,api.getCoachById);
 app.get('/coachinfo',admin.checkCoach, api.getCoachInfo);
 app.post('/addCoach', admin.checkAdmin,api.addCoach);
 app.post('/updateCoach', admin.checkAdmin,api.updateCoach);
@@ -87,7 +87,7 @@ app.post('/deleteCoach',admin.checkAdmin, api.deleteCoach);
 //*****This section is for the users data********
 //*************************************************
 app.get('/users',admin.checkAdmin,api.getAllUsers);
-app.get('/users/:id',admin.checkCoach,api.getUserById);
+app.get('/users/:id',admin.checkAuth,api.getUserById);
 app.get('/cusers',admin.checkCoach, api.getUsersByCoachId);
 app.post('/addUser', admin.checkAdmin,api.addUser);
 app.post('/updateUser',admin.checkAdmin, api.updateUser);

@@ -303,6 +303,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
                 console.log('return from save note');
                 console.log(data);
                 //now send action plan email
+
             });
 
 
