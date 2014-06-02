@@ -22,7 +22,7 @@ exports.getAssmByUserId = function(req, res) {helper.getConnection(function(err,
                 console.log('Error getting assessment for userid :' + userId)
             }else {
                 console.log(item);
-                res.send(item);
+                res.render('assessmentResult',{Assessment:item});
             }
         });
     });

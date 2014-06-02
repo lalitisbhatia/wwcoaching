@@ -99,6 +99,7 @@ app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
 //app.get('/assessment*',admin.checkParticipant,home.participant);
 
 app.get('/assessment/:id',assmnt.getAssmByUserId);
+app.get('/getuser/:id/assmResults',assmnt.getAssmByUserId);
 app.post('/participant/:firstname/:lastname',admin.checkParticipant, assmnt.saveAssm);
 
 //****************************************************

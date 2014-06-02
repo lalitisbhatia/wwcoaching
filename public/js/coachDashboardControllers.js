@@ -273,9 +273,9 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
                 $scope.notes=[];
             }
             $log.log($scope.notes);
-            coachDashboardServices.getUserAssessment($scope._id).then(function(data){
-                $scope.Assessment=data.Assessment;
-            })
+//            coachDashboardServices.getUserAssessment($scope._id).then(function(data){
+//                $scope.Assessment=data.Assessment;
+//            })
         });
 
         coachDashboardServices.getCoachInfo().then(function(data){
@@ -285,7 +285,12 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
         });
     };
 
-
+    $scope.getAssessment= function(){
+        console.log('getting assm results');
+        coachDashboardServices.getUserAssessment($scope._id).then(function(data){
+                $scope.Assessment=data.Assessment;
+            })
+    };
     $scope.savenote = function() {
         console.log($scope.User);
         var callDate = new Date();

@@ -21,7 +21,7 @@ block content
                     .container
                         legend
                             p Upcoming Sessions
-                        table
+                        table(ng-if="upcomingAppts.length>0")
                             thead.t-head
                                 tr
                                     th NAME

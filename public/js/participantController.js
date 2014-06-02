@@ -217,6 +217,11 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
     $scope.cancelUserAppt = function(coach,selDate) {
         console.log('calling cancel Appt');
         var selectedDate = new Date(selDate);
+        var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has cancelled a call with you  for " +selectedDate.dateFormat('D,M-d, H:iA');
+        var msgUser="Hi "+$scope.userName + " ,\n You have cancelled a call with " +$scope.coachName+" for " +selectedDate.dateFormat('D,M-d, H:iA');
+        var subj='Coaching session cancelled';
+        $scope.setEmailOptions(coach.coachId,coach.coachEmail,subj,msgUser,msgCoach);
+        console.log($scope.EmailOptions);
         //console.log(selectedDate);
         //console.log(coach);
 
@@ -227,15 +232,13 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.coachAvailDates={};
             $scope.SearchMessage ="";
 
-            var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has cancelled a call with you  for " +selectedDate.dateFormat('D,M-d, H:iA');
-            var msgUser="Hi "+$scope.userName + " ,\n You have cancelled a call with " +$scope.coachName+" for " +selectedDate.dateFormat('D,M-d, H:iA');
-            var subj='Coaching session cancelled';
+
 
             $scope.confirmMessage="Your appointment has been cancelled. You will receive a confirmation email shortly. Here are your appointment details:";
             $scope.confirmCoach='Coach: '+coach.coachName;
             $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA');
 
-            $scope.setEmailOptions(subj,msgUser,msgCoach);
+
 
             alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);
             //trigger emails/text
