@@ -99,6 +99,7 @@ app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
 //app.get('/assessment*',admin.checkParticipant,home.participant);
 
 app.get('/assessment/:id',assmnt.getAssmByUserId);
+app.get('/getuser/:id/assmResults',assmnt.getAssmByUserId);
 app.post('/participant/:firstname/:lastname',admin.checkParticipant, assmnt.saveAssm);
 
 //****************************************************
@@ -120,7 +121,7 @@ app.post('/updateCallNote',admin.checkCoach, api.updateCallNote);
 app.post('/deleteCallNote',admin.checkCoach, api.deleteCallNote);
 
 app.post('/email',mailer.sendMail);
-app.post('/emailActionPlan',mailer.sendActionPlan);
+app.post('/emailActionPlan',mailer.emailActionPlan);
 
 /****************************************************
  This section is for the emailing

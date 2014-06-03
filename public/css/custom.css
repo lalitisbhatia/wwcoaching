@@ -197,3 +197,35 @@ label {
     list-style-type: none;
     padding-right: 20px;
 }
+
+#calColHead {
+    text-align:center;
+    vertical-align:middle;
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:4px;
+    background:#ddd;
+    width:80px;
+    height:20px;
+    border-bottom:ridge;
+}
+#calRowHead{
+    padding:0.5em;
+    background:#333;
+    color:#fff;
+    width:90px;
+    height:50px;
+    padding-top:15px;
+}
+#calCornerTop{
+    padding:0.5em;
+    background:#333;
+    color:#fff;
+    height:50px;
+    padding-top:15px;
+    text-align: center;
+
+}
+#calCell{
+    height:20px;
+}
