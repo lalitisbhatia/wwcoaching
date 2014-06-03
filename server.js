@@ -99,7 +99,9 @@ app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
 //app.get('/assessment*',admin.checkParticipant,home.participant);
 
 app.get('/assessment/:id',assmnt.getAssmByUserId);
-app.get('/getuser/:id/assmResults',assmnt.getAssmByUserId);
+app.get('/getuser/:id/assmResults',admin.checkCoach,function(req,res){
+    res.render('assessmentResult',{userId:req.params.id});
+});
 app.post('/participant/:firstname/:lastname',admin.checkParticipant, assmnt.saveAssm);
 
 //****************************************************

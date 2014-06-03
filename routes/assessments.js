@@ -22,7 +22,8 @@ exports.getAssmByUserId = function(req, res) {helper.getConnection(function(err,
                 console.log('Error getting assessment for userid :' + userId)
             }else {
                 console.log(item);
-                res.render('assessmentResult',{Assessment:item});
+                //res.render('assessmentResult',{Assessment:item.Assessment, AsmId:item._id});
+                res.send(item);
             }
         });
     });

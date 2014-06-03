@@ -3,7 +3,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
     /*********************************************************************/
     $scope.initApp=function() {
         $log.log('coachDashBoardController initialized');
-        $scope.DISPLAY_DAYS = 7;
+
         /*********************************************************************
          *** on init, get coach info, users for the coach and coach schedule
          *********************************************************************/
@@ -51,7 +51,6 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
      The date is based on the current date and time starts with 9:00am
      *****************************************************************/
     $scope.setupCalendar = function(){
-
         // Define display params - based on these values, we'll setup the calendar display
         // 0 empty, 1 - Coach Available,, 2 - appt booked
 
@@ -72,7 +71,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
 
         //console.log('Starting calendar setup with start date - ' +$scope.startdate);
 
-        $scope.weekEndDate = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+$scope.DISPLAY_DAYS-1);
+        $scope.weekEndDate = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+13);
         //console.log( $scope.weekEndDate.dateFormat('d Y'));
         $scope.WeekRange=$scope.startdate.dateFormat('M d - ') +  $scope.weekEndDate.dateFormat('M d, Y');
 
@@ -81,7 +80,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
 
         var dispTime = 0;
         var dispDate = 0;
-        for(var i =0;i<=$scope.DISPLAY_DAYS;i++ ){
+        for(var i =0;i<=14;i++ ){
             var dt = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+i,$scope.startdate.getHours() ,$scope.startdate.getMinutes());
 
             //console.log(dt);
@@ -165,12 +164,12 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
         console.log('inside update week');
         if(action=='next'){
             //console.log('select next week');
-            $scope.startdate.setDate($scope.startdate.getDate()+$scope.DISPLAY_DAYS+1);
+            $scope.startdate.setDate($scope.startdate.getDate()+15);
             //console.log($scope.startdate);
         }
         if(action=='prev'){
             //console.log('select prev week');
-            $scope.startdate.setDate($scope.startdate.getDate()-$scope.DISPLAY_DAYS +1);
+            $scope.startdate.setDate($scope.startdate.getDate()-13);
             //console.log($scope.startdate);
         }
 
@@ -251,7 +250,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
 coachDashboardModule.controller('userDetailsController',['$scope','$http','$log','coachDashboardServices', function($scope,$http,$log,coachDashboardServices) {
     $scope.initApp=function() {
         $log.log('userDetailsController initialized');
-        $scope.htmlMsg="";
+
         // get the user details first
         coachDashboardServices.getUserProfile().then(function (data) {
             //$scope.data = wwCoachingService.userProfile();
@@ -273,9 +272,9 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
                 $scope.notes=[];
             }
             $log.log($scope.notes);
-//            coachDashboardServices.getUserAssessment($scope._id).then(function(data){
-//                $scope.Assessment=data.Assessment;
-//            })
+            coachDashboardServices.getUserAssessment($scope._id).then(function(data){
+                $scope.Assessment=data.Assessment;
+            })
         });
 
         coachDashboardServices.getCoachInfo().then(function(data){
@@ -285,23 +284,10 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
         });
     };
 
-    $scope.getAssessment= function(){
-        console.log('getting assm results');
-        coachDashboardServices.getUserAssessment($scope._id).then(function(data){
-                $scope.Assessment=data.Assessment;
-            })
-    };
+
     $scope.savenote = function() {
         console.log($scope.User);
         var callDate = new Date();
-        $scope.htmlMsg = $('#emailHtml').html();
-        $scope.ActionPlanEmail={};
-        $scope.ActionPlanEmail.Subj="Your Action Plan for the coming week";
-        $scope.ActionPlanEmail.Message=$scope.htmlMsg;
-        //console.log($scope.htmlMsg);
-        $scope.ActionPlanEmail.userEmail = $scope.User.Email;
-        $scope.ActionPlanEmail.coachEmail = $scope.Coach.Email;
-        $scope.ActionPlanEmail.coachId=$scope.Coach._id;
 
         if($scope.newnote.callid == null) {
 
@@ -317,12 +303,6 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
                 console.log('return from save note');
                 console.log(data);
                 //now send action plan email
-
-
-                coachDashboardServices.emailActionPlan($scope.ActionPlanEmail).then(function(data){
-
-                });
-
             });
 
 
@@ -396,15 +376,4 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
         // clear the option.
         $scope.ActionPlan.option_new = { planItem: '' };
     }
-}]);
-
-coachDashboardModule.controller('assessmentController',['$scope','$http','$log','coachDashboardServices', function($scope,$http,$log,coachDashboardServices) {
-    $scope.initApp=function(userId) {
-        console.log('getting assm results');
-            coachDashboardServices.getUserAssessment(userId).then(function(data){
-                $scope.Assessment=data.Assessment;
-                console.log($scope.Assessment);
-            })
-    };
-
 }]);

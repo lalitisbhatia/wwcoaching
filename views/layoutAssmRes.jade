@@ -5,21 +5,9 @@ html(lang="en" )
         link(rel='stylesheet', href='/css/normalize.css')
         link(rel='stylesheet', href='/css/style.css')
     body
-        .navbar.navbar-inverse.aq-ww-banner.navbar-fixed-top(role='navigation' style='border:none;')
-            .container
-                .navbar-header
-                    button.navbar-toggle.collapsed(type='button', style='border:none;' data-toggle='collapse', data-target='.navbar-collapse')
-                        span.sr-only Toggle navigation
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-                    img(src='/img/ww_logo_white_sm.png' style='padding-top:15px; padding-left:0')
-                .navbar-collapse.collapse(style='border:none;')
-                    ul.nav.navbar-nav.navbar-brand
-                        li
-                            a(href='/' style='padding-top:5px;') Home
-                    a.navbar-brand.navbar-right(id='logout' href='/logout' style="color:#E6E0E0;") Logout
-                // /.navbar-collapse
+        img(src='/img/ww_logo_white_sm.png' style='padding-top:15px; padding-left:0')
+        a(href='/' style='padding-top:5px;') Home
+        a.navbar-brand.navbar-right(id='logout' href='/logout' style="color:#E6E0E0;") Logout
         block content
         script(src='/js/jquery-1.11.0.min.js')
         script(src='/js/bootstrap.min.js')
