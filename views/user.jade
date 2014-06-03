@@ -43,6 +43,7 @@ block content
                                     div
                                         br
                                         label Additional Notes
+                                        i - these are for you reference and will not be sent to the user
                                         div
                                             textarea.ng-pristine.ng-valid(rows='3' cols='60' type='text', name='addlnotes' , ng-model='newnote.addlNotes')
 
@@ -51,7 +52,7 @@ block content
                                     input#userid(type='hidden' ng-model='newnote._id' value='{{_id}}')
                                     br
                                     legend
-                                        input(type='button', value='Save', ng-click='savenote()').btn.btn-primary
+
                                         p
 
                             .col-lg-5.well

@@ -29,8 +29,8 @@
       <file leaf-file-name="user.jade" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/user.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35008103" vertical-offset="1584" max-vertical-offset="13464">
-              <caret line="75" column="44" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.37763372" vertical-offset="847" max-vertical-offset="13488">
+              <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -715,7 +715,11 @@
       <created>1401767163235</created>
       <updated>1401767163235</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="on session view, show user height and weight on seperate lines">
+      <created>1401767283277</created>
+      <updated>1401767283277</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -780,7 +784,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="update to emailing - sender and recipient is now dynamic&#10;" />
     <MESSAGE value="Updated Save Appt-&#10;check if the user has a coach associated. If not, associate the coach&#10;- updated participant controller.saveAppt to send coach object instead of just ID so the name can also be used for coach-user association" />
     <MESSAGE value="removed username and password of participant from session information so its not saved on the schedule&#10;removed User.CoachId, User.CoachName from schedule - duplicated info" />
     <MESSAGE value="updated participant scheduler views:&#10;2 views now - ParticipantFirst (not associated with a coach), ParticipantSubs(subsequent) with a default view of upcoming availabilities&#10;" />
@@ -805,7 +808,8 @@
     <MESSAGE value="Assessment results. Ready for Sean to fix html" />
     <MESSAGE value="made participant login case-insensetive" />
     <MESSAGE value="fixed email subject for coach.&#10;fixed formatting for schedule email&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed email subject for coach.&#10;fixed formatting for schedule email&#10;" />
+    <MESSAGE value="on session view, show user height and weight on seperate lines" />
+    <option name="LAST_COMMIT_MESSAGE" value="on session view, show user height and weight on seperate lines" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1190,8 +1194,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/user.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35008103" vertical-offset="1584" max-vertical-offset="13464">
-          <caret line="75" column="44" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.37763372" vertical-offset="847" max-vertical-offset="13488">
+          <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
           <folding />
         </state>
       </provider>
