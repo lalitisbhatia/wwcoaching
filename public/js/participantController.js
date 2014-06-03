@@ -183,8 +183,9 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         var selectedDate = new Date(selDate);
         var msgCoach="Hi "+coach.coachName +",\n "+ $scope.userName +" has booked a call with you for " +selectedDate.dateFormat('D,M-d, H:iA T');
         var msgUser="Hi "+$scope.user.FirstName + " ,\n Your coaching call with " +coach.coachName+" is scheduled for " +selectedDate.dateFormat('D,M d, H:iA T')+'. Have a great session';
-        var subj='Your Coaching session is booked';
-        $scope.setEmailOptions(coach.coachId,coach.coachEmail,subj,msgUser,msgCoach);
+        var userSubj='Your Coaching session is booked';
+        var coachSubj='You have a NEW coaching session!';
+        $scope.setEmailOptions(coach.coachId,coach.coachEmail,userSubj,coachSubj,msgUser,msgCoach);
         console.log($scope.EmailOptions);
 
         console.log(selectedDate);
@@ -220,7 +221,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         var msgCoach="Hi "+$scope.coachName +",\n "+ $scope.userName +" has cancelled a call with you  for " +selectedDate.dateFormat('D,M-d, H:iA');
         var msgUser="Hi "+$scope.userName + " ,\n You have cancelled a call with " +$scope.coachName+" for " +selectedDate.dateFormat('D,M-d, H:iA');
         var subj='Coaching session cancelled';
-        $scope.setEmailOptions(coach.coachId,coach.coachEmail,subj,msgUser,msgCoach);
+        $scope.setEmailOptions(coach.coachId,coach.coachEmail,subj,subj,msgUser,msgCoach);
         console.log($scope.EmailOptions);
         //console.log(selectedDate);
         //console.log(coach);
@@ -249,11 +250,12 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
         });
     };
 
-    $scope.setEmailOptions = function(coachId,coachEmail,subj,userMsg,coachMsg) {
+    $scope.setEmailOptions = function(coachId,coachEmail,userSubj,coachSubj,userMsg,coachMsg) {
         $scope.EmailOptions.userEmail = $scope.user.Email;
         $scope.EmailOptions.coachEmail = coachEmail;
         $scope.EmailOptions.coachId=coachId;
-        $scope.EmailOptions.subject = subj;
+        $scope.EmailOptions.userSubject = userSubj;
+        $scope.EmailOptions.coachSubject = coachSubj;
         $scope.EmailOptions.userMsg = userMsg;
         $scope.EmailOptions.coachMsg = coachMsg;
     }

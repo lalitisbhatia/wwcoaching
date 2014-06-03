@@ -13,7 +13,8 @@ exports.sendMail = function(req,res){
     var display_date = date.getDay()+', '+date.getMonth()+' '+date.getDate();
     var participantEmail = req.body.EmailOptions.userEmail;
     var coachEmail = req.body.EmailOptions.coachEmail;
-    var subj= req.body.EmailOptions.subject;
+    var participantSubj= req.body.EmailOptions.userSubject;
+    var coachSubj= req.body.EmailOptions.coachSubject;
     var participantMsg = req.body.EmailOptions.userMsg;
     var coachMsg = req.body.EmailOptions.coachMsg;
     var coachId = req.body.EmailOptions.coachId;
@@ -44,7 +45,7 @@ exports.sendMail = function(req,res){
                         }
                     });
 
-                    var mailOptions = createMailOptions(subj,coachEmail,coachEmail,coachMsg);
+                    var mailOptions = createMailOptions(coachSubj,coachEmail,coachEmail,coachMsg);
 
                     smtpTransport.sendMail(mailOptions, function(error, response){
                         if(error){
@@ -54,7 +55,7 @@ exports.sendMail = function(req,res){
                             console.log('Sending message to participant');
                             //now send email to participant
 
-                            mailOptions = createMailOptions(subj,participantEmail,coachEmail,participantMsg);
+                            mailOptions = createMailOptions(participantSubj,participantEmail,coachEmail,participantMsg);
                             //console.log(mailOptions);
                             smtpTransport.sendMail(mailOptions, function(error, response){
                                 if(error){
@@ -109,7 +110,7 @@ exports.emailActionPlan = function(req,res){
                         }
                     });
 
-                    var mailOptions = createMailOptions(subj,userEmail,coachEmail,msg);
+                    var mailOptions = createHtmlMailOptions(subj,userEmail,coachEmail,msg);
 
                     smtpTransport.sendMail(mailOptions, function(error, response){
                         if(error){
@@ -136,10 +137,21 @@ function createMailOptions(subject,emailTo,emailFrom,message){
         subject: subject,
         to: emailTo,
         text : message,
-        html:message,
+        //html:message,
         from:emailFrom // sender address
     };
     return mailOptions;
 }
 
+function createHtmlMailOptions(subject,emailTo,emailFrom,message){
+    var mailOptions={};
+
+    mailOptions = {
+        subject: subject,
+        to: emailTo,
+        html:message,
+        from:emailFrom // sender address
+    };
+    return mailOptions;
+}
 
