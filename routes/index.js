@@ -102,7 +102,7 @@ exports.participant = function(req, res,next){
         //If not registered, show registration view
         helper.getConnection(function (err, db) {
             db.collection(participantsCollName, function (err, collection) {
-                collection.findOne({'FirstName': fn, 'LastName': ln}, {Username: 0, Password: 0}, function (err, item) {
+                collection.findOne({'FirstName': { $regex: fn, $options: 'i' }, 'LastName': { $regex: ln, $options: 'i' }}, {Username: 0, Password: 0}, function (err, item) {
                     if (err) {
                         console.log(err);
                         res.send('error while looking for participant: ' + err);

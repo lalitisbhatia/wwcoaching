@@ -104,7 +104,7 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
 
 
     db.collection(participantsCollName, function(err, collection) {
-        collection.findOne({'FirstName':fn,'LastName':ln},{Username:0,Password:0}, function(err, item) {
+        collection.findOne({'FirstName':{ $regex: fn, $options: 'i' } ,'LastName':{ $regex: ln, $options: 'i' }},{Username:0,Password:0}, function(err, item) {
                 if(err){
                     console.log(err);
                     res.send('error while looking for participant: '+ err);
@@ -113,7 +113,7 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
 
                 if(item)
                 {
-                    //console.log(item);
+                    console.log(item);
                     req.session.auth=true;
                     req.session.user=item;
                     req.session.isParticipant = true;
