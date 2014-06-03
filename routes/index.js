@@ -63,7 +63,7 @@ exports.coach = function(req, res,next){
 exports.participant = function(req, res,next){
     var fn = req.params.firstname;
     var ln = req.params.lastname;
-    console.log(fn + ' - '+ ln);
+    //console.log(fn + ' - '+ ln);
     console.log('inside index.js router');
     //console.log(req.session.user);
 
@@ -108,7 +108,7 @@ exports.participant = function(req, res,next){
                         res.send('error while looking for participant: ' + err);
                         return(next(err));
                     }
-                    console.log(item);
+                    //console.log(item);
                     if (!item) {
                         console.log('rendering registration');
                         res.render('participantRegister', {firstname: fn, lastname: ln});

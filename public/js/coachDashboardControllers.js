@@ -257,22 +257,22 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             //$scope.data = wwCoachingService.userProfile();
             $log.log('inside controller');
             $log.log(data);
-            $scope.FirstName = data.pilotProfile.FirstName;
-            $scope.LastName = data.pilotProfile.LastName;
-            $scope._id = data.pilotProfile._id;
-            $scope.Age = data.wwProfile.Age;
-            $scope.Gender = data.wwProfile.Gender;
-            $scope.Height = data.wwProfile.Height;
-            $scope.Weight = data.wwProfile.Weight;
-            $scope.MinSafeWeight = data.wwProfile.MinSafeWeight;
-            $scope.MaxSafeWeight = data.wwProfile.MaxSafeWeight;
-            $scope.User= data.pilotProfile;
-            $scope.WWUser = data.wwProfile;
-            $scope.notes = data.pilotProfile.CallNotes;
+            $scope.FirstName = data.FirstName;
+            $scope.LastName = data.LastName;
+            $scope._id = data._id;
+            $scope.Age = data.WWInfo.Age;
+            $scope.Gender = data.WWInfo.Gender;
+            $scope.Height = data.WWInfo.Height;
+            $scope.Weight = data.WWInfo.Weight;
+            $scope.MinSafeWeight = data.WWInfo.MinSafeWeight;
+            $scope.MaxSafeWeight = data.WWInfo.MaxSafeWeight;
+            $scope.User= data;
+            $scope.WWUser = data.WWInfo;
+            $scope.notes = data.CallNotes;
             if(!$scope.notes){
                 $scope.notes=[];
             }
-            $log.log($scope.notes);
+            //$log.log($scope.notes);
 //            coachDashboardServices.getUserAssessment($scope._id).then(function(data){
 //                $scope.Assessment=data.Assessment;
 //            })
@@ -351,7 +351,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
         //search note with given id and delete it
         for(var i in $scope.notes) {
             if($scope.notes[i].callid == id) {
-                $scope.newnote.userid=$scope.User._id
+                $scope.newnote.userid=$scope.User._id;
                 $scope.newnote.callid= id;
 
                 //console.log($scope.newnote);

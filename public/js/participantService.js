@@ -56,7 +56,7 @@ participantModule.factory('participantService',function($http,$log,$q,$rootScope
                 })
         },
         //method to get a specific user's profile
-        getUserProfile:function(wwLoginInfo,pilotLoginInfo){
+        getUserProfile:function(wwLoginInfo,pilotUserInfo){
             var deferred = $q.defer();
             var userProfile={};
             return $http({
@@ -78,10 +78,12 @@ participantModule.factory('participantService',function($http,$log,$q,$rootScope
                     //console.log('logging user profile with wwProfile');
                     //console.log(userProfile.wwProfile );
                     if(response.data.LoginSuccessful) {
+                        pilotUserInfo.WWInfo=response.data.UserInformation;
+                        //console.log(pilotUserInfo);
                         $http({
                             method: 'POST',
                             url: '/participant',
-                            data: pilotLoginInfo
+                            data: pilotUserInfo
                         })
                             .success(function (data) {
                                 //$log.info("Successfully retrieved user  WW info.");

@@ -35,16 +35,17 @@ participantModule.controller('ParticipantLoginController', ['$scope','$http','$r
         //var saveWWCreds = $('#chksave').is(":checked");
 
         var pilotUser = {};
-        if($scope.saveWWCreds) {
-            pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: $scope.saveWWCreds,username:$scope.username,password:$scope.password};
-        }else{
-            pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: $scope.saveWWCreds};
-        }
+        //if($scope.saveWWCreds) {
+        //    pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname, SaveWWCreds: $scope.saveWWCreds,username:$scope.username,password:$scope.password};
+        //}else{
+            pilotUser = {"firstname": $scope.firstname, "lastname": $scope.lastname};
+        //}
         console.log(pilotUser);
         participantService.getUserProfile(loginInfo,pilotUser).then(function(data){
             if(data.LoginSuccessful){
                 $scope.wwProfile = data.wwProfile;
                 $scope.pilotUser= data.pilotUser;
+                //console.log($scope.wwProfile);
                 window.location.replace("/participant/"+$scope.firstname+"/"+$scope.lastname);
             }else{
                 $scope.errMessage="Failed to validate WW credentials. Please try again"

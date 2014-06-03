@@ -97,10 +97,8 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
     //console.log(req.body);
     var fn = req.body.firstname;
     var ln = req.body.lastname;
-    var un = req.body.username;
-    var pw = req.body.password;
-    var saveWWCreds = req.body.SaveWWCreds;
-    console.log(fn + ' - ' + ln + '- '+ saveWWCreds);
+    var WWInfo = req.body.WWInfo;
+    //console.log(fn + ' - ' + ln );
 
 
     db.collection(participantsCollName, function(err, collection) {
@@ -113,26 +111,27 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
 
                 if(item)
                 {
-                    console.log(item);
+                    //console.log(item);
+
                     req.session.auth=true;
                     req.session.user=item;
+                    req.session.user.WWInfo= WWInfo;
                     req.session.isParticipant = true;
-                    //if the checkbox was checked, save the ww credentials to pilot db
-                    if(saveWWCreds){
-                        console.log('saving WW credentials');
-                        collection.update({_id:item._id}, {$set:{Username:un,Password:pw}}, {safe:true}, function(err, result) {
-                            if (err) {
-                                console.log('Error updating ww credentials: ' + err);
-                                res.send({'error':'An error has occurred'});
-                            } else {
-                                console.log('' + result + ' document(s) updated');
-                                //res.send(result);
-                            }
-                        });
-                    }
+                    //if(saveWWCreds){
+                    console.log('saving WW Info - nor username/password');
+                    collection.update({_id:item._id}, {$set:{WWInfo:WWInfo}}, {safe:true}, function(err, result) {
+                        if (err) {
+                            console.log('Error updating ww Info: ' + err);
+                            res.send({'error':'An error has occurred'});
+                        } else {
+                            console.log('' + result + ' document(s) updated');
+                            //res.send(result);
+                        }
+                    });
+                    //}
                     //check if the user took assessment and set that property in the session object
                     db.collection(assessmentCollName, function(err, collection) {
-                        console.log(item);
+                        //console.log(item);
                         collection.findOne({'Assessment.UserId':item._id}, function(err, assm) {
                             if(err){
                                 console.log(err);

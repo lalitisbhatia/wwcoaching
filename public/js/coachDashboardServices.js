@@ -5,8 +5,43 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
         //method for coach details - this will also  have the associated users
 
         //method to get a specific user's profile
+//        getUserProfile:function(){
+//            var deferred = $q.defer();
+//            var userProfile={};
+//            var path = '';
+//            path=window.location.pathname;
+//            path =path.replace('getuser','users');
+//            return $http({
+//                method: 'GET',
+//                url: path
+//            })
+//                .then(function(response){
+//                    userProfile.pilotProfile =response.data;
+//                    //console.log('logging user profile with pilot profile');
+//                    //console.log(userProfile.pilotProfile );
+//                    var loginInfo = { "U": response.data.Username, "P": response.data.Password, "R": "true" };
+//
+//                    //console.log(response.data);
+//                    $http({
+//                        method:'POST',
+//                        url: 'https://mobile.weightwatchers.com/authservice.svc/login',
+//                        data: loginInfo
+//                    })
+//                        .success(function(data) {
+//                            //$log.info("Successfully retrieved user  WW info.");
+//                            //$log.info(data);
+//                        })
+//                        .then(function(response){
+//                            userProfile.wwProfile = response.data.UserInformation;
+//                            //console.log('logging user profile with ww profile');
+//                            //console.log(userProfile);
+//                            deferred.resolve(userProfile);
+//                        });
+//                    return deferred.promise;
+//                });
+//
+//        },
         getUserProfile:function(){
-            var deferred = $q.defer();
             var userProfile={};
             var path = '';
             path=window.location.pathname;
@@ -15,29 +50,13 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                 method: 'GET',
                 url: path
             })
+                .error(function(status, headers, config){
+                    $log.log('failed to get participant info :' + status);
+                })
                 .then(function(response){
-                    userProfile.pilotProfile =response.data;
-                    //console.log('logging user profile with pilot profile');
-                    //console.log(userProfile.pilotProfile );
-                    var loginInfo = { "U": response.data.Username, "P": response.data.Password, "R": "true" };
-
-                    //console.log(response.data);
-                    $http({
-                        method:'POST',
-                        url: 'https://mobile.weightwatchers.com/authservice.svc/login',
-                        data: loginInfo
-                    })
-                        .success(function(data) {
-                            //$log.info("Successfully retrieved user  WW info.");
-                            //$log.info(data);
-                        })
-                        .then(function(response){
-                            userProfile.wwProfile = response.data.UserInformation;
-                            //console.log('logging user profile with ww profile');
-                            //console.log(userProfile);
-                            deferred.resolve(userProfile);
-                        });
-                    return deferred.promise;
+                    console.log('logging return from service');
+                    console.log(response.data);
+                    return response.data;
                 });
 
         },
