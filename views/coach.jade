@@ -4,7 +4,7 @@ block content
 
     .container(ng-controller='coachDashBoardController' data-ng-init='initApp()' style="padding-top:20px;padding-left:20px;")
         h3(style='padding-left:0px;')
-            p Hi {{FirstName}} ! Welcome to the Coaches' Dashboard.
+            p Hi {{FirstName}}! Welcome to your dashboard.
         p(style='padding-bottom:5px;')
         .row(ng-controller='coachDashBoardController' )
             ul.nav.nav-pills(style='font-size:20px;margin-left:10px;')
@@ -12,7 +12,7 @@ block content
                     a(id="aMyUsers" href='#users', data-toggle='tab' ) Dashboard
 
                 li(style='margin-left:80px;')
-                    a(href='#availability', data-toggle='tab') My Schedule
+                    a(href='#availability', data-toggle='tab') My schedule
 
             legend
             // Tab panes
@@ -20,7 +20,7 @@ block content
                 #users.tab-pane.active
                     .container
                         legend
-                            p Upcoming Sessions
+                            p Upcoming sessions
                         table(ng-if="upcomingAppts.length>0")
                             thead.t-head
                                 tr

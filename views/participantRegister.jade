@@ -1,13 +1,13 @@
 extends layoutVis
 block content
     .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
-        h3(style='padding-left:0px;') Hi Welcome to the WeightWatchers Coaching Pilot
-        p Please register with the coaching portal.
+        h3(style='padding-left:0px;') Hi, Welcome to the Weight Watchers One-to-One!
+
         legend
         p(style='padding-bottom:10px;')
         .row(ng-controller="ParticipantLoginController" ng-init="initApp()")
             .col-lg-4.well
-                h2(style="text-align:center;") Register
+                h2(style="text-align:center;") To find a coach, please register below.
                 legend
                 form.form-horizontal.ng-pristine
                     fieldset

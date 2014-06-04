@@ -160,7 +160,7 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
     $scope.setSearchResults = function(data){
         $scope.availDates = data;
         if($scope.availDates.length>0){
-            $scope.SearchMessage = "Following coaches are available on or around " + $scope.SelectedDate;
+            $scope.SearchMessage = "Here are athe coaches that are available on or around " + $scope.SelectedDate;
         }else{
             $scope.SearchMessage = "No coaches are available on or around " + $scope.SelectedDate +".\n Please search using a different date or search by coach name.";
         }
@@ -201,9 +201,9 @@ participantModule.controller('ParticipantSchController', ['$scope','$http','$rou
             $scope.coachAvailDates={};
             $scope.SearchMessage ="";
 
-            $scope.confirmMessage="Thanks for making an appointment. You will receive a confirmation email shortly. Here are your appointment details:";
+            $scope.confirmMessage="You're all set. You'll receive a confirmation email shortly. \n Your personal coaching appointment:";
             $scope.confirmCoach='Coach: '+coach.coachName;
-            $scope.confirmDate='Date/Time: '+selectedDate.dateFormat('D, M-d, H:iA T');
+            $scope.confirmDate='Date/time: '+selectedDate.dateFormat('D, M-d, H:iA T');
 
 
             alert($scope.confirmMessage + '\n'+$scope.confirmCoach+'\n'+$scope.confirmDate);

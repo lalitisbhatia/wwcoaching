@@ -8,11 +8,11 @@ block content
                     .container
                         .row.well.col-md-9
                             .col-lg-4(style="margin-top:-20px;margin-bottom:-20px;")
-                                h3 Welcome #{user.FirstName}.
-                                p Your Coach is &nbsp;
+                                h3 Welcome, #{user.FirstName}.
+                                p Your coach is &nbsp;
                                     b #{user.CoachName}
                             .col-lg-6(style="border-left:ridge;margin-top:-20px;margin-bottom:-20px;")
-                                h3 Your upcoming appointments
+                                h3 Your upcoming coaching sessions:
                                     legend
                                     fieldset
                                         table.searchResults.ng-scope(style="margin-left:20px;" ng-if="coachAvailDates.length>0")
@@ -28,12 +28,12 @@ block content
                                                         //input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(coachAvailDate.Coach,coachAvailDate.DateUTC)').btn.btn-primary
 
                         .row.col-md-9
-                            b Schedlule more appointments
+                            b Schedlule a coaching session
                                 br
                         .row.well.col-md-9
                             .col-lg-4(style="border-right:ridge;")
                                 legend
-                                    p Your coach's upcoming availability
+                                    p Choose a time below
                                 //b(style="color:green;") {{confirmMessage}}
                                     p
                                         b {{confirmCoach}}
@@ -59,7 +59,7 @@ block content
                                 form.ng-pristine
                                     fieldset(style="margin-left:1px;")
                                         // Form Name
-                                        p Search other times for  #{user.CoachName}
+                                        p Choose another date
                                             | or find other available coaches
                                         // Text input
                                         .form-group

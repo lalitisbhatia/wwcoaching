@@ -12,18 +12,17 @@ block content
                                     form.ng-pristine
                                         fieldset
                                             // Form Name
-                                            legend Search for a coach
-                                            i (need copy from Alisha
-                                            p Select a date/ time or Coach Name to search
+                                            legend Find a coach
+                                            p Select a date/ time or search by Coach Name
                                             // Text input
                                             .form-group
                                                 .col-md-3
-                                                    b Search by Date/Time
+                                                    b Search by date/time
                                                     input#datepicker.form-control.input-md(type='text', name='datetime' style="margin-bottom:15px;")
                                                 .col-md-1
                                                     b OR
                                                 .col-md-3
-                                                    b Search by Coach Name
+                                                    b Search by coach name
                                                     //select(ng-options="name as coach.FirstName + ' ' +coach.LastName for coach in coaches | orderBy:['FirstName','LastName']" ng-model="coach" ng-change="getCoachesById(coach._id)")
                                                     select#coachselect.form-control.input-md(ng-model='newuser' name="coach" style="margin-bottom:15px;")
                                                         option(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']"  value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
@@ -56,7 +55,7 @@ block content
                                                             td  {{availDate.Date|date:'HH'}}
                                                             td  {{availDate.Time}}
                                                             td
-                                                                input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Confirm', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
+                                                                input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Select', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
 
 
                                             input(type="hidden" value="#{user._id}" id="userID" )
