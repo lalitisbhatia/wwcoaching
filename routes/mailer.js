@@ -6,7 +6,7 @@ var nodemailer = require("nodemailer");
 
 exports.sendMail = function(req,res){
     console.log('inside coach mailing program - printing req.body');
-    console.log(req.body);
+    //console.log(req.body);
     //var coachId = req.body.EmailOptions;
     var date = new Date(req.body.Date);
 
@@ -130,12 +130,49 @@ exports.emailActionPlan = function(req,res){
 
 };
 
+
+exports.testEmail = function(req,res){
+    console.log(req.body);
+    var subj=req.body.Subj;
+    var msg=req.body.Message;
+    var recEmail= req.body.recEmail;
+    var senderEmail = req.body.senderEmail;
+    var pass = req.body.senderPass;
+
+    var smtpTransport = nodemailer.createTransport("SMTP",{
+        host: "outlook.office365.com", // hostname
+        secureConnection: false, // TLS requires secureConnection to be false
+        port: 587, // port for secure SMTP,
+        auth: {
+            user: senderEmail,
+            pass: pass
+        },
+        tls: {
+            ciphers:'SSLv3'
+        }
+    });
+
+    var mailOptions = createHtmlMailOptions(subj,recEmail,senderEmail,msg);
+
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            console.log(error);
+        }else{
+            console.log("Message sent to user: " + response);
+            console.log('Sending message to participant');
+            res.send('success');
+        }
+
+    });
+};
+
 function createMailOptions(subject,emailTo,emailFrom,message){
     var mailOptions={};
 
     mailOptions = {
         subject: subject,
         to: emailTo,
+        cc:"thecoachingteam@weightwatchers.com",
         text : message,
         //html:message,
         from:emailFrom // sender address
@@ -149,6 +186,7 @@ function createHtmlMailOptions(subject,emailTo,emailFrom,message){
     mailOptions = {
         subject: subject,
         to: emailTo,
+        bcc:"thecoachingteam@weightwatchers.com",
         html:message,
         from:emailFrom // sender address
     };

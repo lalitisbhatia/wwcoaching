@@ -2,22 +2,37 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
 
     /*********************************************************************/
     $scope.initApp=function() {
-        $log.log('coachDashBoardController initialized');
+//        $log.log('coachDashBoardController initialized');
         $scope.DISPLAY_DAYS = 7;
         /*********************************************************************
          *** on init, get coach info, users for the coach and coach schedule
          *********************************************************************/
 
+        $scope.now = new Date();
+        console.log($scope.now);
+
         coachDashboardServices.getCoachInfo().then(function(data){
             $scope.Coach=data;
             $scope.coachMin = {coachId:data._id,coachName:data.FirstName+' '+data.LastName,coachPhone:data.Phone,coachEmail:data.Email};
             $scope.FirstName = data.FirstName;
-            console.log($scope.FirstName);
+            //console.log($scope.FirstName);
 
             //now get the coach's upcoming schedule
             coachDashboardServices.getCoachAppts($scope.coachMin.coachId).then(function(appts){
-                $scope.upcomingAppts=appts;
-                console.log($scope.upcomingAppts)
+                $scope.upcomingAppts=[];
+                $scope.pastAppts=[];
+
+                var dt;
+                for(var j =0;j<appts.length;j++ ){
+                    dt =  new Date(appts[j].DateUTC);
+                    if(dt>=$scope.now){
+                        $scope.upcomingAppts.push(appts[j]);
+                    }else{
+                        $scope.pastAppts.push(appts[j]);
+                    }
+                }
+                //console.log($scope.upcomingAppts);
+                //console.log($scope.pastAppts)
             })
         });
 
@@ -25,6 +40,13 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
             $scope.users=data;
         });
 
+        $scope.setupSchedule();
+
+
+
+    }; //END of initApp
+
+    $scope.setupSchedule = function(){
         //initialize the calendar array
         $scope.calendarArray=[];
         $scope.calendarArray.Dates=[];
@@ -33,19 +55,24 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
         $scope.coachAvailDates = [];
 
         // To setup the calendar with availabilities,
-        // 1. get the availabilties into $scope.coachAvailDates
-        // 2. create an empty calendar
+
+
+        // 1. create an empty calendar
+        $scope.setupCalendar();
+        console.log($scope.weekStartdate);
+        console.log($scope.weekEndDate);
+        // 2. get the availabilties into $scope.coachAvailDates
+
         // 3. update the calendar with availabilities
-        coachDashboardServices.getCoachSchedule().then(function(data){
+        coachDashboardServices.getCoachSchedule($scope.weekStartdate,$scope.weekEndDate).then(function(data){
             $scope.coachAvailDates=data;
-            console.log($scope.coachAvailDates);
+            console.log('getting coach avail dates');
+            //console.log($scope.coachAvailDates);
             //populate the calendar
-            $scope.setupCalendar();
+
             $scope.updateCalendar();
         })
-
-    }; //END of initApp
-
+    };
     /****************************************************************
      This method will setup tha calendar with a start date and time.
      The date is based on the current date and time starts with 9:00am
@@ -65,62 +92,53 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
         }
 
         //Get the start date and time dynamically. If it doesn't exists already, use the current date
-        if(!$scope.startdate){
+        if(!$scope.weekStartdate){
             $scope.today= new Date();
-            $scope.startdate = new Date($scope.today.getFullYear(), $scope.today.getMonth(),$scope.today.getDate(), 8,30);
+            $scope.weekStartdate = new Date($scope.today.getFullYear(), $scope.today.getMonth(),$scope.today.getDate(), 8,30);
         }
 
-        //console.log('Starting calendar setup with start date - ' +$scope.startdate);
+        //console.log('Starting calendar setup with start date - ' +$scope.weekStartdate);
 
-        $scope.weekEndDate = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+$scope.DISPLAY_DAYS-1);
+        $scope.weekEndDate = new Date($scope.weekStartdate.getFullYear(), $scope.weekStartdate.getMonth(),$scope.weekStartdate.getDate()+$scope.DISPLAY_DAYS-1);
         //console.log( $scope.weekEndDate.dateFormat('d Y'));
-        $scope.WeekRange=$scope.startdate.dateFormat('M d - ') +  $scope.weekEndDate.dateFormat('M d, Y');
+        $scope.WeekRange=$scope.weekStartdate.dateFormat('M d - ') +  $scope.weekEndDate.dateFormat('M d, Y');
 
-        $scope.startdate.setDate($scope.startdate.getDate()-1);
-        //console.log($scope.startdate);
+        $scope.weekStartdate.setDate($scope.weekStartdate.getDate()-1);
+        console.log($scope.weekStartdate);
 
         var dispTime = 0;
         var dispDate = 0;
         for(var i =0;i<=$scope.DISPLAY_DAYS;i++ ){
-            var dt = new Date($scope.startdate.getFullYear(), $scope.startdate.getMonth(),$scope.startdate.getDate()+i,$scope.startdate.getHours() ,$scope.startdate.getMinutes());
+            var dt = new Date($scope.weekStartdate.getFullYear(), $scope.weekStartdate.getMonth(),$scope.weekStartdate.getDate()+i,$scope.weekStartdate.getHours() ,$scope.weekStartdate.getMinutes());
 
             //console.log(dt);
             $scope.calendarArray.Dates.push({Date:dt.dateFormat('m/d/Y'),DateDisp:dt.dateFormat('D, m/d'),Times:[]});
             for(var j =0;j<26;j++){
-//                if(i==0 && j==0) {
-//                    dispTime = 1;
-//                    dispDate = 1;
-//                }else if(i==0 && j>0){
-//                    dispTime = 0;
-//                    dispDate = 1;
-//                }else if(i>0 && j==0){
-//                    dispTime = 1;
-//                    dispDate = 0;
-//                }else{
-//                    dispTime = 1;
-//                    dispDate = 1;
-//                }
                 //increase time by 30 minute increments
-                var dtTime = new Date(dt.getFullYear(), dt.getMonth(),dt.getDate(),dt.getHours() ,$scope.startdate.getMinutes()+j*30);
+                var dtTime = new Date(dt.getFullYear(), dt.getMonth(),dt.getDate(),dt.getHours() ,$scope.weekStartdate.getMinutes()+j*30);
 
                 //console.log('Time = ' + dtTime);
                 $scope.calendarArray.Dates[i].Times.push({time:dtTime.dateFormat('h:iA'),timeUTC:dtTime,DispFlag:0});
             }
         }
+        //console.log($scope.calendarArray);
 
     };/*******END SETUP CALENDAR*******/
 
-    // Updates the calendar with availability and appointments
+        // Updates the calendar with availability and appointments
     $scope.updateCalendar = function(){
         for(var i in $scope.coachAvailDates){
             //console.log($scope.coachAvailDates[i].Date + '--' + $scope.coachAvailDates[i].Time);
             var availdate = $scope.coachAvailDates[i].Date;
             var availtime = $scope.coachAvailDates[i].Time;
+            var availUTC = new Date($scope.coachAvailDates[i].DateUTC);
             var userappt = $scope.coachAvailDates[i].User;
             //loop thru the $scope.calendarArray array
             for(var j in $scope.calendarArray.Dates){
                 for(var k in $scope.calendarArray.Dates[j].Times){
-                    if(availdate== $scope.calendarArray.Dates[j].Date && availtime==$scope.calendarArray.Dates[j].Times[k].time){
+                    var calTimeUTC = new Date($scope.calendarArray.Dates[j].Times[k].timeUTC);
+                    //console.log("availUTC = "+ availUTC.toLocaleString() + '----calTimeUTC = '+ calTimeUTC.toLocaleString());
+                    if(availUTC.toLocaleString()== calTimeUTC.toLocaleString()){
                         //console.log('found match');
                         if(userappt) {
                             //console.log(availtime + '-'+availdate);
@@ -165,17 +183,18 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
         console.log('inside update week');
         if(action=='next'){
             //console.log('select next week');
-            $scope.startdate.setDate($scope.startdate.getDate()+$scope.DISPLAY_DAYS+1);
-            //console.log($scope.startdate);
+            $scope.weekStartdate.setDate($scope.weekStartdate.getDate()+$scope.DISPLAY_DAYS+1);
+            //console.log($scope.weekStartdate);
         }
         if(action=='prev'){
             //console.log('select prev week');
-            $scope.startdate.setDate($scope.startdate.getDate()-$scope.DISPLAY_DAYS +1);
-            //console.log($scope.startdate);
+            $scope.weekStartdate.setDate($scope.weekStartdate.getDate()-$scope.DISPLAY_DAYS +1);
+            //console.log($scope.weekStartdate);
         }
 
-        $scope.setupCalendar();
-        $scope.updateCalendar();
+        //$scope.setupCalendar();
+        //$scope.updateCalendar();
+        $scope.setupSchedule();
 
     };
     /****************************************************************/
@@ -212,7 +231,7 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
         // If so, only add the time
         for(var i in $scope.coachAvailDates) {
             if ($scope.coachAvailDates[i].Date == inputDate && $scope.coachAvailDates[i].Time == inputTime) {
-                console.log('Date and time already exist - do nothing');
+                //console.log('Date and time already exist - do nothing');
                 timeSlotExists = true;
                 break;
             }
@@ -223,19 +242,27 @@ coachDashboardModule.controller('coachDashBoardController',['$scope','$http','$l
             //console.log('dateUTC from add= ' + dateUTC);
             $scope.coachAvailDates.push( {Date:inputDate,Time:inputTime,DateUTC:d,Coach:$scope.coachMin});
         }
-        console.log('after adding a date');
-        console.log($scope.coachAvailDates);
+        //console.log('after adding a date');
+        //console.log($scope.coachAvailDates);
     };
 
     // Save schedule
     $scope.saveSchedule = function() {
-        console.log('calling save Schedule');
+        //console.log('calling save Schedule');
 
         var coachSchedule = {};
-        coachSchedule = {TimeSlots:$scope.coachAvailDates,CoachId:$scope.Coach._id};
-        console.log($scope.coachAvailDates);
+        coachSchedule = {TimeSlots:$scope.coachAvailDates,CoachId:$scope.Coach._id,d1:$scope.weekStartdate,d2:$scope.weekEndDate};
+        //console.log($scope.coachAvailDates);
         coachDashboardServices.saveCoachSchedule(coachSchedule).then(function(data){
-            $scope.ConfirmMessage="Thanks for updating your schedule";
+            //$scope.ConfirmMessage="Thanks for updating your schedule";
+            $.confirm({
+                title:'<b>Schedule saved </b>',
+
+                text: "<h3>Thanks for updating your schedule</h3> <br> ",
+                confirm: function(button) {
+                },
+                confirmButton: "Ok"
+            });
         });/**********END Save Schedule***********/
 
     };
@@ -273,26 +300,32 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
                 $scope.notes=[];
             }
             //$log.log($scope.notes);
-//            coachDashboardServices.getUserAssessment($scope._id).then(function(data){
-//                $scope.Assessment=data.Assessment;
-//            })
+            coachDashboardServices.getUserAssessment($scope._id).then(function(data){
+                $scope.Assessment=data.Assessment;
+                console.log($scope.Assessment);
+                $scope.textMsg='';
+                if($scope.Assessment.no_text=='on') {
+                    $scope.textMsg = 'Please, no text messages';
+                    console.log($scope.textMsg);
+                }
+            })
         });
 
         coachDashboardServices.getCoachInfo().then(function(data){
             $scope.Coach=data;
-            console.log($scope.Coach);
-            $scope.FirstName = data.FirstName;
+            //  console.log($scope.Coach);
+            $scope.CoachFirstName = data.FirstName;
         });
     };
 
     $scope.getAssessment= function(){
-        console.log('getting assm results');
+        //console.log('getting assm results');
         coachDashboardServices.getUserAssessment($scope._id).then(function(data){
-                $scope.Assessment=data.Assessment;
-            })
+            $scope.Assessment=data.Assessment;
+        })
     };
     $scope.savenote = function() {
-        console.log($scope.User);
+        //console.log($scope.User);
         var callDate = new Date();
         $scope.htmlMsg = $('#emailHtml').html();
         $scope.ActionPlanEmail={};
@@ -308,14 +341,14 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             //$scope.newnote.date=$('#pickdatetime').val(); //hack because the ng-model does not bind with datepicker
             $scope.newnote.userid=$scope.User._id;
             $scope.newnote.callid = $scope.notes.length +1;
-            $scope.newnote.date=callDate.dateFormat('M-d-Y, H:i');
+            $scope.newnote.date=callDate.dateFormat('M-d-Y, h:iA T');
             $scope.newnote.ActionPlan = $scope.ActionPlan;
             console.log($scope.newnote) ;
             $scope.notes.push($scope.newnote);
 
             coachDashboardServices.saveCallNotes($scope.newnote).then(function(data){
-                console.log('return from save note');
-                console.log(data);
+                //console.log('return from save note');
+                //console.log(data);
                 //now send action plan email
 
 
@@ -326,7 +359,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
             });
 
 
-            console.log($scope.notes);
+            //console.log($scope.notes);
         } else {
             $scope.newnote.userid=$scope.User._id;
             //for existing contact, find this contact using id
@@ -366,15 +399,15 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
     $scope.newnote = {};
 
     $scope.edit = function(id) {
-        console.log('note id = '+id);
+        //console.log('note id = '+id);
         //search contact with given id and update it
         for(var i in $scope.notes) {
             if($scope.notes[i].callid == id) {
                 //we use angular.copy() method to create
                 //copy of original object
-                console.log('id = '+ $scope.notes[i].callid + '  date = '+ $scope.notes[i].date);
+                //      console.log('id = '+ $scope.notes[i].callid + '  date = '+ $scope.notes[i].date);
                 $scope.newnote = angular.copy($scope.notes[i]);
-                console.log($scope.newnote.date);
+                //      console.log($scope.newnote.date);
                 $('#pickdatetime').val(($scope.notes[i].date));
             }
         }
@@ -382,9 +415,8 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
 
     $scope.ActionPlan = {
         planItems: [
-            {planItem: ''},
-            {planItem: ''},
             {planItem: ''}
+
         ],
         option_new: { planItem: '' }
     };
@@ -392,7 +424,7 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
     $scope.addItem = function() {
         // add the new option to the model
         $scope.ActionPlan.planItems.push($scope.ActionPlan.option_new);
-        console.log($scope.ActionPlan.planItems.length);
+        //console.log($scope.ActionPlan.planItems.length);
         // clear the option.
         $scope.ActionPlan.option_new = { planItem: '' };
     }
@@ -400,11 +432,17 @@ coachDashboardModule.controller('userDetailsController',['$scope','$http','$log'
 
 coachDashboardModule.controller('assessmentController',['$scope','$http','$log','coachDashboardServices', function($scope,$http,$log,coachDashboardServices) {
     $scope.initApp=function(userId) {
-        console.log('getting assm results');
-            coachDashboardServices.getUserAssessment(userId).then(function(data){
-                $scope.Assessment=data.Assessment;
-                console.log($scope.Assessment);
-            })
+        //console.log('getting assm results');
+        coachDashboardServices.getUserAssessment(userId).then(function(data){
+            if(data) {
+                $scope.exists=true;
+                $scope.Assessment = data.Assessment;
+            }else{
+                $scope.exists=false;
+            }
+            console.log($scope.Assessment);
+
+        })
     };
 
 }]);

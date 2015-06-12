@@ -5,7 +5,9 @@
 var mongo = require("mongodb");
 var helper = require('../public/lib/dbhelper');
 var BSON = mongo.BSONPure;
-
+var https = require('https');
+var needle = require('needle');
+var request = require('request');
 
 var coachesCollName = 'coaches';
 var participantsCollName = 'users';
@@ -13,8 +15,8 @@ var assessmentCollName = 'assessments';
 
 exports.loginAdmin = function(req, res,next) {helper.getConnection(function(err,db){
     console.log('calling login function for ADMIN');
-    console.log('user: ' + req.body.username);
-    console.log('password: ' + req.body.password);
+    //console.log('user: ' + req.body.username);
+    //console.log('password: ' + req.body.password);
     db.collection(coachesCollName, function(err, collection) {
         collection.findOne(
             {
@@ -29,16 +31,16 @@ exports.loginAdmin = function(req, res,next) {helper.getConnection(function(err,
 
                 if(item)
                 {
-                    console.log(item);
+                    //console.log(item);
                     if(item.admin){
                         req.session.auth=true;
                         req.session.userId=item._id;
                         req.session.user=item;
                         req.session.isAdmin=true;
-                        console.log(item);
+                        //console.log(item);
                     }else{
 
-                        console.log(item);
+                        //console.log(item);
                     }
                     console.log('redirecting to /admin');
                     res.redirect('/admin');
@@ -57,10 +59,10 @@ exports.loginAdmin = function(req, res,next) {helper.getConnection(function(err,
 
 exports.loginCoach = function(req, res,next) {helper.getConnection(function(err,db){
     console.log('calling login function for COACH');
-    console.log('user: ' + req.body.username);
-    console.log('password: ' + req.body.password);
+    //console.log('user: ' + req.body.username);
+    //console.log('password: ' + req.body.password);
     db.collection(coachesCollName, function(err, collection) {
-        collection.findOne({'Username':req.body.username,'Password':req.body.password},{Username:0,Password:0,EmailPassword:0}, function(err, item) {
+        collection.findOne({'Username':{$regex:req.body.username,$options:'i'},'Password':{$regex:req.body.password,$options:'i'}},{Username:0,Password:0,EmailPassword:0}, function(err, item) {
                 if(err){
                     console.log(err);
                     res.send('error while looking for coach: '+ err);
@@ -76,7 +78,7 @@ exports.loginCoach = function(req, res,next) {helper.getConnection(function(err,
                         req.session.user=item;
                         req.session.isCoach = true;
                     }
-                    console.log(item);
+                    //console.log(item);
                     res.redirect('/coach');
                 }else
                 {
@@ -95,68 +97,103 @@ exports.loginParticipant = function(req, res,next) {helper.getConnection(functio
     console.log('calling login function for Participant');
     //console.log('logging request object');
     //console.log(req.body);
-    var fn = req.body.firstname;
-    var ln = req.body.lastname;
-    var WWInfo = req.body.WWInfo;
-    //console.log(fn + ' - ' + ln );
+    //var fn = req.body.firstname;
+    //var ln = req.body.lastname;
+    var un = req.body.Username;
+    //var WWInfo = req.body.WWInfo;
+    var wwloginInfo = req.body.WWLoginInfo;
+    //console.log('wwloginInfo');
+    //console.log(wwloginInfo);
 
+    var retData= {};
 
-    db.collection(participantsCollName, function(err, collection) {
-        collection.findOne({'FirstName':{ $regex: fn, $options: 'i' } ,'LastName':{ $regex: ln, $options: 'i' }},{Username:0,Password:0}, function(err, item) {
-                if(err){
-                    console.log(err);
-                    res.send('error while looking for participant: '+ err);
-                    return(next(err));
-                }
+    /**************************************************************/
+    //first authenticate WW credentials
+    /**************************************************************/
+    var strLoginInfo = JSON.stringify(wwloginInfo);
+    var options = {
+        headers: {'Content-Type': 'application/json'}
+    };
+    needle.post ('https://mobile.weightwatchers.com/authservice.svc/login',strLoginInfo,options,function(err, resp, body){
+        console.log('inside needle post');
+        //console.log(body);
+        retData.LoginSuccessful = body.LoginSuccessful;
+        retData.Role= body.Role;
+        retData.UserInformation = body.UserInformation;
 
-                if(item)
-                {
-                    //console.log(item);
+        if(body.LoginSuccessful && body.Role!='registered'){
+            /*************************************************************
+             *  Now find the participant in the dashboard DB
+             ************************************************************/
+            db.collection(participantsCollName, function(err, collection) {
+                collection.findOne({'Username':un}, function(err, item) {
+                    if(err){
+                        console.log(err);
+                        res.send('error while looking for participant: '+ err);
+                        return(next(err));
+                    }
 
-                    req.session.auth=true;
-                    req.session.user=item;
-                    req.session.user.WWInfo= WWInfo;
-                    req.session.isParticipant = true;
-                    //if(saveWWCreds){
-                    console.log('saving WW Info - nor username/password');
-                    collection.update({_id:item._id}, {$set:{WWInfo:WWInfo}}, {safe:true}, function(err, result) {
-                        if (err) {
-                            console.log('Error updating ww Info: ' + err);
-                            res.send({'error':'An error has occurred'});
-                        } else {
-                            console.log('' + result + ' document(s) updated');
-                            //res.send(result);
-                        }
-                    });
-                    //}
-                    //check if the user took assessment and set that property in the session object
-                    db.collection(assessmentCollName, function(err, collection) {
-                        //console.log(item);
-                        collection.findOne({'Assessment.UserId':item._id}, function(err, assm) {
-                            if(err){
-                                console.log(err);
-                                res.send('error while looking for assessment: '+ err);
-                                return(next(err));
+                    if(item)
+                    {
+                        /********************
+                         *** Set Session ****
+                         ********************/
+                        req.session.auth=true;
+                        req.session.user=item;
+                        req.session.user.WWInfo= retData.UserInformation;
+                        req.session.isParticipant = true;
+
+                        retData.ParticipantInfo = item;
+                        /******************************************
+                         *** Save WW information in pilot db ****
+                         ******************************************/
+                        console.log('saving WW Info - not username/password');
+                        collection.update({_id:item._id}, {$set:{WWInfo:retData.UserInformation}}, {safe:true}, function(err, result) {
+                            if (err) {
+                                console.log('Error updating ww Info: ' + err);
+                                res.send({'error':'An error has occurred'});
+                            } else {
+                                console.log('' + result + ' document(s) updated');
+                                //res.send(result);
                             }
-
-                            if(assm){
-                                console.log('found assessment');
-                                req.session.user.assessment=true;
-                            }
-                            res.send(item);
                         });
-                    });
-                    //console.log(item);
 
-                }else
-                {
-                    console.log('participant not found');
-                    res.render('participantLogin',{'message':'Coaching pilot credentials are not valid. Please try again'});
+                        //check if the user took assessment and set that property in the session object
+                        db.collection(assessmentCollName, function(err, collection) {
+                            //console.log(item);
+                            collection.findOne({'Assessment.UserId':item._id}, function(err, assm) {
+                                if(err){
+                                    console.log(err);
+                                    res.send('error while looking for assessment: '+ err);
+                                    return(next(err));
+                                }
 
-                }
+                                if(assm){
+                                    console.log('found assessment');
+                                    req.session.user.assessment=true;
+                                }
+                                //console.log(retData);
+                                res.send(retData);
+                            });
+                        });
 
+                    }else
+                    {
+                        console.log('participant not found');
+                        res.render('participantLogin',{'message':'Coaching pilot credentials are not valid. Please try again','username':un});
+
+                    }
+
+                });
             });
+        }else{
+            res.render('participantLogin',{'message':'These WeightWatchers credentials are not valid. Please try again','username':un});
+        }
     });
+
+
+
+
 
 });
 };
@@ -194,7 +231,7 @@ exports.saveParticipantCreds = function(req, res,next) {helper.getConnection(fun
     db.collection(participantsCollName, function(err, collection) {
 
         collection.findOne(
-            { 
+            {
                 'Username':user,
                 'Password':pwd
             }, function(err, item) {
@@ -203,7 +240,7 @@ exports.saveParticipantCreds = function(req, res,next) {helper.getConnection(fun
                 res.send('error while looking for participant : '+ err);
                 return(next(err));
             };
-            
+
             if(item)
             {
                 //console.log(item);
@@ -228,10 +265,10 @@ exports.saveParticipantCreds = function(req, res,next) {helper.getConnection(fun
                 res.render('index',{'message':'no user found'});
 
             }
-            
+
         });
     });
-     
+
 });
 };
 

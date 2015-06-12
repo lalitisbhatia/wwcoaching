@@ -1,10 +1,10 @@
 doctype html
 html(lang="en" ng-app="participantModule")
     head
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
         link(rel='stylesheet', href='/css/bootstrap.min.css')
         link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
         link(rel='stylesheet', href='/css/custom.css')
-        link(rel='stylesheet', href='/css/dashboard.css')
         link(rel='stylesheet', href='/css/jquery.datetimepicker.css')
     body
         .navbar.navbar-inverse.aq-ww-banner.navbar-fixed-top(role='navigation' style='border:none;')
@@ -19,11 +19,11 @@ html(lang="en" ng-app="participantModule")
                 .navbar-collapse.collapse(style='border:none;')
                     ul.nav.navbar-nav.navbar-brand
                         li
-                            a(href='/' style='padding-top:5px;') Home
                     a.navbar-brand.navbar-right(id='logout' href='/logout' style="color:#E6E0E0;") Logout
                 // /.navbar-collapse
         block content
         script(src='/js/jquery-1.11.0.min.js')
+        script(src='/js/jquery.confirm.min.js')
         script(src='/js/bootstrap.min.js')
         script(src='/js/angular.min.js')
         script(src='/js/angular-route.min.js')

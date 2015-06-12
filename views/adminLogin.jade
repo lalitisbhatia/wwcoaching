@@ -1,12 +1,12 @@
 extends layoutVis
 block content
     .container(style="padding-top:50px;padding-left:200px;")
-        h3(style='padding-left:0px;') Hi Admin User . Welcome to the WeightWatchers Coaching Pilot
+        h3(style='padding-left:0px;') Hi Admin User . Welcome to the Weight Watchers Coaching Pilot
         p Please login to access pilot admin information.
         legend
         p(style='padding-bottom:10px;')
         .row
-            .col-lg-4.well
+            .col-lg-4.well(style="margin-left: 90px")
                 h2(style="text-align:center;") Admin Login
                 legend
                 form.form-horizontal.ng-pristine(role='form',action='/admin' method='POST')

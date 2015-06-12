@@ -20,31 +20,45 @@ var usersCollName = 'users';
  *************************************/
 exports.searchAvails = function(req, res) {helper.getConnection(function(err,db){
     var type =req.params.type;
-    console.log(type);
+    var currDate = new Date(req.params.currDate);
+    //console.log('search type= ' +type);
+    //console.log('curr date param= ' +currDate);
     var query={};
-    var today =new Date();
+    var limitResults=12;
+    currDate.setHours(currDate.getHours()+4);//move forward by 4 hours from the current time to give coaches enough time
+    var queryDate; //this is the date that'll be used in the query depending on the search and current date
+
+
+    //console.log('curr date after updating hours= ' +currDate);
     if(type=='date'){
 
         var inputUTCDate =new Date(req.params.value);
         var timeForward = new Date(inputUTCDate);
         var timeBack = new Date(inputUTCDate);
-        timeForward.setHours(timeForward.getHours()+10);
-        timeBack.setHours(timeBack.getHours()-2);
 
-        console.log(timeForward.toISOString());
-        console.log(timeBack.toISOString());
+        timeForward.setHours(timeForward.getHours()+12);
+        //console.log(timeForward.toISOString());
+        //console.log(timeBack.toISOString());
 
-        query={DateUTC:{$gte:timeBack.toISOString(),$lte:timeForward.toISOString(),$gte:today.toISOString()},User:{$exists:false}};
+        //if input date is 4 hour further than current date, use it, otherwise use current date + 4 hours
+        if(currDate<=timeBack){
+            queryDate=timeBack;
+        }else{
+            queryDate=currDate;
+        }
+        //console.log('query date = '+ queryDate.toISOString());
+        //{DateUTC:{$gte:timeBack.toISOString()}},
+        query={DateUTC:{$gte:queryDate.toISOString()},User:{$exists:false}};
 
     }else if(type=='coach'){
         var coachId = req.params.value;
-        console.log('coach id = ' + coachId);
-        query={"Coach.coachId":coachId,User:{$exists:false},DateUTC:{$gte:today.toISOString()}};
+        //console.log('coach id = ' + coachId);
+        query={"Coach.coachId":coachId,User:{$exists:false},DateUTC:{$gte:currDate.toISOString()}};
     }
 
 //    console.log('Retrieving availability of  coaches for '+ timeForward.toISOString() );
     db.collection(schCollName, function(err, collection) {
-        collection.find(query).toArray(function(err, items) {
+        collection.find(query).sort({DateUTC:1}).limit(limitResults).toArray(function(err, items) {
             if (err) {
                 res.send({'error':'error occurred while getting all availabilities'});
             } else {
@@ -69,7 +83,7 @@ exports.searchUserAppts = function(req, res) {helper.getConnection(function(err,
     console.log('user id = ' + userId);
 
     var today =new Date();
-    console.log(today.toISOString());
+    //console.log(today.toISOString());
 
     query={"User._id":userId,DateUTC:{$gte:today.toISOString()}};
 
@@ -79,10 +93,10 @@ exports.searchUserAppts = function(req, res) {helper.getConnection(function(err,
                 res.send({'error':'error occurred while getting all availabilities'});
             } else {
                 if(items) {
-                    console.log(items);
+                    //console.log(items);
                     res.send(items);
                 }else{
-                    console.log('no results found');
+                    console.log('no user appts found');
                 }
             }
         });
@@ -97,12 +111,12 @@ exports.searchCoachAppts = function(req, res) {helper.getConnection(function(err
     console.log('searching coach\'s appts' );
     var coachId =req.params.id;
     var query={};
-    console.log('coach id = ' + coachId);
+    //console.log('coach id = ' + coachId);
 
     var today =new Date();
-    console.log(today.toISOString());
+    //console.log(today.toISOString());
 
-    query={"Coach.coachId":coachId,User:{$exists:true},DateUTC:{$gte:today.toISOString()}};
+    query={"Coach.coachId":coachId,User:{$exists:true}};
 
     db.collection(schCollName, function(err, collection) {
         collection.find(query).toArray(function(err, items) {
@@ -110,10 +124,10 @@ exports.searchCoachAppts = function(req, res) {helper.getConnection(function(err
                 res.send({'error':'error occurred while getting coach\'s upcoming appointments'});
             } else {
                 if(items) {
-                    console.log(items);
+                    //console.log(items);
                     res.send(items);
                 }else{
-                    console.log('no results found');
+                    console.log('no coach appts found');
                 }
             }
         });
@@ -122,17 +136,24 @@ exports.searchCoachAppts = function(req, res) {helper.getConnection(function(err
 });
 };
 
-//this is to build the calendar
+//this is to build the calendar - Get avails only for a range of dates
 exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    var startDate = new Date(req.params.d1);
+    var endDate = new Date(req.params.d2);
+
+    endDate.setDate(endDate.getDate()+1);
+    startDate.setDate(startDate.getDate()+1);
+    console.log(startDate);
+    console.log(endDate);
     var id = req.session.userId.toString();//here the userId is the coach id
     console.log('Retrieving availability for coachId: ' + id);
     db.collection('schedule', function(err, collection) {
-        collection.find({"Coach.coachId":id}).toArray(function(err, item) {
+        collection.find({$and:[{"Coach.coachId":id},{DateUTC:{$gte:startDate.toISOString()}},{DateUTC:{$lte:endDate.toISOString()}}]}).toArray(function(err, item) {
             if (err) {
-                res.send({'error':'error occurred while getting coach availabilities'});
+                res.send({'error':'error occurred while getting coach availabilities' + err});
             } else {
                 if(item) {
-                    //console.log(item);
+                    console.log(item.length);
                     res.send(item);
                 }else{
                     console.log('no results found');
@@ -144,15 +165,64 @@ exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,d
 });
 };
 
-exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+exports.getAllCoachAvails = function(req, res) {helper.getConnection(function(err,db){
+    console.log('Retrieving availability for all coaches: ');
+    var d1=new Date(req.params.d1);
+    console.log('d1 = ' + d1);
+    var month ;
+    var dt;
+    if(d1.getMonth()+1<10){
+        month = '0'+(d1.getMonth()+1).toString();
+    }else
+    {
+        month = (d1.getMonth()+1).toString();
+    }
+
+    if(d1.getDate()<10){
+        dt = '0'+(d1.getDate()).toString();
+    }else
+    {
+        dt = (d1.getDate()).toString();
+    }
+    var date= (month + '/' +dt + '/' + d1.getFullYear());
+    console.log('date = ' + date);
+    db.collection('schedule', function(err, collection) {
+        collection.find({Date:date}).sort({DateUTC:1,"Coach.coachName":1}).toArray(function(err, item) {
+            if (err) {
+                res.send({'error':'error occurred while getting full schedule'});
+            } else {
+                if(item) {
+                    console.log(item.length);
+                    res.send(item);
+                }else{
+                    console.log('no results found');
+                }
+            }
+        });
+    });
+
+});
+};
+
+// Save coach availability for a range of dates
+exports.saveCoachAvails = function(req, res) {helper.getConnection(function(err,db){
     var coachId = req.body.CoachId;
     var schedules = req.body.TimeSlots;
-    //console.log(req.body);
-    console.log('printing schedules');
-    console.log(schedules);
+    var startDate = new Date(req.body.d1);
+    var endDate = new Date(req.body.d2);
+
+    endDate.setDate(endDate.getDate()+1);
+    startDate.setDate(startDate.getDate()+1);
+    console.log(startDate);
+    console.log(endDate);
+
+    console.log(req.body);
+    //console.log('printing schedules');
+    //console.log(schedules);
     //first check if the coach exists
     db.collection(schCollName, function(err, collection) {
-        collection.remove({"Coach.coachId": coachId}, function (err, item) {
+        //empty out the coach's schedule for the input dates
+        collection.remove({$and:[{"Coach.coachId":coachId},{DateUTC:{$gte:startDate.toISOString()}},{DateUTC:{$lte:endDate.toISOString()}}]}, function (err, item) {
             if (err) {
                 console.log('error removing coach schedule');
             } else {
@@ -167,6 +237,8 @@ exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,d
                             res.send(result);
                         }
                     });
+                }else{
+                    res.send('no data to insert');
                 }
             }
         });
@@ -183,9 +255,9 @@ exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db)
     var coachId = req.body.Coach.coachId;
     var coachName = req.body.Coach.coachName;
 
-    console.log('date :' + date);
-    console.log('userId :' + userId);
-    console.log('coachId :' + coachId);
+    //console.log('date :' + date);
+    //console.log('userId :' + userId);
+    //console.log('coachId :' + coachId);
 
     db.collection(schCollName, function(err, collection) {
         collection.update({DateUTC:date,"Coach.coachId":coachId}, {$set:{"User._id":user._id,"User.Email":user.Email,"User.FirstName":user.FirstName,"User.LastName":user.LastName,"User.Phone":user.Phone}}, {safe:true}, function(err, result) {
@@ -207,13 +279,34 @@ exports.saveUserAppt = function(req, res) {helper.getConnection(function(err,db)
                             req.session.user.CoachName=coachName;
                             //console.log('rewriting session');
                             //console.log(req.session.user);
-                            res.send('success');
+                            //res.send('success');
                         }
                     })
                 });
                 // }
 
 
+                //now get all the user appts and send them back
+                var query={};
+                var today =new Date();
+                //console.log(today.toISOString());
+
+                query={"User._id":userId,DateUTC:{$gte:today.toISOString()}};
+
+                db.collection(schCollName, function(err, collection) {
+                    collection.find(query).toArray(function(err, items) {
+                        if (err) {
+                            res.send({'error':'error occurred while getting all availabilities'});
+                        } else {
+                            if(items) {
+                                //console.log(items);
+                                res.send(items);
+                            }else{
+                                console.log('no results found');
+                            }
+                        }
+                    });
+                });
             }
         });
     });
@@ -226,9 +319,10 @@ exports.cancelUserAppt = function(req, res) {helper.getConnection(function(err,d
     var date = req.body.Date;
     var coachId = req.body.Coach.coachId;
     var coachName = req.body.Coach.coachName;
+    var userId = req.session.user._id;
 
-    console.log('date :' + date);
-    console.log('coachId :' + coachId);
+    //console.log('date :' + date);
+    //console.log('coachId :' + coachId);
 
     db.collection(schCollName, function(err, collection) {
         collection.update({DateUTC:date,"Coach.coachId":coachId}, {$unset:{User:""}}, {safe:true}, function(err, result) {
@@ -237,9 +331,32 @@ exports.cancelUserAppt = function(req, res) {helper.getConnection(function(err,d
                 res.send({'error':'An error has occurred'});
             } else {
                 console.log('' + result + ' document(s) updated');
-                res.send("appointment cancelled");
+
+                //now get all the user appts and send them back
+                var query={};
+                var today =new Date();
+                //console.log(today.toISOString());
+
+                query={"User._id":userId,DateUTC:{$gte:today.toISOString()}};
+
+                db.collection(schCollName, function(err, collection) {
+                    collection.find(query).toArray(function(err, items) {
+                        if (err) {
+                            res.send({'error':'error occurred while getting all availabilities'});
+                        } else {
+                            if(items) {
+                                //console.log(items);
+                                res.send(items);
+                            }else{
+                                console.log('no results found');
+                            }
+                        }
+                    });
+                });
+
             }
         });
+
     });
 
 });

@@ -15,7 +15,7 @@ block content
                 li(style='margin-left:50px;')
                     a(href='#aCoaches', data-toggle='tab') Coaches
                 li(style='margin-left:50px;')
-                    a(href='#aSchedules', data-toggle='tab') Schedules
+                    a(href='#availability', data-toggle='tab') Schedules
         .col-sm-9
             // Tab panes
             .tab-content(ng-controller='AdminController' data-ng-init='initApp()')
@@ -23,107 +23,127 @@ block content
                 #users.tab-pane.active.col-sm-9.col-md-10.main
 
                     .ng-scope(style='width:800px;')
-                        form.form-horizontal.well.ng-pristine
-                            fieldset
-                                // Form Name
-                                legend Add New User
-                                // Text input
-                                .form-group(style="margin-bottom:5px;")
-                                    label.col-md-4.control-label(for='firstname') First Name
-                                    .col-md-4
-                                        input#textinput.form-control.input-md(type='text', name='firstname', ng-model='newuser.FirstName')
-                                .form-group(style="margin-bottom:5px;")
-                                    label.col-md-4.control-label(for='lastname') Last Name
-                                    .col-md-4
-                                        input#textinput.form-control.input-md(type='text', name='lastname', ng-model='newuser.LastName')
-                                .form-group(style="margin-bottom:5px;")
-                                    label.col-md-4.control-label(for='email') Email
-                                    .col-md-4
-                                        input#textinput.form-control.input-md(type='text', name='email', ng-model='newuser.Email')
-                                .form-group(style="margin-bottom:5px;")
-                                    label.col-md-4.control-label(for='phone') Phone
-                                    .col-md-4
-                                        input#textinput.form-control.input-md(type='text', name='phone', ng-model='newuser.Phone')
-                                .form-group(style="margin-bottom:5px;")
-                                    label.col-md-4.control-label(for='coach') Coach
-                                    .col-md-4
-                                        select.form-control.input-md(ng-model='newuser.CoachId' name="coach")
-                                            option(ng-repeat='coach in coaches' value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
+                        div.well.ng-pristine
+                            a(ng-click='showUser=!showUser'  style="text-decoration:none;cursor:pointer;")
+                                h3(style="border:thin;") Add New User
 
-                               .form-group
-                                    label.col-md-4.control-label(for='save')
-                                    .col-md-4
-                                        button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='saveuser()') Save
+                            span(ng-hide='showUser')
+                            span(ng-show='showUser')
+                                form.form-horizontal
+
+                                    fieldset
+                                        // Form Name
+                                        .form-group(style="margin-bottom:5px;")
+                                            label.col-md-4.control-label(for='firstname') First Name
+                                            .col-md-4
+                                                input#textinput.form-control.input-md(type='text', name='firstname', ng-model='newuser.FirstName')
+                                        .form-group(style="margin-bottom:5px;")
+                                            label.col-md-4.control-label(for='lastname') Last Name
+                                            .col-md-4
+                                                input#textinput.form-control.input-md(type='text', name='lastname', ng-model='newuser.LastName')
+                                        .form-group(style="margin-bottom:5px;")
+                                            label.col-md-4.control-label(for='email') Email
+                                            .col-md-4
+                                                input#textinput.form-control.input-md(type='text', name='email', ng-model='newuser.Email')
+                                        .form-group(style="margin-bottom:5px;")
+                                            label.col-md-4.control-label(for='phone') Phone
+                                            .col-md-4
+                                                input#textinput.form-control.input-md(type='text', name='phone', ng-model='newuser.Phone')
+                                        .form-group(style="margin-bottom:5px;")
+                                            label.col-md-4.control-label(for='coach') Coach
+                                            .col-md-4
+                                                select.form-control.input-md(ng-model='newuser.CoachId' name="coach")
+                                                    option(ng-repeat='coach in coaches' value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
+
+                                       .form-group
+                                            label.col-md-4.control-label(for='save')
+                                            .col-md-4
+                                                button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='saveuser()') Save
                         legend
-                        legend All Users
-                        label.col-md-2.control-label Search users
-                        .col-md-2
-                            input(type='text' ng-model="query.FirstName")
-                        legend
+                        h3.col-md-6.control-label All Users
+
+                        h3.col-md-3.control-label Search users:
+                        .col-sm-2
+                            input(type='text' ng-model="query.FirstName" style="margin:15px;")
+                        br
+                        br
                         table.table.table-striped.table-bordered
+
                             thead
                                 tr
                                     th Name
                                     th Email
                                     th Phone
                                     th Coach
+                                    th username
                                     th Action
+                                    th Assessment
+
                             tbody
-                                tr.ng-scope(ng-repeat='user in users | filter:query')
+
+                                tr(ng-repeat='user in users | filter:query')
+
+
                                     td.ng-binding {{ user.FirstName}} {{ user.LastName }}
                                     td.ng-binding {{ user.Email }}
                                     td.ng-binding {{ user.Phone }}
                                     td.ng-binding {{ user.CoachName }}
+                                    td.ng-binding {{ user.Username }}
                                     td
                                         a(href='#', ng-click='editUser(user._id)') edit
                                             | /
-                                        a(href='#', ng-click='deleteUser(user._id)') delete
+                                        a.confirm(id="user._id"  ng-click='deleteConf(user)') Delete
+                                    td
+                                        a(href="/getuser/{{user._id}}/assmResults" ) Assessment
                 #aCoaches.tab-pane.active.col-sm-9.col-md-10.main
                         .ng-scope(style='width:900px;')
-                            form.form-horizontal.well.ng-pristine
-                                fieldset
-                                    // Form Name
-                                    legend Add New Coach
-                                    // Text input
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='firstname') First Name
-                                        .col-md-4
-                                            input#textinput.form-control.input-md(type='text', name='firstname', ng-model='newcoach.FirstName')
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='lastname') Last Name
-                                        .col-md-4
-                                            input#textinput.form-control.input-md(type='text', name='lastname', ng-model='newcoach.LastName')
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='email') Email
-                                        .col-md-4
-                                            input#textinput.form-control.input-md(type='text', name='email', ng-model='newcoach.Email')
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='password') Email Password
-                                        .col-md-4
-                                            input#textinput.form-control.input-md(type='text', name='emailPassword', ng-model='newcoach.EmailPassword')
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='phone') Phone
-                                        .col-md-4
-                                            input#textinput.form-control.input-md(type='text', name='phone', ng-model='newcoach.Phone')
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='username') Username
-                                        .col-md-4
-                                            input#textinput.form-control.input-md(type='text', name='username', ng-model='newcoach.Username')
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='password') Dashboard Password
-                                        .col-md-4
-                                            input#textinput.form-control.input-md(type='text', name='password', ng-model='newcoach.Password')
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='bio') Bio
-                                        .col-md-4
-                                            textarea#textarea.form-control(rows='4' cols='50' name='bio', ng-model='newcoach.Bio') Bio
-                                    .form-group(style="margin-bottom:5px;")
-                                        label.col-md-4.control-label(for='save')
-                                        .col-md-4
-                                            button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='savecoach()') Save
+                            div.well.ng-pristine
+                                a(ng-click='showCoach=!showCoach'  style="text-decoration:none;cursor:pointer;")
+                                    h3(style="border:thin;padding-bottom:5px;") Add New Coach
+
+                                span(ng-hide='showCoach')
+                                span(ng-show='showCoach')
+                                    form.form-horizontal
+                                        fieldset
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='firstname') First Name
+                                                .col-md-4
+                                                    input#textinput.form-control.input-md(type='text', name='firstname', ng-model='newcoach.FirstName')
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='lastname') Last Name
+                                                .col-md-4
+                                                    input#textinput.form-control.input-md(type='text', name='lastname', ng-model='newcoach.LastName')
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='email') Email
+                                                .col-md-4
+                                                    input#textinput.form-control.input-md(type='text', name='email', ng-model='newcoach.Email')
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='password') Email Password
+                                                .col-md-4
+                                                    input#textinput.form-control.input-md(type='text', name='emailPassword', ng-model='newcoach.EmailPassword')
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='phone') Phone
+                                                .col-md-4
+                                                    input#textinput.form-control.input-md(type='text', name='phone', ng-model='newcoach.Phone')
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='username') Username
+                                                .col-md-4
+                                                    input#textinput.form-control.input-md(type='text', name='username', ng-model='newcoach.Username')
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='password') Dashboard Password
+                                                .col-md-4
+                                                    input#textinput.form-control.input-md(type='text', name='password', ng-model='newcoach.Password')
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='bio') Bio
+                                                .col-md-4
+                                                    textarea#textarea.form-control(rows='4' cols='50' name='bio', ng-model='newcoach.Bio') Bio
+                                            .form-group(style="margin-bottom:5px;")
+                                                label.col-md-4.control-label(for='save')
+                                                .col-md-4
+                                                    button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='savecoach()') Save
 
                             legend
-                            legend All Coaches
+                            h3 All Coaches
                             table.table.table-striped.table-bordered
                                 thead
                                     tr
@@ -136,7 +156,7 @@ block content
                                         th Action
 
                                 tbody
-                                    tr.ng-scope(ng-repeat="coach in coaches | orderBy:'Email'")
+                                    tr.ng-scope(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']")
                                         td.ng-binding {{ coach.FirstName}} {{ coach.LastName }}
                                         td.ng-binding {{ coach.Phone }}
                                         td.ng-binding {{ coach.Email }}
@@ -145,16 +165,43 @@ block content
                                         td.ng-binding {{ coach.FirstName}}
                                         td
                                             a(href='#', ng-click='editCoach(coach._id)') edit
-                                                | /
-                                            a(href='#', ng-click='deleteCoach(coach._id)') delete
-                #aSchedules.tab-pane.col-sm-9.col-md-10.main
-                    .container
-                        ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
-                            li(ng-repeat="coach in coaches")
+
+                                        td
+                                            button#singlebutton.btn.btn-primary( name='TestEmail' value='', ng-click='testEmail(coach)') Send Test email
+                #availability.tab-pane.col-sm-12.col-md-12.main
+                    .ng-scope
+                        .container
+                            .row
+                                .col-md-12
+                                    legend
+
+                                        p
+
+                                        div(style="margin-left:300px;vertical-align:middle;")
+                                            span
+
+                                                |Schedule for
+                                            br
+                                            span
+                                                b(style="display:inline-block;border:thin;padding:4px;" )
+                                                    .aq-btn(style="font-size:13px;min-width:90px;padding-top: 5px" ng-click="updateDay('prev')") Prev Day
+                                                b  {{startdate|date:'EEE, MMM-d, yyyy'}}
+                                                b(style="display:inline-block;border:thin;padding:4px;"  )
+                                                    .aq-btn(style="font-size:13px;min-width:90px;padding-top: 5px" ng-click="updateDay('next')") Next Day
+                                    table#availSchedules(border='1px;')
+                                        tr
+                                            td(ng-repeat="Times in calendarArray.Times" ng-init="outerIndex = $index" style="background-color:#fff;vertical-align: initial; min-width:130px;")
+                                                p(style="background-color:black;color:#fff;font-size:15px;height:30px;vertical-align: initial;padding:5px;") {{Times.time}}
+                                                table
+                                                    tr(ng-repeat="coach in Times.Coaches" ng-init="innerIndex = $index" style="height:75px;border-bottom:ridge;")
+                                                        td(ng-if="coach.Appt" style="background:#46bea5;")
+                                                            b {{coach.coachName}}
+                                                            p(style="margin:2px;") appt with
+                                                            b {{coach.Appt.FirstName}} {{coach.Appt.LastName}}
+                                                        td(ng-if="!coach.Appt" style="background:white;")
+                                                            p {{coach.coachName}}
 
 
 
-        hr
-    footer
-        p © Company 2014
-// /container
+
+

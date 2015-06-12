@@ -61,6 +61,7 @@ label {
 
 .ie8 legend { max-width: 825px; }
 
+
 /* textareas & text inputs */
 
 textarea,
@@ -303,7 +304,7 @@ input[type=radio]:focus + .aq-radio:after {
     margin-left: -50px;
     margin-top: 0;
     position: absolute;
-    top: 22px;
+    top: 15px;
     -webkit-transition: background .3s ease;
     -moz-transition: background .3s ease;
     -ms-transition: background .3s ease;
@@ -433,7 +434,7 @@ input[type=radio]:focus + .aq-radio:after {
     height: auto;
     margin-left: auto;
     margin-right: auto;
-    max-width: 800px;
+    max-width: 630px;
     text-align: center;
     width: 100%;
 }
@@ -519,7 +520,7 @@ input[type=radio]:focus + .aq-radio:after {
     color: #fff;
     font-size: 1em;
     font-weight: 400;
-    margin-top: -12px;
+    margin-top: -10px;
     position: absolute;
     right: 15px;
     text-decoration: none;
@@ -579,6 +580,11 @@ input[type=radio]:focus + .aq-radio:after {
 /**** Intro ****/
 
 .aq-intro { margin-bottom: 20px; }
+
+.confirm .aq-intro {
+    margin-bottom: 0;
+    text-align: center;
+}
 
 .aq-intro h2 {
     color: #403292;
@@ -648,7 +654,7 @@ input[type=radio]:focus + .aq-radio:after {
 
 /* Name */
 
-.qstn-wrap.name { margin-bottom: 40px !important; }
+/*.qstn-wrap.name { margin-bottom: 40px !important; }*/
 
 .name label { margin-bottom: 0.938em; }
 
@@ -943,7 +949,7 @@ fieldset.likert {
 
 .img-boxes label .q-txt-wrap {
     display: inline-table;
-    height: 45px;
+    height: 55px;
     margin-bottom: 5px;
     margin-left: 15px;
     margin-right: 15px;
@@ -1053,6 +1059,101 @@ textarea.other-input {
 .note-paper textarea:focus { border: 0; }
 
 
+/* Thank You */
+
+.confirm .sub-header { margin-bottom: 15px; }
+
+.rsrcs {
+    background: #f4f4f4;
+    margin-bottom: 15px;
+    padding: 15px;
+    width: 100%;
+}
+
+.rsrcs h3 {
+    color: #403292;
+    font-size: 1.2em;
+    line-height: 1.4em;
+    margin-bottom: 15px;
+}
+
+.aq-wrap .rsrcs p {
+    color: #555;
+    font-size: 0.9em;
+    font-weight: 300;
+    line-height: 1.4em;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.aq-wrap .rsrcs p:last-child {
+    margin-bottom: 0;
+}
+
+.rsrcs ol {
+    counter-reset:li;
+    list-style: none;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0;
+}
+
+.rsrcs li {
+    margin-bottom: 10px;
+    margin-left: 35px;
+    position: relative;
+}
+
+.rsrcs li:last-child {
+    margin-bottom: 0;
+}
+
+.rsrcs li a {
+    color: inherit;
+    font-weight: 600;
+}
+
+.rsrcs li a:focus,
+.rsrcs li a:active,
+.rsrcs li a:hover {
+    text-decoration: none;
+}
+
+.rsrcs ol li:before {
+    font-family: 'WWDisplay_Bold';
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    font-size: 0.95em;
+    left: -35px;
+    line-height: 1.15em;
+    background: #403292;
+    border-radius: 50px;
+    height: 25px;
+    padding: 5px;
+    width: 25px;
+    text-align: center;
+    color: #fff;
+    top: 2px;
+}
+
+.rsrcs ol li:after {
+    border-bottom: 1px solid #999;
+    content: '';
+    display: block;
+    height: 1px;
+    margin-bottom: 10px;
+    margin-left: -35px;
+    margin-top: 10px;
+}
+
+.rsrcs ol li:last-child:after {
+    border: none;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+
 /**** Media Queries ****/
 
 /* 341px */
@@ -1149,6 +1250,27 @@ textarea.other-input {
     .note-paper:before { border-width: 0 60px 60px 0; }
     .note-paper:after { border-width: 60px 0 0 60px; }
 
+    .rsrcs {
+        margin-bottom: 15px;
+        padding: 25px;
+    }
+
+    .rsrcs li { margin-left: 43px; }
+
+    .rsrcs ol li:before {
+        font-size: 1.25em;
+        height: 30px;
+        left: -43px;
+        line-height: 1.1em;
+        width: 30px;
+    }
+
+    .rsrcs ol li:after {
+        margin-bottom: 20px;
+        margin-left: -43px;
+        margin-top: 20px;
+    }
+
 }
 
 
@@ -1169,6 +1291,8 @@ textarea.other-input {
         margin-bottom: 10px;
     }
 
+    .confirm .aq-intro h2 { font-size: 2.4em; }
+
     .aq-wrap p {
         font-size: 1.4em;
         margin-bottom: 50px;
@@ -1181,6 +1305,53 @@ textarea.other-input {
     }
 
     #q14 label:nth-child(4n) { margin-right: 0; }
+
+    .confirm .sub-header {
+        margin-bottom: 45px;
+        max-width: 800px;
+    }
+
+    .rsrcs h3 {
+        font-size: 1.3em;
+        margin-bottom: 35px;
+    }
+
+    .aq-wrap .rsrcs p {
+        font-size: 1.1em;
+        line-height: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    .rsrcs li { margin-left: 70px; }
+
+    .rsrcs ol li:before {
+        font-size: 1.9em;
+        height: 45px;
+        left: -70px;
+        line-height: 1.25em;
+        width: 45px;
+    }
+
+    .rsrcs ol li:after {
+        margin-left: -70px;
+    }
+
+    .rsrcs li a {
+        border-bottom: 2px solid #555;
+        text-decoration: none;
+        -webkit-transition: border .15s ease;
+        -moz-transition: border .15s ease;
+        -ms-transition: border .15s ease;
+        -o-transition: border .15s ease;
+        transition: border .15s ease;
+    }
+
+    .rsrcs li a:focus,
+    .rsrcs li a:active,
+    .rsrcs li a:hover {
+        border-bottom: 1px solid transparent;
+    }
+
 
 }
 
@@ -1224,7 +1395,10 @@ textarea.other-input {
         height: 29px;
         width: 230px;
     }
+
     .aq-wrap { padding: 140px 50px 50px 75px; }
+
+    .aq-wrap.confirm { padding-top: 200px; }
 
     .sec-title {
         font-size: 2em;
@@ -1336,5 +1510,15 @@ textarea.other-input {
     }
 
     #q24 label:nth-child(odd) { margin-right: 0; }
+
+    .rsrcs {
+        margin-bottom: 30px;
+        padding: 40px;
+    }
+
+    .rsrcs ol li:after {
+        margin-bottom: 25px;
+        margin-top: 25px;
+    }
 
 }

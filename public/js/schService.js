@@ -1,15 +1,15 @@
 'use strict';
 participantModule.factory('schedulingService',function($http,$log,$q,$rootScope){
     var myService = {
-        getCoachesByDate: function (date) {
+        getCoachesByDate: function (date,currDate) {
             return $http({
                 method: 'GET',
-                url: '/searchAvails/date/'+date
+                url: '/searchAvails/date/'+date +'/'+currDate
             })
                 .success(function(data) {
-                    $log.info("Successfully retrieved availability for all coaches.");
+                    //$log.info("Successfully retrieved availability for all coaches.");
 
-                    $log.log(data);
+                    //$log.log(data);
                 })
                 .error(function(status, headers, config){
                     $log.log('failed to coach availabilities' + status);
@@ -23,14 +23,15 @@ participantModule.factory('schedulingService',function($http,$log,$q,$rootScope)
 
         },
         getCoachesById: function (coachId) {
+            var currDate = new Date();
             return $http({
                 method: 'GET',
-                url: '/searchAvails/coach/'+coachId
+                url: '/searchAvails/coach/'+coachId+'/'+currDate
             })
                 .success(function(data) {
-                    $log.info("Successfully retrieved availability for all coaches.");
+                    //$log.info("Successfully retrieved availability for all coaches.");
 
-                    $log.log(data);
+                    //$log.log(data);
                 })
                 .error(function(status, headers, config){
                     $log.log('failed to coach availabilities' + status);
@@ -49,9 +50,9 @@ participantModule.factory('schedulingService',function($http,$log,$q,$rootScope)
                 url: '/searchAppts/user/'+userId
             })
                 .success(function(data) {
-                    $log.info("Successfully retrieved availability for all coaches.");
+                    //$log.info("Successfully retrieved availability for all coaches.");
 
-                    $log.log(data);
+                    //$log.log(data);
                 })
                 .error(function(status, headers, config){
                     $log.log('failed to coach availabilities' + status);

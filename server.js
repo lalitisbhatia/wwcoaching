@@ -11,7 +11,7 @@ var express = require('express'),
     admin = require("./routes/admin"),
     assmnt = require("./routes/assessments"),
     schedule = require("./routes/schedule");
-    mailer = require("./routes/mailer");
+mailer = require("./routes/mailer");
 
 var app = express();
 
@@ -47,10 +47,17 @@ app.get('/',home.home);
 app.get('/admin',home.admin);
 app.get('/coach',home.coach);
 app.get('/participant/:firstname/:lastname',home.participant);
+app.get('/participant/:username',home.participant);
 
+app.get('/mf',function(req,res){
+    res.render('mf');
+});
 
 app.get('/getuser/:id',function(req,res){
     res.render('user');
+});
+app.get('/getuser/past/:id',function(req,res){
+    res.render('user',{past:true});
 });
 app.get('/getcoach/:id',function(req,res){
     res.render('coach');
@@ -99,24 +106,25 @@ app.post('/deleteUser',admin.checkAdmin, api.deleteUser);
 //app.get('/assessment*',admin.checkParticipant,home.participant);
 
 app.get('/assessment/:id',assmnt.getAssmByUserId);
-app.get('/getuser/:id/assmResults',admin.checkCoach,function(req,res){
-    res.render('assessmentResult',{userId:req.params.id});
+app.get('/getuser/:id/assmResults',admin.checkAuth,function(req,res){
+    res.render('assmRes',{userId:req.params.id});
 });
-app.post('/participant/:firstname/:lastname',admin.checkParticipant, assmnt.saveAssm);
+app.post('/participant/:username',admin.checkParticipant, assmnt.saveAssm);
 
 //****************************************************
 //*****This section is for the schedule data********
 //****************************************************
-app.get('/getCoachAvails', schApi.getCoachAvails);
-app.post('/addCoachAvails', schApi.addCoachAvails);
-app.get('/searchAvails/:type/:value', schApi.searchAvails);
+app.get('/getCoachAvails/:d1/:d2', schApi.getCoachAvails);
+app.get('/getAllCoachAvails/:d1', admin.checkAdmin,schApi.getAllCoachAvails);
+app.post('/saveCoachAvails', schApi.saveCoachAvails);
+app.get('/searchAvails/:type/:value/:currDate', schApi.searchAvails);
 app.get('/searchAppts/user/:id', schApi.searchUserAppts);
 app.get('/searchCoachAppts/coach/:id', schApi.searchCoachAppts);
 app.post('/saveAppt', schApi.saveUserAppt);
 app.post('/cancelAppt', schApi.cancelUserAppt);
 /****************************************************
-  This section is for the call Notes and action plans
-/****************************************************/
+ This section is for the call Notes and action plans
+ /****************************************************/
 app.get('/getCallNotes/:userid',admin.checkCoach, api.getCallNotes);
 app.post('/addCallNote',admin.checkCoach, api.addCallNote);
 app.post('/updateCallNote',admin.checkCoach, api.updateCallNote);
@@ -125,6 +133,7 @@ app.post('/deleteCallNote',admin.checkCoach, api.deleteCallNote);
 app.post('/email',mailer.sendMail);
 app.post('/emailActionPlan',mailer.emailActionPlan);
 
+app.post('/testEmail',mailer.testEmail);
 /****************************************************
  This section is for the emailing
  /****************************************************/

@@ -28,18 +28,40 @@ block content
                                     th EMAIL
                                     th PHONE
                                     th Date/Time
-                                    th OTHER
+
                             tbody
-                                tr.ng-scope(ng-repeat='appt in upcomingAppts')
+                                tr.ng-scope(ng-repeat="appt in upcomingAppts | orderBy:'-DateUTC'" )
                                     td
                                         a(href='/getuser/{{appt.User._id}}') {{ appt.User.FirstName }} {{ appt.User.LastName }}
                                     td
-                                        {{appt.User.Email}}
+                                        p {{appt.User.Email}}
                                     td
-                                        {{appr.User.Phone}}
+                                        p {{appt.User.Phone}}
                                     td
-                                        {{appt.Date}} at {{appt.Time}}
-                                    td xxxxxxxxxx
+                                        p {{appt.DateUTC | date:'MMM-d'}} at {{appt.Time}}
+
+                        br
+                        legend
+                        legend
+                            p Past sessions
+                        table(ng-if="pastAppts.length>0")
+                            thead.t-head
+                                tr
+                                    th NAME
+                                    th EMAIL
+                                    th PHONE
+                                    th Date/Time
+
+                            tbody
+                                tr.ng-scope(ng-repeat="appt in pastAppts | orderBy:'-DateUTC'" )
+                                    td
+                                        a(href='/getuser/past/{{appt.User._id}}') {{ appt.User.FirstName }} {{ appt.User.LastName }}
+                                    td
+                                        p {{appt.User.Email}}
+                                    td
+                                        p {{appt.User.Phone}}
+                                    td
+                                        p {{appt.DateUTC | date:'MMM-d'}} at {{appt.Time}}
 
                         //ul(style="list-style-type: none;padding-left:10px;margin-top:20px;")
                         //  li(ng-repeat="user in users")
@@ -59,18 +81,22 @@ block content
                         .container
                             .row
                                 .col-md-12
-                                         p Please choose your availability for coaching call by checking the date/time slots.
+                                         p Please choose your availability for coaching calls by checking the date/time slots.
                                             | As users schedule calls with you, it'll appear on this calendar
 
                                         legend
+
                                             p
-                                        p(style="margin-left:200px;margin-bottom:10px;")
-                                            |  Week of
+
+                                            span(style="margin-left:100px;")
+
+                                                | Week of
                                             a(style="display:inline-block;border:thin;padding:4px;" href="" ng-click="updateWeek('prev')")
                                              b <
                                             b  {{WeekRange}}
                                             a(style="display:inline-block;border:thin;padding:4px;" href="" ng-click="updateWeek('next')")
                                              b >
+                                            input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary(style="margin-left:200px;")
                                         table#availSchedules(border='1px;')
                                             tr
                                                 td(ng-repeat="availDate in calendarArray.Dates" ng-init="outerIndex = $index" style="background-color:#fff;")
@@ -83,20 +109,20 @@ block content
                                                                     p {{availDate.DateDisp}}
                                                                 div#calColHead(ng-if= "outerIndex==0 && innerIndex>0")
                                                                     p {{availTime.time}}
-                                                                div#calCell(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" )
-                                                                    input(id="chk{{availTime.timeUTC}}"  style="margin-left:30px;" type="checkbox"   ng-click="updateSelection($event,availTime.timeUTC)")
+                                                                div#calCellChkOpen(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==0" )
+                                                                    input(id="chk{{availTime.timeUTC}}"  type="checkbox"   ng-click="updateSelection($event,availTime.timeUTC)")
                                                                     label(for="chk{{availTime.timeUTC}}")
-                                                                div#calCell(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" )
-                                                                    input(id="chk{{availTime.timeUTC}}" style="margin-left:30px;" type="checkbox"  checked ng-click="updateSelection($event,availTime.timeUTC)")
+                                                                div#calCellChkAvail(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==1" )
+                                                                    input(id="chk{{availTime.timeUTC}}"  type="checkbox"  checked ng-click="updateSelection($event,availTime.timeUTC)")
                                                                     label(for="chk{{availTime.timeUTC}}")
-                                                                div#calCell(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" ) Appt:{{availTime.Appt.FirstName}}
+                                                                div#calCell(ng-if="outerIndex>0 && innerIndex>0 && availTime.DispFlag==2" ) {{availTime.Appt.FirstName}}
 
                                         legend
 
-                                    br
+                                        br
 
-                                    input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary
-                                    p(style="color:green") {{ConfirmMessage}}
+                                        input(type='button',  id="btnSave"  value='Save', ng-click='saveSchedule()').btn.btn-primary(style="margin-left:650px;")
+                                        p(style="color:green;margin-left:400px;") {{ConfirmMessage}}
                                     input(type='button', id="fakeSave" , ng-click='' style="display:none;")
                 //#availability.tab-pane.col-sm-12.col-md-12.main
                 //    .ng-scope
@@ -147,7 +173,5 @@ block content
                 //
                 //
 
-        hr
-        footer
-            p © Company 2014
+
 // /container

@@ -14,7 +14,7 @@ var coachesCollName = 'coaches';
 
 exports.getAllCoaches = function(req, res) {helper.getConnection(function(err,db){
     db.collection(coachesCollName, function(err, collection) {
-        collection.find().toArray(function(err, items) {
+        collection.find({admin:{$exists:false}}).toArray(function(err, items) {
             res.send(items);
         });
     });
@@ -42,7 +42,7 @@ exports.getCoachInfo = function(req, res) {helper.getConnection(function(err,db)
              if(err){
                 console.log('no user found: '+ err);
             }
-            console.log(item);
+            //console.log(item);
             res.send(item);
         });
     });
@@ -71,7 +71,7 @@ exports.updateCoach = function(req, res) {helper.getConnection(function(err,db){
 
     var coach = req.body;
     console.log('Updating coach: ' + coach._id);
-    console.log((coach));
+    //console.log((coach));
     db.collection(coachesCollName, function(err, collection) {
         collection.update({'_id':coach._id}, coach, {safe:true}, function(err, result) {
             if (err) {
@@ -126,7 +126,7 @@ exports.getUserById = function(req, res) {helper.getConnection(function(err,db){
     console.log('Retrieving user: ' + id);
     db.collection(usersCollName, function(err, collection) {
         collection.findOne({'_id':id}, function(err, item) {
-            console.log(item);
+            //console.log(item);
             res.send(item);
         });
     });
@@ -254,7 +254,7 @@ exports.updateCallNote = function(req, res) {helper.getConnection(function(err,d
 exports.deleteCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
 
-    console.log(note);
+    //console.log(note);
 
     db.collection(usersCollName, function(err, collection) {
         //first remove the note
@@ -272,7 +272,7 @@ exports.deleteCallNote = function(req, res) {helper.getConnection(function(err,d
 };
 exports.addCallNote = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
-    console.log(note);
+    //console.log(note);
     db.collection(usersCollName, function(err, collection) {
         collection.update({'_id':note.userid},{"$push":{"CallNotes":note}}, { upsert: true }, function(err, result) {
             if (err) {
@@ -330,7 +330,7 @@ exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,d
                 res.send({'error':'error occurred while getting coach availabilities'});
             } else {
                 if(item) {
-                    console.log(item);
+                    //console.log(item);
                     res.send(item);
                 }else{
                     console.log('no results found');
@@ -345,7 +345,7 @@ exports.getCoachAvails = function(req, res) {helper.getConnection(function(err,d
 exports.deleteCoachAvails = function(req, res) {helper.getConnection(function(err,db){
     var note = req.body;
 
-    console.log(note);
+    //console.log(note);
 
     db.collection(usersCollName, function(err, collection) {
         //first remove the note
@@ -364,8 +364,8 @@ exports.deleteCoachAvails = function(req, res) {helper.getConnection(function(er
 exports.addCoachAvails = function(req, res) {helper.getConnection(function(err,db){
     var coach = req.body.Coach;
     var schedules = req.body.Dates;
-    console.log(coach);
-    console.log(schedules);
+    //console.log(coach);
+    //console.log(schedules);
     //first check if the coach exists
     db.collection(schCollName, function(err, collection) {
         collection.findOne({"Coach.coachId":coach._id}, function(err, item) {

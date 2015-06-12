@@ -46,6 +46,7 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
             var path = '';
             path=window.location.pathname;
             path =path.replace('getuser','users');
+            path =path.replace('/past','');
             return $http({
                 method: 'GET',
                 url: path
@@ -54,8 +55,8 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                     $log.log('failed to get participant info :' + status);
                 })
                 .then(function(response){
-                    console.log('logging return from service');
-                    console.log(response.data);
+                    //console.log('logging return from service');
+                    //console.log(response.data);
                     return response.data;
                 });
 
@@ -96,7 +97,7 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                 url: '/coachinfo'
             })
                 .success(function(data) {
-                    $log.info("Successfully retrieved coach info.");
+                    //$log.info("Successfully retrieved coach info.");
                 })
                 .error(function(status, headers, config){
                     $log.log('failed to get coach info :' + status);
@@ -112,7 +113,7 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                 url: '/cusers'
             })
                 .success(function(data) {
-                    $log.info("Successfully retrieved users for coach.");
+                    //$log.info("Successfully retrieved users for coach.");
                 })
                 .error(function(status, headers, config){
                     $log.log('failed to get users for coach :' + status);
@@ -122,13 +123,13 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                     return response.data;
                 });
         },
-        getCoachSchedule:function(){
+        getCoachSchedule:function(d1,d2){
             return $http({
                 method: 'GET',
-                url: '/getCoachAvails'
+                url: '/getCoachAvails/'+d1+'/'+d2
             })
                 .success(function (data, status, headers, config) {
-                    console.log('after getting coach avails');
+                    //console.log('after getting coach avails');
                 })
                 .error(function(status, headers, config){
                     console.log('failed to get schedules:' + status);
@@ -144,7 +145,7 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
                 url: '/searchCoachAppts/coach/'+coachId
             })
                 .success(function(data) {
-                    $log.info("Successfully retrieved appts for all coach.");
+                    //$log.info("Successfully retrieved appts for all coach.");
                 })
                 .error(function(status, headers, config){
                     $log.log('failed to coach appts' + status);
@@ -157,7 +158,7 @@ coachDashboardModule.factory('coachDashboardServices',function($http,$log,$q,$ro
         saveCoachSchedule:function(schedule){
             return $http({
                 method:'POST',
-                url: '/addCoachAvails',
+                url: '/saveCoachAvails',
                 data: schedule
             })
                 .success(function (d, status, headers, config) {

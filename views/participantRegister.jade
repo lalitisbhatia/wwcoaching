@@ -1,13 +1,14 @@
 extends layoutVis
 block content
     .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
-        h3(style='padding-left:0px;') Hi, Welcome to the Weight Watchers One-to-One!
+        h3(style='padding-left:0px;') Welcome to Weight Watchers One-to-One!
 
         legend
         p(style='padding-bottom:10px;')
-        .row(ng-controller="ParticipantLoginController" ng-init="initApp()")
-            .col-lg-4.well
-                h2(style="text-align:center;") To find a coach, please register below.
+        .row(ng-controller="ParticipantLoginController" ng-init="initApp('#{username}')")
+            .col-lg-4.well(style="margin-left: 90px")
+                p(style="text-align:center;") You’re just a few steps away from choosing your coach! To get started, please register below.
+                    i (The contact info you provide will be used by your coach to communicate with you.)
                 legend
                 form.form-horizontal.ng-pristine
                     fieldset
@@ -23,12 +24,23 @@ block content
                         .form-group(style="margin-bottom:5px;")
                             label.col-md-4.control-label(for='email') Email
                             .col-md-4
-                                input#textinput.form-control(style="width:160px;" type='text', name='email', ng-model='newuser.Email')
+                                input#txtemail.form-control(style="width:160px;" type='text', name='email', placeholder='required' ng-model='newuser.Email')
+                        .form-group(style="margin-bottom:0px;")
+                            .col-md-offset-4
+                                span(style="color:red") {{errorEmail}}
                         .form-group(style="margin-bottom:5px;")
                             label.col-md-4.control-label(for='phone') Phone
                             .col-md-4
-                                input#textinput.form-control(style="width:160px;" type='text', name='phone', ng-model='newuser.Phone')
+                                input#txtphone.form-control(style="width:160px;" type='text', name='phone', placeholder='required' ng-model='newuser.Phone' )
+                        .form-group(style="margin-bottom:0px;")
+                                .col-md-offset-4
+                                    span(style="color:red") {{errorPhone}}
                         .form-group
                             label.col-md-4.control-label(for='save')
                             .col-md-4
                                 button#singlebutton.btn.btn-primary( name='save' value='Save', ng-click='saveuser()') Save
+                            label.col-md-12(style="font-size:11px;font-weight:300")
+                                br
+                                p If you're having trouble registering , please contact customer service at 1-800-651-600 or &nbsp;
+                                    a(href="mailto:thecoachingteam@weightwatchers.com") send us an email
+                                input(type="hidden" value="#{username}" id="username" )

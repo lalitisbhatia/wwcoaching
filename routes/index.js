@@ -61,9 +61,8 @@ exports.coach = function(req, res,next){
 };
 
 exports.participant = function(req, res,next){
-    var fn = req.params.firstname;
-    var ln = req.params.lastname;
-    //console.log(fn + ' - '+ ln);
+    var username = req.params.username;
+    console.log('username = '+username);
     console.log('inside index.js router');
     //console.log(req.session.user);
 
@@ -102,7 +101,7 @@ exports.participant = function(req, res,next){
         //If not registered, show registration view
         helper.getConnection(function (err, db) {
             db.collection(participantsCollName, function (err, collection) {
-                collection.findOne({'FirstName': { $regex: fn, $options: 'i' }, 'LastName': { $regex: ln, $options: 'i' }}, {Username: 0, Password: 0}, function (err, item) {
+                collection.findOne({'Username': {$regex:username,$options:'i'}}, function (err, item) {
                     if (err) {
                         console.log(err);
                         res.send('error while looking for participant: ' + err);
@@ -110,11 +109,12 @@ exports.participant = function(req, res,next){
                     }
                     //console.log(item);
                     if (!item) {
-                        console.log('rendering registration');
-                        res.render('participantRegister', {firstname: fn, lastname: ln});
+                        console.log('rendering registration : '+ username);
+                        res.render('participantRegister', {username: username});
                     } else {
-                        console.log('rendering login');
-                        res.render('participantLogin', {firstname: fn, lastname: ln});
+                        console.log('rendering login: ');
+                        //console.log(item);
+                        res.render('participantLogin', {username: item.Username});
                     }
                 })
             })

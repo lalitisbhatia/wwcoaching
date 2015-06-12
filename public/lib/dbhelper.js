@@ -1,6 +1,8 @@
 var connURL = "mongodb://lalitisbhatia:adana1234@oceanic.mongohq.com:10089/pilot2db";
 var dbName = "/pilot2db";
 
+//var connURL = "mongodb://localhost/pilot2db";
+
 var MongoClient = require('mongodb').MongoClient;
 
 var db_singleton = null;

@@ -2,6 +2,7 @@
 
 adminModule.controller('AdminController',  function AdminController($scope,$http,$log,AdminService) {
     $scope.initApp=function() {
+        $scope.DISPLAY_DAYS = 1;
         $scope.coaches=[];
         AdminService.getAllCoaches().then(function(data){
             $scope.coaches = data;
@@ -11,9 +12,38 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
         $scope.users=[];
         AdminService.getAllUsers().then(function(data){
             $scope.users = data;
-            console.log($scope.users);
+            //console.log($scope.users);
+        });
+
+        //initialize the calendar array
+        $scope.calendarArray=[];
+        $scope.calendarArray.Times=[];
+
+        //initialize the array to hold data of availability from db
+        $scope.coachAvailDates = [];
+
+        $scope.setupSchedule();
+
+    };
+
+
+    $scope.deleteConf=function(user){
+        console.log(user);
+        $.confirm({
+            title:'Deleting user?',
+
+            text: "Are you sure you want to delete "+ user.FirstName + ' '+user.LastName ,
+            confirm: function(button) {
+                $scope.deleteUser(user._id);
+            },
+            cancel: function(button) {
+            },
+            confirmButton: "Yes I am",
+            cancelButton: "No"
         });
     };
+
+
 
     /**********************************************
      **** handle CRUD operations for Coaches ********
@@ -156,4 +186,87 @@ adminModule.controller('AdminController',  function AdminController($scope,$http
         }
     };
 
+    $scope.testEmail = function(coach){
+        console.log('calling test email');
+        console.log(coach);
+        var emailData={};
+        emailData.Subj = 'Test email from '+coach.FirstName + ' ' + coach.LastName;
+        emailData.msg="This is a test message";
+        emailData.senderEmail = coach.Email;
+        emailData.recEmail='lalit.bhatia@weightwatchers.com';
+        emailData.senderPass=coach.EmailPassword;
+
+        AdminService.testEmail(emailData).then(function(data){
+            console.log('success');
+            alert(data);
+        });
+    };
+
+    /****************************************************************
+     *  Handle Next/Prev calendar buttons
+     /****************************************************************/
+    $scope.updateDay= function(action){
+        console.log('inside update week');
+        if(action=='next'){
+            //console.log('select next week');
+            $scope.startdate.setDate($scope.startdate.getDate()+$scope.DISPLAY_DAYS);
+            console.log($scope.startdate);
+        }
+        if(action=='prev'){
+            console.log('select prev week');
+            $scope.startdate.setDate($scope.startdate.getDate()-$scope.DISPLAY_DAYS );
+            console.log($scope.startdate);
+        }
+        $scope.setupSchedule();
+    };
+
+
+    $scope.setupSchedule = function(){
+        if(!$scope.startdate){
+            $scope.today= new Date();
+            $scope.startdate = new Date($scope.today.getFullYear(), $scope.today.getMonth(),$scope.today.getDate(), 8,30);
+        }
+
+        AdminService.getAllCoachSchedule($scope.startdate ).then(function (data) {
+            $scope.coachAvailDates = data;
+            //console.log($scope.coachAvailDates);
+            $scope.sortAllAvailability();
+        });
+    };
+
+    $scope.sortAllAvailability = function(){
+        //console.log($scope.coachAvailDates);
+        var currTime ='';
+        var calCounter=-1;
+        //console.log($scope.calendarArray.Times.Coaches);
+        for (var j in $scope.coachAvailDates) {
+            var userAppt=$scope.coachAvailDates[j].User;
+            var coach=$scope.coachAvailDates[j].Coach;
+            if(userAppt){
+                //console.log('found appt' + calCounter);
+                coach.Appt=userAppt;
+            }
+            var dt = new Date($scope.coachAvailDates[j].DateUTC);
+            console.log("Time = " + $scope.coachAvailDates[j].Time + '   ---  Locale time = ' + dt.toLocaleTimeString());
+            if (currTime==dt.toLocaleTimeString()){
+                $scope.calendarArray.Times[calCounter].Coaches.push(coach);
+
+
+            }else {
+                calCounter++;
+                //console.log(calCounter);
+                currTime = dt.toLocaleTimeString();
+                $scope.calendarArray.Times[calCounter]={};
+                $scope.calendarArray.Times[calCounter].Coaches=[];
+                $scope.calendarArray.Times[calCounter].time=currTime;
+
+                $scope.calendarArray.Times[calCounter].Coaches.push(coach);
+            }
+
+
+
+        }
+
+        //console.log($scope.calendarArray.Times);
+    }
 });

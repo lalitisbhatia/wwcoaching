@@ -145,6 +145,48 @@ adminModule.factory('AdminService',function($http,$log,$q,$rootScope){
                     console.log('failed to delete coach:' + status);
                 })
 
+        },
+        testEmail:function(emailData){
+            return $http({
+                method:'POST',
+                url: '/testEmail',
+                data: emailData
+            })
+                .then(function(response){
+                    return(response.data);
+                });
+        },
+        getAllCoachSchedule:function(d1){
+            return $http({
+                method: 'GET',
+                url: '/getAllCoachAvails/'+d1
+            })
+                .success(function (data, status, headers, config) {
+                    //console.log('after getting coach avails');
+                })
+                .error(function(status, headers, config){
+                    console.log('failed to get schedules:' + status);
+                })
+                .then(function(response) {
+                    //console.log(response.data);
+                    return response.data;
+                });
+        },
+        getUserAssessment:function(userId){
+            return $http({
+                method: 'GET',
+                url: '/assessment/'+userId
+            })
+                .success(function(data) {
+                    //$log.info("Successfully retrieved assessment for user "+ userId);
+                })
+                .error(function(status, headers, config){
+                    //$log.log('failed to get assessment for user '+ userId );
+                })
+                .then(function(response) {
+                    //console.log(response.data);
+                    return response.data;
+                });
         }
     };
 

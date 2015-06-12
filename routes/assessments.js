@@ -21,7 +21,7 @@ exports.getAssmByUserId = function(req, res) {helper.getConnection(function(err,
             if(err){
                 console.log('Error getting assessment for userid :' + userId)
             }else {
-                console.log(item);
+                //console.log(item);
                 //res.render('assessmentResult',{Assessment:item.Assessment, AsmId:item._id});
                 res.send(item);
             }
@@ -36,7 +36,7 @@ exports.saveAssm = function(req, res) {helper.getConnection(function(err,db){
     console.log(req.body);
     var assmDate = new Date();
     assm.AssmDate = assmDate.toISOString();
-    console.log(req.session.user.assessment);
+    //console.log(req.session.user.assessment);
 
     db.collection(assmCollName, function(err, collection) {
         if(req.session.user.assessment){
@@ -58,7 +58,7 @@ exports.saveAssm = function(req, res) {helper.getConnection(function(err,db){
             });
         }
         req.session.user.assessment=true;
-        res.render('confirmation');
+        res.render('confirmation',{userid:req.body.UserId});
     });
 });
 };

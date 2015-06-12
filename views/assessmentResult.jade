@@ -15,416 +15,413 @@ body
         span.offscreen Weight Watchers
     a#logout.aq-logout(href='/logout') Logout
 
-form(ng-controller='assessmentController' ng-init="initApp('#{userId}')")
-        .aq-wrap
-            a(id="aMyUsers" href='/coach' )
-                b Back To Dashboard
-            br
-            .sec.active
+    .aq-wrap(ng-controller='assessmentController' ng-init="initApp('#{userId}')")
+        a(id="aMyUsers" href='/coach' )
+            b Back To Dashboard
+        br
+        .sec.active
 
-                h3.sec-title Assessment Results for {{Assessment.first_name}} {{Assessment.last_name}}
-                    h3.sec-title Your Food & Activity
-                    #q01.qstn-wrap
-                        span.qstn
-                            span 1. How many days a week do you eat...
-                                fieldset#q01a01
-                                    span.qstn-sub Breakfast {{Assessment.meals_num1[1]}}
-                                fieldset#q01a02
-                                    span.qstn-sub Lunch {{Assessment.meals_num2[1]}}
-                                fieldset#q01a03
-                                    span.qstn-sub Dinner {{Assessment.meals_num3[1]}}
-                    #q02.qstn-wrap
-                        span.qstn
-                            span 2.
-                            | Do you eat around the same time every day?
+            h3.sec-title Assessment Results for {{Assessment.first_name}} {{Assessment.last_name}}
+                h3.sec-title Your Food & Activity
+                #q01.qstn-wrap
+                    span.qstn
+                        span 1. How many days a week do you eat...
+                            fieldset#q01a01
+                                span.qstn-sub Breakfast {{Assessment.meals_num1[1]}}
+                            fieldset#q01a02
+                                span.qstn-sub Lunch {{Assessment.meals_num2[1]}}
+                            fieldset#q01a03
+                                span.qstn-sub Dinner {{Assessment.meals_num3[1]}}
+                #q02.qstn-wrap
+                    span.qstn
+                        span 2.
+                        | Do you eat around the same time every day?
+                    br
+                    label
+                        span(ng-if="Assessment.eating_patterns==1") Yep. My meals are like clockwork.
+                    label
+                        span(ng-if="Assessment.eating_patterns==2") Are you kidding? I grab a bite whenever I can.
+                .qstn-divider
+                #q03.qstn-wrap.others
+                    span.qstn
+                        span 3.
+                        | How many times per week do you go out to eat? (Don’t forget fast food.)
+                    fieldset#q03a01
+                        span.qstn-sub Breakfast {{Assessment.meals_out1[1]}}
+                    fieldset#q03a02
+                        span.qstn-sub Lunch {{Assessment.meals_out2[1]}}
+                    fieldset#q03a03
+                        span.qstn-sub Dinner {{Assessment.meals_out3[1]}}
+                    fieldset#q03a04
+                        span.qstn-sub Snacks {{Assessment.meals_out4[1]}}
+                #q04.qstn-wrap.others
+                    span.qstn
+                        span 4.
+                        | Who does the cooking at your house?
                         br
-                        label
-                            span(ng-if="Assessment.eating_patterns==1") Yep. My meals are like clockwork.
-                        label
-                            span(ng-if="Assessment.eating_patterns==2") Are you kidding? I grab a bite whenever I can.
-                    .qstn-divider
-                    #q03.qstn-wrap.others
+                        label.qstn-sub#q04a01
+                            span(ng-if="Assessment.who_cooks==1") I do
+                        label.qstn-sub#q04a02
+                            span(ng-if="Assessment.who_cooks==2") Someone else does
+                        label.qstn-sub#q04a03
+                            span(ng-if="Assessment.who_cooks==3") I split it with someone else
+                        label.qstn-sub#q04a04
+                            span(ng-if="Assessment.who_cooks==4") The restaurant / grocery store does!
+                .qstn-divider
+                #q05.qstn-wrap
+                    span.qstn
+                        span 5.
+                            b Each day
+                            | , how often do you eat:
+                        br
+                        label#q05a01
+                            .q-txt-wrap
+                                span Fresh fruit {{Assessment.food_type[0]}}
+                        label#q05a02
+                            .q-txt-wrap
+                                span Vegetables {{Assessment.food_type[1]}}
+                        label#q05a03
+                            .q-txt-wrap
+                                span Fried Foods {{Assessment.food_type[2]}}
+                        label#q05a04
+                            .q-txt-wrap
+                                span Chips, crackers {{Assessment.food_type[3]}}
+                        label#q05a05
+                            .q-txt-wrap
+                                span Cookies, candy, ice-cream {{Assessment.food_type[4]}}
+                        label#q05a06
+                            .q-txt-wrap
+                                span Sweet drinks {{Assessment.food_type[5]}}
+                        label#q05a07
+                            .q-txt-wrap
+                                span 0-calorie drinks (including water) {{Assessment.food_type[6]}}
+                .qstn-divider
+                #q06.qstn-wrap
+                    fieldset
                         span.qstn
-                            span 3.
-                            | How many times per week do you go out to eat? (Don’t forget fast food.)
-                        fieldset#q03a01
-                            span.qstn-sub Breakfast {{Assessment.meals_out1[1]}}
-                        fieldset#q03a02
-                            span.qstn-sub Lunch {{Assessment.meals_out2[1]}}
-                        fieldset#q03a03
-                            span.qstn-sub Dinner {{Assessment.meals_out3[1]}}
-                        fieldset#q03a04
-                            span.qstn-sub Snacks {{Assessment.meals_out4[1]}}
-                    #q04.qstn-wrap.others
+                            span 6.
+                            | How do you normally spend your day?
+                        br
+                        label#q06a01
+                            .q-txt-wrap
+                                span(ng-if="Assessment.daily_act==1") Sitting down
+                        label#q06a02
+                            .q-txt-wrap
+                                span(ng-if="Assessment.daily_act==2") Sitting, but I also work out
+                        label#q06a03
+                            .q-txt-wrap
+                                span(ng-if="Assessment.daily_act==3") A mix of sitting and standing
+                        label#q06a04
+                            .q-txt-wrap
+                                span(ng-if="Assessment.daily_act==4") Mainly standing and walking
+                        label#q06a05
+                            .q-txt-wrap
+                                span(ng-if="Assessment.daily_act==5") I'm very active
+                .qstn-divider
+                #q07.qstn-wrap
+                    fieldset
                         span.qstn
-                            span 4.
-                            | Who does the cooking at your house?
-                            br
-                            label.qstn-sub#q04a01
-                                span(ng-if="Assessment.who_cooks==1") I do
-                            label.qstn-sub#q04a02
-                                span(ng-if="Assessment.who_cooks==2") Someone else does
-                            label.qstn-sub#q04a03
-                                span(ng-if="Assessment.who_cooks==3") I split it with someone else
-                            label.qstn-sub#q04a04
-                                span(ng-if="Assessment.who_cooks==4") The restaurant / grocery store does!
-                    .qstn-divider
-                    #q05.qstn-wrap
-                        span.qstn
-                            span 5.
-                                b Each day
-                                | , how often do you eat:
-                            br
-                            label#q05a01
-                                .q-txt-wrap
-                                    span Fresh fruit {{Assessment.food_type[0]}}
-                            label#q05a02
-                                .q-txt-wrap
-                                    span Vegetables {{Assessment.food_type[1]}}
-                            label#q05a03
-                                .q-txt-wrap
-                                    span Fried Foods {{Assessment.food_type[2]}}
-                            label#q05a04
-                                .q-txt-wrap
-                                    span Chips, crackers {{Assessment.food_type[3]}}
-                            label#q05a05
-                                .q-txt-wrap
-                                    span Cookies, candy, ice-cream {{Assessment.food_type[4]}}
-                            label#q05a06
-                                .q-txt-wrap
-                                    span Sweet drinks {{Assessment.food_type[5]}}
-                            label#q05a07
-                                .q-txt-wrap
-                                    span 0-calorie drinks (including water) {{Assessment.food_type[6]}}
-                    .qstn-divider
-                    #q06.qstn-wrap
-                        fieldset
+                            span 7.
+                            | How much activity do you do
+                            b &nbsp; each week
+                            | ?
+                        br
+                        label#q07a02
+                            .q-txt-wrap
+                                span(ng-if="Assessment.physical_act==1") 30 mins. or less
+                        label#q07a02
+                            .q-txt-wrap
+                                span(ng-if="Assessment.physical_act==2") Around 60 mins.
+                        label#q07a01
+                            .q-txt-wrap
+                                span(ng-if="Assessment.physical_act==3") 100 mins. or more
+                .qstn-divider
+                #q08.qstn-wrap
+                    fieldset
+                        legend
                             span.qstn
-                                span 6.
-                                | How do you normally spend your day?
-                            br
-                            label#q06a01
-                                .q-txt-wrap
-                                    span(ng-if="Assessment.daily_act==1") Sitting down
-                            label#q06a02
-                                .q-txt-wrap
-                                    span(ng-if="Assessment.daily_act==2") Sitting, but I also work out
-                            label#q06a03
-                                .q-txt-wrap
-                                    span(ng-if="Assessment.daily_act==3") A mix of sitting and standing
-                            label#q06a04
-                                .q-txt-wrap
-                                    span(ng-if="Assessment.daily_act==4") Mainly standing and walking
-                            label#q06a05
-                                .q-txt-wrap
-                                    span(ng-if="Assessment.daily_act==5") I'm very active
-                    .qstn-divider
-                    #q07.qstn-wrap
-                        fieldset
-                            span.qstn
-                                span 7.
-                                | How much activity do you do
-                                b &nbsp; each week
-                                | ?
-                            br
-                            label#q07a02
-                                .q-txt-wrap
-                                    span(ng-if="Assessment.physical_act==1") 30 mins. or less
-                            label#q07a02
-                                .q-txt-wrap
-                                    span(ng-if="Assessment.physical_act==2") Around 60 mins.
-                            label#q07a01
-                                .q-txt-wrap
-                                    span(ng-if="Assessment.physical_act==3") 100 mins. or more
-                    .qstn-divider
-                    #q08.qstn-wrap
-                        fieldset
-                            legend
-                                span.qstn
-                                    span 8. Do you use an activity monitor or fitness app?
-                                    br
-                                    span(ng-if="Assessment.act_track=='yes'")
-                                        | I do!
-                                span.qstn-sub
-                                    span What device or apps do you use?
-                                    br
-                                    ul
-                                        li(ng-repeat="val in Assessment.act_devices")
-                                            span(ng-if="val=='1'") FitBit
-                                            span(ng-if="val=='2'") Jawbone Up
-                                            span(ng-if="val=='3'") Nike+ FuelBand
-                                            span(ng-if="val=='4'") ActiveLink
-                                            span(ng-if="val=='5'") {{Assessment.act_devices_other}}
-                                    span(ng-if="Assessment.act_track=='no'") Nope!
-                    .qstn-divider
-                    h3.sec-title Your Weight History
-                    #q09.qstn-wrap
-                        span.qstn
-                            span 9.
-                            | What's your current weight?
-                            br
-                            span {{Assessment.current_weight}} lbs.
-                    .qstn-divider
-                    #q10.qstn-wrap
-                        label
-                            span.qstn
-                                span 10.
-                                | What's the lowest weight you've been as an adult?
+                                span 8. Do you use an activity monitor or fitness app?
                                 br
-                                span {{Assessment.lowest_weight}} lbs.
-                    .qstn-divider
-                    #q11.qstn-wrap
-                        label
-                            span.qstn.dbl-digit
-                                span 11.
-                                | How many times have you lost 10 lbs. or more?
+                                span(ng-if="Assessment.act_track=='yes'")
+                                    | I do!
+                            span.qstn-sub
+                                span What device or apps do you use?
                                 br
-                                span {{Assessment.diet_loss}} times
-                    .qstn-divider
-                    #q12.qstn-wrap.others
-                        fieldset.radios
-                            legend
-                                span.qstn.dbl-digit
-                                    span 12.
-                                    | What weight-loss approach has worked
-                                    b best
-                                    | for you?
-                            label#q12a01
-                                span(ng-if="Assessment.loss_approach=='1'") Keeping track of food / activity
-                            label#q12a02
-                                span(ng-if="Assessment.loss_approach=='2'") Pre-packaged meals
-                            label#q12a03
-                                span(ng-if="Assessment.loss_approach=='3'") Online weight-loss group
-                            label#q12a04
-                                span(ng-if="Assessment.loss_approach=='4'") Group that meets in person
-                            label#q12a05
-                                span(ng-if="Assessment.loss_approach=='5'") Working with a nutritionist
-                            label#q12a06
-                                span(ng-if="Assessment.loss_approach=='6'") Online tools / apps
-                            label#q12a07
-                                span(ng-if="Assessment.loss_approach=='7'") Surgery / medically supervised fast
-                            label#q12a08
-                                span(ng-if="Assessment.loss_approach=='8'") Changing my eating / exercise habits
-                            label#q12a09
-                                span(ng-if="Assessment.loss_approach=='9'") {{Assessment.loss_approach_other}}
-                    .qstn-divider
-                    #q13.qstn-wrap.ans-boxes.true-false.inline-btns
-                        span.qstn.dbl-digit
-                            span 13.
-                            | Please answer true or false:
-                        fieldset#q13a01
-                            span.qstn-sub If I don’t lose weight every week, I’ll give up quickly.
-                            br
-                            span(ng-if="Assessment.statement1=='true'") True
-                            span(ng-if="Assessment.statement1=='false'") False
-                        fieldset#q13a02
-                            span.qstn-sub If I slip, I focus on that and forget my successes.
-                            br
-                            span(ng-if="Assessment.statement2=='true'") True
-                            span(ng-if="Assessment.statement2=='false'") False
-                        fieldset#q13a03
-                            span.qstn-sub If I eat healthy and don’t see results, I’ll stop bothering.
-                            br
-                            span(ng-if="Assessment.statement3=='true'") True
-                            span(ng-if="Assessment.statement3=='false'") False
-                        fieldset#q13a04
-                            span.qstn-sub If I go off track, I think I’ve blown it. And then I REALLY go off track.
-                            br
-                            span(ng-if="Assessment.statement4=='true'") True
-                            span(ng-if="Assessment.statement4=='false'") False
-                    .qstn-divider
-                    h3.sec-title Your Goals
-                    #q14.qstn-wrap.inline-btns
-                        fieldset
-                            span.qstn.dbl-digit
-                                span 14.
-                                | How much weight would you like to lose?
-                                br
-                                span(ng-if="Assessment.wt_to_lose=='1'") 5-15 lbs.
-                                span(ng-if="Assessment.wt_to_lose=='2'") 16-25 lbs.
-                                span(ng-if="Assessment.wt_to_lose=='3'") 26-50 lbs.
-                                span(ng-if="Assessment.wt_to_lose=='4'") 50+ lbs.
-                    .qstn-divider
-                    #q15.qstn-wrap
-                        label
-                            span.qstn.dbl-digit
-                                span 15.
-                                | Why do you want to lose weight
-                                i &nbsp;right now
-                                | ?
-                            br
-                            span {{Assessment.coach_benefit}}
-                    .qstn-divider
-                    #q16.qstn-wrap
-                        label
-                            span.qstn.dbl-digit
-                                span 16.
-                                | What's the biggest thing you want to work on with your coach?
-                            br
-                            span {{Assessment.loss_benefit}}
-                    .qstn-divider
-                    h3.sec-title Your Lifestyle
-                    #q17.qstn-wrap.img-boxes.radios.others
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 17.
-                                    | Where do you spend your day?
-                                    span(ng-if="Assessment.spend_your_day=='1'") At work
-                                    span(ng-if="Assessment.spend_your_day=='2'") At school
-                                    span(ng-if="Assessment.spend_your_day=='3'") At home with kids
-                                    span(ng-if="Assessment.spend_your_day=='4'") At home on my own
-                                    span(ng-if="Assessment.spend_your_day=='5'") Retired
-                                    span(ng-if="Assessment.spend_your_day=='6'") {{Assessment.spend_your_day_other}}
-                    .qstn-divider
-                    #q18.qstn-wrap.radios
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 18.
-                                    | Which best describes your household?
-                                br
-                                span(ng-if="Assessment.household=='1'") Just me
-                                span(ng-if="Assessment.household=='2'") Couple
-                                span(ng-if="Assessment.household=='3'") Roommates
-                                span(ng-if="Assessment.household=='4'") Family with children
-                                span(ng-if="Assessment.household=='5'") Live with parent(s)
-                    .qstn-divider
-                    #q19.qstn-wrap.radios
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 19.
-                                    | When it comes to weight loss, how much support do you have?
-                                br
-                                span(ng-if="Assessment.support==1") A lot
-                                span(ng-if="Assessment.support==2") A little
-                                span(ng-if="Assessment.support==3") Almost none
-                    .qstn-divider
-                    #q20.qstn-wrap.radios
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 20.
-                                    | How stressful is your life?
-                                br
-                                span(ng-if="Assessment.stress==1") Easy breezy!
-                                span(ng-if="Assessment.stress==2") Kinda stressful
-                                span(ng-if="Assessment.stress==3") I'm freaking out.
-                    .qstn-divider
-                    h3.sec-title Eating Habits
-                    #q21.qstn-wrap.img-boxes.checks
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 21.
-                                    | Which time of day is it hardest for you to stay on track?
-                                br
-                                span(ng-if="Assessment.stay_on_track==1") Morning
-                                span(ng-if="Assessment.stay_on_track==2") Afternoon
-                                span(ng-if="Assessment.stay_on_track==3") Evening
-                                span(ng-if="Assessment.stay_on_track==4") Late at night
-                    .qstn-divider
-                    #q22.qstn-wrap.img-boxes.top-five
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 22.
-                                    | What are the five foods you can’t live without?
-                                br
-                                span {{Assessment.five_foods1}}
-                                br
-                                span {{Assessment.five_foods2}}
-                                br
-                                span {{Assessment.five_foods3}}
-                                br
-                                span {{Assessment.five_foods4}}
-                                br
-                                span {{Assessment.five_foods5}}
-                    .qstn-divider
-                    #q23.qstn-wrap.checks.others
-                        span.qstn.dbl-digit
-                            span 23.
-                            | Any food allergies or dietary preferences? (Select all that apply)
-                        ul
-                            li(ng-repeat="val in Assessment.allergies")
-                                span(ng-if="val=='1'") Vegetarian
-                                span(ng-if="val=='2'") Vegan
-                                span(ng-if="val=='3'") Kosher
-                                span(ng-if="val=='4'") Diabetic
-                                span(ng-if="val=='5'") Gluten-free
-                                span(ng-if="val=='6'") Low sodium
-                                span(ng-if="val=='7'") {{Assessment.allergies_food}}
-                                span(ng-if="val=='8'") {{Assessment.allergies_other}}
-                                span(ng-if="val=='9'") None
-                    .qstn-divider
-                    #q24.qstn-wrap.checks.others
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 24.
-                                    | What makes it hard to lose weight? (Pick three.)
                                 ul
-                                li(ng-repeat="val in Assessment.hard_to_lose")
-                                    span(ng-if="val=='1'") Eating too much at meals
-                                    span(ng-if="val=='2'") Snacking
-                                    span(ng-if="val=='3'") Weekends!
-                                    span(ng-if="val=='4'") Unhealthy food in my house
-                                    span(ng-if="val=='5'") Comforting myself with food
-                                    span(ng-if="val=='6'") Guilt. (I overeat, feel guilty, overeat some more...)
-                                    span(ng-if="val=='7'") I never feel full
-                                    span(ng-if="val=='8'") I reward myself with food
-                                    span(ng-if="val=='9'") Eating at work
-                                    span(ng-if="val=='10'") Eating with family & friends
-                                    span(ng-if="val=='11'") Eating out
-                                    span(ng-if="val=='12'") Food just tastes so good!
-                                    span(ng-if="val=='13'") {{Assessment.hard_to_lose_other}}
-                    .qstn-divider
-                    #q25.qstn-wrap.radios.others
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 25.
-                                    | Having a mantra can really help you stick with it. Pick one below, or write your own!
-                                    span(ng-if="Assesment.mantra=='1'") Losing weight is hard. Being overweight is hard. Choose your hard.
-                                    span(ng-if="Assesment.mantra=='2'") If you kinda do it, it kinda works. If you really do it, it really works.
-                                    span(ng-if="Assesment.mantra=='3'") The scale is a weight loss tool - not a judge, jury and executioner.
-                                    span(ng-if="Assesment.mantra=='4'") Don't give up what you want the most for what you want in the moment.
-                                    span(ng-if="Assesment.mantra=='5'") If we want a change, we have to make a change.
-                                    span(ng-if="Assesment.mantra=='6'") Whether you believe you can, or cannot, you're right.
-                                    span(ng-if="Assesment.mantra=='7'") I've come too far to take orders from a cookie.
-                                    span(ng-if="Assesment.mantra=='8'") I've got this.
-                                    span(ng-if="Assesment.mantra=='9'") It's choice, not chance, that will determine my destiny.
-                                    span(ng-if="Assesment.mantra=='10'") {{Assessment.mantra_other}}
-                    .qstn-divider
-                    #q26.qstn-wrap.tel
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span 26.
-                                    | Phone number(s):
-                                .qstn-sub What number do you want your coach to call for check-ins:
-                                span {{Assessment.home_num}}
-                                br
-                                br
-                                .qstn-sub
-                                    | We'll text you a reminder about your sessions. What's the best number to reach you?
-                                span {{Assessment.mobile_num}}
-                                span.qstn-sub(ng-if="Assessment.no_text='on'") No text messages, please.
-                    .qstn-divider
-                    #qstn_assess.qstn-wrap
-                        fieldset
-                            legend
-                                span.qstn.dbl-digit
-                                    span Is there anything else you’d like your coach to know about you?
-                            span {{Assessment.coach_msg}}
+                                    li(ng-repeat="val in Assessment.act_devices")
+                                        span(ng-if="val=='1'") FitBit
+                                        span(ng-if="val=='2'") Jawbone Up
+                                        span(ng-if="val=='3'") Nike+ FuelBand
+                                        span(ng-if="val=='4'") ActiveLink
+                                        span(ng-if="val=='5'") {{Assessment.act_devices_other}}
+                                span(ng-if="Assessment.act_track=='no'") Nope!
+                .qstn-divider
+                h3.sec-title Your Weight History
+                #q09.qstn-wrap
+                    span.qstn
+                        span 9.
+                        | What's your current weight?
+                        br
+                        span {{Assessment.current_weight}} lbs.
+                .qstn-divider
+                #q10.qstn-wrap
+                    label
+                        span.qstn
+                            span 10.
+                            | What's the lowest weight you've been as an adult?
+                            br
+                            span {{Assessment.lowest_weight}} lbs.
+                .qstn-divider
+                #q11.qstn-wrap
+                    label
+                        span.qstn.dbl-digit
+                            span 11.
+                            | How many times have you lost 10 lbs. or more?
+                            br
+                            span {{Assessment.diet_loss}} times
+                .qstn-divider
+                #q12.qstn-wrap.others
+                    fieldset.radios
+                        legend
+                            span.qstn.dbl-digit
+                                span 12.
+                                | What weight-loss approach has worked
+                                b best
+                                | for you?
+                        label#q12a01
+                            span(ng-if="Assessment.loss_approach=='1'") Keeping track of food / activity
+                        label#q12a02
+                            span(ng-if="Assessment.loss_approach=='2'") Pre-packaged meals
+                        label#q12a03
+                            span(ng-if="Assessment.loss_approach=='3'") Online weight-loss group
+                        label#q12a04
+                            span(ng-if="Assessment.loss_approach=='4'") Group that meets in person
+                        label#q12a05
+                            span(ng-if="Assessment.loss_approach=='5'") Working with a nutritionist
+                        label#q12a06
+                            span(ng-if="Assessment.loss_approach=='6'") Online tools / apps
+                        label#q12a07
+                            span(ng-if="Assessment.loss_approach=='7'") Surgery / medically supervised fast
+                        label#q12a08
+                            span(ng-if="Assessment.loss_approach=='8'") Changing my eating / exercise habits
+                        label#q12a09
+                            span(ng-if="Assessment.loss_approach=='9'") {{Assessment.loss_approach_other}}
+                .qstn-divider
+                #q13.qstn-wrap.ans-boxes.true-false.inline-btns
+                    span.qstn.dbl-digit
+                        span 13.
+                        | Please answer true or false:
+                    fieldset#q13a01
+                        span.qstn-sub If I don’t lose weight every week, I’ll give up quickly.
+                        br
+                        span(ng-if="Assessment.statement1=='true'") True
+                        span(ng-if="Assessment.statement1=='false'") False
+                    fieldset#q13a02
+                        span.qstn-sub If I slip, I focus on that and forget my successes.
+                        br
+                        span(ng-if="Assessment.statement2=='true'") True
+                        span(ng-if="Assessment.statement2=='false'") False
+                    fieldset#q13a03
+                        span.qstn-sub If I eat healthy and don’t see results, I’ll stop bothering.
+                        br
+                        span(ng-if="Assessment.statement3=='true'") True
+                        span(ng-if="Assessment.statement3=='false'") False
+                    fieldset#q13a04
+                        span.qstn-sub If I go off track, I think I’ve blown it. And then I REALLY go off track.
+                        br
+                        span(ng-if="Assessment.statement4=='true'") True
+                        span(ng-if="Assessment.statement4=='false'") False
+                .qstn-divider
+                h3.sec-title Your Goals
+                #q14.qstn-wrap.inline-btns
+                    fieldset
+                        span.qstn.dbl-digit
+                            span 14.
+                            | How much weight would you like to lose?
+                            br
+                            span(ng-if="Assessment.wt_to_lose=='1'") 5-15 lbs.
+                            span(ng-if="Assessment.wt_to_lose=='2'") 16-25 lbs.
+                            span(ng-if="Assessment.wt_to_lose=='3'") 26-50 lbs.
+                            span(ng-if="Assessment.wt_to_lose=='4'") 50+ lbs.
+                .qstn-divider
+                #q15.qstn-wrap
+                    label
+                        span.qstn.dbl-digit
+                            span 15.
+                            | Why do you want to lose weight
+                            i &nbsp;right now
+                            | ?
+                        br
+                        span {{Assessment.coach_benefit}}
+                .qstn-divider
+                #q16.qstn-wrap
+                    label
+                        span.qstn.dbl-digit
+                            span 16.
+                            | What's the biggest thing you want to work on with your coach?
+                        br
+                        span {{Assessment.loss_benefit}}
+                .qstn-divider
+                h3.sec-title Your Lifestyle
+                #q17.qstn-wrap.img-boxes.radios.others
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 17.
+                                | Where do you spend your day?
+                                span(ng-if="Assessment.spend_your_day=='1'") At work
+                                span(ng-if="Assessment.spend_your_day=='2'") At school
+                                span(ng-if="Assessment.spend_your_day=='3'") At home with kids
+                                span(ng-if="Assessment.spend_your_day=='4'") At home on my own
+                                span(ng-if="Assessment.spend_your_day=='5'") Retired
+                                span(ng-if="Assessment.spend_your_day=='6'") {{Assessment.spend_your_day_other}}
+                .qstn-divider
+                #q18.qstn-wrap.radios
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 18.
+                                | Which best describes your household?
+                            br
+                            span(ng-if="Assessment.household=='1'") Just me
+                            span(ng-if="Assessment.household=='2'") Couple
+                            span(ng-if="Assessment.household=='3'") Roommates
+                            span(ng-if="Assessment.household=='4'") Family with children
+                            span(ng-if="Assessment.household=='5'") Live with parent(s)
+                .qstn-divider
+                #q19.qstn-wrap.radios
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 19.
+                                | When it comes to weight loss, how much support do you have?
+                            br
+                            span(ng-if="Assessment.support==1") A lot
+                            span(ng-if="Assessment.support==2") A little
+                            span(ng-if="Assessment.support==3") Almost none
+                .qstn-divider
+                #q20.qstn-wrap.radios
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 20.
+                                | How stressful is your life?
+                            br
+                            span(ng-if="Assessment.stress==1") Easy breezy!
+                            span(ng-if="Assessment.stress==2") Kinda stressful
+                            span(ng-if="Assessment.stress==3") I'm freaking out.
+                .qstn-divider
+                h3.sec-title Eating Habits
+                #q21.qstn-wrap.img-boxes.checks
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 21.
+                                | Which time of day is it hardest for you to stay on track?
+                            br
+                            span(ng-if="Assessment.stay_on_track==1") Morning
+                            span(ng-if="Assessment.stay_on_track==2") Afternoon
+                            span(ng-if="Assessment.stay_on_track==3") Evening
+                            span(ng-if="Assessment.stay_on_track==4") Late at night
+                .qstn-divider
+                #q22.qstn-wrap.img-boxes.top-five
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 22.
+                                | What are the five foods you can’t live without?
+                            br
+                            span {{Assessment.five_foods1}}
+                            br
+                            span {{Assessment.five_foods2}}
+                            br
+                            span {{Assessment.five_foods3}}
+                            br
+                            span {{Assessment.five_foods4}}
+                            br
+                            span {{Assessment.five_foods5}}
+                .qstn-divider
+                #q23.qstn-wrap.checks.others
+                    span.qstn.dbl-digit
+                        span 23.
+                        | Any food allergies or dietary preferences? (Select all that apply)
+                    ul
+                        li(ng-repeat="val in Assessment.allergies")
+                            span(ng-if="val=='1'") Vegetarian
+                            span(ng-if="val=='2'") Vegan
+                            span(ng-if="val=='3'") Kosher
+                            span(ng-if="val=='4'") Diabetic
+                            span(ng-if="val=='5'") Gluten-free
+                            span(ng-if="val=='6'") Low sodium
+                            span(ng-if="val=='7'") {{Assessment.allergies_food}}
+                            span(ng-if="val=='8'") {{Assessment.allergies_other}}
+                            span(ng-if="val=='9'") None
+                .qstn-divider
+                #q24.qstn-wrap.checks.others
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 24.
+                                | What makes it hard to lose weight? (Pick three.)
+                            ul
+                            li(ng-repeat="val in Assessment.hard_to_lose")
+                                span(ng-if="val=='1'") Eating too much at meals
+                                span(ng-if="val=='2'") Snacking
+                                span(ng-if="val=='3'") Weekends!
+                                span(ng-if="val=='4'") Unhealthy food in my house
+                                span(ng-if="val=='5'") Comforting myself with food
+                                span(ng-if="val=='6'") Guilt. (I overeat, feel guilty, overeat some more...)
+                                span(ng-if="val=='7'") I never feel full
+                                span(ng-if="val=='8'") I reward myself with food
+                                span(ng-if="val=='9'") Eating at work
+                                span(ng-if="val=='10'") Eating with family & friends
+                                span(ng-if="val=='11'") Eating out
+                                span(ng-if="val=='12'") Food just tastes so good!
+                                span(ng-if="val=='13'") {{Assessment.hard_to_lose_other}}
+                .qstn-divider
+                #q25.qstn-wrap.radios.others
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 25.
+                                | Having a mantra can really help you stick with it. Pick one below, or write your own!
+                                span(ng-if="Assesment.mantra=='1'") Losing weight is hard. Being overweight is hard. Choose your hard.
+                                span(ng-if="Assesment.mantra=='2'") If you kinda do it, it kinda works. If you really do it, it really works.
+                                span(ng-if="Assesment.mantra=='3'") The scale is a weight loss tool - not a judge, jury and executioner.
+                                span(ng-if="Assesment.mantra=='4'") Don't give up what you want the most for what you want in the moment.
+                                span(ng-if="Assesment.mantra=='5'") If we want a change, we have to make a change.
+                                span(ng-if="Assesment.mantra=='6'") Whether you believe you can, or cannot, you're right.
+                                span(ng-if="Assesment.mantra=='7'") I've come too far to take orders from a cookie.
+                                span(ng-if="Assesment.mantra=='8'") I've got this.
+                                span(ng-if="Assesment.mantra=='9'") It's choice, not chance, that will determine my destiny.
+                                span(ng-if="Assesment.mantra=='10'") {{Assessment.mantra_other}}
+                .qstn-divider
+                #q26.qstn-wrap.tel
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span 26.
+                                | Phone number(s):
+                            .qstn-sub What number do you want your coach to call for check-ins:
+                            span {{Assessment.home_num}}
+                            br
+                            br
+                            .qstn-sub
+                                | We'll text you a reminder about your sessions. What's the best number to reach you?
+                            span {{Assessment.mobile_num}}
+                            span.qstn-sub(ng-if="Assessment.no_text='on'") No text messages, please.
+                .qstn-divider
+                #qstn_assess.qstn-wrap
+                    fieldset
+                        legend
+                            span.qstn.dbl-digit
+                                span Is there anything else you’d like your coach to know about you?
+                        span {{Assessment.coach_msg}}
 
 
     script(src='/js/jquery-1.11.0.min.js')
-    script(src='/js/bootstrap.min.js')
     script(src='/js/angular.min.js')
     script(src='/js/angular-route.min.js')
-    script(src='/js/jquery.datetimepicker.js')
     script(src='/js/app.js')
     script(src='/js/coachDashboardServices.js')
     script(src='/js/coachDashboardControllers.js')

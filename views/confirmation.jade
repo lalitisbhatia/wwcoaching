@@ -1,49 +1,71 @@
 doctype html
-html(lang='en')
+html(lang='en' ng-app="participantModule")
 
-head
-    title Personal Assessment / Thank You
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1, minimum-scale=1')
-    link(rel='stylesheet', type='text/css', href='/css/normalize.css')
-    link(rel='stylesheet', type='text/css', href='/css/style.css')
-body
-    .aq-ww-banner
-        h1
-            span.offscreen Weight Watchers
-        a#logout.aq-logout(href='/logout') Logout
-        .aq-wrap.confirm
-            header.aq-intro
-                h2.wwdisplay-bold Thank you!
-                p.sub-header
-                    | We're so excited to get you started in our new coaching program!
-                    br
-                    | To get you off to the best start, here's what to do before your first call:
-            .rsrcs
-                ol
-                    li
-                        p
-                            a(href='') Schedule your first session.
-                            | Click the button below to choose your coach and get started!
-                    li
-                        p
-                            a(href='') Check out our starter meal ideas.
-                            | We think the best way to learn the Plan is through food, so we've included a recipe booklet with some seriously delicious meals to get you started. And the
-                            b
-                                i PointsPlus
-                            | values? They're already figured out. All you have to do is track 'em!
-                    li
-                        p
-                            a(href='') Read your PointsPlus plan guide.
-                            | This will explain how to keep track of what you eat and answer any questions you might have.
-                    li
-                        p
-                            | Have an iPhone or Android?
-                            a(href='') Download the Weight Watchers Mobile app.
-                            | It's a fun way to follow Weight Watchers in an easy-to-understand app.
-                    li
-                        p
-                            a(href='') Watch our Mobile apps webcast.
-                            | Like cool tools and funny women? Guest host Ana Gasteyer shows you how to use her top can't-live-without gadgets.
-            button.aq-btn Find my coach
+    head
+        title Personal Assessment / Thank You
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1, minimum-scale=1' )
+        link(rel='stylesheet', type='text/css', href='/css/normalize.css')
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', href='/css/style.css')
+        link(rel='stylesheet', type='text/css', href='/css/search.css')
+        link(rel='stylesheet', href='/css/jquery.datetimepicker.css')
+    body
+        .aq-ww-banner(ng-controller='ParticipantSchController' ng-init="initSchPage('','#{userid}')" style="position:relative;")
+            h1
+                span.offscreen Weight Watchers
+            a#logout.aq-logout(href='/logout' style="font-size:15px;") Logout
+            .aq-wrap.confirm
+                header.aq-intro
+                    h2.wwdisplay-bold Welcome to Weight Watchers Coaching!
+                    p.sub-header Ready to get started? Let’s do this thing!
+                div(style="display:block;text-align:center;")
+                    button.aq-btn#schButton(style="font-size:20px;") Schedule a session
+                    div
+                        input#datepicker(type='text', name='datetime' style="background-color:transparent;max-width: 180px;position: relative;top: -60px;z-index: -1;" )
 
+                        fieldset(style="padding:-50px;top:-50px;")
+                                p(style="font-size:20px;color:green;padding-top:20px") {{SearchMessage}}
+                                p(style="font-size:20px;color:green;padding-left:40px;") {{SaveApptMessage1}}
+                                br
+                                input.aq-btn(style="font-size:15px;margin-left:40px;padding:3px 6px 3px 6px;height:20px;min-width:30px;display:none; " type='button',  id="continue"  value='Continue', ng-click='goToScheduler()')
+
+
+                            table.searchResults.ng-scope(ng-if="availDates.length>0" style="top:-70px;position:relative; margin-left:220px;")
+                                    thead.t-head
+                                        tr
+                                            th Coach
+                                            th Date
+                                            th Time
+                                            th
+
+                                    tbody
+
+                                        tr(ng-repeat="availDate in availDates | orderBy:['DateUTC']")
+
+                                            td
+                                                b {{availDate.Coach.coachName}}
+                                                //i coach details here
+                                            td  {{availDate.DateUTC|date:'MMM-dd'}}
+                                            td {{availDate.DateUTC|date:'h:mm a'}}
+                                            td
+                                                input.aq-btn(style="height:30px;min-width:40px;" type='button',  id="btnSelect"  value='Book', ng-click='saveConf(availDate.Coach,availDate.DateUTC)')
+
+
+                            //input(type="hidden" value="#{userid}" id="userID" )
+
+
+
+        script(src='/js/jquery-1.11.0.min.js')
+        script(src='/js/jquery.confirm.min.js')
+        script(src='/js/bootstrap.min.js')
+        script(src='/js/angular.min.js')
+        script(src='/js/angular-route.min.js')
+        script(src='/js/jquery.datetimepicker.js')
+        script(src='/js/app.js')
+        script(src='/js/adminService.js')
+        script(src='/js/schService.js')
+        script(src='/js/participantService.js')
+        script(src='/js/schController.js')
+        script(src='/js/participantController.js')

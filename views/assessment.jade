@@ -4,6 +4,7 @@ doctype html
 <!--[if gt IE 9]><!--><html lang="en"><!--<![endif]-->
 head
     title My Personal Assessment
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1, minimum-scale=1')
     link(rel='stylesheet', type='text/css', href='/css/normalize.css')
@@ -15,7 +16,7 @@ body
         span.offscreen Weight Watchers
     a#logout.aq-logout(href='/logout') Logout
 form(action='#confirmation' method="POST")
-    // <form action="thanks.html" method="POST" role="form">
+    // <form action="confirmation.html" method="POST" role="form">
     .aq-wrap
         .sec.active
             header.aq-intro
@@ -36,14 +37,16 @@ form(action='#confirmation' method="POST")
         .sec
             .btwn-msg
                 h2.wwdisplay-bold
-                    | Glad you’re here,
+                    | Glad you’re here,&nbsp;
                     span.user-firstname Sean
                     | !
                 p
-                    | This assessment is your first step towards coaching. It’ll help your coach get to know you, so you can get off to a really great start.
+                    | This assessment is your first step towards coaching.
+                    span.ww-break
+                    | It’ll help your coach get to know you, so you can get off to a really great start.
             button.aq-btn.next(type='button') Let’s do this thing!
         .sec
-            h3.sec-title Your Food & Activity
+            h   3.sec-title Your Food & Activity
             #q01.qstn-wrap
                 span.qstn
                     span 1.
@@ -232,8 +235,8 @@ form(action='#confirmation' method="POST")
             #q03.qstn-wrap.others
                 span.qstn
                     span 3.
-                    | How many times per
-                    b week
+                    | How many times per &nbsp;
+                    b week &nbsp;
                     | do you go out to eat? (Don’t forget fast food.)
                 fieldset#q03a01.select
                     label
@@ -515,7 +518,7 @@ form(action='#confirmation' method="POST")
                         .q-txt-wrap
                             span
                                 | Cookies, candy,
-                                br
+                                span.ww-break
                                 | ice-cream
                         .q-input-wrap
                             input(type='text', name='food_type', pattern='[0-9]*')
@@ -545,24 +548,18 @@ form(action='#confirmation' method="POST")
                         .q-txt-wrap
                             span Sitting down
                     label#q06a02
-                        input(type='radio', name='daily_act', value='2')
-                        .aq-radio
-                        img.img-box(src='/img/mostlysittingworkout.jpg', alt='')
-                        .q-txt-wrap
-                            span Sitting, but I also work out
-                    label#q06a03
                         input(type='radio', name='daily_act', value='3')
                         .aq-radio
                         img.img-box(src='/img/sittingstanding.jpg', alt='')
                         .q-txt-wrap
-                            span A mix of sitting and standing
-                    label#q06a04
+                            span A mix of sitting and standing (ex: teacher)
+                    label#q06a03
                         input(type='radio', name='daily_act', value='4')
                         .aq-radio
                         img.img-box(src='/img/standing.jpg', alt='')
                         .q-txt-wrap
-                            span Mainly standing and walking
-                    label#q06a05
+                            span Mainly standing and walking (ex: retail)
+                    label#q06a04
                         input(type='radio', name='daily_act', value='5')
                         .aq-radio
                         img.img-box(src='/img/physical.jpg', alt='')
@@ -574,25 +571,25 @@ form(action='#confirmation' method="POST")
                     legend
                         span.qstn
                             span 7.
-                            | How much activity do you do
+                            | How much exercise do you do &nbsp;
                             b each week
                             | ?
                     label#q07a02
                         input(type='radio', name='physical_act', value='1')
                         .aq-radio
-                        img.img-box(src='/img/clock.jpg', alt='')
+                        img.img-box(src='/img/clock1.jpg', alt='')
                         .q-txt-wrap
                             span 30 mins. or less
                     label#q07a02
                         input(type='radio', name='physical_act', value='2')
                         .aq-radio
-                        img.img-box(src='/img/clock.jpg', alt='')
+                        img.img-box(src='/img/clock2.jpg', alt='')
                         .q-txt-wrap
                             span Around 60 mins.
                     label#q07a01
                         input(type='radio', name='physical_act', value='3')
                         .aq-radio
-                        img.img-box(src='/img/clock.jpg', alt='')
+                        img.img-box(src='/img/clock3.jpg', alt='')
                         .q-txt-wrap
                             span 100 mins. or more
             .qstn-divider
@@ -670,8 +667,8 @@ form(action='#confirmation' method="POST")
                     legend
                         span.qstn.dbl-digit
                             span 12.
-                            | What weight-loss approach has worked
-                            b best
+                            | What weight-loss approach has worked &nbsp;
+                            b best &nbsp;
                             | for you?
                     label#q12a01
                         input(type='radio', name='loss_approach', value='1')
@@ -788,17 +785,17 @@ form(action='#confirmation' method="POST")
                 label
                     span.qstn.dbl-digit
                         span 15.
-                        | Why do you want to lose weight
+                        | What's your motivation for working out &nbsp;
                         i right now
                         | ?
-                    textarea(name='coach_benefit', placeholder='write here...')
+                    textarea(name='coach_benefit', placeholder='Write here...')
             .qstn-divider
             #q16.qstn-wrap
                 label
                     span.qstn.dbl-digit
                         span 16.
                         | What's the biggest thing you want to work on with your coach?
-                    textarea(name='loss_benefit', placeholder='write here...')
+                    textarea(name='loss_benefit', placeholder='Write here...')
             .qstn-divider
             h3.sec-title Your Lifestyle
             #q17.qstn-wrap.img-boxes.radios.others
@@ -826,7 +823,7 @@ form(action='#confirmation' method="POST")
                         .q-txt-wrap
                             span
                                 | At home
-                                br
+                                span.ww-break
                                 | with kids
                     label#q17a04
                         input(type='radio', name='spend_your_day', value='4')
@@ -835,7 +832,7 @@ form(action='#confirmation' method="POST")
                         .q-txt-wrap
                             span
                                 | At home
-                                br
+                                span.ww-break
                                 | on my own
                     label#q17a05
                         input(type='radio', name='spend_your_day', value='5')
@@ -956,23 +953,23 @@ form(action='#confirmation' method="POST")
                             | What are the five foods you can’t live without?
                     label#q22a01
                         span.offscreen 1
-                        img.img-box(src='/img/1fav.jpg', alt='')
+                        img.img-box(src='/img/fav1.jpg', alt='')
                         input(type='text', name='five_foods1')
                     label#q22a02
                         span.offscreen 2
-                        img.img-box(src='/img/2fav.jpg', alt='')
+                        img.img-box(src='/img/fav2.jpg', alt='')
                         input(type='text', name='five_foods2')
                     label#q22a03
                         span.offscreen 3
-                        img.img-box(src='/img/3fav.jpg', alt='')
+                        img.img-box(src='/img/fav3.jpg', alt='')
                         input(type='text', name='five_foods3')
                     label#q22a04
                         span.offscreen 4
-                        img.img-box(src='/img/4fav.jpg', alt='')
+                        img.img-box(src='/img/fav4.jpg', alt='')
                         input(type='text', name='five_foods4')
                     label#q22a05
                         span.offscreen 5
-                        img.img-box(src='/img/5fav.jpg', alt='')
+                        img.img-box(src='/img/fav5.jpg', alt='')
                         input(type='text', name='five_foods5')
             .qstn-divider
             #q23.qstn-wrap.checks.others
@@ -1155,11 +1152,13 @@ form(action='#confirmation' method="POST")
                         .dear.wwdisplay-bold Dear Coach,
                         .note-divider
                         label
-                            textarea(name='coach_msg', placeholder='write your message here...')
+                            textarea(name='coach_msg', placeholder='Write your message here...')
                         .user-name
                             span.user-firstname
+                            span &nbsp;
                             span.user-lastname
             button.aq-btn(type='submit') I’m done!
+
     input(type='hidden', value='#{user._id}', name='UserId')
 
 

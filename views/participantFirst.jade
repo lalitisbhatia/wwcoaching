@@ -7,26 +7,32 @@ block content
                 #scheduler.tab-pane.col-sm-9.col-md-10.main
                     .ng-scope(ng-controller='ParticipantSchController' ng-init="initSchPage('#{user.CoachId}','#{user._id}')"  style='width:800px;')
                         .container
-                            .row.well.col-md-9
+                            .row.well.col-md-6
                                 .col-lg-12
                                     form.ng-pristine
                                         fieldset
                                             // Form Name
-                                            legend Find a coach
-                                            p Select a date/ time or search by Coach Name
+                                            legend
                                             // Text input
                                             .form-group
-                                                .col-md-3
-                                                    b Search by date/time
-                                                    input#datepicker.form-control.input-md(type='text', name='datetime' style="margin-bottom:15px;")
-                                                .col-md-1
-                                                    b OR
-                                                .col-md-3
-                                                    b Search by coach name
-                                                    //select(ng-options="name as coach.FirstName + ' ' +coach.LastName for coach in coaches | orderBy:['FirstName','LastName']" ng-model="coach" ng-change="getCoachesById(coach._id)")
-                                                    select#coachselect.form-control.input-md(ng-model='newuser' name="coach" style="margin-bottom:15px;")
-                                                        option(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']"  value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
-                                        p {{SearchMessage}}
+                                                .col-md-5
+                                                    p We’ve got great coaches to choose from. Just pick a time that works best for you!
+                                                .col-md-5
+                                                    br
+
+                                                    //input#datepicker.form-control.input-md(type='text', name='datetime' style="margin-bottom:15px;")
+                                                    div(style="display:block;text-align:center;")
+                                                    button.aq-btn#schButton(style="font-size:15px;min-width:70px;") Schedule a session
+
+                                                    div
+                                                        input#datepicker(type='text', name='datetime' style="background-color:transparent;max-width: 180px;position: relative;top: -60px;z-index: -1;" )
+
+                                                //    b OR
+                                                //.col-md-3
+                                                //    b Search by coach name
+                                                //    //select(ng-options="name as coach.FirstName + ' ' +coach.LastName for coach in coaches | orderBy:['FirstName','LastName']" ng-model="coach" ng-change="getCoachesById(coach._id)")
+                                                //    select#coachselect.form-control.input-md(ng-model='newuser' name="coach" style="margin-bottom:15px;")
+                                                //        option(ng-repeat="coach in coaches | orderBy:['FirstName','LastName']"  value="{{coach._id}}") {{coach.FirstName}} {{coach.LastName}}
 
                                         //b(style="color:green;") {{confirmMessage}}
                                         p
@@ -34,10 +40,19 @@ block content
                                         p
                                             //b {{confirmDate}}
                                         fieldset(style="padding:10px;")
-                                            // Form Name
+                                                p(style="color:green") {{SearchMessage}}
+                                                p(id="SaveApptMsg" style="display:none;font-size:15px;color:green;padding-left:40px;") You’re all set! We’re really looking forward to talking with you
+                                                    b <br><br>
+                                                    b FYI:&nbsp;
+                                                    | If you need a quick answer to a small question right now, <a href='http://www.weightwatchers.com/templates/Marketing/Marketing_SubG_Utool_1col.aspx?pageid=1437650&username=#{user.Username}'>ask Team WW</a>.  Or head over to the <a href='http://www.weightwatchers.com'> site </a>and check out your new tools!
+                                                br
+                                                br
+                                                div
+                                                    input.aq-btn(style="font-size:12px;margin-left:40px;margin-top:20px;padding:3px 6px 3px 6px;height:20px;min-width:30px;display:none; " type='button',  id="continue"  value='Continue', onclick='window.location.reload()')
+
 
                                             legend
-                                                table.searchResults.ng-scope(ng-if="availDates.length>0")
+                                                table.searchResults(ng-if="availDates.length>0")
                                                     thead.t-head
                                                         tr
                                                             th Coach
@@ -52,46 +67,15 @@ block content
                                                             td
                                                                 b {{availDate.Coach.coachName}}
                                                                 //i coach details here
-                                                            td  {{availDate.Date|date:'HH'}}
-                                                            td  {{availDate.Time}}
+                                                            td {{availDate.DateUTC|date:'MMM-dd'}}
+                                                            td {{availDate.DateUTC|date:'h:mm a'}}
                                                             td
-                                                                input(style="padding:3px 6px 3px 6px;" type='button',  id="btnSelect"  value='Select', ng-click='saveUserAppt(availDate.Coach,availDate.DateUTC)').btn.btn-primary
+                                                                input.aq-btn(style="font-size:15px;padding:3px 6px 3px 6px;height:25px;min-width:40px;" type='button',  id="btnSelect"  value='Select', ng-click='saveConf(availDate.Coach,availDate.DateUTC)').btn.btn-primary
+
+
 
 
                                             input(type="hidden" value="#{user._id}" id="userID" )
 
-
-        //ul#coaches(style="list-style-type:none;padding-left:10px;")
-                                                //    li(ng-repeat="availDate in availDates| orderBy:'Date'")
-                                                        b {{availDate.Coach.coachName}}     {{availDate.Date|date:'HH'}}, {{availDate.Time}}
-
-                                                        //ul#dates(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                        //    li(ng-repeat="appt in availDate.appointments ")
-                                                                p
-
-                                                                //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                                //    li(ng-repeat="time in appt.Times")
-                                                                //        p {{availDate.Coach.coachName}} {{appt.Date}} {{time.time}}
-
-
-                                                //    p {{appt}}
-
-                                                //ul#times(style="list-style-type: none;padding-left:55px;padding-bottom:5px;")
-                                                //    legend
-                                                //    li(ng-repeat="availdTime in availdDate.Times") b {{availDate.Date}}{{availTime.time}}
-                                                //
-                                                //            a(href='#' style='padding-left: 30px;' data-date='{{savedDate.Date}}' data-time='{{savedTime.time}}') X
-
-
-
                                         input(type='button', id="fakeSave" , ng-click='' style="display:none;")
 
-
-
-
-
-
-
-        hr
-        footer
-            p © Company 2014

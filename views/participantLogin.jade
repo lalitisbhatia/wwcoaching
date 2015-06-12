@@ -2,35 +2,50 @@ extends layoutVis
 
 block content
     .container(style="padding-top:50px;padding-left:200px;" ng-app="participantModule")
-                h3(style='padding-left:0px;') Thanks for registering.
-                p Now please login using your WeightWatchers credentials.....
-                    i need copy from Alisha ....
+                h3(style='padding-left:0px;') You're almost there...
 
                 legend
                 p(style='padding-bottom:10px;')
 
-                .row(ng-controller="ParticipantLoginController" ng-init="initApp()")
-                    .col-lg-4.well
-                        h2(style="text-align:center;") Participant Login
+                .row(ng-controller="ParticipantLoginController" ng-init="initApp('#{username}')")
+                    .col-lg-4.well(style="margin-left: 90px")
+                        h2(style="text-align:center;") Log in
                         legend
                         form.form-horizontal.ng-pristine
                             fieldset
                                 // Text input
-                                .form-group(style="margin-top:5px;")
-                                    label.col-md-4.control-label(for='username') Username
-                                    .col-md-4
-                                        input#textinput.form-control(style="width:160px;" type='text', name='username' placeholder='ww username' ng-model="username")
+                                //.form-group(style="margin-top:5px;")
+                                //    label.col-md-4.control-label(for='username') Username
+                                //    .col-md-4
+                                //        input.form-control(style="width:160px;" type='text', name='username' placeholder='ww username' ng-model="username")
                                 .form-group(style="margin-top:15px;")
-                                    label.col-md-4.control-label(for='password') Password
+                                    label.col-md-2.control-label(for='password')
                                     .col-md-4
-                                        input#textinput.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='ww password' ng-model="password")
+                                        input#password.form-control.input-md(style="width:160px;" type='password', name='password' placeholder='ww password' ng-model="password")
                                         br
-                                .form-group(style="margin-left:15px;")
-                                        input(type='button', id="fakeSave" , ng-click='' style="display:none;")
-                                        input(type="hidden" value="#{firstname}" id="firstname" ng-model="firstname")
-                                        input(type="hidden" value="#{lastname}" id="lastname" ng-model="lastname")
-
-                                .form-group(style="margin-top:15px;")
+                                    span.col-md-12(style="color:black;font-size:12px;") Just log in using your Weight Watchers password
+                                .form-group
                                     .col-md-4
-                                        button#singlebutton.btn.btn-primary( ng-click='getWWDetails()',style="margin-left:110px;") Login
+                                        //button#singlebutton.btn.btn-primary( onclick="GetUserWWDetails('#{user.Username}',password)",style="margin-left:110px;") Login
+                                        button#singlebutton.btn.btn-primary( ng-click="getWWDetails()",style="margin-left:110px;") Login
+                                        br
+                                        br
                                 span(style="color:red;" ng-model="errMessage") {{errMessage}}
+                                label.col-md-12(style="display:none;" id="lblMsg")
+                                    p If you're having trouble logging in, please contact customer service at 1-800-651-600
+                                    p For coaching related questions,
+                                        a(href="mailto:thecoachingteam@weightwatchers.com") &nbsp;send us an email.
+
+                                //.form-group(style="margin-left:15px;")
+                                //        input(type="hidden" value="#{user.FirstName}" id="firstname" ng-model="firstname")
+                                //        input(type="hidden" value="#{user.LastName}" id="lastname" ng-model="lastname")
+                                //        input(type="hidden" value="#{user.Username}" id="un" ng-model="un")
+
+
+
+                                br
+                                span(style="color:green;font-size:12px;")
+                                    b ** &nbsp;
+                                    | If you are an Internet Explorer user, we &nbsp;
+                                    b strongly &nbsp;
+                                    | recommend using IE versions 10 or higher. If you are unable to upgrade, please use Firefox or Chrome
